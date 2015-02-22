@@ -55,7 +55,7 @@ public class LoginBean extends Bean{
     }
 
     public String login(){
-        System.out.println("test");
+        System.out.println("test"); /////////////
 
 //        log.info("-- SessionRegistry principle size: {}", sessionRegistry.getAllPrincipals().size());
 //        if(!Utils.isZero(userName.length()) && !Utils.isZero(password.length())) {
