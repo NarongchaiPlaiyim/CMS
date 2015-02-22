@@ -42,6 +42,7 @@ public class LoginBean extends Bean{
     private UserDetail userDetail;
     private Map<String,String> map;
 
+    private String typeRadio;
     @PostConstruct
     private void init(){
         if(!Utils.isNull(SecurityContextHolder.getContext().getAuthentication())){
@@ -54,6 +55,8 @@ public class LoginBean extends Bean{
     }
 
     public String login(){
+        System.out.println("test");
+
 //        log.info("-- SessionRegistry principle size: {}", sessionRegistry.getAllPrincipals().size());
 //        if(!Utils.isZero(userName.length()) && !Utils.isZero(password.length())) {
 //            setPassword(EncryptionService.encryption(password));

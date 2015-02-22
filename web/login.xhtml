@@ -19,7 +19,13 @@
         <h:form id="frmLogin">
             <div style="text-align: center">
                 <p:panel style="border: 0">
-                <p:graphicImage library="images" name="/shared/DN1.png"/>
+                <!--<p:graphicImage library="images" name="/shared/DN1.png"/>-->
+                    <p:selectOneRadio id="typeRadio" styleClass="radio_table" style="background-origin: border-box"
+                            value="#{loginBean.typeRadio}">
+                        <f:selectItem itemLabel="Teacher" itemValue="0"
+                                />
+                        <f:selectItem itemLabel="Studen" itemValue="1"/>
+                    </p:selectOneRadio>
                 </p:panel>
             </div>
             <div style="text-align: center">
