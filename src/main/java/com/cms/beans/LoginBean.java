@@ -39,24 +39,59 @@ public class LoginBean extends Bean{
 
     private String userName = "";
     private String password = "";
+    private String teacherId = "";
+
     private UserDetail userDetail;
     private Map<String,String> map;
 
     private String typeRadio;
+
+    private boolean teacherFlag;
+    private boolean studentFlag;
+
+    private final String TEACHER = "0";
+    private final String STUDENT = "1";
     @PostConstruct
     private void init(){
-        if(!Utils.isNull(SecurityContextHolder.getContext().getAuthentication())){
-            userDetail = (UserDetail) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            map = (Map<String, String>) FacesUtil.getSession(false).getAttribute(AttributeName.AUTHORIZE.getName());
+//        if(!Utils.isNull(SecurityContextHolder.getContext().getAuthentication())){
+//            userDetail = (UserDetail) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//            map = (Map<String, String>) FacesUtil.getSession(false).getAttribute(AttributeName.AUTHORIZE.getName());
+//        } else {
+//            log.debug("[NEW] CODE MAP");
+//            map = new HashMap<String, String>();
+//        }
+        initTeacher();
+        typeRadio = TEACHER;
+    }
+
+    private void initTeacher(){
+        teacherFlag = true;
+        studentFlag = false;
+    }
+
+    private void initStudent(){
+        teacherFlag = false;
+        studentFlag = true;
+    }
+
+    public void onClickRadio(){
+        if (STUDENT.equals(typeRadio) ) {
+            initStudent();
         } else {
-            log.debug("[NEW] CODE MAP");
-            map = new HashMap<String, String>();
+            initTeacher();
         }
     }
 
+    public void onClickRegister(){
+
+    }
     public String login(){
         System.out.println("test"); /////////////
-
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 //        log.info("-- SessionRegistry principle size: {}", sessionRegistry.getAllPrincipals().size());
 //        if(!Utils.isZero(userName.length()) && !Utils.isZero(password.length())) {
 //            setPassword(EncryptionService.encryption(password));
