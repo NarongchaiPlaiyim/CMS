@@ -51,6 +51,32 @@ public enum Utils {
         }
     }
 
+    private static List<Integer> getAcademicYear(){
+        int year = getCalendar().get(Calendar.YEAR);
+        List<Integer> academicYear = new ArrayList();
+        academicYear.add(year);
+        academicYear.add(year-1);
+        academicYear.add(year+1);
+        academicYear.add(year+2);
+        return academicYear;
+    }
+
+    private static List<String> getSemester(){
+        List<String> semester = new ArrayList();
+        semester.add("1");
+        semester.add("2");
+        semester.add("Summer");
+        return semester;
+    }
+
+    private static List<String> getExamType(){
+        List<String> examType = new ArrayList();
+        examType.add("Quiz");
+        examType.add("Midterm");
+        examType.add("Final");
+        return examType;
+    }
+
     private static Calendar getCalendar(){
         return Calendar.getInstance();
     }
