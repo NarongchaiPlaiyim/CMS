@@ -1,10 +1,12 @@
 package com.cms.beans;
 
 import com.cms.service.LoginService;
+import com.cms.service.security.SimpleAuthenticationManager;
 import com.cms.service.security.UserDetail;
 import com.cms.service.security.encryption.EncryptionService;
 import com.cms.utils.AttributeName;
 import com.cms.utils.FacesUtil;
+import com.cms.utils.MessageDialog;
 import com.cms.utils.Utils;
 import lombok.Getter;
 import lombok.Setter;
@@ -86,40 +88,36 @@ public class LoginBean extends Bean{
 
     }
     public String login(){
-        System.out.println("test"); /////////////
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-//        log.info("-- SessionRegistry principle size: {}", sessionRegistry.getAllPrincipals().size());
-//        if(!Utils.isZero(userName.length()) && !Utils.isZero(password.length())) {
-//            setPassword(EncryptionService.encryption(password));
-//            if(loginService.isUserExist(getUserName(), getPassword())){
-//                StaffModel staffModel = loginService.getStaffModel();
-//                userDetail = new UserDetail(staffModel.getUsername(),
-//                                            staffModel.getPassword(),
-//                                            "USER",
-//                                            staffModel.getMsTitleModel().getName(),
-//                                            staffModel.getName());
-//                userDetail.setId(Utils.parseInt(staffModel.getId(), 0));
-//                HttpServletRequest httpServletRequest = FacesUtil.getRequest();
-//                HttpServletResponse httpServletResponse = FacesUtil.getResponse();
-//                UsernamePasswordAuthenticationToken request = new UsernamePasswordAuthenticationToken(getUserDetail(), getPassword());
-//                request.setDetails(new WebAuthenticationDetails(httpServletRequest));
-//                SimpleAuthenticationManager simpleAuthenticationManager = new SimpleAuthenticationManager();
-//                Authentication result = simpleAuthenticationManager.authenticate(request);
-//                log.debug("-- authentication result: {}", result.toString());
-//                SecurityContextHolder.getContext().setAuthentication(result);
-//                compositeSessionAuthenticationStrategy.onAuthentication(request, httpServletRequest, httpServletResponse);
-//                HttpSession httpSession = FacesUtil.getSession(false);
+        log.info("-- SessionRegistry principle size: {}", sessionRegistry.getAllPrincipals().size());
+        if(true){//!Utils.isZero(userName.length()) && !Utils.isZero(password.length())) {
+            setPassword(EncryptionService.encryption(password));
+            if(loginService.isUserExist(getUserName(), getPassword())){
+                userDetail = new UserDetail();
+                userDetail.setRole("TEACHER");
+                /*StaffModel staffModel = loginService.getStaffModel();
+                userDetail = new UserDetail(staffModel.getUsername(),
+                                            staffModel.getPassword(),
+                                            "USER",
+                                            staffModel.getMsTitleModel().getName(),
+                                            staffModel.getName());
+                userDetail.setId(Utils.parseInt(staffModel.getId(), 0)); */
+                HttpServletRequest httpServletRequest = FacesUtil.getRequest();
+                HttpServletResponse httpServletResponse = FacesUtil.getResponse();
+                UsernamePasswordAuthenticationToken request = new UsernamePasswordAuthenticationToken(getUserDetail(), getPassword());
+                request.setDetails(new WebAuthenticationDetails(httpServletRequest));
+                SimpleAuthenticationManager simpleAuthenticationManager = new SimpleAuthenticationManager();
+                Authentication result = simpleAuthenticationManager.authenticate(request);
+                log.debug("-- authentication result: {}", result.toString());
+                SecurityContextHolder.getContext().setAuthentication(result);
+                compositeSessionAuthenticationStrategy.onAuthentication(request, httpServletRequest, httpServletResponse);
+                HttpSession httpSession = FacesUtil.getSession(false);
 //                httpSession.setAttribute(AttributeName.USER_DETAIL.getName(), getUserDetail());
 //                httpSession.setAttribute(AttributeName.AUTHORIZE.getName(), loginService.getAuthorize());
-//                log.debug("-- userDetail[{}]", userDetail.toString());
-//                return "PASS";
-//            }
-//        }
-//        showDialog(MessageDialog.WARNING.getMessageHeader(), "Invalid username or password.");
+                log.debug("-- userDetail[{}]", userDetail.toString());
+                return "PASS";
+            }
+        }
+        showDialog(MessageDialog.WARNING.getMessageHeader(), "Invalid username or password.");
         return "loggedOut";
     }
 

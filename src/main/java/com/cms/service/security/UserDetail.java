@@ -20,6 +20,10 @@ public class UserDetail implements Serializable {
     private boolean isRequestFlag;
     private String fullName;
 
+    public UserDetail() {
+
+    }
+
     public UserDetail(String userName, String password, String role, String firstName, String lastName) {
         this.userName = userName;
         this.password = password;

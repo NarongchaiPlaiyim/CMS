@@ -28,7 +28,7 @@ public class SimpleAuthenticationManager implements AuthenticationManager {
             return getAuthority(userDetail, authentication, authenticationDetails);
         }
         // business role
-        if ("USER".equalsIgnoreCase(userDetail.getRole())) {
+        if ("TEACHER".equalsIgnoreCase(userDetail.getRole())) {
             return getAuthority(userDetail, authentication, authenticationDetails);
         }
         throw new BadCredentialsException("Bad Credentials");
