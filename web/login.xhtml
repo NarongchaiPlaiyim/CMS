@@ -62,15 +62,17 @@
         <p style="color: #2F91BD">Powered by Extra Solution Engineering Co.,Ltd.</p>
     </div>
 
-    <p:dialog id="teacherRegisterDialog" widgetVar="teacherRegisterDlg" header="TTTTTTFind Location for Item "
+    <p:dialog id="teacherRegisterDialog" widgetVar="teacherRegisterDlg" header="Teacher Register"
               onShow="hideWindowsScrollBar()" onHide="showWindowsScrollBar()" resizable="false"
-              modal="true" width="600" height="450">
+              closable="false"
+              modal="true" width="300" height="230">
         <ui:include src="site/dialog/teacherRegisterDialog.xhtml"/>
     </p:dialog>
 
-    <p:dialog id="studentRegisterDialog" widgetVar="studentRegisterDlg" header="SSSSFind Location for Item "
+    <p:dialog id="studentRegisterDialog" widgetVar="studentRegisterDlg" header="Student Register"
               onShow="hideWindowsScrollBar()" onHide="showWindowsScrollBar()" resizable="false"
-              modal="true" width="600" height="450">
+              closable="false"
+              modal="true" width="300" height="230">
         <ui:include src="site/dialog/studenRegisterDialog.xhtml"/>
     </p:dialog>
 

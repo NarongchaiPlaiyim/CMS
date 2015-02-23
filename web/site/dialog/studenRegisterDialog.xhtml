@@ -1,12 +1,74 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html
-        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-<head>
-    <title></title>
-</head>
-<body>
+<!DOCTYPE html>
+<html>
+<f:view xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:p="http://primefaces.org/ui">
+    <h:head>
+    </h:head>
+    <h:form id="studenRegisterForm">
+        <table border="0" class="content_table_form">
+            <tr >
+                <td style="min-width: 100px; width: 100px; max-width: 100px;" class="left" />
+                <td style="min-width: 150px; width: 150px; max-width: 150px;" class="left" />
+            </tr>
+            <tr>
+                <td>
+                    <h:outputLabel value="Student ID"/>
+                </td>
+                <td>
+                    <p:inputText style="min-width: 150px; width: 150px; max-width: 150px;"
+                                 value="#{studentRegisterBean.view.studentId}" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <h:outputLabel value="Username"/>
+                </td>
+                <td>
+                    <p:inputText style="min-width: 150px; width: 150px; max-width: 150px;"
+                                 value="#{studentRegisterBean.view.userName}" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <h:outputLabel value="Password"/>
+                </td>
+                <td>
+                    <p:password style="min-width: 150px; width: 150px; max-width: 150px;"
+                                 value="#{studentRegisterBean.view.password}" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <h:outputLabel value="Email"/>
+                </td>
+                <td>
+                    <p:inputText style="min-width: 150px; width: 150px; max-width: 150px;"
+                                 value="#{studentRegisterBean.view.email}" />
+                </td>
+            </tr>
+            <tr/>
+            <tr>
+                <td colspan="2">
+                    <div style="text-align: center;">
+                        <p:commandButton value="#{msg.get('btn.name.submit')}"
+                                         id="btnSaveHeader"
+                                         styleClass="medium" style="#{msg.get('btn.size')}"
+                                         icon="ui-icon-check"
+                                         action="#{studentRegisterBean.onClickSubmit}"/>
+                        <p:commandButton value="#{msg.get('btn.name.cancel')}"
+                                         id="btnCancel"
+                                         icon="ui-icon-cancel"
+                                         styleClass="medium" style="#{msg.get('btn.size')}"
+                                         process="@form"
+                                         oncomplete="PF('studentRegisterDlg').hide()"/>
+                    </div>
+                </td>
+            </tr>
+        </table>
 
-</body>
+
+    </h:form>
+</f:view>
 </html>
