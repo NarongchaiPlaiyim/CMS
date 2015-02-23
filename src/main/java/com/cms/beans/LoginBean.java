@@ -4,10 +4,7 @@ import com.cms.service.LoginService;
 import com.cms.service.security.SimpleAuthenticationManager;
 import com.cms.service.security.UserDetail;
 import com.cms.service.security.encryption.EncryptionService;
-import com.cms.utils.AttributeName;
-import com.cms.utils.FacesUtil;
-import com.cms.utils.MessageDialog;
-import com.cms.utils.Utils;
+import com.cms.utils.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -84,16 +81,19 @@ public class LoginBean extends Bean{
         }
     }
 
-    public void onClickRegister(){
-
-    }
     public String login(){
         log.info("-- SessionRegistry principle size: {}", sessionRegistry.getAllPrincipals().size());
+
+        if(isStudentFlag() && Utils.isZero(teacherId.length())){
+            showDialog(MessageDialog.WARNING.getMessageHeader(), "Invalid teacher id.");
+            return "loggedOut";
+        }
+
         if(true){//!Utils.isZero(userName.length()) && !Utils.isZero(password.length())) {
             setPassword(EncryptionService.encryption(password));
             if(loginService.isUserExist(getUserName(), getPassword())){
                 userDetail = new UserDetail();
-                userDetail.setRole("TEACHER");
+                userDetail.setRole(Type.TEACHER.getText());
                 /*StaffModel staffModel = loginService.getStaffModel();
                 userDetail = new UserDetail(staffModel.getUsername(),
                                             staffModel.getPassword(),
@@ -110,7 +110,7 @@ public class LoginBean extends Bean{
                 log.debug("-- authentication result: {}", result.toString());
                 SecurityContextHolder.getContext().setAuthentication(result);
                 compositeSessionAuthenticationStrategy.onAuthentication(request, httpServletRequest, httpServletResponse);
-                HttpSession httpSession = FacesUtil.getSession(false);
+//                HttpSession httpSession = FacesUtil.getSession(false);
 //                httpSession.setAttribute(AttributeName.USER_DETAIL.getName(), getUserDetail());
 //                httpSession.setAttribute(AttributeName.AUTHORIZE.getName(), loginService.getAuthorize());
                 log.debug("-- userDetail[{}]", userDetail.toString());

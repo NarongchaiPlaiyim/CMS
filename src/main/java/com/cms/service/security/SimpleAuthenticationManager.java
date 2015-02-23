@@ -1,6 +1,7 @@
 package com.cms.service.security;
 
 
+import com.cms.utils.Type;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -23,15 +24,13 @@ public class SimpleAuthenticationManager implements AuthenticationManager {
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         UserDetail userDetail = (UserDetail) authentication.getPrincipal();
         WebAuthenticationDetails authenticationDetails = (WebAuthenticationDetails) authentication.getDetails();
-        // system role
-        if ("ADMIN".equalsIgnoreCase(userDetail.getRole())) {
-            return getAuthority(userDetail, authentication, authenticationDetails);
+
+        if(!Type.TEACHER.getText().equalsIgnoreCase(userDetail.getRole()) &&
+                !Type.STUDENT.getText().equalsIgnoreCase(userDetail.getRole())){
+            throw new BadCredentialsException("Bad Credentials");
         }
-        // business role
-        if ("TEACHER".equalsIgnoreCase(userDetail.getRole())) {
-            return getAuthority(userDetail, authentication, authenticationDetails);
-        }
-        throw new BadCredentialsException("Bad Credentials");
+
+        return getAuthority(userDetail, authentication, authenticationDetails);
     }
 
     private UsernamePasswordAuthenticationToken getAuthority(UserDetail userDetail, Authentication authentication, WebAuthenticationDetails authenticationDetails) {
