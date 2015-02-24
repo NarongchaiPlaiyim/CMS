@@ -33,14 +33,14 @@ public class RegisterService extends Service{
             userModel.setPassword(EncryptionService.encryption(view.getPassword()));
             userModel.setEmail(view.getEmail());
             userModel.setTeacherId(view.getTeacherId());
-            userModel.setRole(Type.TEACHER.getText());
+            userModel.setRole(Type.TEACHER);
         } else {
             StudentRegisterView view = (StudentRegisterView) o;
             userModel.setUserName(view.getUserName());
             userModel.setPassword(EncryptionService.encryption(view.getPassword()));
             userModel.setEmail(view.getEmail());
             userModel.setStudentId(view.getStudentId());
-            userModel.setRole(Type.STUDENT.getText());
+            userModel.setRole(Type.STUDENT);
         }
         return userModel;
     }

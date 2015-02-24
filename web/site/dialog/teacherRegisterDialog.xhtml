@@ -18,7 +18,7 @@
                 </td>
                 <td>
                     <p:inputText style="min-width: 150px; width: 150px; max-width: 150px;"
-                                 value="#{teacherRegisterBean.view.teacherId}" />
+                                 value="#{loginBean.teacherRegisterView.teacherId}" />
                 </td>
             </tr>
             <tr>
@@ -27,7 +27,7 @@
                 </td>
                 <td>
                     <p:inputText style="min-width: 150px; width: 150px; max-width: 150px;"
-                                 value="#{teacherRegisterBean.view.userName}" />
+                                 value="#{loginBean.teacherRegisterView.userName}" />
                 </td>
             </tr>
             <tr>
@@ -36,7 +36,7 @@
                 </td>
                 <td>
                     <p:password style="min-width: 150px; width: 150px; max-width: 150px;"
-                                value="#{teacherRegisterBean.view.password}" />
+                                value="#{loginBean.teacherRegisterView.password}" />
                 </td>
             </tr>
             <tr>
@@ -45,7 +45,7 @@
                 </td>
                 <td>
                     <p:inputText style="min-width: 150px; width: 150px; max-width: 150px;"
-                                 value="#{teacherRegisterBean.view.email}" />
+                                 value="#{loginBean.teacherRegisterView.email}" />
                 </td>
             </tr>
             <tr/>
@@ -54,11 +54,11 @@
                     <div style="text-align: center;">
                         <p:commandButton value="#{msg.get('btn.name.submit')}"
                                          id="btnSaveHeader"
-                                         update=":msgBoxSystemMessagePanelT"
+                                         update=":msgBoxSystemMessagePanel"
                                          styleClass="medium" style="#{msg.get('btn.size')}"
                                          icon="ui-icon-check"
                                          oncomplete="PF('teacherRegisterDlg').hide()"
-                                         action="#{teacherRegisterBean.onClickSubmit}"/>
+                                         action="#{loginBean.onClickRegTeacherSubmit()}"/>
                         <p:commandButton value="#{msg.get('btn.name.cancel')}"
                                          id="btnCancel"
                                          icon="ui-icon-cancel"
@@ -69,23 +69,6 @@
                 </td>
             </tr>
         </table>
-
-
     </h:form>
-
-    <p:panel id="msgBoxSystemMessagePanelT" style="border: 0">
-        <p:confirmDialog id="msgBoxSystemMessageDialogT" widgetVar="msgBoxSystemMessageDlgT" width="#{msg.get('dialog.message.size')}" closable="false"
-                         style="border: 0;"
-                         header="#{teacherRegisterBean.messageHeader}" message="#{teacherRegisterBean.message}" >
-            <div style="text-align: right">
-                <p:commandButton value="#{msg.get('btn.name.ok')}"
-                                 process="@this"
-                                 update=":teacherRegisterForm"
-                                 icon="ui-icon-check"
-                                 styleClass="medium" style="#{msg.get('btn.size')}"
-                                 oncomplete="PF('msgBoxSystemMessageDlgT').hide()"/>
-            </div>
-        </p:confirmDialog>
-    </p:panel>
 </f:view>
 </html>

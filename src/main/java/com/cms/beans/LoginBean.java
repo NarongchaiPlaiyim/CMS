@@ -1,9 +1,12 @@
 package com.cms.beans;
 
+import com.cms.model.db.UserModel;
+import com.cms.model.view.dilog.StudentRegisterView;
+import com.cms.model.view.dilog.TeacherRegisterView;
 import com.cms.service.LoginService;
+import com.cms.service.RegisterService;
 import com.cms.service.security.SimpleAuthenticationManager;
 import com.cms.service.security.UserDetail;
-import com.cms.service.security.encryption.EncryptionService;
 import com.cms.utils.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,7 +21,6 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -35,6 +37,7 @@ public class LoginBean extends Bean{
     @ManagedProperty("#{loginService}") private LoginService loginService;
     @ManagedProperty("#{sessionRegistry}") private SessionRegistry sessionRegistry;
     @ManagedProperty("#{sas}") private CompositeSessionAuthenticationStrategy compositeSessionAuthenticationStrategy;
+    @ManagedProperty("#{registerService}") private RegisterService registerService;
 
     private String userName = "";
     private String password = "";
@@ -50,6 +53,10 @@ public class LoginBean extends Bean{
 
     private final String TEACHER = "0";
     private final String STUDENT = "1";
+
+    private TeacherRegisterView teacherRegisterView;
+    private StudentRegisterView studentRegisterView;
+
     @PostConstruct
     private void init(){
 //        if(!Utils.isNull(SecurityContextHolder.getContext().getAuthentication())){
@@ -61,16 +68,47 @@ public class LoginBean extends Bean{
 //        }
         initTeacher();
         typeRadio = TEACHER;
+        teacherRegisterView = new TeacherRegisterView();
+        studentRegisterView = new StudentRegisterView();
     }
 
     private void initTeacher(){
         teacherFlag = true;
         studentFlag = false;
     }
-
     private void initStudent(){
         teacherFlag = false;
         studentFlag = true;
+    }
+
+    public void onClickRegStudentSubmit(){
+        try {
+            if(Utils.isZero(studentRegisterView.getUserName()) ||  Utils.isZero(studentRegisterView.getPassword()) ||
+                    Utils.isZero(studentRegisterView.getStudentId()) ||  Utils.isZero(studentRegisterView.getEmail())){
+                showDialogWarning("กรอกให้ครบ ซิสัส");
+            }
+
+            //showDialogWarning("Already existed login name");
+
+            registerService.createNewUser(studentRegisterView);
+            showDialogCreated();
+            init();
+        } catch (Exception e) {
+            showDialogError(e.getMessage());
+            log.debug("Exception while processing ", e);
+        }
+    }
+
+    public void onClickRegTeacherSubmit(){
+        System.out.println("onClickRegTeacherSubmit");
+        try {
+            registerService.createNewUser(teacherRegisterView);
+            showDialogCreated();
+            init();
+        } catch (Exception e) {
+            showDialogError(e.getMessage());
+            log.debug("Exception while processing ", e);
+        }
     }
 
     public void onClickRadio(){
@@ -90,17 +128,12 @@ public class LoginBean extends Bean{
         }
 
         if(!Utils.isZero(userName.length()) && !Utils.isZero(password.length())) {
-            setPassword(EncryptionService.encryption(password));
             if(loginService.isUserExist(getUserName(), getPassword())){
-                userDetail = new UserDetail();
-                userDetail.setRole(Type.TEACHER.getText());
-                /*StaffModel staffModel = loginService.getStaffModel();
-                userDetail = new UserDetail(staffModel.getUsername(),
-                                            staffModel.getPassword(),
-                                            "USER",
-                                            staffModel.getMsTitleModel().getName(),
-                                            staffModel.getName());
-                userDetail.setId(Utils.parseInt(staffModel.getId(), 0)); */
+                UserModel userModel = loginService.getUserModel();
+                userDetail = new UserDetail(userModel.getId(),
+                                            userModel.getUserName(),
+                                            userModel.getPassword(),
+                                            userModel.getRole());
                 HttpServletRequest httpServletRequest = FacesUtil.getRequest();
                 HttpServletResponse httpServletResponse = FacesUtil.getResponse();
                 UsernamePasswordAuthenticationToken request = new UsernamePasswordAuthenticationToken(getUserDetail(), getPassword());
@@ -110,8 +143,8 @@ public class LoginBean extends Bean{
                 log.debug("-- authentication result: {}", result.toString());
                 SecurityContextHolder.getContext().setAuthentication(result);
                 compositeSessionAuthenticationStrategy.onAuthentication(request, httpServletRequest, httpServletResponse);
-//                HttpSession httpSession = FacesUtil.getSession(false);
-//                httpSession.setAttribute(AttributeName.USER_DETAIL.getName(), getUserDetail());
+                HttpSession httpSession = FacesUtil.getSession(false);
+                httpSession.setAttribute(AttributeName.USER_DETAIL.getName(), getUserDetail());
 //                httpSession.setAttribute(AttributeName.AUTHORIZE.getName(), loginService.getAuthorize());
                 log.debug("-- userDetail[{}]", userDetail.toString());
                 return "PASS";

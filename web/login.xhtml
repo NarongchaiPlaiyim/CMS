@@ -36,7 +36,7 @@
 
                     <h:outputLabel id="teacherIdLabel" for="teacherId" value="Teacher ID"
                                    rendered="#{loginBean.studentFlag}"/>
-                    <p:password id="teacherId" value="#{loginBean.teacherId}" placeholder="Enter teacher id."
+                    <p:inputText id="teacherId" value="#{loginBean.teacherId}" placeholder="Enter teacher id."
                                    rendered="#{loginBean.studentFlag}"/>
 
                     <p:commandButton id="loginBtn" value="#{msg.get('btn.name.login')}"
