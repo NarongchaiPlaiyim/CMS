@@ -26,6 +26,13 @@ public class TeacherRegisterBean extends Bean {
     }
 
     public void onClickSubmit(){
-        view.setCreateDate(Utils.currentDate());
+        try {
+            registerService.createNewUser(view);
+            showDialogCreated();
+            init();
+        } catch (Exception e) {
+            showDialogError(e.getMessage());
+            log.debug("Exception while processing ", e);
+        }
     }
 }

@@ -14,7 +14,7 @@
             </tr>
             <tr>
                 <td>
-                    <h:outputLabel value="Student ID"/>
+                    <h:outputLabel value="Teacher ID"/>
                 </td>
                 <td>
                     <p:inputText style="min-width: 150px; width: 150px; max-width: 150px;"
@@ -54,8 +54,10 @@
                     <div style="text-align: center;">
                         <p:commandButton value="#{msg.get('btn.name.submit')}"
                                          id="btnSaveHeader"
+                                         update=":msgBoxSystemMessagePanel"
                                          styleClass="medium" style="#{msg.get('btn.size')}"
                                          icon="ui-icon-check"
+                                         oncomplete="PF('teacherRegisterDlg').hide()"
                                          action="#{teacherRegisterBean.onClickSubmit}"/>
                         <p:commandButton value="#{msg.get('btn.name.cancel')}"
                                          id="btnCancel"

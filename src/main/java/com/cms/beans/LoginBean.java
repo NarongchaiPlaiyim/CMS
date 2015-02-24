@@ -89,7 +89,7 @@ public class LoginBean extends Bean{
             return "loggedOut";
         }
 
-        if(true){//!Utils.isZero(userName.length()) && !Utils.isZero(password.length())) {
+        if(!Utils.isZero(userName.length()) && !Utils.isZero(password.length())) {
             setPassword(EncryptionService.encryption(password));
             if(loginService.isUserExist(getUserName(), getPassword())){
                 userDetail = new UserDetail();

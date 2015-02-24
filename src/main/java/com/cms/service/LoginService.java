@@ -1,5 +1,6 @@
 package com.cms.service;
 
+import com.cms.model.dao.UserDAO;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,7 +14,7 @@ import java.util.Map;
 @Transactional
 public class LoginService extends Service{
     private static final long serialVersionUID = 4112578634088874840L;
-//    @Resource private StaffDAO staffDAO;
+    @Resource private UserDAO userDAO;
 //    @Resource private MenuObjectDAO menuObjectDAO;
 //
 //    @Getter StaffModel staffModel;

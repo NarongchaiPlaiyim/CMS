@@ -54,8 +54,10 @@
                     <div style="text-align: center;">
                         <p:commandButton value="#{msg.get('btn.name.submit')}"
                                          id="btnSaveHeader"
+                                         update=":msgBoxSystemMessagePanel"
                                          styleClass="medium" style="#{msg.get('btn.size')}"
                                          icon="ui-icon-check"
+                                         oncomplete="PF('studentRegisterDlg').hide()"
                                          action="#{studentRegisterBean.onClickSubmit}"/>
                         <p:commandButton value="#{msg.get('btn.name.cancel')}"
                                          id="btnCancel"

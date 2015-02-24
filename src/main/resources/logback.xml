@@ -58,7 +58,7 @@
         <appender-ref ref="NORMAL-FILE"/>
     </logger>
 
-    <logger name="com.ese" level="DEBUG"/>
+    <logger name="com.cms" level="DEBUG"/>
     <logger name="org.springframework" level="INFO" />
     <logger name="org.hibernate" level="INFO"/>
     <logger name="org.hibernate.type" level="INFO" additivity="false">

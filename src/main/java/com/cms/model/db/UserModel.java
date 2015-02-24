@@ -18,35 +18,38 @@ public class UserModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name="login_id")
-    private String loginId;
+    @Column(name="teacher_id")
+    private String teacherId;
 
-    @Column(name="name")
+    @Column(name="student_id")
+    private String studentId;
+
+    @Column(name="username")
     private String userName;
 
     @Column(name="password")
     private String password;
 
-    @Column(name="email_address")
+    @Column(name="email")
     private String email;
 
     @Column(name="facebook")
     private String facebook;
 
-    @OneToOne
-    @JoinColumn(name="role_id")
-    private MSRoleModel roleModel;
+    @Column(name="role")
+    private String role;
 
     @Override
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
                 .append("id", id)
-                .append("loginId", loginId)
+                .append("teacherId", teacherId)
+                .append("studentId", studentId)
                 .append("userName", userName)
                 .append("password", password)
                 .append("email", email)
                 .append("facebook", facebook)
-                .append("roleModel", roleModel)
+                .append("role", role)
                 .toString();
     }
 }
