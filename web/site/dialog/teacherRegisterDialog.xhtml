@@ -57,6 +57,7 @@
                                          update=":msgBoxSystemMessagePanel"
                                          styleClass="medium" style="#{msg.get('btn.size')}"
                                          icon="ui-icon-check"
+                                         process="@form"
                                          oncomplete="PF('teacherRegisterDlg').hide()"
                                          action="#{loginBean.onClickRegTeacherSubmit()}"/>
                         <p:commandButton value="#{msg.get('btn.name.cancel')}"
