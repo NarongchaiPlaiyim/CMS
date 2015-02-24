@@ -50,6 +50,7 @@
                                      rendered="#{loginBean.teacherFlag}"
                                      update=":msgBoxSystemMessagePanel"
                                      oncomplete="PF('teacherRegisterDlg').show()"/>
+
                     <p:commandButton id="registerStudentBtn" value="#{msg.get('btn.name.register')}"
                                      rendered="#{loginBean.studentFlag}"
                                      update=":msgBoxSystemMessagePanel"
@@ -92,6 +93,7 @@
             </div>
         </p:confirmDialog>
     </p:panel>
+
     <pe:blockUI widgetVar="bui" centerX="true" centerY="true">
             <p:panel style="border: 0">
                 <div style="text-align: center;">

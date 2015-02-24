@@ -54,7 +54,7 @@
                     <div style="text-align: center;">
                         <p:commandButton value="#{msg.get('btn.name.submit')}"
                                          id="btnSaveHeader"
-                                         update=":msgBoxSystemMessagePanel"
+                                         update=":msgBoxSystemMessagePanelS"
                                          styleClass="medium" style="#{msg.get('btn.size')}"
                                          icon="ui-icon-check"
                                          oncomplete="PF('studentRegisterDlg').hide()"
@@ -72,5 +72,21 @@
 
 
     </h:form>
+
+    <p:panel id="msgBoxSystemMessagePanelS" style="border: 0">
+        <p:confirmDialog id="msgBoxSystemMessageDialogS" widgetVar="msgBoxSystemMessageDlgS" width="#{msg.get('dialog.message.size')}" closable="false"
+                         style="border: 0;"
+                         header="#{studentRegisterBean.messageHeader}" message="#{studentRegisterBean.message}" >
+            <div style="text-align: right">
+                <p:commandButton value="#{msg.get('btn.name.ok')}"
+                                 process="@this"
+                                 update=":studenRegisterForm"
+                                 icon="ui-icon-check"
+                                 styleClass="medium" style="#{msg.get('btn.size')}"
+                                 oncomplete="PF('msgBoxSystemMessageDlgS').hide()"/>
+            </div>
+        </p:confirmDialog>
+    </p:panel>
+
 </f:view>
 </html>

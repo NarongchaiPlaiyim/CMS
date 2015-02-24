@@ -27,6 +27,10 @@ public class StudentRegisterBean extends Bean {
 
     public void onClickSubmit(){
         try {
+            if(Utils.isZero(view.getUserName()) ||  Utils.isZero(view.getPassword()) ||
+                    Utils.isZero(view.getStudentId()) ||  Utils.isZero(view.getEmail())){
+                showDialogWarning("กรอกให้ครบ ซิสัส");
+            }
             registerService.createNewUser(view);
             showDialogCreated();
             init();
