@@ -48,12 +48,12 @@
 
                     <p:commandButton id="registerTeacherBtn" value="#{msg.get('btn.name.register')}"
                                      rendered="#{loginBean.teacherFlag}"
-                                     update=":msgBoxSystemMessagePanel"
+                                     update=":teacherRegisterForm"
                                      oncomplete="PF('teacherRegisterDlg').show()"/>
 
                     <p:commandButton id="registerStudentBtn" value="#{msg.get('btn.name.register')}"
                                      rendered="#{loginBean.studentFlag}"
-                                     update=":msgBoxSystemMessagePanel"
+                                     update=":studenRegisterForm"
                                      oncomplete="PF('studentRegisterDlg').show()"/>
                 </p:panelGrid>
             </p:panel>
@@ -82,7 +82,7 @@
     <p:panel id="msgBoxSystemMessagePanel" style="border: 0">
         <p:confirmDialog id="msgBoxSystemMessageDialog" widgetVar="msgBoxSystemMessageDlg" width="#{msg.get('dialog.message.size')}" closable="false"
                          style="border: 0;"
-                         header="#{loginBean.messageHeader}" message="#{loginBean.message}" >
+                         header="#{teacherRegisterBean.messageHeader}" message="#{teacherRegisterBean.message}" >
             <div style="text-align: right">
                 <p:commandButton value="#{msg.get('btn.name.ok')}"
                                  process="@this"
