@@ -14,6 +14,10 @@ public class UserDAO extends GenericDAO<UserModel, Integer>{
                 Restrictions.eq("password", EncryptionService.encryption(password)))).uniqueResult();
     }
 
+    public UserModel findByUserNameAndPassword(String userName) throws Exception {
+        return (UserModel) getCriteria().add(Restrictions.eq("userName", userName)).uniqueResult();
+    }
+
     public boolean isExist(String id, Type type) throws Exception {
         boolean result;
         if(type == Type.TEACHER){
@@ -23,4 +27,6 @@ public class UserDAO extends GenericDAO<UserModel, Integer>{
         }
         return result;
     }
+
+
 }

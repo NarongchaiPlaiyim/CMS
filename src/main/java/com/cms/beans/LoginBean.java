@@ -88,9 +88,13 @@ public class LoginBean extends Bean{
     public void onClickRegStudentSubmit(){
         try {
             if(!registerService.isRecordExist(studentRegisterView.getStudentId(), Type.STUDENT)){
-                registerService.createNewUser(studentRegisterView);
-                showDialogCreated();
-                init();
+                if(!loginService.isUserExist(studentRegisterView.getUserName())){
+                    registerService.createNewUser(studentRegisterView);
+                    showDialogCreated();
+                    init();
+                } else {
+                    showDialogWarning("Already existed username.");
+                }
             } else {
                 showDialogWarning("Already existed student id.");
             }
@@ -104,9 +108,13 @@ public class LoginBean extends Bean{
         System.out.println("onClickRegTeacherSubmit");
         try {
             if(!registerService.isRecordExist(teacherRegisterView.getTeacherId(), Type.TEACHER)){
-                registerService.createNewUser(teacherRegisterView);
-                showDialogCreated();
-                init();
+                if(!loginService.isUserExist(teacherRegisterView.getUserName())){
+                    registerService.createNewUser(teacherRegisterView);
+                    showDialogCreated();
+                    init();
+                } else {
+                    showDialogWarning("Already existed username.");
+                }
             } else {
                 showDialogWarning("Already existed teacher id.");
             }

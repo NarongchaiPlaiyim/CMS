@@ -34,6 +34,19 @@ public class LoginService extends Service{
         return result;
     }
 
+    public boolean isUserExist(final String userName){
+        log.debug("-- isUserExist({}, {})", userName);
+        boolean result = false;
+        try {
+            userModel = userDAO.findByUserNameAndPassword(userName);
+            if(!Utils.isNull(userModel)){
+                result = true;
+            }
+        } catch (Exception e) {
+            log.error("Exception while calling isUserExist()", e);
+        }
+        return result;
+    }
 
 //
 //    public Map<String, String> getAuthorize(){
