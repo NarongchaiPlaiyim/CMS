@@ -17,6 +17,10 @@ public class RegisterService extends Service{
     private static final long serialVersionUID = 4112578630941419914L;
     @Resource private UserDAO userDAO;
 
+    public boolean isRecordExist(String id, Type type) throws Exception{
+        return userDAO.isExist(id, type);
+    }
+
     public void createNewUser(TeacherRegisterView view) throws Exception{
         userDAO.persist(transform(view));
     }

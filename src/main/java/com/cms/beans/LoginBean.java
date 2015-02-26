@@ -68,8 +68,7 @@ public class LoginBean extends Bean{
 //        }
         initTeacher();
         typeRadio = TEACHER;
-        teacherRegisterView = new TeacherRegisterView();
-        studentRegisterView = new StudentRegisterView();
+        onClickRegister();
     }
 
     private void initTeacher(){
@@ -81,18 +80,20 @@ public class LoginBean extends Bean{
         studentFlag = true;
     }
 
+
+    public void onClickRegister(){
+        teacherRegisterView = new TeacherRegisterView();
+        studentRegisterView = new StudentRegisterView();
+    }
     public void onClickRegStudentSubmit(){
         try {
-            if(Utils.isZero(studentRegisterView.getUserName()) ||  Utils.isZero(studentRegisterView.getPassword()) ||
-                    Utils.isZero(studentRegisterView.getStudentId()) ||  Utils.isZero(studentRegisterView.getEmail())){
-                showDialogWarning("กรอกให้ครบ ซิสัส");
+            if(!registerService.isRecordExist(studentRegisterView.getStudentId(), Type.STUDENT)){
+                registerService.createNewUser(studentRegisterView);
+                showDialogCreated();
+                init();
+            } else {
+                showDialogWarning("Already existed student id.");
             }
-
-            //showDialogWarning("Already existed login name");
-
-            registerService.createNewUser(studentRegisterView);
-            showDialogCreated();
-            init();
         } catch (Exception e) {
             showDialogError(e.getMessage());
             log.debug("Exception while processing ", e);
@@ -102,9 +103,13 @@ public class LoginBean extends Bean{
     public void onClickRegTeacherSubmit(){
         System.out.println("onClickRegTeacherSubmit");
         try {
-            registerService.createNewUser(teacherRegisterView);
-            showDialogCreated();
-            init();
+            if(!registerService.isRecordExist(teacherRegisterView.getTeacherId(), Type.TEACHER)){
+                registerService.createNewUser(teacherRegisterView);
+                showDialogCreated();
+                init();
+            } else {
+                showDialogWarning("Already existed teacher id.");
+            }
         } catch (Exception e) {
             showDialogError(e.getMessage());
             log.debug("Exception while processing ", e);
@@ -121,37 +126,67 @@ public class LoginBean extends Bean{
 
     public String login(){
         log.info("-- SessionRegistry principle size: {}", sessionRegistry.getAllPrincipals().size());
-
-        if(isStudentFlag() && Utils.isZero(teacherId.length())){
-            showDialog(MessageDialog.WARNING.getMessageHeader(), "Invalid teacher id.");
+        if(isTeacherFlag()){
+            if(!Utils.isZero(userName.length()) && !Utils.isZero(password.length())) {
+                if(loginService.isUserExist(getUserName(), getPassword())){
+                    UserModel userModel = loginService.getUserModel();
+                    userDetail = new UserDetail(userModel.getId(),
+                            userModel.getUserName(),
+                            userModel.getPassword(),
+                            userModel.getRole());
+                    HttpServletRequest httpServletRequest = FacesUtil.getRequest();
+                    HttpServletResponse httpServletResponse = FacesUtil.getResponse();
+                    UsernamePasswordAuthenticationToken request = new UsernamePasswordAuthenticationToken(getUserDetail(), getPassword());
+                    request.setDetails(new WebAuthenticationDetails(httpServletRequest));
+                    SimpleAuthenticationManager simpleAuthenticationManager = new SimpleAuthenticationManager();
+                    Authentication result = simpleAuthenticationManager.authenticate(request);
+                    log.debug("-- authentication result: {}", result.toString());
+                    SecurityContextHolder.getContext().setAuthentication(result);
+                    compositeSessionAuthenticationStrategy.onAuthentication(request, httpServletRequest, httpServletResponse);
+                    HttpSession httpSession = FacesUtil.getSession(false);
+                    httpSession.setAttribute(AttributeName.USER_DETAIL.getName(), getUserDetail());
+//                httpSession.setAttribute(AttributeName.AUTHORIZE.getName(), loginService.getAuthorize());
+                    log.debug("-- userDetail[{}]", userDetail.toString());
+                    return "PASS";
+                }
+            }
+            showDialog(MessageDialog.WARNING.getMessageHeader(), "Invalid username or password.");
+            return "loggedOut";
+        } else {
+            if(!Utils.isZero(getUserName().length()) && !Utils.isZero(getPassword().length())) {
+                if(loginService.isUserExist(getUserName(), getPassword())){
+                    try {
+                        if(!registerService.isRecordExist(getTeacherId(), Type.TEACHER)){
+                            showDialog(MessageDialog.WARNING.getMessageHeader(), "Invalid teacher id.");
+                            return "loggedOut";
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    UserModel userModel = loginService.getUserModel();
+                    userDetail = new UserDetail(userModel.getId(),
+                            userModel.getUserName(),
+                            userModel.getPassword(),
+                            userModel.getRole());
+                    HttpServletRequest httpServletRequest = FacesUtil.getRequest();
+                    HttpServletResponse httpServletResponse = FacesUtil.getResponse();
+                    UsernamePasswordAuthenticationToken request = new UsernamePasswordAuthenticationToken(getUserDetail(), getPassword());
+                    request.setDetails(new WebAuthenticationDetails(httpServletRequest));
+                    SimpleAuthenticationManager simpleAuthenticationManager = new SimpleAuthenticationManager();
+                    Authentication result = simpleAuthenticationManager.authenticate(request);
+                    log.debug("-- authentication result: {}", result.toString());
+                    SecurityContextHolder.getContext().setAuthentication(result);
+                    compositeSessionAuthenticationStrategy.onAuthentication(request, httpServletRequest, httpServletResponse);
+                    HttpSession httpSession = FacesUtil.getSession(false);
+                    httpSession.setAttribute(AttributeName.USER_DETAIL.getName(), getUserDetail());
+//                httpSession.setAttribute(AttributeName.AUTHORIZE.getName(), loginService.getAuthorize());
+                    log.debug("-- userDetail[{}]", userDetail.toString());
+                    return "PASS";
+                }
+            }
+            showDialog(MessageDialog.WARNING.getMessageHeader(), "Invalid username or password.");
             return "loggedOut";
         }
-
-        if(!Utils.isZero(userName.length()) && !Utils.isZero(password.length())) {
-            if(loginService.isUserExist(getUserName(), getPassword())){
-                UserModel userModel = loginService.getUserModel();
-                userDetail = new UserDetail(userModel.getId(),
-                                            userModel.getUserName(),
-                                            userModel.getPassword(),
-                                            userModel.getRole());
-                HttpServletRequest httpServletRequest = FacesUtil.getRequest();
-                HttpServletResponse httpServletResponse = FacesUtil.getResponse();
-                UsernamePasswordAuthenticationToken request = new UsernamePasswordAuthenticationToken(getUserDetail(), getPassword());
-                request.setDetails(new WebAuthenticationDetails(httpServletRequest));
-                SimpleAuthenticationManager simpleAuthenticationManager = new SimpleAuthenticationManager();
-                Authentication result = simpleAuthenticationManager.authenticate(request);
-                log.debug("-- authentication result: {}", result.toString());
-                SecurityContextHolder.getContext().setAuthentication(result);
-                compositeSessionAuthenticationStrategy.onAuthentication(request, httpServletRequest, httpServletResponse);
-                HttpSession httpSession = FacesUtil.getSession(false);
-                httpSession.setAttribute(AttributeName.USER_DETAIL.getName(), getUserDetail());
-//                httpSession.setAttribute(AttributeName.AUTHORIZE.getName(), loginService.getAuthorize());
-                log.debug("-- userDetail[{}]", userDetail.toString());
-                return "PASS";
-            }
-        }
-        showDialog(MessageDialog.WARNING.getMessageHeader(), "Invalid username or password.");
-        return "loggedOut";
     }
 
     public boolean isRendered(String key){
