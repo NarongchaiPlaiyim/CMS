@@ -47,10 +47,12 @@
                                              scrollable="true" scrollHeight="450"
                                              var="subjectModel"
                                              value="#{subjectBean.subjectModelList}"
-                                             selectionMode="single"
                                              rowKey="#{subjectModel.id}"
                                              rowIndexVar="rowIndex">
-                                    <p:column headerText="Subject Id" style="min-width: 150px; width: 150px; max-width: 150px;" styleClass="center">
+                                    <p:column headerText="No" style="min-width: 20px; width: 20px; max-width: 20px;" styleClass="center">
+                                        <h:outputText value="#{rowIndex+1}"/>
+                                    </p:column>
+                                    <p:column headerText="Subject Id" style="min-width: 100px; width: 100px; max-width: 100px;" styleClass="center">
                                         <h:outputText value="#{subjectModel.subjectId}" style="word-wrap:break-word;"/>
                                     </p:column>
                                     <p:column headerText="Subject Name" style="min-width: 150px; width: 150px; max-width: 150px;" styleClass="center">
@@ -73,7 +75,7 @@
         <p:panel id="subjectPanel" styleClass="panel">
             <p:dialog id="subjectDialog" widgetVar="subjectDlg" header="Add subject"
                       onShow="hideWindowsScrollBar()" onHide="showWindowsScrollBar()" resizable="false"
-                      modal="true" width="300" height="230">
+                      modal="true" width="340" height="280">
                 <ui:include src="../site/dialog/subjectDialog.xhtml"/>
             </p:dialog>
         </p:panel>
