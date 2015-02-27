@@ -81,6 +81,17 @@
 
                     </table>
 
+                    <p:panel style="border: 0">
+                        <div style="text-align: left;">
+                            <p:commandButton value="#{msg.get('btn.name.add')}"
+                                             action="#{subjectBean.onClickAdd}"
+                                             oncomplete="PF('examinationDlg').show()"
+                                             update="@form, :examinationDialogForm"
+                                             styleClass="medium" style="#{msg.get('btn.size')}"
+                                             icon="ui-icon-plusthick"/>
+                        </div>
+                    </p:panel>
+
                     <table border="0" class="content_table_form">
                         <tr >
                             <td style="min-width: 150px; width: 150px; max-width: 150px;" class="left" />
@@ -116,6 +127,30 @@
                 </h:form>
             </p:layoutUnit>
         </p:layout>
+
+        <p:panel id="examinationPanel" styleClass="panel">
+            <p:dialog id="examinationDialog" widgetVar="examinationDlg" header="Add Examination"
+                      closable="false"
+                      onShow="hideWindowsScrollBar()" onHide="showWindowsScrollBar()" resizable="false"
+                      modal="true" width="300" height="230">
+                <ui:include src="../site/dialog/examinationDialog.xhtml"/>
+            </p:dialog>
+        </p:panel>
+
+        <p:panel id="msgBoxSystemMessagePanel" style="border: 0">
+            <p:confirmDialog id="msgBoxSystemMessageDialog" widgetVar="msgBoxSystemMessageDlg" width="#{msg.get('dialog.message.size')}" closable="false"
+                             header="#{examinationBean.messageHeader}" message="#{examinationBean.message}" >
+                <div style="text-align: right">
+                    <p:commandButton value="#{msg.get('btn.name.ok')}"
+                                     process="@this"
+                                     update="examinationForm"
+                                     icon="ui-icon-check"
+                                     styleClass="medium" style="#{msg.get('btn.size')}"
+                                     oncomplete="PF('msgBoxSystemMessageDlg').hide()"/>
+                </div>
+            </p:confirmDialog>
+        </p:panel>
+
     </h:body>
 </f:view>
 </html>
