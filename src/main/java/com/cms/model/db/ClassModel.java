@@ -15,6 +15,9 @@ import javax.persistence.*;
 @Proxy(lazy=false)
 public class ClassModel {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
     @Column(name="class_id")
     private String classId;
 

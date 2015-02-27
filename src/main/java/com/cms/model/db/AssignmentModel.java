@@ -16,6 +16,9 @@ import java.math.BigDecimal;
 @Proxy(lazy=false)
 public class AssignmentModel {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
     @Column(name="assignment_id")
     private String assignmentId;
 
