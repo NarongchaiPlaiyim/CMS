@@ -1,12 +1,121 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html
-        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-<head>
-    <title></title>
-</head>
-<body>
+<!DOCTYPE html>
+<html>
+<f:view xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>#{msg.get('menu.examination.title')}</title>
+    </h:head>
+    <h:body>
+        <p:layout fullPage="true" id="layoutPanel">
+            <p:layoutUnit id="layoutTop" position="north" size="180" header="#{msg.get('header.north')}" collapsible="true" style="border: 0">
+                <ui:insert name="header">
+                    <ui:include src="#{msg.get('include.header')}"/>
+                </ui:insert>
+            </p:layoutUnit>
+            <p:layoutUnit id="layoutLeft" position="west" size="#{msg.get('layoutLeft.size')}" header="#{msg.get('header.west')}" collapsible="true" style="border: 0">
+                <ui:include src="#{msg.get('include.menu')}"/>
+            </p:layoutUnit>
 
-</body>
+            <p:layoutUnit id="layoutCenter" position="center" header="#{msg.get('menu.examination.title')}" >
+                <h:form id="examinationForm">
+                    <table border="0" class="content_table_form">
+                        <tr >
+                            <td style="min-width: 150px; width: 150px; max-width: 150px;" class="left" />
+                            <td style="min-width: 150px; width: 150px; max-width: 150px;" class="left" />
+                            <td style="min-width: 150px; width: 150px; max-width: 150px;" class="left" />
+                            <td style="min-width: 150px; width: 150px; max-width: 150px;" class="left" />
+                        </tr>
+                        <tr>
+                            <td colspan="4">
+                                <p:dataTable id="tutorialTable"
+                                             scrollable="true" scrollHeight="450"
+                                             var="subjectModel"
+                                             value="#{classTutorialBean.subjectModelList}"
+                                             selectionMode="single"
+                                             rowKey="#{subjectModel.id}"
+                                             rowIndexVar="rowIndex">
+                                    <p:column headerText="Subject Id" style="min-width: 150px; width: 150px; max-width: 150px;" styleClass="center">
+
+                                    </p:column>
+                                    <p:column headerText="Subject Name" style="min-width: 150px; width: 150px; max-width: 150px;" styleClass="center">
+
+                                    </p:column>
+                                    <p:column headerText="Details" style="min-width: 150px; width: 150px; max-width: 150px;" styleClass="center">
+
+                                    </p:column>
+                                </p:dataTable>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <table border="0" class="content_table_form">
+                        <tr >
+                            <td style="min-width: 150px; width: 150px; max-width: 150px;" class="left" />
+                            <td style="min-width: 150px; width: 150px; max-width: 150px;" class="left" />
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <h:outputLabel value="Academic Year"/>
+                            </td>
+                            <td>
+                                <p:selectOneMenu value="#{subjectBean.subjectModelSelected.semester}">
+                                    <f:selectItems value="#{subjectBean.SEMESTER}" />
+                                </p:selectOneMenu>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <h:outputLabel value="Semester"/>
+                            </td>
+                            <td>
+                                <p:selectOneMenu value="#{subjectBean.subjectModelSelected.semester}">
+                                    <f:selectItems value="#{subjectBean.SEMESTER}" />
+                                </p:selectOneMenu>
+                            </td>
+                        </tr>
+
+                    </table>
+
+                    <table border="0" class="content_table_form">
+                        <tr >
+                            <td style="min-width: 150px; width: 150px; max-width: 150px;" class="left" />
+                            <td style="min-width: 150px; width: 150px; max-width: 150px;" class="left" />
+                            <td style="min-width: 150px; width: 150px; max-width: 150px;" class="left" />
+                            <td style="min-width: 150px; width: 150px; max-width: 150px;" class="left" />
+                        </tr>
+                        <tr>
+                            <td colspan="4">
+                                <p:dataTable id="tutorialTable2"
+                                             scrollable="true" scrollHeight="450"
+                                             var="subjectModel"
+                                             value="#{classTutorialBean.subjectModelList}"
+                                             selectionMode="single"
+                                             rowKey="#{subjectModel.id}"
+                                             rowIndexVar="rowIndex">
+                                    <p:column headerText="Exam No." style="min-width: 150px; width: 150px; max-width: 150px;" styleClass="center">
+
+                                    </p:column>
+                                    <p:column headerText="Exam Content" style="min-width: 150px; width: 150px; max-width: 150px;" styleClass="center">
+
+                                    </p:column>
+                                    <p:column headerText="Type" style="min-width: 150px; width: 150px; max-width: 150px;" styleClass="center">
+
+                                    </p:column>
+                                    <p:column headerText="Score" style="min-width: 150px; width: 150px; max-width: 150px;" styleClass="center">
+
+                                    </p:column>
+                                </p:dataTable>
+                            </td>
+                        </tr>
+                    </table>
+                </h:form>
+            </p:layoutUnit>
+        </p:layout>
+    </h:body>
+</f:view>
 </html>
