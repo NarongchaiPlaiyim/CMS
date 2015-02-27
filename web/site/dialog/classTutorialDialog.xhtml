@@ -6,7 +6,7 @@
         xmlns:p="http://primefaces.org/ui">
     <h:head>
     </h:head>
-    <h:form id="assignmentDialogForm">
+    <h:form id="classTruorialDialogForm">
         <table border="0" class="content_table_form">
             <tr >
                 <td style="min-width: 100px; width: 100px; max-width: 100px;" class="left" />
@@ -14,7 +14,24 @@
             </tr>
             <tr>
                 <td>
+                    <h:outputLabel value="Class"/>
+                </td>
+                <td>
+                    <!--<p:inputText style="min-width: 150px; width: 150px; max-width: 150px;"-->
+                                 <!--value="#{subjectBean.subjectModelSelected.subjectId}" />-->
+                </td>
+            </tr>
+            <tr>
+                <td>
                     <h:outputLabel value="Topic"/>
+                </td>
+                <td>
+                    <!---->
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <h:outputLabel value="Description"/>
                 </td>
                 <td>
 
@@ -22,7 +39,7 @@
             </tr>
             <tr>
                 <td>
-                    <h:outputLabel value="Description"/>
+                    <h:outputLabel value="Week"/>
                 </td>
                 <td>
 
@@ -37,22 +54,6 @@
                 </td>
             </tr>
             <tr>
-                <td>
-                    <h:outputLabel value="Academic Year"/>
-                </td>
-                <td>
-
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <h:outputLabel value="Semester"/>
-                </td>
-                <td>
-
-                </td>
-            </tr>
-            <tr>
                 <td colspan="2">
                     <div style="text-align: center;"></div>
                     <p:commandButton value="#{msg.get('btn.name.submit')}"
@@ -61,14 +62,14 @@
                                      styleClass="medium" style="#{msg.get('btn.size')}"
                                      icon="ui-icon-check"
                                      process="@form"
-                                     oncomplete="PF('assignmetDlg').hide()"
+                                     oncomplete="PF('classTutorialDlg').hide()"
                                      action="#{subjectBean.onSubmit()}"/>
                     <p:commandButton value="#{msg.get('btn.name.cancel')}"
                                      id="btnCancel"
                                      icon="ui-icon-cancel"
                                      styleClass="medium" style="#{msg.get('btn.size')}"
                                      process="@form"
-                                     oncomplete="PF('assignmetDlg').hide()"/>
+                                     oncomplete="PF('classTutorialDlg').hide()"/>
                 </td>
             </tr>
         </table>

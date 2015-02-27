@@ -50,15 +50,60 @@
                             </td>
                         </tr>
                     </table>
+
+                    <p:panel style="border: 0">
+                        <div style="text-align: left;">
+                            <p:commandButton value="#{msg.get('btn.name.add')}"
+                                             action="#{subjectBean.onClickAdd}"
+                                             oncomplete="PF('classTutorialDlg').show()"
+                                             update="@form, :classTruorialDialogForm"
+                                             styleClass="medium" style="#{msg.get('btn.size')}"
+                                             icon="ui-icon-plusthick"/>
+                        </div>
+                    </p:panel>
+
+                    <table border="0" class="content_table_form">
+                        <tr >
+                            <td style="min-width: 150px; width: 150px; max-width: 150px;" class="left" />
+                            <td style="min-width: 150px; width: 150px; max-width: 150px;" class="left" />
+                            <td style="min-width: 150px; width: 150px; max-width: 150px;" class="left" />
+                            <td style="min-width: 150px; width: 150px; max-width: 150px;" class="left" />
+                        </tr>
+                        <tr>
+                            <td colspan="4">
+                                <p:dataTable id="tutorialTable"
+                                             scrollable="true" scrollHeight="450"
+                                             var="subjectModel"
+                                             value="#{classTutorialBean.subjectModelList}"
+                                             selectionMode="single"
+                                             rowKey="#{subjectModel.id}"
+                                             rowIndexVar="rowIndex">
+                                    <p:column headerText="Tutorial Code" style="min-width: 150px; width: 150px; max-width: 150px;" styleClass="center">
+
+                                    </p:column>
+                                    <p:column headerText="Tutorial Name" style="min-width: 150px; width: 150px; max-width: 150px;" styleClass="center">
+
+                                    </p:column>
+                                    <p:column headerText="Week" style="min-width: 150px; width: 150px; max-width: 150px;" styleClass="center">
+
+                                    </p:column>
+                                    <p:column headerText="" style="min-width: 150px; width: 150px; max-width: 150px;" styleClass="center">
+
+                                    </p:column>
+                                </p:dataTable>
+                            </td>
+                        </tr>
+                    </table>
                 </h:form>
             </p:layoutUnit>
         </p:layout>
 
-        <p:panel id="subjectPanel" styleClass="panel">
-            <p:dialog id="subjectDialog" widgetVar="subjectDlg" header="Add subject"
+        <p:panel id="classTutorialPanel" styleClass="panel">
+            <p:dialog id="classTutorialDialog" widgetVar="classTutorialDlg" header="Add Tutorial"
+                      closable="false"
                       onShow="hideWindowsScrollBar()" onHide="showWindowsScrollBar()" resizable="false"
                       modal="true" width="300" height="230">
-                <ui:include src="../site/dialog/classTruorialDialog.xhtml"/>
+                <ui:include src="../site/dialog/classTutorialDialog.xhtml"/>
             </p:dialog>
         </p:panel>
 
