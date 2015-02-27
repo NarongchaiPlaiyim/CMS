@@ -15,7 +15,7 @@ import java.math.BigDecimal;
 @Entity
 @Table(name = "examination")
 @Proxy(lazy=false)
-public class Examination {
+public class ExaminationModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
