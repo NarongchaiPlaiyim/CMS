@@ -25,7 +25,7 @@
                                       value="#{loginBean.typeRadio}">
                         <f:selectItem itemLabel="Teacher" itemValue="#{loginBean.TEACHER}"/>
                         <f:selectItem itemLabel="Student" itemValue="#{loginBean.STUDENT}"/>
-                        <p:ajax listener="#{loginBean.onClickRadio}" event="change" update="@form"/>
+                        <p:ajax listener="#{loginBean.onClickRadio}" event="change" update="@form, :frmLogin:teacherId"/>
                     </p:selectOneRadio>
 
 
@@ -36,8 +36,13 @@
 
                     <h:outputLabel id="teacherIdLabel" for="teacherId" value="Teacher ID"
                                    rendered="#{loginBean.studentFlag}"/>
-                    <p:inputText id="teacherId" value="#{loginBean.teacherId}" placeholder="Enter teacher id."
-                                   rendered="#{loginBean.studentFlag}"/>
+
+                    <p:selectOneMenu id="teacherId" value="#{loginBean.userModelSelected}" rendered="#{loginBean.studentFlag}">
+                        <f:selectItems value="#{loginBean.teacherList}"
+                                       var="c"
+                                       itemLabel="#{c.personId}" itemValue="#{c}"
+                                />
+                    </p:selectOneMenu>
 
                     <p:commandButton id="loginBtn" value="#{msg.get('btn.name.login')}"
 
@@ -61,9 +66,6 @@
             </p:panel>
         </h:form>
     </h:body>
-    <div class="loginfooter">
-        <p style="color: #2F91BD">Powered by Extra Solution Engineering Co.,Ltd.</p>
-    </div>
 
     <p:dialog id="teacherRegisterDialog" widgetVar="teacherRegisterDlg" header="Teacher Register"
               onShow="hideWindowsScrollBar()" onHide="showWindowsScrollBar()" resizable="false"

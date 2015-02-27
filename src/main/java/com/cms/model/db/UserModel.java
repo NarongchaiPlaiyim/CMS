@@ -19,11 +19,8 @@ public class UserModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name="teacher_id")
-    private String teacherId;
-
-    @Column(name="student_id")
-    private String studentId;
+    @Column(name="person_id")
+    private String personId;
 
     @Column(name="username")
     private String userName;
@@ -45,8 +42,7 @@ public class UserModel {
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
                 .append("id", id)
-                .append("teacherId", teacherId)
-                .append("studentId", studentId)
+                .append("personId", personId)
                 .append("userName", userName)
                 .append("password", password)
                 .append("email", email)
