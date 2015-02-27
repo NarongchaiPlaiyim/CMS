@@ -23,8 +23,8 @@
                     <h:outputLabel for="typeRadio" value=""/>
                     <p:selectOneRadio id="typeRadio" styleClass="radio_table" style="background-origin: border-box"
                                       value="#{loginBean.typeRadio}">
-                        <f:selectItem itemLabel="Teacher" itemValue="0"/>
-                        <f:selectItem itemLabel="Student" itemValue="1"/>
+                        <f:selectItem itemLabel="Teacher" itemValue="#{loginBean.TEACHER}"/>
+                        <f:selectItem itemLabel="Student" itemValue="#{loginBean.STUDENT}"/>
                         <p:ajax listener="#{loginBean.onClickRadio}" event="change" update="@form"/>
                     </p:selectOneRadio>
 

@@ -51,7 +51,7 @@ public enum Utils {
         }
     }
 
-    private static List<Integer> getAcademicYear(){
+    public static List<Integer> getAcademicYear(){
         int year = getCalendar().get(Calendar.YEAR);
         List<Integer> academicYear = new ArrayList();
         academicYear.add(year);
@@ -61,7 +61,7 @@ public enum Utils {
         return academicYear;
     }
 
-    private static List<String> getSemester(){
+    public static List<String> getSemester(){
         List<String> semester = new ArrayList();
         semester.add("1");
         semester.add("2");

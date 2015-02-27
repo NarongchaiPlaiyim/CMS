@@ -17,6 +17,9 @@ import java.math.BigDecimal;
 @Proxy(lazy=false)
 public class Examination {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
     @Column(name="Exam_id")
     private String examId;
 
@@ -24,7 +27,7 @@ public class Examination {
     private String description;
 
     @Column(name="score")
-    private BigDecimal score;
+    private double score;
 
     @OneToOne
     @JoinColumn(name="subject_id")

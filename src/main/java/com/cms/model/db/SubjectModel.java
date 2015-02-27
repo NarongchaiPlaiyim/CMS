@@ -15,8 +15,11 @@ import javax.persistence.*;
 @Proxy(lazy=false)
 public class SubjectModel {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
     @Column(name="subject_id")
-    private int subjectId;
+    private String subjectId;
 
     @Column(name="subject_code")
     private String subjectCode;
@@ -31,18 +34,19 @@ public class SubjectModel {
     private String semester;
 
     @OneToOne
-    @JoinColumn(name="teacher_id")
-    private UserModel teacherId;
+    @JoinColumn(name="user_id")
+    private UserModel userModel;
 
     @Override
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
+                .append("id", id)
                 .append("subjectId", subjectId)
                 .append("subjectCode", subjectCode)
                 .append("subjectName", subjectName)
                 .append("description", description)
                 .append("semester", semester)
-                .append("teacherId", teacherId)
+                .append("userModel", userModel)
                 .toString();
     }
 }
