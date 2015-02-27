@@ -8,38 +8,35 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import org.hibernate.annotations.Proxy;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
 
 @Getter
 @Setter
 @Entity
-@Table(name = "examination")
+@Table(name = "board")
 @Proxy(lazy=false)
-public class Examination {
+public class BoardModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name="Exam_id")
-    private String examId;
-
-    @Column(name="description")
-    private String description;
-
-    @Column(name="score")
-    private double score;
+    @Column(name="detail")
+    private String detail;
 
     @OneToOne
     @JoinColumn(name="subject_id")
     private SubjectModel subjectModel;
 
+    @OneToOne
+    @JoinColumn(name="user_id")
+    private UserModel userModel;
+
     @Override
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
-                .append("examId", examId)
-                .append("description", description)
-                .append("score", score)
+                .append("id", id)
+                .append("detail", detail)
                 .append("subjectModel", subjectModel)
+                .append("userModel", userModel)
                 .toString();
     }
 }

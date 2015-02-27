@@ -1,5 +1,6 @@
 package com.cms.model.db;
 
+
 import lombok.Getter;
 import lombok.Setter;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -12,41 +13,33 @@ import java.math.BigDecimal;
 @Getter
 @Setter
 @Entity
-@Table(name = "assignment")
+@Table(name = "examination")
 @Proxy(lazy=false)
-public class AssignmentModel {
+public class ExaminationModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name="assignment_id")
-    private String assignmentId;
-
-    @Column(name="assignment_no")
-    private BigDecimal assignmentNo;
-
-    @Column(name="year")
-    private String year;
-
-    @Column(name="semester")
-    private String semester;
+    @Column(name="Exam_id")
+    private String examId;
 
     @Column(name="description")
     private String description;
 
+    @Column(name="score")
+    private double score;
+
     @OneToOne
-    @JoinColumn(name="class_id")
-    private ClassModel classModel;
+    @JoinColumn(name="subject_id")
+    private SubjectModel subjectModel;
 
     @Override
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
-                .append("assignmentId", assignmentId)
-                .append("assignmentNo", assignmentNo)
-                .append("year", year)
-                .append("semester", semester)
+                .append("examId", examId)
                 .append("description", description)
-                .append("classModel", classModel)
+                .append("score", score)
+                .append("subjectModel", subjectModel)
                 .toString();
     }
 }
