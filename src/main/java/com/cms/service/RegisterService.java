@@ -17,6 +17,10 @@ public class RegisterService extends Service{
     private static final long serialVersionUID = 4112578630941419914L;
     @Resource private UserDAO userDAO;
 
+    public boolean isRecordExist(String id, Type type) throws Exception{
+        return userDAO.isExist(id, type);
+    }
+
     public void createNewUser(TeacherRegisterView view) throws Exception{
         userDAO.persist(transform(view));
     }
@@ -33,14 +37,14 @@ public class RegisterService extends Service{
             userModel.setPassword(EncryptionService.encryption(view.getPassword()));
             userModel.setEmail(view.getEmail());
             userModel.setTeacherId(view.getTeacherId());
-            userModel.setRole(Type.TEACHER.getText());
+            userModel.setRole(Type.TEACHER);
         } else {
             StudentRegisterView view = (StudentRegisterView) o;
             userModel.setUserName(view.getUserName());
             userModel.setPassword(EncryptionService.encryption(view.getPassword()));
             userModel.setEmail(view.getEmail());
             userModel.setStudentId(view.getStudentId());
-            userModel.setRole(Type.STUDENT.getText());
+            userModel.setRole(Type.STUDENT);
         }
         return userModel;
     }

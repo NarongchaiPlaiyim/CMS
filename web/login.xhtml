@@ -23,8 +23,8 @@
                     <h:outputLabel for="typeRadio" value=""/>
                     <p:selectOneRadio id="typeRadio" styleClass="radio_table" style="background-origin: border-box"
                                       value="#{loginBean.typeRadio}">
-                        <f:selectItem itemLabel="Teacher" itemValue="0"/>
-                        <f:selectItem itemLabel="Student" itemValue="1"/>
+                        <f:selectItem itemLabel="Teacher" itemValue="#{loginBean.TEACHER}"/>
+                        <f:selectItem itemLabel="Student" itemValue="#{loginBean.STUDENT}"/>
                         <p:ajax listener="#{loginBean.onClickRadio}" event="change" update="@form"/>
                     </p:selectOneRadio>
 
@@ -36,7 +36,7 @@
 
                     <h:outputLabel id="teacherIdLabel" for="teacherId" value="Teacher ID"
                                    rendered="#{loginBean.studentFlag}"/>
-                    <p:password id="teacherId" value="#{loginBean.teacherId}" placeholder="Enter teacher id."
+                    <p:inputText id="teacherId" value="#{loginBean.teacherId}" placeholder="Enter teacher id."
                                    rendered="#{loginBean.studentFlag}"/>
 
                     <p:commandButton id="loginBtn" value="#{msg.get('btn.name.login')}"
@@ -49,11 +49,13 @@
                     <p:commandButton id="registerTeacherBtn" value="#{msg.get('btn.name.register')}"
                                      rendered="#{loginBean.teacherFlag}"
                                      update=":teacherRegisterForm"
+                                     action="#{loginBean.onClickRegister}"
                                      oncomplete="PF('teacherRegisterDlg').show()"/>
 
                     <p:commandButton id="registerStudentBtn" value="#{msg.get('btn.name.register')}"
                                      rendered="#{loginBean.studentFlag}"
                                      update=":studenRegisterForm"
+                                     action="#{loginBean.onClickRegister}"
                                      oncomplete="PF('studentRegisterDlg').show()"/>
                 </p:panelGrid>
             </p:panel>
@@ -82,7 +84,7 @@
     <p:panel id="msgBoxSystemMessagePanel" style="border: 0">
         <p:confirmDialog id="msgBoxSystemMessageDialog" widgetVar="msgBoxSystemMessageDlg" width="#{msg.get('dialog.message.size')}" closable="false"
                          style="border: 0;"
-                         header="#{teacherRegisterBean.messageHeader}" message="#{teacherRegisterBean.message}" >
+                         header="#{loginBean.messageHeader}" message="#{loginBean.message}" >
             <div style="text-align: right">
                 <p:commandButton value="#{msg.get('btn.name.ok')}"
                                  process="@this"

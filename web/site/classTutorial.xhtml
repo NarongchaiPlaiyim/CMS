@@ -1,12 +1,81 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html
-        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-<head>
-    <title></title>
-</head>
-<body>
+<!DOCTYPE html>
+<html>
+<f:view xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>#{msg.get('menu.class.tutorial.title')}</title>
+    </h:head>
+    <h:body>
+        <p:layout fullPage="true" id="layoutPanel">
+            <p:layoutUnit id="layoutTop" position="north" size="180" header="#{msg.get('header.north')}" collapsible="true" style="border: 0">
+                <ui:insert name="header">
+                    <ui:include src="#{msg.get('include.header')}"/>
+                </ui:insert>
+            </p:layoutUnit>
+            <p:layoutUnit id="layoutLeft" position="west" size="#{msg.get('layoutLeft.size')}" header="#{msg.get('header.west')}" collapsible="true" style="border: 0">
+                <ui:include src="#{msg.get('include.menu')}"/>
+            </p:layoutUnit>
 
-</body>
+            <p:layoutUnit id="layoutCenter" position="center" header="#{msg.get('menu.class.tutorial.title')}" >
+                <h:form id="classTutorialForm">
+                    <table border="0" class="content_table_form">
+                        <tr >
+                            <td style="min-width: 150px; width: 150px; max-width: 150px;" class="left" />
+                            <td style="min-width: 150px; width: 150px; max-width: 150px;" class="left" />
+                            <td style="min-width: 150px; width: 150px; max-width: 150px;" class="left" />
+                            <td style="min-width: 150px; width: 150px; max-width: 150px;" class="left" />
+                        </tr>
+                        <tr>
+                            <td colspan="4">
+                                <p:dataTable id="subjectTable"
+                                             scrollable="true" scrollHeight="450"
+                                             var="subjectModel"
+                                             value="#{classTutorialBean.subjectModelList}"
+                                             selectionMode="single"
+                                             rowKey="#{subjectModel.id}"
+                                             rowIndexVar="rowIndex">
+                                    <p:column headerText="Subject Id" style="min-width: 150px; width: 150px; max-width: 150px;" styleClass="center">
+                                        <h:outputText value="#{subjectModel.subjectId}" style="word-wrap:break-word;"/>
+                                    </p:column>
+                                    <p:column headerText="Subject Name" style="min-width: 150px; width: 150px; max-width: 150px;" styleClass="center">
+                                        <h:outputText value="#{subjectModel.subjectName}" style="word-wrap:break-word;"/>
+                                    </p:column>
+                                    <p:column headerText="Detail" style="min-width: 150px; width: 150px; max-width: 150px;" styleClass="center">
+
+                                    </p:column>
+                                </p:dataTable>
+                            </td>
+                        </tr>
+                    </table>
+                </h:form>
+            </p:layoutUnit>
+        </p:layout>
+
+        <p:panel id="subjectPanel" styleClass="panel">
+            <p:dialog id="subjectDialog" widgetVar="subjectDlg" header="Add subject"
+                      onShow="hideWindowsScrollBar()" onHide="showWindowsScrollBar()" resizable="false"
+                      modal="true" width="300" height="230">
+                <ui:include src="../site/dialog/classTruorialDialog.xhtml"/>
+            </p:dialog>
+        </p:panel>
+
+        <p:panel id="msgBoxSystemMessagePanel" style="border: 0">
+            <p:confirmDialog id="msgBoxSystemMessageDialog" widgetVar="msgBoxSystemMessageDlg" width="#{msg.get('dialog.message.size')}" closable="false"
+                             header="#{classTutorialBean.messageHeader}" message="#{classTutorialBean.message}" >
+                <div style="text-align: right">
+                    <p:commandButton value="#{msg.get('btn.name.ok')}"
+                                     process="@this"
+                                     update="classTutorialForm"
+                                     icon="ui-icon-check"
+                                     styleClass="medium" style="#{msg.get('btn.size')}"
+                                     oncomplete="PF('msgBoxSystemMessageDlg').hide()"/>
+                </div>
+            </p:confirmDialog>
+        </p:panel>
+
+    </h:body>
+</f:view>
 </html>

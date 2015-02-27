@@ -1,5 +1,6 @@
 package com.cms.model.db;
 
+import com.cms.utils.Type;
 import lombok.Getter;
 import lombok.Setter;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -37,7 +38,8 @@ public class UserModel {
     private String facebook;
 
     @Column(name="role")
-    private String role;
+    @Enumerated(EnumType.ORDINAL)
+    private Type role;
 
     @Override
     public String toString() {

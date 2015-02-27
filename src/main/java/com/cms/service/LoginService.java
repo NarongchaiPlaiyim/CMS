@@ -1,6 +1,9 @@
 package com.cms.service;
 
 import com.cms.model.dao.UserDAO;
+import com.cms.model.db.UserModel;
+import com.cms.utils.Utils;
+import lombok.Getter;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,25 +18,36 @@ import java.util.Map;
 public class LoginService extends Service{
     private static final long serialVersionUID = 4112578634088874840L;
     @Resource private UserDAO userDAO;
-//    @Resource private MenuObjectDAO menuObjectDAO;
-//
-//    @Getter StaffModel staffModel;
-//
+    @Getter private UserModel userModel;
+
     public boolean isUserExist(final String userName, final String password){
         log.debug("-- isUserExist({}, {})", userName, password);
-        return true;
-//        boolean result = Utils.TRUE;
-//        try {
-//            staffModel = staffDAO.findByUserNameAndPassword(userName, password);
-//            if(Utils.isNull(staffModel)){
-//                result = !result;
-//            }
-//            return result;
-//        } catch (Exception e) {
-//            log.error("Exception while calling isUserExist()", e);
-//            return !result;
-//        }
+        boolean result = false;
+        try {
+            userModel = userDAO.findByUserNameAndPassword(userName, password);
+            if(!Utils.isNull(userModel)){
+                result = true;
+            }
+        } catch (Exception e) {
+            log.error("Exception while calling isUserExist()", e);
+        }
+        return result;
     }
+
+    public boolean isUserExist(final String userName){
+        log.debug("-- isUserExist({}, {})", userName);
+        boolean result = false;
+        try {
+            userModel = userDAO.findByUserNameAndPassword(userName);
+            if(!Utils.isNull(userModel)){
+                result = true;
+            }
+        } catch (Exception e) {
+            log.error("Exception while calling isUserExist()", e);
+        }
+        return result;
+    }
+
 //
 //    public Map<String, String> getAuthorize(){
 //        List<String> stringList;

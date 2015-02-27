@@ -27,7 +27,7 @@ public class Examination {
     private String description;
 
     @Column(name="score")
-    private BigDecimal score;
+    private double score;
 
     @OneToOne
     @JoinColumn(name="subject_id")

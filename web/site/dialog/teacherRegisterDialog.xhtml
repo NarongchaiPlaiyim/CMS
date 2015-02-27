@@ -18,7 +18,7 @@
                 </td>
                 <td>
                     <p:inputText style="min-width: 150px; width: 150px; max-width: 150px;"
-                                 value="#{teacherRegisterBean.view.teacherId}" />
+                                 value="#{loginBean.teacherRegisterView.teacherId}" />
                 </td>
             </tr>
             <tr>
@@ -27,7 +27,7 @@
                 </td>
                 <td>
                     <p:inputText style="min-width: 150px; width: 150px; max-width: 150px;"
-                                 value="#{teacherRegisterBean.view.userName}" />
+                                 value="#{loginBean.teacherRegisterView.userName}" />
                 </td>
             </tr>
             <tr>
@@ -36,7 +36,7 @@
                 </td>
                 <td>
                     <p:password style="min-width: 150px; width: 150px; max-width: 150px;"
-                                value="#{teacherRegisterBean.view.password}" />
+                                value="#{loginBean.teacherRegisterView.password}" />
                 </td>
             </tr>
             <tr>
@@ -45,7 +45,7 @@
                 </td>
                 <td>
                     <p:inputText style="min-width: 150px; width: 150px; max-width: 150px;"
-                                 value="#{teacherRegisterBean.view.email}" />
+                                 value="#{loginBean.teacherRegisterView.email}" />
                 </td>
             </tr>
             <tr/>
@@ -59,7 +59,7 @@
                                          icon="ui-icon-check"
                                          process="@form"
                                          oncomplete="PF('teacherRegisterDlg').hide()"
-                                         action="#{teacherRegisterBean.onClickSubmit}"/>
+                                         action="#{loginBean.onClickRegTeacherSubmit()}"/>
                         <p:commandButton value="#{msg.get('btn.name.cancel')}"
                                          id="btnCancel"
                                          icon="ui-icon-cancel"

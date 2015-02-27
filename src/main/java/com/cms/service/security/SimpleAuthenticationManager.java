@@ -25,8 +25,7 @@ public class SimpleAuthenticationManager implements AuthenticationManager {
         UserDetail userDetail = (UserDetail) authentication.getPrincipal();
         WebAuthenticationDetails authenticationDetails = (WebAuthenticationDetails) authentication.getDetails();
 
-        if(!Type.TEACHER.getText().equalsIgnoreCase(userDetail.getRole()) &&
-                !Type.STUDENT.getText().equalsIgnoreCase(userDetail.getRole())){
+        if(Type.TEACHER != userDetail.getRole() && Type.STUDENT != userDetail.getRole()){
             throw new BadCredentialsException("Bad Credentials");
         }
 
@@ -35,7 +34,7 @@ public class SimpleAuthenticationManager implements AuthenticationManager {
 
     private UsernamePasswordAuthenticationToken getAuthority(UserDetail userDetail, Authentication authentication, WebAuthenticationDetails authenticationDetails) {
         List<GrantedAuthority> grantedAuthorities = new ArrayList<GrantedAuthority>();
-        grantedAuthorities.add(new SimpleGrantedAuthority(userDetail.getRole()));
+        grantedAuthorities.add(new SimpleGrantedAuthority(userDetail.getRole().getText()));
         UsernamePasswordAuthenticationToken result = new UsernamePasswordAuthenticationToken(userDetail,
                 authentication.getCredentials(), grantedAuthorities);
         result.setDetails(authenticationDetails);

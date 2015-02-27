@@ -1,9 +1,11 @@
 package com.cms.model.dao;
 
+import com.cms.utils.Utils;
 import lombok.Getter;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Criterion;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
 
@@ -58,18 +60,18 @@ public abstract class GenericDAO<T, ID extends Serializable> implements Serializ
         return (T) getSession().load(getEntityClass(), id);
     }
 
-//    public List<T> findAll() throws Exception {
-//        return findByCriteria();
-//    }
+    public List<T> findAll() throws Exception {
+        return findByCriteria();
+    }
 
-//    protected List<T> findByCriteria(Criterion... criterions) throws Exception {
-//        Criteria crit = getCriteria();
-////        crit.setMaxResults(1000);
-//        for (Criterion c : criterions) {
-//            crit.add(c);
-//        }
-//        return Utils.safetyList(crit.list());
-//    }
+    protected List<T> findByCriteria(Criterion... criterions) throws Exception {
+        Criteria crit = getCriteria();
+//        crit.setMaxResults(1000);
+        for (Criterion c : criterions) {
+            crit.add(c);
+        }
+        return Utils.safetyList(crit.list());
+    }
 
     public void delete(T entity) throws Exception {
         getSession().delete(entity);
@@ -89,10 +91,10 @@ public abstract class GenericDAO<T, ID extends Serializable> implements Serializ
         getSession().flush();
     }
 
-//    public boolean isRecordExist(Criterion... criterions) throws Exception {
-//        List<T> list = findByCriteria(criterions);
-//        return list.size()>0;
-//    }
+    public boolean isRecordExist(Criterion... criterions) throws Exception {
+        List<T> list = findByCriteria(criterions);
+        return list.size()>0;
+    }
 
 //    protected List<T> findBySQL(String sql, Object... params) throws Exception {
 //        Query query = getSession().createSQLQuery(sql);
