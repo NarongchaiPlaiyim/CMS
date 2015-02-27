@@ -1,8 +1,6 @@
 package com.cms.beans;
 
 import com.cms.model.db.UserModel;
-import com.cms.model.view.dilog.StudentRegisterView;
-import com.cms.model.view.dilog.TeacherRegisterView;
 import com.cms.service.LoginService;
 import com.cms.service.RegisterService;
 import com.cms.service.security.SimpleAuthenticationManager;
@@ -54,9 +52,9 @@ public class LoginBean extends Bean{
     private final String TEACHER = "0";
     private final String STUDENT = "1";
 
-    private TeacherRegisterView teacherRegisterView;
-    private StudentRegisterView studentRegisterView;
-
+    private List<UserModel> teacherList;
+    private UserModel userModel;
+    private UserModel userModelSelected;
     @PostConstruct
     private void init(){
 //        if(!Utils.isNull(SecurityContextHolder.getContext().getAuthentication())){
@@ -68,28 +66,34 @@ public class LoginBean extends Bean{
 //        }
         initTeacher();
         typeRadio = TEACHER;
-        onClickRegister();
     }
 
     private void initTeacher(){
         teacherFlag = true;
         studentFlag = false;
+        onClickRegister();
+        initTeacherList();
     }
+
     private void initStudent(){
         teacherFlag = false;
         studentFlag = true;
+        onClickRegister();
+        initTeacherList();
     }
 
+    private void initTeacherList(){
+        teacherList = loginService.getTeacherList();
+    }
 
     public void onClickRegister(){
-        teacherRegisterView = new TeacherRegisterView();
-        studentRegisterView = new StudentRegisterView();
+        userModel = new UserModel();
     }
     public void onClickRegStudentSubmit(){
         try {
-            if(!registerService.isRecordExist(studentRegisterView.getStudentId(), Type.STUDENT)){
-                if(!loginService.isUserExist(studentRegisterView.getUserName())){
-                    registerService.createNewUser(studentRegisterView);
+            if(!registerService.isRecordExist(userModel.getPersonId())){
+                if(!loginService.isUserExist(userModel.getUserName())){
+                    registerService.createNewUser(userModel, Type.STUDENT);
                     showDialogCreated();
                     init();
                 } else {
@@ -107,9 +111,9 @@ public class LoginBean extends Bean{
     public void onClickRegTeacherSubmit(){
         System.out.println("onClickRegTeacherSubmit");
         try {
-            if(!registerService.isRecordExist(teacherRegisterView.getTeacherId(), Type.TEACHER)){
-                if(!loginService.isUserExist(teacherRegisterView.getUserName())){
-                    registerService.createNewUser(teacherRegisterView);
+            if(!registerService.isRecordExist(userModel.getPersonId())){
+                if(!loginService.isUserExist(userModel.getUserName())){
+                    registerService.createNewUser(userModel, Type.TEACHER);
                     showDialogCreated();
                     init();
                 } else {
@@ -136,7 +140,7 @@ public class LoginBean extends Bean{
         log.info("-- SessionRegistry principle size: {}", sessionRegistry.getAllPrincipals().size());
         if(isTeacherFlag()){
             if(!Utils.isZero(userName.length()) && !Utils.isZero(password.length())) {
-                if(loginService.isUserExist(getUserName(), getPassword())){
+                if(loginService.isUserExist(getUserName(), getPassword(), Type.TEACHER)){
                     UserModel userModel = loginService.getUserModel();
                     userDetail = new UserDetail(userModel.getId(),
                             userModel.getUserName(),
@@ -162,9 +166,9 @@ public class LoginBean extends Bean{
             return "loggedOut";
         } else {
             if(!Utils.isZero(getUserName().length()) && !Utils.isZero(getPassword().length())) {
-                if(loginService.isUserExist(getUserName(), getPassword())){
+                if(loginService.isUserExist(getUserName(), getPassword(), Type.STUDENT)){
                     try {
-                        if(!registerService.isRecordExist(getTeacherId(), Type.TEACHER)){
+                        if(!registerService.isRecordExist(getTeacherId())){
                             showDialog(MessageDialog.WARNING.getMessageHeader(), "Invalid teacher id.");
                             return "loggedOut";
                         }

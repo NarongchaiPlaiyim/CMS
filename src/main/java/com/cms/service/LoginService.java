@@ -2,6 +2,7 @@ package com.cms.service;
 
 import com.cms.model.dao.UserDAO;
 import com.cms.model.db.UserModel;
+import com.cms.utils.Type;
 import com.cms.utils.Utils;
 import lombok.Getter;
 import org.springframework.stereotype.Component;
@@ -20,11 +21,21 @@ public class LoginService extends Service{
     @Resource private UserDAO userDAO;
     @Getter private UserModel userModel;
 
-    public boolean isUserExist(final String userName, final String password){
+    public List<UserModel> getTeacherList(){
+        List<UserModel> userModelList = Utils.getEmptyList();
+        try {
+            userModelList = userDAO.findAllTeachers();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return userModelList;
+    }
+
+    public boolean isUserExist(final String userName, final String password, Type role){
         log.debug("-- isUserExist({}, {})", userName, password);
         boolean result = false;
         try {
-            userModel = userDAO.findByUserNameAndPassword(userName, password);
+            userModel = userDAO.findByUserNameAndPassword(userName, password, role);
             if(!Utils.isNull(userModel)){
                 result = true;
             }
