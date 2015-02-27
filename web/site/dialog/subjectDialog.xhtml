@@ -9,7 +9,7 @@
     <h:form id="subjectDlgForm">
         <table border="0" class="content_table_form">
             <tr >
-                <td style="min-width: 100px; width: 100px; max-width: 100px;" class="left" />
+                <td style="min-width: 130px; width: 130px; max-width: 130px;" class="left" />
                 <td style="min-width: 150px; width: 150px; max-width: 150px;" class="left" />
             </tr>
             <tr>
@@ -28,6 +28,15 @@
                 <td>
                     <p:inputText style="min-width: 150px; width: 150px; max-width: 150px;"
                                  value="#{subjectBean.subjectModelSelected.subjectName}" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <h:outputLabel value="Description"/>
+                </td>
+                <td>
+                    <p:inputTextarea style="min-width: 150px; width: 150px; max-width: 150px;"
+                                 value="#{subjectBean.subjectModelSelected.description}" />
                 </td>
             </tr>
             <tr>

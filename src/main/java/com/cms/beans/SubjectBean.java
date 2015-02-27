@@ -2,6 +2,7 @@ package com.cms.beans;
 
 import com.cms.model.db.SubjectModel;
 import com.cms.service.SubjectService;
+import com.cms.service.security.UserDetail;
 import com.cms.utils.Utils;
 import lombok.Getter;
 import lombok.Setter;
@@ -24,14 +25,19 @@ public class SubjectBean extends Bean {
     private SubjectModel subjectModelSelected;
     private final List<String> SEMESTER = Utils.getSemester();
     private String semesterSelected;
+    private UserDetail userDetail;
 
     @PostConstruct
     private void init(){
         subjectModelList = new ArrayList<SubjectModel>();
         subjectModelSelected = new SubjectModel();
+        userDetail = getUser();
+        onload();
     }
 
-
+    private void onload(){
+        subjectModelList = subjectService.getSubject(userDetail.getId());
+    }
 
     public void onClickAdd(){
         subjectModelSelected = new SubjectModel();
