@@ -18,7 +18,7 @@ public class SubjectDAO extends GenericDAO<SubjectModel, Integer> {
         try {
             Criteria criteria = getCriteria();
             criteria.add(Restrictions.eq("userModel.id", userId));
-            criteria.addOrder(Order.asc("subjectId"));
+            criteria.addOrder(Order.asc("subjectCode"));
             subjectModelList = criteria.list();
         } catch (Exception e) {
             log.debug("Exception error findByUserId : ", e);
