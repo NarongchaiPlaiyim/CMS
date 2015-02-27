@@ -18,7 +18,8 @@
                 </td>
                 <td>
                     <p:inputText style="min-width: 150px; width: 150px; max-width: 150px;"
-                                 value="#{subjectBean.subjectModelSelected.subjectId}" />
+                                 required="#{not empty param[addSubject.clientId]}"
+                                 value="#{subjectBean.subjectModelSelected.subjectCode}" />
                 </td>
             </tr>
             <tr>
@@ -27,6 +28,7 @@
                 </td>
                 <td>
                     <p:inputText style="min-width: 150px; width: 150px; max-width: 150px;"
+                                 required="#{not empty param[addSubject.clientId]}"
                                  value="#{subjectBean.subjectModelSelected.subjectName}" />
                 </td>
             </tr>
@@ -54,7 +56,8 @@
                     <h:outputLabel value="Upload"/>
                 </td>
                 <td>
-
+                    <p:commandButton value="Upload"
+                                     id="btnUpload"/>
                 </td>
             </tr>
             <tr>
@@ -62,11 +65,12 @@
                     <div style="text-align: center;"></div>
                     <p:commandButton value="#{msg.get('btn.name.submit')}"
                                      id="btnSaveHeader"
-                                     update=":msgBoxSystemMessagePanel"
+                                     update=":msgBoxSystemMessagePanel, :subjectDlgForm"
                                      styleClass="medium" style="#{msg.get('btn.size')}"
                                      icon="ui-icon-check"
                                      process="@form"
-                                     oncomplete="PF('subjectDlg').hide()"
+                                     oncomplete="PF('bui').unblock()"
+                                     binding="#{addSubject}"
                                      action="#{subjectBean.onSubmit()}"/>
                     <p:commandButton value="#{msg.get('btn.name.cancel')}"
                                      id="btnCancel"

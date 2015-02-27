@@ -1,8 +1,10 @@
 package com.cms.beans;
 
+import com.cms.model.db.EnrollModel;
 import com.cms.model.db.SubjectModel;
 import com.cms.service.SubjectService;
 import com.cms.service.security.UserDetail;
+import com.cms.utils.MessageDialog;
 import com.cms.utils.Utils;
 import lombok.Getter;
 import lombok.Setter;
@@ -26,6 +28,8 @@ public class SubjectBean extends Bean {
     private final List<String> SEMESTER = Utils.getSemester();
     private String semesterSelected;
     private UserDetail userDetail;
+    private int subjectId;
+    private List<EnrollModel> enrollModelList;
 
     @PostConstruct
     private void init(){
@@ -43,11 +47,24 @@ public class SubjectBean extends Bean {
         subjectModelSelected = new SubjectModel();
     }
 
-    public void onClickDelete(){
+    public void preDelete(){
+        showDialog(MessageDialog.WARNING.getMessageHeader(), "Are you want to delete?", "confirmDlg");
+    }
 
+    public void onClickDelete(){
+        subjectService.remove(subjectId);
+        onload();
+        showDialog("Remove", "Sucess", "msgBoxSystemMessageDlg");
     }
 
     public void onSubmit(){
+        log.debug("subjectModelSelected : [{}]", subjectModelSelected.toString());
+        subjectService.save(subjectModelSelected, userDetail.getId());
+        showDialogSaved();
+        onload();
+    }
 
+    public void studentInSubject(){
+        enrollModelList = subjectService.getStudent(subjectId);
     }
 }

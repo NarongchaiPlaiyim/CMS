@@ -18,9 +18,6 @@ public class SubjectModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name="subject_id")
-    private String subjectId;
-
     @Column(name="subject_code")
     private String subjectCode;
 
@@ -41,7 +38,6 @@ public class SubjectModel {
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
                 .append("id", id)
-                .append("subjectId", subjectId)
                 .append("subjectCode", subjectCode)
                 .append("subjectName", subjectName)
                 .append("description", description)
