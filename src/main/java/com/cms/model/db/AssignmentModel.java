@@ -35,8 +35,8 @@ public class AssignmentModel {
     private String description;
 
     @OneToOne
-    @JoinColumn(name="class_id")
-    private ClassModel classModel;
+    @JoinColumn(name="subject_id")
+    private SubjectModel subjectModel;
 
     @Column(name="active", nullable=false, columnDefinition="int default 1")
     private int active;
@@ -51,7 +51,7 @@ public class AssignmentModel {
                 .append("year", year)
                 .append("semester", semester)
                 .append("description", description)
-                .append("classModel", classModel)
+                .append("subjectModel", subjectModel)
                 .append("active", active)
                 .toString();
     }
