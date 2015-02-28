@@ -1,9 +1,11 @@
 package com.cms.beans;
 
 import com.cms.model.db.ExaminationModel;
+import com.cms.model.db.StudentExaminationModel;
 import com.cms.model.db.SubjectModel;
 import com.cms.service.ExaminationService;
 import com.cms.utils.FacesUtil;
+import com.cms.utils.MessageDialog;
 import com.cms.utils.Utils;
 import lombok.Getter;
 import lombok.Setter;
@@ -27,10 +29,12 @@ public class ExaminationBean extends Bean {
     private ExaminationModel examinationModel;
     private List<SubjectModel> subjectModelList;
     private SubjectModel subjectModelSelected;
+    private List<StudentExaminationModel> studentExaminationModelList;
 
     private final List<String> SEMESTER = Utils.getSemester();
     private final List<String> ACADEMICYEAR = Utils.getAcademicYear();
     private final List<String> EXAMTYPE = Utils.getExamType();
+    private int examId;
 
     private boolean flagBtnAdd = true;
     @PostConstruct
@@ -65,4 +69,27 @@ public class ExaminationBean extends Bean {
         examinationModelList = examinationService.getList(subjectModelSelected);
     }
 
+    public void getStudentExam(){
+        studentExaminationModelList = examinationService.getStudentExamByExam(examId);
+        log.debug("---------- : {}", studentExaminationModelList.size());
+    }
+
+    public void preDelete(){
+        showDialog(MessageDialog.WARNING.getMessageHeader(), "Are you want to delete?", "confirmDlg");
+    }
+
+    public void onClickDelete(){
+        examinationService.remove(examId);
+        onClickTable();
+        showDialog("Remove", "Sucess", "msgBoxSystemMessageDlg");
+    }
+
+    public void onEditScore(){
+        examinationService.saveScore(studentExaminationModelList);
+        showDialogSaved();
+    }
+
+    public void getExamBySearch(){
+        studentExaminationModelList = examinationService.search(subjectModelSelected.getYear(), subjectModelSelected.getSemester(), examId);
+    }
 }
