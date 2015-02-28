@@ -17,7 +17,8 @@
                     <h:outputLabel value="Academic Year"/>
                 </td>
                 <td>
-                    <p:selectOneMenu value="#{examinationBean.examinationModel.academicYear}">
+                    <p:selectOneMenu value="#{examinationBean.examinationModel.academicYear}"  required="#{not empty param[addExam.clientId]}">
+                        <f:selectItem itemLabel="- Please Select -" itemValue=""/>
                         <f:selectItems value="#{examinationBean.ACADEMICYEAR}" />
                     </p:selectOneMenu>
                 </td>
@@ -28,7 +29,8 @@
                     <h:outputLabel value="Semester"/>
                 </td>
                 <td>
-                    <p:selectOneMenu value="#{examinationBean.examinationModel.semester}">
+                    <p:selectOneMenu value="#{examinationBean.examinationModel.semester}" required="#{not empty param[addExam.clientId]}">
+                        <f:selectItem itemLabel="- Please Select -" itemValue=""/>
                         <f:selectItems value="#{examinationBean.SEMESTER}" />
                     </p:selectOneMenu>
                 </td>
@@ -40,6 +42,7 @@
                 </td>
                 <td>
                     <p:inputText style="min-width: 150px; width: 150px; max-width: 150px;"
+                                 required="#{not empty param[addExam.clientId]}"
                                  value="#{examinationBean.examinationModel.examNo}" />
                 </td>
             </tr>
@@ -48,7 +51,8 @@
                     <h:outputLabel value="Example Type"/>
                 </td>
                 <td>
-                    <p:selectOneMenu value="#{examinationBean.examinationModel.examType}">
+                    <p:selectOneMenu value="#{examinationBean.examinationModel.examType}" required="#{not empty param[addExam.clientId]}">
+                        <f:selectItem itemLabel="- Please Select -" itemValue=""/>
                         <f:selectItems value="#{examinationBean.EXAMTYPE}" />
                     </p:selectOneMenu>
                 </td>
@@ -68,7 +72,7 @@
                 </td>
                 <td>
                     <p:inputText style="min-width: 150px; width: 150px; max-width: 150px;"
-                                     value="#{examinationBean.examinationModel.score}" />
+                                 value="#{examinationBean.examinationModel.score}" />
                 </td>
             </tr>
             <tr>
@@ -76,11 +80,11 @@
                     <div style="text-align: center;"></div>
                     <p:commandButton value="#{msg.get('btn.name.submit')}"
                                      id="btnSaveHeader"
-                                     update=":msgBoxSystemMessagePanel"
+                                     update=":msgBoxSystemMessagePanel, :examinationDialogForm"
                                      styleClass="medium" style="#{msg.get('btn.size')}"
                                      icon="ui-icon-check"
                                      process="@form"
-                                     oncomplete="PF('examinationDlg').hide()"
+                                     binding="#{addExam}"
                                      action="#{examinationBean.onClickSubmit()}"/>
                     <p:commandButton value="#{msg.get('btn.name.cancel')}"
                                      id="btnCancel"

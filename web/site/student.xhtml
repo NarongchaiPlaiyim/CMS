@@ -31,7 +31,7 @@
                         <tr>
                             <td colspan="4">
                                 <p:dataTable id="studentTable"
-                                             scrollable="true" scrollHeight="200"
+                                             rows="7" paginator="true"
                                              var="subjectModel"
                                              value="#{studentBean.subjectModelList}"
                                              selectionMode="single"
@@ -117,11 +117,10 @@
                         <tr>
                             <td colspan="4">
                                 <p:dataTable id="studentTable2"
-                                             scrollable="true" scrollHeight="200"
+                                             rows="7" paginator="true"
                                              var="subjectModel"
                                              value="#{classTutorialBean.subjectModelList}"
                                              selectionMode="single"
-
                                              rowKey="#{subjectModel.id}"
                                              rowIndexVar="rowIndex">
                                     <p:column headerText="Student Id" style="min-width: 150px; width: 150px; max-width: 150px;" styleClass="center">

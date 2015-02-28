@@ -31,7 +31,7 @@
                         <tr>
                             <td colspan="4">
                                 <p:dataTable id="subjectTable"
-                                             scrollable="true" scrollHeight="200"
+                                             rows="7" paginator="true"
                                              var="subjectModel"
                                              value="#{examinationBean.subjectModelList}"
                                              selectionMode="single"
@@ -53,7 +53,7 @@
                                     <p:column headerText="Description" style="min-width: 300px; width: 300px; max-width: 300px;" styleClass="center">
                                         <h:outputText value="#{subjectModel.description}" style="word-wrap:break-word;"/>
                                     </p:column>
-                                    <p:column headerText="No. of student" style="min-width: 100px; width: 100px; max-width: 100px; text-align: center" styleClass="center">
+                                    <p:column headerText="No. of student" style="min-width: 80px; width: 80px; max-width: 80px; text-align: center" styleClass="center">
                                         <p:commandButton value="View" process="@this"
                                                          update=":studentDlgForm"
                                                          oncomplete="PF('studentDlg').show()"
@@ -90,7 +90,7 @@
                         <tr>
                             <td colspan="4">
                                 <p:dataTable id="tutorialTable2"
-                                             scrollable="true" scrollHeight="200"
+                                             rows="7" paginator="true"
                                              var="examinationModel"
                                              value="#{examinationBean.examinationModelList}"
                                              rowKey="#{subjectModel.id}"
@@ -110,11 +110,23 @@
                                     <p:column headerText="Score" style="min-width: 150px; width: 150px; max-width: 150px;" styleClass="center">
                                         <h:outputText value="#{examinationModel.score}" style="word-wrap:break-word;"/>
                                     </p:column>
-                                    <p:column headerText="" style="min-width: 150px; width: 150px; max-width: 150px;" styleClass="center">
+                                    <p:column headerText="Add Score" style="min-width: 100px; width: 100px; max-width: 100px; text-align: center" styleClass="center">
                                         <p:commandButton icon="ui-icon-trash"
                                                          title="View"
                                                          value="#{msg.get('btn.name.view')}"
+                                                         update=":examinationDialogForm2"
+                                                         action="#{examinationBean.getStudentExam()}"
                                                          oncomplete="PF('examinationDlg2').show()">
+                                            <f:setPropertyActionListener value="#{examinationModel.id}" target="#{examinationBean.examId}"/>
+                                        </p:commandButton>
+                                    </p:column>
+                                    <p:column headerText="" style="min-width: 30px; width: 30px; max-width: 30px; text-align: center" styleClass="center">
+                                        <p:commandButton icon="ui-icon-trash"
+                                                         process="@this"
+                                                         action="#{examinationBean.preDelete()}"
+                                                         update=":confirmPanel"
+                                                         title="Remove">
+                                            <f:setPropertyActionListener value="#{examinationModel.id}" target="#{examinationBean.examId}"/>
                                         </p:commandButton>
                                     </p:column>
                                 </p:dataTable>
@@ -137,7 +149,7 @@
         <p:panel id="examinationPanel2" styleClass="panel">
             <p:dialog id="examinationDialog2" widgetVar="examinationDlg2" header="Add Examination" closable="#{true}"
                       onShow="hideWindowsScrollBar()" onHide="showWindowsScrollBar()" resizable="false"
-                      modal="true" width="800" height="400">
+                      modal="true" width="840" height="400">
                 <ui:include src="../site/dialog/examinationDialog2.xhtml"/>
             </p:dialog>
         </p:panel>
@@ -151,7 +163,7 @@
                                      update="examinationForm"
                                      icon="ui-icon-check"
                                      styleClass="medium" style="#{msg.get('btn.size')}"
-                                     oncomplete="PF('msgBoxSystemMessageDlg').hide()"/>
+                                     oncomplete="PF('msgBoxSystemMessageDlg').hide(); PF('examinationDlg2').hide(); PF('examinationDlg').hide()"/>
                 </div>
             </p:confirmDialog>
         </p:panel>
@@ -162,6 +174,27 @@
                       modal="true" width="350">
                 <ui:include src="../site/dialog/studentDialog.xhtml"/>
             </p:dialog>
+        </p:panel>
+
+        <p:panel id="confirmPanel" style="border: 0">
+            <p:confirmDialog id="confirmDialog" widgetVar="confirmDlg" width="#{msg.get('dialog.message.size')}"
+                             closable="false"
+                             header="#{examinationBean.messageHeader}" message="#{examinationBean.message}" >
+                <div style="text-align: right">
+                    <p:commandButton value="#{msg.get('btn.name.ok')}" action="#{examinationBean.onClickDelete()}"
+                                     process="@this" update=":msgBoxSystemMessagePanel"
+                                     styleClass="medium" style="#{msg.get('btn.size')}"
+                                     icon="ui-icon-check"
+                                     onstart="PF('bui').block()"
+                                     oncomplete="PF('confirmDlg').hide(); PF('bui').unblock()"/>
+                    <p:commandButton value="#{msg.get('btn.name.cancel')}"
+                                     process="@this"
+                                     update=":examinationForm"
+                                     styleClass="medium" style="#{msg.get('btn.size')}"
+                                     icon="ui-icon-cancel"
+                                     oncomplete="PF('confirmDlg').hide()"/>
+                </div>
+            </p:confirmDialog>
         </p:panel>
 
     </h:body>

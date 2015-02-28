@@ -17,7 +17,7 @@
                     <h:outputLabel value="Topic"/>
                 </td>
                 <td>
-                    <p:inputText value="#{assignmentBean.assignmentModel.assignmentNo}"/>
+                    <p:inputText value="#{assignmentBean.assignmentModel.assignmentNo}" required="#{not empty param[addAssignment.clientId]}"/>
                 </td>
             </tr>
             <tr>
@@ -25,7 +25,7 @@
                     <h:outputLabel value="Description"/>
                 </td>
                 <td>
-                    <p:inputTextarea value="#{assignmentBean.assignmentModel.description}"/>
+                    <p:inputTextarea value="#{assignmentBean.assignmentModel.description}" required="#{not empty param[addAssignment.clientId]}"/>
                 </td>
             </tr>
             <tr>
@@ -41,7 +41,10 @@
                     <h:outputLabel value="Academic Year"/>
                 </td>
                 <td>
-                    <p:inputText value="#{assignmentBean.assignmentModel.year}" disabled="true"/>
+                    <p:selectOneMenu value="#{assignmentBean.assignmentModel.year}" required="#{not empty param[addAssignment.clientId]}">
+                        <f:selectItem itemLabel="- Please Select -" itemValue=""/>
+                        <f:selectItems value="#{assignmentBean.year}" />
+                    </p:selectOneMenu>
                 </td>
             </tr>
             <tr>
@@ -49,7 +52,10 @@
                     <h:outputLabel value="Semester"/>
                 </td>
                 <td>
-                    <p:inputText value="#{assignmentBean.assignmentModel.semester}" disabled="true"/>
+                    <p:selectOneMenu value="#{assignmentBean.assignmentModel.semester}" required="#{not empty param[addAssignment.clientId]}">
+                        <f:selectItem itemLabel="- Please Select -" itemValue=""/>
+                        <f:selectItems value="#{assignmentBean.SEMESTER}" />
+                    </p:selectOneMenu>
                 </td>
             </tr>
             <tr>
@@ -57,12 +63,12 @@
                     <div style="text-align: center;">
                         <p:commandButton value="#{msg.get('btn.name.submit')}"
                                          id="btnSaveHeader"
-                                         update=":msgBoxSystemMessagePanel"
+                                         update=":msgBoxSystemMessagePanel, :assignmentDialogForm"
                                          styleClass="medium" style="#{msg.get('btn.size')}"
                                          icon="ui-icon-check"
                                          process="@form"
-                                         oncomplete="PF('assignmetDlg').hide()"
-                                         action="#{subjectBean.onSubmit()}"/>
+                                         binding="#{addAssignment}"
+                                         action="#{assignmentBean.addAssignment()}"/>
                         <p:commandButton value="#{msg.get('btn.name.cancel')}"
                                          id="btnCancel"
                                          icon="ui-icon-cancel"

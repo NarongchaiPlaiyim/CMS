@@ -7,7 +7,6 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import org.hibernate.annotations.Proxy;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
 
 @Getter
 @Setter
@@ -23,7 +22,7 @@ public class AssignmentModel {
     private String assignmentId;
 
     @Column(name="assignment_no")
-    private BigDecimal assignmentNo;
+    private String assignmentNo;
 
     @Column(name="year")
     private String year;
@@ -39,7 +38,7 @@ public class AssignmentModel {
     private ClassEntity classEntity;
 
     @Column(name="active", nullable=false, columnDefinition="int default 1")
-    private int active;
+    private int active = 1;
 
 
     @Override
