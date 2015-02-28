@@ -38,15 +38,21 @@ public class AssignmentModel {
     @JoinColumn(name="class_id")
     private ClassModel classModel;
 
+    @Column(name="active", nullable=false, columnDefinition="int default 1")
+    private int active;
+
+
     @Override
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
+                .append("id", id)
                 .append("assignmentId", assignmentId)
                 .append("assignmentNo", assignmentNo)
                 .append("year", year)
                 .append("semester", semester)
                 .append("description", description)
                 .append("classModel", classModel)
+                .append("active", active)
                 .toString();
     }
 }

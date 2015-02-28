@@ -36,6 +36,10 @@ public class StudentAssignmentModel {
     @Column(name="upload_assignment")
     private String uploadAssignment;
 
+    @Column(name="active", nullable=false, columnDefinition="int default 1")
+    private int active;
+
+
     @Override
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
@@ -45,6 +49,7 @@ public class StudentAssignmentModel {
                 .append("submitStatus", submitStatus)
                 .append("score", score)
                 .append("uploadAssignment", uploadAssignment)
+                .append("active", active)
                 .toString();
     }
 }

@@ -1,13 +1,14 @@
 package com.cms.beans;
 
 import com.cms.model.db.SubjectModel;
-import com.cms.utils.Utils;
+import com.cms.utils.FacesUtil;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +23,13 @@ public class AssignmentBean extends Bean{
 
     @PostConstruct
     private void init(){
-        subjectModelList = new ArrayList<SubjectModel>();
         subjectModelSelected = new SubjectModel();
+        onload();
+    }
+
+    private void onload(){
+        HttpSession session = FacesUtil.getSession(true);
+
+        subjectModelList = (List<SubjectModel>) session.getAttribute("subjectModelList");
     }
 }

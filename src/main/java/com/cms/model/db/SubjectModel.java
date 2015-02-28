@@ -34,6 +34,10 @@ public class SubjectModel {
     @JoinColumn(name="user_id")
     private UserModel userModel;
 
+    @Column(name="active", nullable=false, columnDefinition="int default 1")
+    private int active = 1;
+
+
     @Override
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
@@ -43,6 +47,7 @@ public class SubjectModel {
                 .append("description", description)
                 .append("semester", semester)
                 .append("userModel", userModel)
+                .append("active", active)
                 .toString();
     }
 }

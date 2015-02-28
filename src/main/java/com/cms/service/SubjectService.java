@@ -37,7 +37,9 @@ public class SubjectService extends Service {
 
     public void remove(int subjectId){
         try {
-            subjectDAO.delete(subjectDAO.findByID(subjectId));
+            SubjectModel model = subjectDAO.findByID(subjectId);
+            model.setActive(0);
+            subjectDAO.update(model);
         } catch (Exception e) {
             log.debug("Exception error remove : ", e);
         }

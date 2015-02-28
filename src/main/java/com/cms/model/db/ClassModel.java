@@ -34,14 +34,20 @@ public class ClassModel {
     @JoinColumn(name="subject_id")
     private SubjectModel subjectModel;
 
+    @Column(name="active", nullable=false, columnDefinition="int default 1")
+    private int active;
+
+
     @Override
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
+                .append("id", id)
                 .append("classId", classId)
                 .append("weekNo", weekNo)
                 .append("topic", topic)
                 .append("description", description)
                 .append("subjectModel", subjectModel)
+                .append("active", active)
                 .toString();
     }
 }

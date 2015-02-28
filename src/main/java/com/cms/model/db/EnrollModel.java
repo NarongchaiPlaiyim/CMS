@@ -26,12 +26,17 @@ public class EnrollModel {
     @JoinColumn(name="subject_id")
     private SubjectModel subjectModel;
 
+    @Column(name="active", nullable=false, columnDefinition="int default 1")
+    private int active;
+
+
     @Override
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
                 .append("id", id)
                 .append("userModel", userModel)
                 .append("subjectModel", subjectModel)
+                .append("active", active)
                 .toString();
     }
 }
