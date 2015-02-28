@@ -53,7 +53,7 @@ public class ExaminationBean extends Bean {
         examinationModel.setSubjectModel(subjectModelSelected);
         examinationService.create(examinationModel);
         showDialogSaved();
-        init();
+        examinationModelList = examinationService.getList(subjectModelSelected);
     }
 
     public void onClickAdd(){
