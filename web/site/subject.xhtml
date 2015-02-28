@@ -44,8 +44,8 @@
                         <tr>
                             <td colspan="4">
                                 <p:dataTable id="subjectTable"
-                                             scrollable="true" scrollHeight="450"
                                              var="subjectModel"
+                                             rows="7" paginator="true"
                                              value="#{subjectBean.subjectModelList}"
                                              rowKey="#{subjectModel.id}"
                                              rowIndexVar="rowIndex">
@@ -89,7 +89,7 @@
         <p:panel id="subjectPanel" styleClass="panel">
             <p:dialog id="subjectDialog" widgetVar="subjectDlg" header="Add subject"
                       onShow="hideWindowsScrollBar()" onHide="showWindowsScrollBar()" resizable="false"
-                      modal="true" width="340" height="280">
+                      modal="true" width="380" height="300">
                 <ui:include src="../site/dialog/subjectDialog.xhtml"/>
             </p:dialog>
         </p:panel>

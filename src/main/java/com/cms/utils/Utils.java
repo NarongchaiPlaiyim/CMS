@@ -3,7 +3,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 
 import java.math.BigDecimal;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -82,7 +81,7 @@ public enum Utils {
     }
 
     public static Date currentDate(){
-       return getCalendar().getTime();
+        return getCalendar().getTime();
     }
 
     public static String getBatchNo(){
