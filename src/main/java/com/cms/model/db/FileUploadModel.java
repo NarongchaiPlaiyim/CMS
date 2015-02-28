@@ -36,6 +36,10 @@ public class FileUploadModel {
     @JoinColumn(name="assignment_id")
     private AssignmentModel assignmentModel;
 
+    @Column(name="active", nullable=false, columnDefinition="int default 1")
+    private int active;
+
+
     @Override
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
@@ -45,6 +49,7 @@ public class FileUploadModel {
                 .append("subjectModel", subjectModel)
                 .append("classModel", classModel)
                 .append("assignmentModel", assignmentModel)
+                .append("active", active)
                 .toString();
     }
 }

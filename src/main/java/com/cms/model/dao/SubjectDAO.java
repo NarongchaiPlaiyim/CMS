@@ -18,6 +18,7 @@ public class SubjectDAO extends GenericDAO<SubjectModel, Integer> {
         try {
             Criteria criteria = getCriteria();
             criteria.add(Restrictions.eq("userModel.id", userId));
+            criteria.add(Restrictions.eq("active", 1));
             criteria.addOrder(Order.asc("subjectCode"));
             subjectModelList = criteria.list();
         } catch (Exception e) {

@@ -8,7 +8,6 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import org.hibernate.annotations.Proxy;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
 
 @Getter
 @Setter
@@ -33,13 +32,19 @@ public class ExaminationModel {
     @JoinColumn(name="subject_id")
     private SubjectModel subjectModel;
 
+    @Column(name="active", nullable=false, columnDefinition="int default 1")
+    private int active;
+
+
     @Override
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
+                .append("id", id)
                 .append("examId", examId)
                 .append("description", description)
                 .append("score", score)
                 .append("subjectModel", subjectModel)
+                .append("active", active)
                 .toString();
     }
 }
