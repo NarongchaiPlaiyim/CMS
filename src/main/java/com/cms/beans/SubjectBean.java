@@ -4,6 +4,7 @@ import com.cms.model.db.EnrollModel;
 import com.cms.model.db.SubjectModel;
 import com.cms.service.SubjectService;
 import com.cms.service.security.UserDetail;
+import com.cms.utils.FacesUtil;
 import com.cms.utils.MessageDialog;
 import com.cms.utils.Utils;
 import lombok.Getter;
@@ -13,6 +14,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,6 +43,8 @@ public class SubjectBean extends Bean {
 
     private void onload(){
         subjectModelList = subjectService.getSubject(userDetail.getId());
+        HttpSession session = FacesUtil.getSession(true);
+        session.setAttribute("subjectModelList", subjectModelList);
     }
 
     public void onClickAdd(){

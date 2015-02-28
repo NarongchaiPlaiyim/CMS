@@ -30,21 +30,32 @@
                         </tr>
                         <tr>
                             <td colspan="4">
-                                <p:dataTable id="tutorialTable"
+                                <p:dataTable id="subjectTable"
                                              scrollable="true" scrollHeight="450"
                                              var="subjectModel"
-                                             value="#{classTutorialBean.subjectModelList}"
+                                             value="#{studentBean.subjectModelList}"
                                              selectionMode="single"
                                              rowKey="#{subjectModel.id}"
                                              rowIndexVar="rowIndex">
-                                    <p:column headerText="Subject Id" style="min-width: 150px; width: 150px; max-width: 150px;" styleClass="center">
-
+                                    <p:column headerText="No" style="min-width: 20px; width: 20px; max-width: 20px;" styleClass="center">
+                                        <h:outputText value="#{rowIndex+1}"/>
+                                    </p:column>
+                                    <p:column headerText="Subject Id" style="min-width: 80px; width: 80px; max-width: 80px;" styleClass="center">
+                                        <h:outputText value="#{subjectModel.subjectCode}" style="word-wrap:break-word;"/>
                                     </p:column>
                                     <p:column headerText="Subject Name" style="min-width: 150px; width: 150px; max-width: 150px;" styleClass="center">
-
+                                        <h:outputText value="#{subjectModel.subjectName}" style="word-wrap:break-word;"/>
                                     </p:column>
-                                    <p:column headerText="Details" style="min-width: 150px; width: 150px; max-width: 150px;" styleClass="center">
-
+                                    <p:column headerText="Description" style="min-width: 300px; width: 300px; max-width: 300px;" styleClass="center">
+                                        <h:outputText value="#{subjectModel.description}" style="word-wrap:break-word;"/>
+                                    </p:column>
+                                    <p:column headerText="No. of student" style="min-width: 100px; width: 100px; max-width: 100px; text-align: center" styleClass="center">
+                                        <p:commandButton value="View" process="@this"
+                                                         update=":studentDlgForm"
+                                                         oncomplete="PF('studentDlg').show()"
+                                                         action="#{subjectBean.studentInSubject}">
+                                            <f:setPropertyActionListener value="#{subjectModel.id}" target="#{subjectBean.subjectId}"/>
+                                        </p:commandButton>
                                     </p:column>
                                 </p:dataTable>
                             </td>
@@ -118,10 +129,9 @@
         </p:layout>
 
         <p:panel id="studentPanel" styleClass="panel">
-            <p:dialog id="studentDialog" widgetVar="studentDlg" header="Add Student"
-                      closable="false"
+            <p:dialog id="studentDialog" widgetVar="studentDlg" header="View Student In Subject"
                       onShow="hideWindowsScrollBar()" onHide="showWindowsScrollBar()" resizable="false"
-                      modal="true" width="300" height="230">
+                      modal="true" width="350">
                 <ui:include src="../site/dialog/studentDialog.xhtml"/>
             </p:dialog>
         </p:panel>
