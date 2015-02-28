@@ -28,6 +28,7 @@ public class SubjectBean extends Bean {
     private List<SubjectModel> subjectModelList;
     private SubjectModel subjectModelSelected;
     private final List<String> SEMESTER = Utils.getSemester();
+    private final List<String> Year = Utils.getAcademicYear();
     private String semesterSelected;
     private UserDetail userDetail;
     private int subjectId;

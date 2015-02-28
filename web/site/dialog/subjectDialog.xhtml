@@ -32,6 +32,7 @@
                                  value="#{subjectBean.subjectModelSelected.subjectName}" />
                 </td>
             </tr>
+
             <tr>
                 <td>
                     <h:outputLabel value="Description"/>
@@ -39,6 +40,17 @@
                 <td>
                     <p:inputTextarea style="min-width: 150px; width: 150px; max-width: 150px;"
                                  value="#{subjectBean.subjectModelSelected.description}" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <h:outputLabel value="Academic Year"/>
+                </td>
+                <td>
+                    <p:selectOneMenu value="#{subjectBean.subjectModelSelected.year}" required="#{not empty param[addSubject.clientId]}">
+                        <f:selectItem itemLabel="- Please Select -" itemValue=""/>
+                        <f:selectItems value="#{subjectBean.year}" />
+                    </p:selectOneMenu>
                 </td>
             </tr>
             <tr>
@@ -63,22 +75,22 @@
             </tr>
             <tr>
                 <td colspan="2">
-                    <div style="text-align: center;"></div>
-                    <p:commandButton value="#{msg.get('btn.name.submit')}"
-                                     id="btnSaveHeader"
-                                     update=":msgBoxSystemMessagePanel, :subjectDlgForm"
-                                     styleClass="medium" style="#{msg.get('btn.size')}"
-                                     icon="ui-icon-check"
-                                     process="@form"
-                                     oncomplete="PF('bui').unblock()"
-                                     binding="#{addSubject}"
-                                     action="#{subjectBean.onSubmit()}"/>
-                    <p:commandButton value="#{msg.get('btn.name.cancel')}"
-                                     id="btnCancel"
-                                     icon="ui-icon-cancel"
-                                     styleClass="medium" style="#{msg.get('btn.size')}"
-                                     process="@form"
-                                     oncomplete="PF('subjectDlg').hide()"/>
+                    <div style="text-align: center;">
+                        <p:commandButton value="#{msg.get('btn.name.submit')}"
+                                         id="btnSaveHeader"
+                                         update=":msgBoxSystemMessagePanel, :subjectDlgForm"
+                                         styleClass="medium" style="#{msg.get('btn.size')}"
+                                         icon="ui-icon-check"
+                                         process="@form"
+                                         binding="#{addSubject}"
+                                         action="#{subjectBean.onSubmit()}"/>
+                        <p:commandButton value="#{msg.get('btn.name.cancel')}"
+                                         id="btnCancel"
+                                         icon="ui-icon-cancel"
+                                         styleClass="medium" style="#{msg.get('btn.size')}"
+                                         process="@form"
+                                         oncomplete="PF('subjectDlg').hide()"/>
+                    </div>
                 </td>
             </tr>
         </table>

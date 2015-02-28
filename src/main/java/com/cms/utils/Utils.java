@@ -53,8 +53,8 @@ public enum Utils {
     public static List<String> getAcademicYear(){
         int year = getCalendar().get(Calendar.YEAR);
         List<String> academicYear = new ArrayList();
-        academicYear.add(year+"");
         academicYear.add((year-1)+"");
+        academicYear.add(year+"");
         academicYear.add((year+1)+"");
         academicYear.add((year+2)+"");
         return academicYear;

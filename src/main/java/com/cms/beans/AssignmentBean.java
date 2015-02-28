@@ -31,11 +31,13 @@ public class AssignmentBean extends Bean{
 
     private String selectSemester;
     private String selectYear;
+    private boolean flagAdd;
 
     @PostConstruct
     private void init(){
         subjectModelSelected = new SubjectModel();
         onload();
+        flagAdd = true;
     }
 
     private void onload(){
@@ -46,12 +48,15 @@ public class AssignmentBean extends Bean{
 
     public void onClickAdd(){
         assignmentModel  = new AssignmentModel();
-        assignmentModel.setSemester(selectSemester);
-        assignmentModel.setYear(selectYear);
         showDialog("assignmetDlg");
     }
 
     public void getAssignmentBySubject(){
+        flagAdd = false;
         assignmentModels = assugnmentService.getAssignment(subjectModelSelected.getId());
+    }
+
+    public void addAssignment(){
+        log.debug("--------------- {}", assignmentModel);
     }
 }

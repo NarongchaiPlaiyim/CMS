@@ -31,32 +31,32 @@
                         <tr>
                             <td colspan="4">
                                 <p:dataTable id="subjectTable"
-                                             var="subjectModel"
+                                             var="assignment"
                                              rows="7" paginator="true"
                                              value="#{assignmentBean.subjectModelList}"
                                              selection="#{assignmentBean.subjectModelSelected}"
                                              selectionMode="single"
-                                             rowKey="#{subjectModel.id}"
+                                             rowKey="#{assignment.id}"
                                              rowIndexVar="rowIndex">
-                                    <p:ajax event="rowSelect" update=":assignmentForm:assignmentTable" listener="#{assignmentBean.getAssignmentBySubject()}"/>
+                                    <p:ajax event="rowSelect" update=":assignmentForm:assignmentTable, :assignmentForm:btnAdd" listener="#{assignmentBean.getAssignmentBySubject()}"/>
                                     <p:column headerText="No" style="min-width: 20px; width: 20px; max-width: 20px;" styleClass="center">
                                         <h:outputText value="#{rowIndex+1}"/>
                                     </p:column>
                                     <p:column headerText="Subject Id" style="min-width: 80px; width: 80px; max-width: 80px;" styleClass="center">
-                                        <h:outputText value="#{subjectModel.subjectCode}" style="word-wrap:break-word;"/>
+                                        <h:outputText value="#{assignment.subjectCode}" style="word-wrap:break-word;"/>
                                     </p:column>
                                     <p:column headerText="Subject Name" style="min-width: 150px; width: 150px; max-width: 150px;" styleClass="center">
-                                        <h:outputText value="#{subjectModel.subjectName}" style="word-wrap:break-word;"/>
+                                        <h:outputText value="#{assignment.subjectName}" style="word-wrap:break-word;"/>
                                     </p:column>
                                     <p:column headerText="Description" style="min-width: 300px; width: 300px; max-width: 300px;" styleClass="center">
-                                        <h:outputText value="#{subjectModel.description}" style="word-wrap:break-word;"/>
+                                        <h:outputText value="#{assignment.description}" style="word-wrap:break-word;"/>
                                     </p:column>
                                     <p:column headerText="No. of student" style="min-width: 100px; width: 100px; max-width: 100px; text-align: center" styleClass="center">
                                         <p:commandButton value="View" process="@this"
                                                          update=":studentDlgForm"
                                                          oncomplete="PF('studentDlg').show()"
                                                          action="#{subjectBean.studentInSubject}">
-                                            <f:setPropertyActionListener value="#{subjectModel.id}" target="#{subjectBean.subjectId}"/>
+                                            <f:setPropertyActionListener value="#{assignment.id}" target="#{subjectBean.subjectId}"/>
                                         </p:commandButton>
                                     </p:column>
                                 </p:dataTable>
@@ -64,42 +64,44 @@
                         </tr>
                     </table>
 
-                    <table border="0" class="content_table_form">
-                        <tr >
-                            <td style="min-width: 150px; width: 150px; max-width: 150px;" class="left" />
-                            <td style="min-width: 150px; width: 150px; max-width: 150px;" class="left" />
-                        </tr>
+                    <!--<table border="0" class="content_table_form">-->
+                        <!--<tr >-->
+                            <!--<td style="min-width: 150px; width: 150px; max-width: 150px;" class="left" />-->
+                            <!--<td style="min-width: 150px; width: 150px; max-width: 150px;" class="left" />-->
+                        <!--</tr>-->
 
-                        <tr>
-                            <td>
-                                <h:outputLabel value="Academic Year"/>
-                            </td>
-                            <td>
-                                <p:selectOneMenu value="#{subjectBean.subjectModelSelected.semester}">
-                                    <f:selectItems value="#{subjectBean.SEMESTER}" />
-                                </p:selectOneMenu>
-                            </td>
-                        </tr>
+                        <!--<tr>-->
+                            <!--<td>-->
+                                <!--<h:outputLabel value="Academic Year"/>-->
+                            <!--</td>-->
+                            <!--<td>-->
+                                <!--<p:selectOneMenu value="#{assignmentBean.subjectModelSelected.semester}">-->
+                                    <!--<f:selectItems value="#{assignmentBean.SEMESTER}" />-->
+                                <!--</p:selectOneMenu>-->
+                            <!--</td>-->
+                        <!--</tr>-->
 
-                        <tr>
-                            <td>
-                                <h:outputLabel value="Semester"/>
-                            </td>
-                            <td>
-                                <p:selectOneMenu value="#{subjectBean.subjectModelSelected.semester}">
-                                    <f:selectItems value="#{subjectBean.SEMESTER}" />
-                                </p:selectOneMenu>
-                            </td>
-                        </tr>
+                        <!--<tr>-->
+                            <!--<td>-->
+                                <!--<h:outputLabel value="Semester"/>-->
+                            <!--</td>-->
+                            <!--<td>-->
+                                <!--<p:selectOneMenu value="#{assignmentBean.subjectModelSelected.semester}">-->
+                                    <!--<f:selectItems value="#{assignmentBean.SEMESTER}" />-->
+                                <!--</p:selectOneMenu>-->
+                            <!--</td>-->
+                        <!--</tr>-->
 
-                    </table>
+                    <!--</table>-->
 
                     <p:panel style="border: 0">
                         <div style="text-align: left;">
-                            <p:commandButton value="#{msg.get('btn.name.add')}"
-                                             action="#{subjectBean.onClickAdd}"
+                            <p:commandButton id="btnAdd"
+                                             value="#{msg.get('btn.name.add')}"
+                                             action="#{assignmentBean.onClickAdd}"
                                              oncomplete="PF('assignmetDlg').show()"
                                              update="@form, :assignmentDialogForm"
+                                             disabled="#{assignmentBean.flagAdd}"
                                              styleClass="medium" style="#{msg.get('btn.size')}"
                                              icon="ui-icon-plusthick"/>
                         </div>
@@ -152,7 +154,7 @@
             <p:dialog id="assignmetDialog" widgetVar="assignmetDlg" header="Add assignment"
                       closable="false"
                       onShow="hideWindowsScrollBar()" onHide="showWindowsScrollBar()" resizable="false"
-                      modal="true" width="300" height="230">
+                      modal="true" width="450" height="300">
                 <ui:include src="../site/dialog/assignmentDialog.xhtml"/>
             </p:dialog>
         </p:panel>

@@ -30,6 +30,9 @@ public class SubjectModel {
     @Column(name="semester")
     private String semester;
 
+    @Column(name="year")
+    private String year;
+
     @OneToOne
     @JoinColumn(name="user_id")
     private UserModel userModel;
@@ -46,6 +49,7 @@ public class SubjectModel {
                 .append("subjectName", subjectName)
                 .append("description", description)
                 .append("semester", semester)
+                .append("year", year)
                 .append("userModel", userModel)
                 .append("active", active)
                 .toString();
