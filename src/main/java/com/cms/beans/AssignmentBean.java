@@ -57,6 +57,8 @@ public class AssignmentBean extends Bean{
     }
 
     public void addAssignment(){
-        log.debug("--------------- {}", assignmentModel);
+        assugnmentService.save(assignmentModel, subjectModelSelected.getId());
+        showDialogSaved();
+        assignmentModels = assugnmentService.getAssignment(subjectModelSelected.getId());
     }
 }

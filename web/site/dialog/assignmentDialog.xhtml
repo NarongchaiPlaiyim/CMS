@@ -42,6 +42,7 @@
                 </td>
                 <td>
                     <p:selectOneMenu value="#{assignmentBean.assignmentModel.year}" required="#{not empty param[addAssignment.clientId]}">
+                        <f:selectItem itemLabel="- Please Select -" itemValue=""/>
                         <f:selectItems value="#{assignmentBean.year}" />
                     </p:selectOneMenu>
                 </td>
@@ -52,6 +53,7 @@
                 </td>
                 <td>
                     <p:selectOneMenu value="#{assignmentBean.assignmentModel.semester}" required="#{not empty param[addAssignment.clientId]}">
+                        <f:selectItem itemLabel="- Please Select -" itemValue=""/>
                         <f:selectItems value="#{assignmentBean.SEMESTER}" />
                     </p:selectOneMenu>
                 </td>
@@ -61,13 +63,11 @@
                     <div style="text-align: center;">
                         <p:commandButton value="#{msg.get('btn.name.submit')}"
                                          id="btnSaveHeader"
-                                         update=":msgBoxSystemMessagePanel"
+                                         update=":msgBoxSystemMessagePanel, :assignmentDialogForm"
                                          styleClass="medium" style="#{msg.get('btn.size')}"
                                          icon="ui-icon-check"
                                          process="@form"
                                          binding="#{addAssignment}"
-                                         onstart="PF('bui'.block())"
-                                         oncomplete="PF('bui').unblock()"
                                          action="#{assignmentBean.addAssignment()}"/>
                         <p:commandButton value="#{msg.get('btn.name.cancel')}"
                                          id="btnCancel"

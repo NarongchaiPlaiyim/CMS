@@ -37,7 +37,7 @@ public class FileUploadModel {
     private AssignmentModel assignmentModel;
 
     @Column(name="active", nullable=false, columnDefinition="int default 1")
-    private int active;
+    private int active = 1;
 
 
     @Override
