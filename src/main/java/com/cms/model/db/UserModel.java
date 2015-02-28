@@ -34,6 +34,9 @@ public class UserModel {
     @Column(name="facebook")
     private String facebook;
 
+    @Column(name="department")
+    private String department;
+
     @Column(name="role")
     @Enumerated(EnumType.ORDINAL)
     private Type role;
@@ -50,6 +53,7 @@ public class UserModel {
                 .append("password", password)
                 .append("email", email)
                 .append("facebook", facebook)
+                .append("department", department)
                 .append("role", role)
                 .append("active", active)
                 .toString();
