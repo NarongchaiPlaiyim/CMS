@@ -75,9 +75,8 @@
                                 <h:outputLabel value="Academic Year"/>
                             </td>
                             <td>
-                                <p:selectOneMenu value="#{assignmentBean.selectYear}" required="#{not empty param[addAssignment.clientId]}">
-                                    <f:selectItem itemLabel="- Please Select -" itemValue=""/>
-                                    <f:selectItems value="#{assignmentBean.year}" />
+                                <p:selectOneMenu value="#{subjectBean.subjectModelSelected.semester}">
+                                    <f:selectItems value="#{subjectBean.SEMESTER}" />
                                 </p:selectOneMenu>
                             </td>
                         </tr>
@@ -87,9 +86,8 @@
                                 <h:outputLabel value="Semester"/>
                             </td>
                             <td>
-                                <p:selectOneMenu value="#{assignmentBean.selectSemester}" required="#{not empty param[addAssignment.clientId]}">
-                                    <f:selectItem itemLabel="- Please Select -" itemValue=""/>
-                                    <f:selectItems value="#{assignmentBean.SEMESTER}" />
+                                <p:selectOneMenu value="#{subjectBean.subjectModelSelected.semester}">
+                                    <f:selectItems value="#{subjectBean.SEMESTER}" />
                                 </p:selectOneMenu>
                             </td>
                         </tr>
@@ -99,8 +97,8 @@
                     <p:panel style="border: 0">
                         <div style="text-align: left;">
                             <p:commandButton value="#{msg.get('btn.name.add')}"
-                                             action="#{assignmentBean.onClickAdd}"
-                                             binding="#{addAssignment}"
+                                             action="#{subjectBean.onClickAdd}"
+                                             oncomplete="PF('assignmetDlg').show()"
                                              update="@form, :assignmentDialogForm"
                                              styleClass="medium" style="#{msg.get('btn.size')}"
                                              icon="ui-icon-plusthick"/>
@@ -121,25 +119,25 @@
                                              rows="7" paginator="true"
                                              value="#{assignmentBean.assignmentModels}"
                                              selectionMode="single"
-                                             rowKey="#{assignment.id}"
+                                             rowKey="#{subjectModel.id}"
                                              rowIndexVar="rowIndex">
                                     <p:column headerText="Assignment Id" style="min-width: 150px; width: 150px; max-width: 150px;" styleClass="center">
-                                        <h:outputText value="" style="word-wrap:break-word;"/>
+                                        <h:outputText value="#{subjectModel.subjectCode}" style="word-wrap:break-word;"/>
                                     </p:column>
                                     <p:column headerText="Description" style="min-width: 150px; width: 150px; max-width: 150px;" styleClass="center">
-                                        <h:outputText value="" style="word-wrap:break-word;"/>
+                                        <h:outputText value="#{subjectModel.subjectName}" style="word-wrap:break-word;"/>
                                     </p:column>
                                     <p:column headerText="Year apply" style="min-width: 150px; width: 150px; max-width: 150px;" styleClass="center">
-                                        <h:outputText value="" style="word-wrap:break-word;"/>
+
                                     </p:column>
                                     <p:column headerText="Semester" style="min-width: 150px; width: 150px; max-width: 150px;" styleClass="center">
-                                        <h:outputText value="" style="word-wrap:break-word;"/>
+
                                     </p:column>
                                     <p:column headerText="View" style="min-width: 150px; width: 150px; max-width: 150px;" styleClass="center">
-                                        <h:outputText value="" style="word-wrap:break-word;"/>
+
                                     </p:column>
                                     <p:column headerText="" style="min-width: 30px; width: 30px; max-width: 30px;" styleClass="center">
-                                        <h:outputText value="" style="word-wrap:break-word;"/>
+
                                     </p:column>
                                 </p:dataTable>
                             </td>
@@ -154,7 +152,7 @@
             <p:dialog id="assignmetDialog" widgetVar="assignmetDlg" header="Add assignment"
                       closable="false"
                       onShow="hideWindowsScrollBar()" onHide="showWindowsScrollBar()" resizable="false"
-                      modal="true" width="450" height="300">
+                      modal="true" width="300" height="230">
                 <ui:include src="../site/dialog/assignmentDialog.xhtml"/>
             </p:dialog>
         </p:panel>
