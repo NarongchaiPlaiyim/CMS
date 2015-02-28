@@ -9,7 +9,7 @@
     <h:form id="assignmentDialogForm">
         <table border="0" class="content_table_form">
             <tr >
-                <td style="min-width: 100px; width: 100px; max-width: 100px;" class="left" />
+                <td style="min-width: 150px; width: 150px; max-width: 150px;" class="left" />
                 <td style="min-width: 150px; width: 150px; max-width: 150px;" class="left" />
             </tr>
             <tr>
@@ -17,7 +17,7 @@
                     <h:outputLabel value="Topic"/>
                 </td>
                 <td>
-
+                    <p:inputText value="#{assignmentBean.assignmentModel.assignmentNo}"/>
                 </td>
             </tr>
             <tr>
@@ -25,7 +25,7 @@
                     <h:outputLabel value="Description"/>
                 </td>
                 <td>
-
+                    <p:inputTextarea value="#{assignmentBean.assignmentModel.description}"/>
                 </td>
             </tr>
             <tr>
@@ -33,7 +33,7 @@
                     <h:outputLabel value="Upload"/>
                 </td>
                 <td>
-
+                    <p:commandButton value="Upload"/>
                 </td>
             </tr>
             <tr>
@@ -41,7 +41,7 @@
                     <h:outputLabel value="Academic Year"/>
                 </td>
                 <td>
-
+                    <p:inputText value="#{assignmentBean.assignmentModel.year}" disabled="true"/>
                 </td>
             </tr>
             <tr>
@@ -49,26 +49,27 @@
                     <h:outputLabel value="Semester"/>
                 </td>
                 <td>
-
+                    <p:inputText value="#{assignmentBean.assignmentModel.semester}" disabled="true"/>
                 </td>
             </tr>
             <tr>
                 <td colspan="2">
-                    <div style="text-align: center;"></div>
-                    <p:commandButton value="#{msg.get('btn.name.submit')}"
-                                     id="btnSaveHeader"
-                                     update=":msgBoxSystemMessagePanel"
-                                     styleClass="medium" style="#{msg.get('btn.size')}"
-                                     icon="ui-icon-check"
-                                     process="@form"
-                                     oncomplete="PF('assignmetDlg').hide()"
-                                     action="#{subjectBean.onSubmit()}"/>
-                    <p:commandButton value="#{msg.get('btn.name.cancel')}"
-                                     id="btnCancel"
-                                     icon="ui-icon-cancel"
-                                     styleClass="medium" style="#{msg.get('btn.size')}"
-                                     process="@form"
-                                     oncomplete="PF('assignmetDlg').hide()"/>
+                    <div style="text-align: center;">
+                        <p:commandButton value="#{msg.get('btn.name.submit')}"
+                                         id="btnSaveHeader"
+                                         update=":msgBoxSystemMessagePanel"
+                                         styleClass="medium" style="#{msg.get('btn.size')}"
+                                         icon="ui-icon-check"
+                                         process="@form"
+                                         oncomplete="PF('assignmetDlg').hide()"
+                                         action="#{subjectBean.onSubmit()}"/>
+                        <p:commandButton value="#{msg.get('btn.name.cancel')}"
+                                         id="btnCancel"
+                                         icon="ui-icon-cancel"
+                                         styleClass="medium" style="#{msg.get('btn.size')}"
+                                         process="@form"
+                                         oncomplete="PF('assignmetDlg').hide()"/>
+                    </div>
                 </td>
             </tr>
         </table>

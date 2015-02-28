@@ -3,7 +3,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 
 import java.math.BigDecimal;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -51,13 +50,13 @@ public enum Utils {
         }
     }
 
-    public static List<Integer> getAcademicYear(){
+    public static List<String> getAcademicYear(){
         int year = getCalendar().get(Calendar.YEAR);
-        List<Integer> academicYear = new ArrayList();
-        academicYear.add(year);
-        academicYear.add(year-1);
-        academicYear.add(year+1);
-        academicYear.add(year+2);
+        List<String> academicYear = new ArrayList();
+        academicYear.add(year+"");
+        academicYear.add((year-1)+"");
+        academicYear.add((year+1)+"");
+        academicYear.add((year+2)+"");
         return academicYear;
     }
 
@@ -69,7 +68,7 @@ public enum Utils {
         return semester;
     }
 
-    private static List<String> getExamType(){
+    public static List<String> getExamType(){
         List<String> examType = new ArrayList();
         examType.add("Quiz");
         examType.add("Midterm");
@@ -82,7 +81,7 @@ public enum Utils {
     }
 
     public static Date currentDate(){
-       return getCalendar().getTime();
+        return getCalendar().getTime();
     }
 
     public static String getBatchNo(){

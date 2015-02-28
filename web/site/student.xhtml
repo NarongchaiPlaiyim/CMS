@@ -30,13 +30,17 @@
                         </tr>
                         <tr>
                             <td colspan="4">
-                                <p:dataTable id="subjectTable"
-                                             scrollable="true" scrollHeight="450"
+                                <p:dataTable id="studentTable"
+                                             scrollable="true" scrollHeight="200"
                                              var="subjectModel"
                                              value="#{studentBean.subjectModelList}"
                                              selectionMode="single"
+                                             selection="#{studentBean.subjectModelSelected}"
                                              rowKey="#{subjectModel.id}"
                                              rowIndexVar="rowIndex">
+                                    <p:ajax event="rowSelect"
+                                            update=":studentForm:studentTable2"
+                                            listener="#{studentBean.onClickTable()}"/>
                                     <p:column headerText="No" style="min-width: 20px; width: 20px; max-width: 20px;" styleClass="center">
                                         <h:outputText value="#{rowIndex+1}"/>
                                     </p:column>
@@ -66,13 +70,13 @@
                         <tr >
                             <td style="min-width: 150px; width: 150px; max-width: 150px;" class="left" />
                             <td style="min-width: 150px; width: 150px; max-width: 150px;" class="left" />
+                            <td style="min-width: 150px; width: 150px; max-width: 150px;" class="left" />
                         </tr>
-
                         <tr>
                             <td>
                                 <h:outputLabel value="Academic Year"/>
                             </td>
-                            <td>
+                            <td colspan="2">
                                 <p:selectOneMenu value="#{subjectBean.subjectModelSelected.semester}">
                                     <f:selectItems value="#{subjectBean.SEMESTER}" />
                                 </p:selectOneMenu>
@@ -83,13 +87,24 @@
                             <td>
                                 <h:outputLabel value="Semester"/>
                             </td>
-                            <td>
+                            <td >
                                 <p:selectOneMenu value="#{subjectBean.subjectModelSelected.semester}">
                                     <f:selectItems value="#{subjectBean.SEMESTER}" />
                                 </p:selectOneMenu>
                             </td>
-                        </tr>
+                            <td >
+                                <div style="text-align: center;">
+                                    <p:commandButton value="#{msg.get('btn.name.search')}"
+                                                     update=":msgBoxSystemMessagePanel"
+                                                     styleClass="medium" style="#{msg.get('btn.size')}"
+                                                     icon="ui-icon-check"
+                                                     process="@form"
+                                                     oncomplete="PF('examinationDlg').hide()"
+                                                     action="#{subjectBean.onSubmit()}"/>
+                                </div>
 
+                            </td>
+                        </tr>
                     </table>
 
                     <table border="0" class="content_table_form">
@@ -101,23 +116,18 @@
                         </tr>
                         <tr>
                             <td colspan="4">
-                                <p:dataTable id="tutorialTable2"
-                                             scrollable="true" scrollHeight="450"
+                                <p:dataTable id="studentTable2"
+                                             scrollable="true" scrollHeight="200"
                                              var="subjectModel"
                                              value="#{classTutorialBean.subjectModelList}"
                                              selectionMode="single"
+
                                              rowKey="#{subjectModel.id}"
                                              rowIndexVar="rowIndex">
                                     <p:column headerText="Student Id" style="min-width: 150px; width: 150px; max-width: 150px;" styleClass="center">
 
                                     </p:column>
                                     <p:column headerText="Student Name" style="min-width: 150px; width: 150px; max-width: 150px;" styleClass="center">
-
-                                    </p:column>
-                                    <p:column headerText="Departement" style="min-width: 150px; width: 150px; max-width: 150px;" styleClass="center">
-
-                                    </p:column>
-                                    <p:column headerText="Year" style="min-width: 150px; width: 150px; max-width: 150px;" styleClass="center">
 
                                     </p:column>
                                 </p:dataTable>

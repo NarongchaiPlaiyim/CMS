@@ -29,6 +29,7 @@ public class ClassTutorialBean extends Bean {
     private SubjectModel subjectModelSelected;
     private int subjectId;
 
+
     @PostConstruct
     private void init(){
         subjectModelSelected = new SubjectModel();

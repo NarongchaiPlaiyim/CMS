@@ -31,12 +31,16 @@
                         <tr>
                             <td colspan="4">
                                 <p:dataTable id="subjectTable"
-                                             scrollable="true" scrollHeight="450"
+                                             scrollable="true" scrollHeight="200"
                                              var="subjectModel"
                                              value="#{examinationBean.subjectModelList}"
                                              selectionMode="single"
+                                             selection="#{examinationBean.subjectModelSelected}"
                                              rowKey="#{subjectModel.id}"
                                              rowIndexVar="rowIndex">
+                                    <p:ajax event="rowSelect"
+                                            update=":examinationForm:tutorialTable2, :examinationForm:addBtn"
+                                            listener="#{examinationBean.onClickTable()}"/>
                                     <p:column headerText="No" style="min-width: 20px; width: 20px; max-width: 20px;" styleClass="center">
                                         <h:outputText value="#{rowIndex+1}"/>
                                     </p:column>
@@ -62,40 +66,12 @@
                         </tr>
                     </table>
 
-                    <table border="0" class="content_table_form">
-                        <tr >
-                            <td style="min-width: 150px; width: 150px; max-width: 150px;" class="left" />
-                            <td style="min-width: 150px; width: 150px; max-width: 150px;" class="left" />
-                        </tr>
-
-                        <tr>
-                            <td>
-                                <h:outputLabel value="Academic Year"/>
-                            </td>
-                            <td>
-                                <p:selectOneMenu value="#{subjectBean.subjectModelSelected.semester}">
-                                    <f:selectItems value="#{subjectBean.SEMESTER}" />
-                                </p:selectOneMenu>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                <h:outputLabel value="Semester"/>
-                            </td>
-                            <td>
-                                <p:selectOneMenu value="#{subjectBean.subjectModelSelected.semester}">
-                                    <f:selectItems value="#{subjectBean.SEMESTER}" />
-                                </p:selectOneMenu>
-                            </td>
-                        </tr>
-
-                    </table>
-
                     <p:panel style="border: 0">
                         <div style="text-align: left;">
                             <p:commandButton value="#{msg.get('btn.name.add')}"
-                                             action="#{subjectBean.onClickAdd}"
+                                             id="addBtn"
+                                             disabled="#{examinationBean.flagBtnAdd}"
+                                             action="#{examinationBean.onClickAdd()}"
                                              oncomplete="PF('examinationDlg').show()"
                                              update="@form, :examinationDialogForm"
                                              styleClass="medium" style="#{msg.get('btn.size')}"
@@ -119,21 +95,24 @@
                                              value="#{examinationBean.examinationModelList}"
                                              rowKey="#{subjectModel.id}"
                                              rowIndexVar="rowIndex">
+                                    <p:column headerText="No" style="min-width: 20px; width: 20px; max-width: 20px;" styleClass="center">
+                                        <h:outputText value="#{rowIndex+1}"/>
+                                    </p:column>
                                     <p:column headerText="Exam No." style="min-width: 150px; width: 150px; max-width: 150px;" styleClass="center">
-
+                                        <h:outputText value="#{examinationModel.examNo}" style="word-wrap:break-word;"/>
                                     </p:column>
                                     <p:column headerText="Exam Content" style="min-width: 150px; width: 150px; max-width: 150px;" styleClass="center">
-
+                                        <h:outputText value="#{examinationModel.examContent}" style="word-wrap:break-word;"/>
                                     </p:column>
                                     <p:column headerText="Type" style="min-width: 150px; width: 150px; max-width: 150px;" styleClass="center">
-
+                                        <h:outputText value="#{examinationModel.examType}" style="word-wrap:break-word;"/>
                                     </p:column>
                                     <p:column headerText="Score" style="min-width: 150px; width: 150px; max-width: 150px;" styleClass="center">
-
+                                        <h:outputText value="#{examinationModel.score}" style="word-wrap:break-word;"/>
                                     </p:column>
                                     <p:column headerText="" style="min-width: 150px; width: 150px; max-width: 150px;" styleClass="center">
                                         <p:commandButton icon="ui-icon-trash"
-                                                         title="Remove"
+                                                         title="View"
                                                          value="#{msg.get('btn.name.view')}"
                                                          oncomplete="PF('examinationDlg2').show()">
                                         </p:commandButton>
@@ -156,10 +135,9 @@
         </p:panel>
 
         <p:panel id="examinationPanel2" styleClass="panel">
-            <p:dialog id="examinationDialog2" widgetVar="examinationDlg2" header="Add Examination"
-                      closable="false"
+            <p:dialog id="examinationDialog2" widgetVar="examinationDlg2" header="Add Examination" closable="#{true}"
                       onShow="hideWindowsScrollBar()" onHide="showWindowsScrollBar()" resizable="false"
-                      modal="true" width="450" height="400">
+                      modal="true" width="800" height="400">
                 <ui:include src="../site/dialog/examinationDialog2.xhtml"/>
             </p:dialog>
         </p:panel>

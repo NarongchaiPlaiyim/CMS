@@ -26,12 +26,15 @@ public class StudentBean extends Bean {
     @PostConstruct
     private void init(){
         subjectModelSelected = new SubjectModel();
-        onload();
+        onLoad();
     }
 
-    private void onload(){
-        HttpSession session = FacesUtil.getSession(true);
+    private void onLoad(){
+        subjectModelList = (List<SubjectModel>) FacesUtil.getSession(true).getAttribute("subjectModelList");
+    }
 
-        subjectModelList = (List<SubjectModel>) session.getAttribute("subjectModelList");
+    public void onClickTable(){
+//        flagBtnAdd = false;
+//        examinationModelList = examinationService.getList(subjectModelSelected);
     }
 }

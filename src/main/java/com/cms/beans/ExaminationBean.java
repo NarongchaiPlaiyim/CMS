@@ -4,6 +4,7 @@ import com.cms.model.db.ExaminationModel;
 import com.cms.model.db.SubjectModel;
 import com.cms.service.ExaminationService;
 import com.cms.utils.FacesUtil;
+import com.cms.utils.Utils;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,7 +12,6 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
-import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,21 +28,41 @@ public class ExaminationBean extends Bean {
     private List<SubjectModel> subjectModelList;
     private SubjectModel subjectModelSelected;
 
+    private final List<String> SEMESTER = Utils.getSemester();
+    private final List<String> ACADEMICYEAR = Utils.getAcademicYear();
+    private final List<String> EXAMTYPE = Utils.getExamType();
+
+    private boolean flagBtnAdd = true;
     @PostConstruct
     private void init(){
-        examinationModelList = new ArrayList<ExaminationModel>();
         examinationModel = new ExaminationModel();
-        examinationModel.setScore(99.99);
-        examinationModelList.add(examinationModel);
-
         subjectModelSelected = new SubjectModel();
-        onload();
+        onLoad();
+        onInitList();
     }
 
-    private void onload(){
-        HttpSession session = FacesUtil.getSession(true);
+    private void onInitList(){
+        examinationModelList = new ArrayList<ExaminationModel>();
+    }
 
-        subjectModelList = (List<SubjectModel>) session.getAttribute("subjectModelList");
+    private void onLoad(){
+        subjectModelList = (List<SubjectModel>) FacesUtil.getSession(true).getAttribute("subjectModelList");
+    }
+
+    public void onClickSubmit(){
+        examinationModel.setSubjectModel(subjectModelSelected);
+        examinationService.create(examinationModel);
+        showDialogSaved();
+        examinationModelList = examinationService.getList(subjectModelSelected);
+    }
+
+    public void onClickAdd(){
+        examinationModel = new ExaminationModel();
+    }
+
+    public void onClickTable(){
+        flagBtnAdd = false;
+        examinationModelList = examinationService.getList(subjectModelSelected);
     }
 
 }
