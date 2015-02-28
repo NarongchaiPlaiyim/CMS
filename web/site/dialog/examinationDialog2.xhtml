@@ -11,12 +11,13 @@
             <tr >
                 <td style="min-width: 150px; width: 150px; max-width: 150px;" class="left" />
                 <td style="min-width: 150px; width: 150px; max-width: 150px;" class="left" />
+                <td style="min-width: 150px; width: 150px; max-width: 150px;" class="left" />
             </tr>
             <tr>
                 <td>
                     <h:outputLabel value="Academic Year"/>
                 </td>
-                <td>
+                <td colspan="2">
                     <p:selectOneMenu value="#{subjectBean.subjectModelSelected.semester}">
                         <f:selectItems value="#{subjectBean.SEMESTER}" />
                     </p:selectOneMenu>
@@ -27,23 +28,66 @@
                 <td>
                     <h:outputLabel value="Semester"/>
                 </td>
-                <td>
+                <td >
                     <p:selectOneMenu value="#{subjectBean.subjectModelSelected.semester}">
                         <f:selectItems value="#{subjectBean.SEMESTER}" />
                     </p:selectOneMenu>
                 </td>
-            </tr>
+                <td >
+                    <div style="text-align: center;">
+                        <p:commandButton value="#{msg.get('btn.name.search')}"
+                                         update=":msgBoxSystemMessagePanel"
+                                         styleClass="medium" style="#{msg.get('btn.size')}"
+                                         icon="ui-icon-check"
+                                         process="@form"
+                                         oncomplete="PF('examinationDlg').hide()"
+                                         action="#{subjectBean.onSubmit()}"/>
+                    </div>
 
+                </td>
+            </tr>
+        </table>
+
+        <p:panel style="border: 0">
+            <div style="text-align: left;">
+                <p:commandButton value="#{msg.get('btn.name.save')}"
+                                 action="#{subjectBean.onClickAdd}"
+                                 oncomplete="PF('examinationDlg').show()"
+                                 update="@form, :examinationDialogForm"
+                                 styleClass="medium" style="#{msg.get('btn.size')}"
+                                 icon="ui-icon-plusthick"/>
+            </div>
+        </p:panel>
+
+        <table border="0" class="content_table_form">
+            <tr >
+                <td style="min-width: 150px; width: 150px; max-width: 150px;" class="left" />
+                <td style="min-width: 150px; width: 150px; max-width: 150px;" class="left" />
+            </tr>
             <tr>
-                <td colspan="2">
-                    <div style="text-align: center;"></div>
-                    <p:commandButton value="#{msg.get('btn.name.search')}"
-                                     update=":msgBoxSystemMessagePanel"
-                                     styleClass="medium" style="#{msg.get('btn.size')}"
-                                     icon="ui-icon-check"
-                                     process="@form"
-                                     oncomplete="PF('examinationDlg').hide()"
-                                     action="#{subjectBean.onSubmit()}"/>
+                <td colspan="4">
+                    <p:dataTable id="tutorialTable2"
+                                 scrollable="true" scrollHeight="200"
+                                 var="examinationModel"
+                                 value="#{examinationBean.examinationModelList}"
+                                 rowKey="#{subjectModel.id}"
+                                 rowIndexVar="rowIndex">
+                        <p:column headerText="Student Id" styleClass="center">
+
+                        </p:column>
+                        <p:column headerText="Student Name" styleClass="center">
+
+                        </p:column>
+                        <p:column headerText="Department" styleClass="center">
+
+                        </p:column>
+                        <p:column headerText="Year" styleClass="center">
+
+                        </p:column>
+                        <p:column headerText="Score" styleClass="center">
+
+                        </p:column>
+                    </p:dataTable>
                 </td>
             </tr>
         </table>
@@ -56,7 +100,7 @@
             <tr>
                 <td colspan="2">
                     <div style="text-align: center;"></div>
-                    <p:commandButton value="#{msg.get('btn.name.submit')}"
+                    <p:commandButton value="#{msg.get('btn.name.save')}"
                                      id="btnSaveHeader"
                                      update=":msgBoxSystemMessagePanel"
                                      styleClass="medium" style="#{msg.get('btn.size')}"
