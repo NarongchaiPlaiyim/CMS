@@ -22,11 +22,26 @@ public class ExaminationModel {
     @Column(name="Exam_id")
     private String examId;
 
+    @Column(name="exam_type")
+    private String examType;
+
+    @Column(name="exam_no")
+    private String examNo;
+
+    @Column(name="exam_content")
+    private String examContent;
+
     @Column(name="description")
     private String description;
 
     @Column(name="score")
     private double score;
+
+    @Column(name="semester")
+    private String semester;
+
+    @Column(name="academic_year")
+    private String academicYear;
 
     @OneToOne
     @JoinColumn(name="subject_id")

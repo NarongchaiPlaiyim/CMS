@@ -4,6 +4,7 @@ import com.cms.model.db.ExaminationModel;
 import com.cms.model.db.SubjectModel;
 import com.cms.service.ExaminationService;
 import com.cms.utils.FacesUtil;
+import com.cms.utils.Utils;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -28,21 +29,33 @@ public class ExaminationBean extends Bean {
     private List<SubjectModel> subjectModelList;
     private SubjectModel subjectModelSelected;
 
+    private final List<String> SEMESTER = Utils.getSemester();
+    private final List<String> ACADEMICYEAR = Utils.getAcademicYear();
+    private final List<String> EXAMTYPE = Utils.getExamType();
+
     @PostConstruct
     private void init(){
-        examinationModelList = new ArrayList<ExaminationModel>();
         examinationModel = new ExaminationModel();
-        examinationModel.setScore(99.99);
-        examinationModelList.add(examinationModel);
-
         subjectModelSelected = new SubjectModel();
-        onload();
+        onLoad();
+        onInitList();
     }
 
-    private void onload(){
-        HttpSession session = FacesUtil.getSession(true);
-
-        subjectModelList = (List<SubjectModel>) session.getAttribute("subjectModelList");
+    private void onInitList(){
+        examinationModelList = examinationService.getList();
     }
 
+    private void onLoad(){
+        subjectModelList = (List<SubjectModel>) FacesUtil.getSession(true).getAttribute("subjectModelList");
+    }
+
+    public void onClickSubmit(){
+        examinationService.create(examinationModel);
+        showDialogSaved();
+        init();
+    }
+
+    public void onClickAdd(){
+        subjectModelSelected = new SubjectModel();
+    }
 }
