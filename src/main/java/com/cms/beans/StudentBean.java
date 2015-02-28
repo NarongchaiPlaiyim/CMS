@@ -32,4 +32,9 @@ public class StudentBean extends Bean {
     private void onLoad(){
         subjectModelList = (List<SubjectModel>) FacesUtil.getSession(true).getAttribute("subjectModelList");
     }
+
+    public void onClickTable(){
+//        flagBtnAdd = false;
+//        examinationModelList = examinationService.getList(subjectModelSelected);
+    }
 }
