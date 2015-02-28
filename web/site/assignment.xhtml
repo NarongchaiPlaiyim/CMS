@@ -108,10 +108,24 @@
                                         <h:outputText value="#{assignment.semester}" style="word-wrap:break-word;"/>
                                     </p:column>
                                     <p:column headerText="View" style="min-width: 150px; width: 150px; max-width: 150px;" styleClass="center">
-
+                                        <p:commandButton id="btnAdd"
+                                                         value="#{msg.get('btn.name.add')}"
+                                                         oncomplete="PF('studentAssignmetDlg').show()"
+                                                         action="#{assignmentBean.loadStudentAssignment()}"
+                                                         update=":assignmentTeacherDialogForm"
+                                                         styleClass="medium" style="#{msg.get('btn.size')}"
+                                                         icon="ui-icon-plusthick">
+                                            <f:setPropertyActionListener value="#{assignment.id}" target="#{assignmentBean.assignmentId}"/>
+                                        </p:commandButton>
                                     </p:column>
                                     <p:column headerText="" style="min-width: 30px; width: 30px; max-width: 30px;" styleClass="center">
-
+                                        <p:commandButton icon="ui-icon-trash"
+                                                         process="@this"
+                                                         action="#{assignmentBean.preDelete()}"
+                                                         update=":confirmPanel"
+                                                         title="Remove">
+                                            <f:setPropertyActionListener value="#{assignment.id}" target="#{assignmentBean.assignmentId}"/>
+                                        </p:commandButton>
                                     </p:column>
                                 </p:dataTable>
                             </td>
@@ -140,7 +154,7 @@
                                      update="assignmentForm"
                                      icon="ui-icon-check"
                                      styleClass="medium" style="#{msg.get('btn.size')}"
-                                     oncomplete="PF('msgBoxSystemMessageDlg').hide(); PF('assignmetDlg').hide()"/>
+                                     oncomplete="PF('msgBoxSystemMessageDlg').hide(); PF('assignmetDlg').hide(); PF('confirmDlg').hide(); PF('studentAssignmetDlg').hide()"/>
                 </div>
             </p:confirmDialog>
         </p:panel>
@@ -151,6 +165,35 @@
                       modal="true" width="350">
                 <ui:include src="../site/dialog/studentDialog.xhtml"/>
             </p:dialog>
+        </p:panel>
+
+        <p:panel id="studentAssignmetPanel" styleClass="panel">
+            <p:dialog id="studentAssignmetDialog" widgetVar="studentAssignmetDlg" header="Add Score"
+                      onShow="hideWindowsScrollBar()" onHide="showWindowsScrollBar()" resizable="false"
+                      modal="true" width="750" height="300">
+                <ui:include src="../site/dialog/assignmentTeacher.xhtml"/>
+            </p:dialog>
+        </p:panel>
+
+        <p:panel id="confirmPanel" style="border: 0">
+            <p:confirmDialog id="confirmDialog" widgetVar="confirmDlg" width="#{msg.get('dialog.message.size')}"
+                             closable="false"
+                             header="#{assignmentBean.messageHeader}" message="#{assignmentBean.message}" >
+                <div style="text-align: right">
+                    <p:commandButton value="#{msg.get('btn.name.ok')}" action="#{assignmentBean.onClickDelete()}"
+                                     process="@this" update=":msgBoxSystemMessagePanel"
+                                     styleClass="medium" style="#{msg.get('btn.size')}"
+                                     icon="ui-icon-check"
+                                     onstart="PF('bui').block()"
+                                     oncomplete="PF('confirmDlg').hide(); PF('bui').unblock()"/>
+                    <p:commandButton value="#{msg.get('btn.name.cancel')}"
+                                     process="@this"
+                                     update=":assignmentForm"
+                                     styleClass="medium" style="#{msg.get('btn.size')}"
+                                     icon="ui-icon-cancel"
+                                     oncomplete="PF('confirmDlg').hide()"/>
+                </div>
+            </p:confirmDialog>
         </p:panel>
 
     </h:body>
