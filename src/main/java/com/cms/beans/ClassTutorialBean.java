@@ -6,14 +6,19 @@ import com.cms.service.ClassTutorialService;
 import com.cms.utils.FacesUtil;
 import lombok.Getter;
 import lombok.Setter;
+import org.apache.commons.io.FilenameUtils;
 import org.primefaces.event.SelectEvent;
+import org.primefaces.model.UploadedFile;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.servlet.http.HttpSession;
+import java.io.FileNotFoundException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Getter
@@ -27,7 +32,8 @@ public class ClassTutorialBean extends Bean {
     private List<ClassEntity> classDetailList;
     private ClassEntity classSelected;
     private SubjectModel subjectModelSelected;
-    private int subjectId;
+    private int currentSubjectId;
+    private UploadedFile uploadedFile;
 
 
     @PostConstruct
@@ -46,17 +52,40 @@ public class ClassTutorialBean extends Bean {
     public void onClickAdd(){
         log.debug("onClickAdd()");
         classSelected = new ClassEntity();
+        SubjectModel subjectModel = new SubjectModel();
+        subjectModel.setId(currentSubjectId);
+        classSelected.setSubjectModel(subjectModel);
     }
 
     public void onSaveNewTutorial(){
         log.debug("onSaveNewTutorial : [{}]", classSelected.toString());
         try {
+
+
+            classTutorialService.uploadFile(uploadedFile, getUser());
+
             classTutorialService.save(classSelected);
+
+            classDetailList = findClassBySubjectId(currentSubjectId);
+
+
         }catch (Exception e){
             e.printStackTrace();
             log.error(e.getMessage());
         }
     }
+
+    public void onDeleteNewTutorial(){
+        log.debug("onDeleteNewTutorial : [{}]", classSelected.toString());
+        try {
+            classTutorialService.deleteClassById(classSelected.getId());
+            classDetailList = findClassBySubjectId(classSelected.getId());
+        }catch (Exception e){
+            e.printStackTrace();
+            log.error(e.getMessage());
+        }
+    }
+
 
 
     public void selectData(SelectEvent event){
@@ -64,13 +93,18 @@ public class ClassTutorialBean extends Bean {
         log.debug("selectData() : {}",subjectModelSelected.toString());
 
         try {
-            classDetailList = classTutorialService.findClassBySubjectId(subjectModelSelected.getId());
+            currentSubjectId = subjectModelSelected.getId();
+            classDetailList = findClassBySubjectId(subjectModelSelected.getId());
             System.out.println(classDetailList.size());
         }catch (Exception e){
             e.printStackTrace();
             log.error(e.getMessage());
         }
 
+    }
+
+    private List<ClassEntity> findClassBySubjectId(int id) throws Exception{
+        return classTutorialService.findClassBySubjectId(id);
     }
 
 }
