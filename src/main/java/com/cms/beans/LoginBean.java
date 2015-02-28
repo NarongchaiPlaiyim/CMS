@@ -19,6 +19,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -208,6 +209,12 @@ public class LoginBean extends Bean{
             log.error("Exception : {}", e);
             return false;
         }
+    }
+
+    public String logout(){
+        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+        SecurityContextHolder.clearContext();
+        return "loggedOut";
     }
 
     public void test(){
