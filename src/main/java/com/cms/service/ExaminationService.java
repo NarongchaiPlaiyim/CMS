@@ -2,6 +2,7 @@ package com.cms.service;
 
 import com.cms.model.dao.ExaminationDAO;
 import com.cms.model.db.ExaminationModel;
+import com.cms.model.db.SubjectModel;
 import com.cms.utils.Utils;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,10 +15,10 @@ import java.util.List;
 public class ExaminationService extends Service {
     @Resource private ExaminationDAO examinationDAO;
 
-    public List<ExaminationModel> getList(){
+    public List<ExaminationModel> getList(SubjectModel model){
         List<ExaminationModel> examinationModelList = Utils.getEmptyList();
         try {
-            examinationModelList = examinationDAO.findAll();
+            examinationModelList = examinationDAO.findBySubject(model);
         } catch (Exception e) {
             log.debug("Exception error load : ", e);
         }

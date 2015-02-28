@@ -12,7 +12,6 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
-import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,6 +32,7 @@ public class ExaminationBean extends Bean {
     private final List<String> ACADEMICYEAR = Utils.getAcademicYear();
     private final List<String> EXAMTYPE = Utils.getExamType();
 
+    private boolean flagBtnAdd = true;
     @PostConstruct
     private void init(){
         examinationModel = new ExaminationModel();
@@ -42,7 +42,7 @@ public class ExaminationBean extends Bean {
     }
 
     private void onInitList(){
-        examinationModelList = examinationService.getList();
+        examinationModelList = new ArrayList<ExaminationModel>();
     }
 
     private void onLoad(){
@@ -50,12 +50,19 @@ public class ExaminationBean extends Bean {
     }
 
     public void onClickSubmit(){
+        examinationModel.setSubjectModel(subjectModelSelected);
         examinationService.create(examinationModel);
         showDialogSaved();
         init();
     }
 
     public void onClickAdd(){
-        subjectModelSelected = new SubjectModel();
+        examinationModel = new ExaminationModel();
     }
+
+    public void onClickTable(){
+        flagBtnAdd = false;
+        examinationModelList = examinationService.getList(subjectModelSelected);
+    }
+
 }
