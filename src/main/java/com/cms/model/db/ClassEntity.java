@@ -13,19 +13,19 @@ import javax.persistence.*;
 @Entity
 @Table(name = "class")
 @Proxy(lazy=false)
-public class ClassModel {
+public class ClassEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name="class_id")
-    private String classId;
+    @Column(name="class_code")
+    private String classCode;
+
+    @Column(name="class_name")
+    private String className;
 
     @Column(name="week_no")
     private int weekNo;
-
-    @Column(name="topic")
-    private String topic;
 
     @Column(name="description")
     private String description;
@@ -42,9 +42,9 @@ public class ClassModel {
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
                 .append("id", id)
-                .append("classId", classId)
+                .append("classCode", classCode)
                 .append("weekNo", weekNo)
-                .append("topic", topic)
+                .append("className", className)
                 .append("description", description)
                 .append("subjectModel", subjectModel)
                 .append("active", active)

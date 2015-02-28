@@ -30,7 +30,7 @@ public class FileUploadModel {
 
     @OneToOne
     @JoinColumn(name="class_id")
-    private ClassModel classModel;
+    private ClassEntity classModel;
 
     @OneToOne
     @JoinColumn(name="assignment_id")

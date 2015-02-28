@@ -17,8 +17,7 @@
                     <h:outputLabel value="Class"/>
                 </td>
                 <td>
-                    <!--<p:inputText style="min-width: 150px; width: 150px; max-width: 150px;"-->
-                                 <!--value="#{subjectBean.subjectModelSelected.subjectId}" />-->
+                    <h:inputText value="#{classTutorialBean.classSelected.classCode}" />
                 </td>
             </tr>
             <tr>
@@ -26,7 +25,7 @@
                     <h:outputLabel value="Topic"/>
                 </td>
                 <td>
-                    <!---->
+                    <h:inputText value="#{classTutorialBean.classSelected.className}" />
                 </td>
             </tr>
             <tr>
@@ -34,7 +33,7 @@
                     <h:outputLabel value="Description"/>
                 </td>
                 <td>
-
+                    <h:inputText value="#{classTutorialBean.classSelected.description}" />
                 </td>
             </tr>
             <tr>
@@ -42,7 +41,7 @@
                     <h:outputLabel value="Week"/>
                 </td>
                 <td>
-
+                    <h:inputText value="#{classTutorialBean.classSelected.weekNo}" />
                 </td>
             </tr>
             <tr>
@@ -58,12 +57,12 @@
                     <div style="text-align: center;"></div>
                     <p:commandButton value="#{msg.get('btn.name.submit')}"
                                      id="btnSaveHeader"
-                                     update=":msgBoxSystemMessagePanel"
+                                     update=":msgBoxSystemMessagePanel , :classTutorialForm:tutorialTable"
                                      styleClass="medium" style="#{msg.get('btn.size')}"
                                      icon="ui-icon-check"
                                      process="@form"
                                      oncomplete="PF('classTutorialDlg').hide()"
-                                     action="#{subjectBean.onSubmit()}"/>
+                                     action="#{classTutorialBean.onSaveNewTutorial()}"/>
                     <p:commandButton value="#{msg.get('btn.name.cancel')}"
                                      id="btnCancel"
                                      icon="ui-icon-cancel"
