@@ -31,7 +31,7 @@
                         <tr>
                             <td colspan="4">
                                 <p:dataTable id="tutorialTable"
-                                             scrollable="true" scrollHeight="450"
+                                             scrollable="true" scrollHeight="200"
                                              var="subjectModel"
                                              value="#{classTutorialBean.subjectModelList}"
                                              selectionMode="single"
@@ -98,14 +98,14 @@
                             <td style="min-width: 150px; width: 150px; max-width: 150px;" class="left" />
                             <td style="min-width: 150px; width: 150px; max-width: 150px;" class="left" />
                             <td style="min-width: 150px; width: 150px; max-width: 150px;" class="left" />
+                            <td style="min-width: 150px; width: 150px; max-width: 150px;" class="left" />
                         </tr>
                         <tr>
                             <td colspan="4">
                                 <p:dataTable id="tutorialTable2"
-                                             scrollable="true" scrollHeight="450"
-                                             var="subjectModel"
-                                             value="#{classTutorialBean.subjectModelList}"
-                                             selectionMode="single"
+                                             scrollable="true" scrollHeight="200"
+                                             var="examinationModel"
+                                             value="#{examinationBean.examinationModelList}"
                                              rowKey="#{subjectModel.id}"
                                              rowIndexVar="rowIndex">
                                     <p:column headerText="Exam No." style="min-width: 150px; width: 150px; max-width: 150px;" styleClass="center">
@@ -120,6 +120,13 @@
                                     <p:column headerText="Score" style="min-width: 150px; width: 150px; max-width: 150px;" styleClass="center">
 
                                     </p:column>
+                                    <p:column headerText="" style="min-width: 150px; width: 150px; max-width: 150px;" styleClass="center">
+                                        <p:commandButton icon="ui-icon-trash"
+                                                         title="Remove"
+                                                         value="#{msg.get('btn.name.view')}"
+                                                         oncomplete="PF('examinationDlg2').show()">
+                                        </p:commandButton>
+                                    </p:column>
                                 </p:dataTable>
                             </td>
                         </tr>
@@ -132,8 +139,17 @@
             <p:dialog id="examinationDialog" widgetVar="examinationDlg" header="Add Examination"
                       closable="false"
                       onShow="hideWindowsScrollBar()" onHide="showWindowsScrollBar()" resizable="false"
-                      modal="true" width="300" height="230">
+                      modal="true" width="450" height="400">
                 <ui:include src="../site/dialog/examinationDialog.xhtml"/>
+            </p:dialog>
+        </p:panel>
+
+        <p:panel id="examinationPanel2" styleClass="panel">
+            <p:dialog id="examinationDialog2" widgetVar="examinationDlg2" header="Add Examination"
+                      closable="false"
+                      onShow="hideWindowsScrollBar()" onHide="showWindowsScrollBar()" resizable="false"
+                      modal="true" width="450" height="400">
+                <ui:include src="../site/dialog/examinationDialog2.xhtml"/>
             </p:dialog>
         </p:panel>
 

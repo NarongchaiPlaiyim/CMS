@@ -4,5 +4,5 @@ import com.cms.model.db.ExaminationModel;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class ExamainationDAO extends GenericDAO<ExaminationModel, Integer>{
+public class ExaminationDAO extends GenericDAO<ExaminationModel, Integer>{
 }
