@@ -25,6 +25,9 @@ public class UserModel {
     @Column(name="username")
     private String userName;
 
+    @Column(name="name")
+    private String name;
+
     @Column(name="password")
     private String password;
 
@@ -50,6 +53,7 @@ public class UserModel {
                 .append("id", id)
                 .append("personId", personId)
                 .append("userName", userName)
+                .append("name", name)
                 .append("password", password)
                 .append("email", email)
                 .append("facebook", facebook)
