@@ -71,7 +71,8 @@
                 </td>
                 <td>
                     <p:inputText style="min-width: 150px; width: 150px; max-width: 150px;"
-                                 value="#{examinationBean.examinationModel.score}" />
+                                 value="#{examinationBean.examinationModel.score}"  onkeydown="return onKeyDownNumber(event);"
+                                 onkeypress="return onKeyPressNumber(event);"/>
                 </td>
             </tr>
             <tr>

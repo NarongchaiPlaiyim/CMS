@@ -47,7 +47,7 @@ public class RegisterSubjectService extends Service{
         List<AssignmentModel> assignmentModelList = assignmentDAO.findBySubjectId(subjectId);
 
         for (AssignmentModel assignmentModel : assignmentModelList){
-            StudentAssignmentModel assignment = studentAssignmentDAO.findByAssignmentIdAndSubjectId(assignmentModel.getId(), model.getId());
+            StudentAssignmentModel assignment = studentAssignmentDAO.findByAssignmentIdAndStudent(assignmentModel.getId(), model.getId());
 
             if (Utils.isNull(assignment)){
                 StudentAssignmentModel studentAssignmentModel = new StudentAssignmentModel();

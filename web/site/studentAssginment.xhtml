@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<f:view xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>#{msg.get('menu.student.title')}</title>
+    </h:head>
+    <h:body>
+        <p:layout fullPage="true" id="layoutPanel">
+            <p:layoutUnit id="layoutTop" position="north" size="180" header="#{msg.get('header.north')}" collapsible="true" style="border: 0">
+                <ui:insert name="header">
+                    <ui:include src="#{msg.get('include.header')}"/>
+                </ui:insert>
+            </p:layoutUnit>
+            <p:layoutUnit id="layoutLeft" position="west" size="#{msg.get('layoutLeft.size')}" header="#{msg.get('header.west')}" collapsible="true" style="border: 0">
+                <ui:include src="#{msg.get('include.menu')}"/>
+            </p:layoutUnit>
+
+            <p:layoutUnit id="layoutCenter" position="center" header="#{msg.get('menu.student.title')}" >
+                <h:form id="studentAssginmentBaneForm">
+                   <p:panel style="border: 0">
+                       <p:dataTable id="subjectTable"
+                                    rows="7" paginator="true" var="subject"
+                                    selection="#{studentAssginmentBane.subjectModel}"
+                                    selectionMode="single"
+                                    value="#{studentAssginmentBane.subjectModelList}"
+                                    rowKey="#{subject.id}"
+                                    rowIndexVar="rowIndex">
+                           <p:ajax event="rowSelect" update=":studentAssginmentBaneForm:studentAssginmentBaneTable" listener="#{studentAssginmentBane.onClickTable}"/>
+                           <p:column headerText="No" style="min-width: 20px; width: 20px; max-width: 20px;" styleClass="center">
+                               <h:outputText value="#{rowIndex+1}"  />
+                           </p:column>
+                           <p:column headerText="Subject ID" style="min-width: 80px; width: 80px; max-width: 80px;" styleClass="center">
+                               <h:outputText value="#{subject.subjectCode}"  />
+                           </p:column>
+                           <p:column headerText="Subject Name" style="min-width: 80px; width: 80px; max-width: 80px;" styleClass="center">
+                               <h:outputText value="#{subject.subjectName}"  />
+                           </p:column>
+                       </p:dataTable>
+                   </p:panel>
+                   <p:panel style="border: 0">
+                       <p:dataTable id="studentAssginmentBaneTable"
+                                    rows="7" paginator="true" var="assginment"
+                                    value="#{studentAssginmentBane.studentAssignmentModelList}"
+                                    rowKey="#{subject.id}"
+                                    rowIndexVar="rowIndex">
+                           <p:column headerText="No" style="min-width: 15px; width: 15px; max-width: 15px;" styleClass="center">
+                               <h:outputText value="#{rowIndex+1}" style="word-wrap:break-word;"/>
+                           </p:column>
+                           <p:column headerText="Assignment ID" style="min-width: 80px; width: 80px; max-width: 80px;" styleClass="center">
+                               <h:outputText value="#{assginment.assignmentModel.assignmentNo}" style="word-wrap:break-word;"/>
+                           </p:column>
+                           <p:column headerText="Description" style="min-width: 250px; width: 250px; max-width: 250px;" styleClass="center">
+                               <h:outputText value="#{assginment.assignmentModel.description}" style="word-wrap:break-word;" />
+                           </p:column>
+                           <p:column headerText="Submit" style="min-width: 30px; width: 30px; max-width: 30px; text-align: center" styleClass="center">
+                               <p:selectBooleanCheckbox value="#{assginment.submitStatus}" style="word-wrap:break-word;"/>
+                           </p:column>
+                           <p:column headerText="Score" style="min-width: 50px; width: 50px; max-width: 50px; text-align: center" styleClass="right">
+                               <h:outputText value="#{assginment.score}" style="word-wrap:break-word;" />
+                           </p:column>
+                           <p:column headerText="Upload" style="min-width: 15px; width: 15px; max-width: 15px; text-align: center" styleClass="center">
+                               <p:commandButton process="@this"
+                                                icon="ui-icon-circle-arrow-n"
+                                                update=":fileAssignmentDlgForm"
+                                                oncomplete="PF('addfileDlg').show()"
+                                                action="#{studentAssginmentBane.onSelectFile()}">
+                                   <f:setPropertyActionListener value="#{assginment.id}" target="#{studentAssginmentBane.studentAssignmentId}"/>
+                               </p:commandButton>
+                           </p:column>
+                       </p:dataTable>
+                       <p:panel style="border: 0">
+                           <div style="text-align: center;">
+                               <p:commandButton value="#{msg.get('btn.name.save')}"
+                                                action="#{studentAssginmentBane.onSave()}"
+                                                update=":msgBoxSystemMessagePanel"
+                                                styleClass="medium" style="#{msg.get('btn.size')}"
+                                                icon="ui-icon-plusthick"/>
+                           </div>
+                       </p:panel>
+                   </p:panel>
+                </h:form>
+            </p:layoutUnit>
+        </p:layout>
+
+        <p:panel id="msgBoxSystemMessagePanel" style="border: 0">
+            <p:confirmDialog id="msgBoxSystemMessageDialog" widgetVar="msgBoxSystemMessageDlg" width="#{msg.get('dialog.message.size')}" closable="false"
+                             header="#{studentAssginmentBane.messageHeader}" message="#{studentAssginmentBane.message}" >
+                <div style="text-align: right">
+                    <p:commandButton value="#{msg.get('btn.name.ok')}"
+                                     process="@this"
+                                     update=":studentAssginmentBaneForm"
+                                     icon="ui-icon-check"
+                                     styleClass="medium" style="#{msg.get('btn.size')}"
+                                     oncomplete="PF('msgBoxSystemMessageDlg').hide();"/>
+                </div>
+            </p:confirmDialog>
+        </p:panel>
+
+        <p:panel id="addfilePanel" styleClass="panel">
+            <p:dialog id="addfileDialog" widgetVar="addfileDlg" header="Add File"
+                      closable="false"
+                      onShow="hideWindowsScrollBar()" onHide="showWindowsScrollBar()" resizable="false"
+                      modal="true" width="350">
+                <ui:include src="../site/dialog/fileAssignment.xhtml"/>
+            </p:dialog>
+        </p:panel>
+
+        <p:panel id="addFilePanel" styleClass="panel">
+            <p:dialog id="addFileDialog" widgetVar="uploadDlg" header="Add File"
+                      closable="false"
+                      onShow="hideWindowsScrollBar()" onHide="showWindowsScrollBar()" resizable="false"
+                      modal="true" width="600">
+                <ui:include src="../site/dialog/uploadAssignmentStudent.xhtml"/>
+            </p:dialog>
+        </p:panel>
+
+    </h:body>
+</f:view>
+</html>

@@ -33,8 +33,11 @@ public class StudentAssignmentModel {
     @Column(name="score")
     private BigDecimal score;
 
-    @Column(name="upload_assignment")
-    private String uploadAssignment;
+    @Column(name="location")
+    private String location;
+
+    @Column(name="filename")
+    private String filename;
 
     @Column(name="active", nullable=false, columnDefinition="int default 1")
     private int active = 1;
@@ -48,7 +51,8 @@ public class StudentAssignmentModel {
                 .append("assignmentModel", assignmentModel)
                 .append("submitStatus", submitStatus)
                 .append("score", score)
-                .append("uploadAssignment", uploadAssignment)
+                .append("location", location)
+                .append("filename", filename)
                 .append("active", active)
                 .toString();
     }

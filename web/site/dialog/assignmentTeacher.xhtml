@@ -24,7 +24,7 @@
                 <h:outputText value="#{studentAssignment.userModel.userName}" style="word-wrap:break-word;"/>
             </p:column>
             <p:column headerText="Submit" style="min-width: 50px; width: 50px; max-width: 50px; text-align: center" styleClass="center">
-                <p:selectBooleanCheckbox value="#{studentAssignment.submitStatus}"/>
+                <p:selectBooleanCheckbox value="#{studentAssignment.submitStatus}" disabled="true"/>
             </p:column>
             <p:column headerText="Score" style="min-width: 50px; width: 50px; max-width: 50px;" styleClass="center">
                 <p:cellEditor>
@@ -33,7 +33,7 @@
                 </p:cellEditor>
             </p:column>
             <p:column headerText="Download" style="min-width: 80px; width: 80px; max-width: 80px; text-align: center" styleClass="center">
-                <p:commandButton value="Download" process="@this"/>
+                <p:commandButton icon="ui-icon-circle-arrow-s" process="@this"/>
             </p:column>
         </p:dataTable>
 
