@@ -24,4 +24,14 @@ public class StudentService extends Service {
         }
         return examinationModelList;
     }
+
+    public List<EnrollModel> getList(SubjectModel model, String semester, String year){
+        List<EnrollModel> examinationModelList = Utils.getEmptyList();
+        try {
+            examinationModelList = enrollDAO.findBySubject(model, semester, year);
+        } catch (Exception e) {
+            log.debug("Exception error load : ", e);
+        }
+        return examinationModelList;
+    }
 }

@@ -29,4 +29,13 @@ public class EnrollDAO extends GenericDAO<EnrollModel, Integer> {
         return Utils.safetyList(getCriteria().add(Restrictions.eq("subjectModel", model))
                 .add(Restrictions.eq("active", 1)).list());
     }
+
+    public List<EnrollModel> findBySubject(SubjectModel model, String semester, String year) throws Exception {
+        return Utils.safetyList(getCriteria()
+                .add(Restrictions.eq("subjectModel", model))
+                .add(Restrictions.eq("active", 1))
+                .add(Restrictions.eq("subjectModel.semester", semester))
+                .add(Restrictions.eq("subjectModel.year", year))
+                .list());
+    }
 }
