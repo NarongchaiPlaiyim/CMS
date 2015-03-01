@@ -11,7 +11,6 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
-import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Getter
@@ -40,5 +39,6 @@ public class StudentBean extends Bean {
 
     public void onClickTable(){
         enrollModelList = studentService.getList(subjectModelSelected);
+        log.debug("-------- : {}", enrollModelList.size());
     }
 }

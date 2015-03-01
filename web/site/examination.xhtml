@@ -39,7 +39,7 @@
                                              rowKey="#{subjectModel.id}"
                                              rowIndexVar="rowIndex">
                                     <p:ajax event="rowSelect"
-                                            update=":examinationForm:tutorialTable2, :examinationForm:addBtn"
+                                            update=":examinationForm:examTable, :examinationForm:addBtn"
                                             listener="#{examinationBean.onClickTable()}"/>
                                     <p:column headerText="No" style="min-width: 20px; width: 20px; max-width: 20px;" styleClass="center">
                                         <h:outputText value="#{rowIndex+1}"/>
@@ -89,7 +89,7 @@
                         </tr>
                         <tr>
                             <td colspan="4">
-                                <p:dataTable id="tutorialTable2"
+                                <p:dataTable id="examTable"
                                              rows="7" paginator="true"
                                              var="examinationModel"
                                              value="#{examinationBean.examinationModelList}"
@@ -123,8 +123,8 @@
                                     <p:column headerText="" style="min-width: 30px; width: 30px; max-width: 30px; text-align: center" styleClass="center">
                                         <p:commandButton icon="ui-icon-trash"
                                                          process="@this"
-                                                         action="#{examinationBean.preDelete()}"
-                                                         update=":confirmPanel"
+                                                         update=":confirmDeleteDialog"
+                                                         oncomplete="PF('confirmDeleteDlg').show()"
                                                          title="Remove">
                                             <f:setPropertyActionListener value="#{examinationModel.id}" target="#{examinationBean.examId}"/>
                                         </p:commandButton>
@@ -176,26 +176,36 @@
             </p:dialog>
         </p:panel>
 
-        <p:panel id="confirmPanel" style="border: 0">
-            <p:confirmDialog id="confirmDialog" widgetVar="confirmDlg" width="#{msg.get('dialog.message.size')}"
-                             closable="false"
-                             header="#{examinationBean.messageHeader}" message="#{examinationBean.message}" >
-                <div style="text-align: right">
-                    <p:commandButton value="#{msg.get('btn.name.ok')}" action="#{examinationBean.onClickDelete()}"
-                                     process="@this" update=":msgBoxSystemMessagePanel"
-                                     styleClass="medium" style="#{msg.get('btn.size')}"
-                                     icon="ui-icon-check"
-                                     onstart="PF('bui').block()"
-                                     oncomplete="PF('confirmDlg').hide(); PF('bui').unblock()"/>
-                    <p:commandButton value="#{msg.get('btn.name.cancel')}"
-                                     process="@this"
-                                     update=":examinationForm"
-                                     styleClass="medium" style="#{msg.get('btn.size')}"
-                                     icon="ui-icon-cancel"
-                                     oncomplete="PF('confirmDlg').hide()"/>
-                </div>
-            </p:confirmDialog>
-        </p:panel>
+        <!--<p:panel id="confirmPanel" style="border: 0">-->
+            <!--<p:confirmDialog id="confirmDialog" widgetVar="confirmDlg" width="#{msg.get('dialog.message.size')}"-->
+                             <!--closable="false"-->
+                             <!--header="#{examinationBean.messageHeader}" message="#{examinationBean.message}" >-->
+                <!--<div style="text-align: right">-->
+                    <!--<p:commandButton value="#{msg.get('btn.name.ok')}" action="#{examinationBean.onClickDelete()}"-->
+                                     <!--process="@this" update=":msgBoxSystemMessagePanel"-->
+                                     <!--styleClass="medium" style="#{msg.get('btn.size')}"-->
+                                     <!--icon="ui-icon-check"-->
+                                     <!--onstart="PF('bui').block()"-->
+                                     <!--oncomplete="PF('confirmDlg').hide(); PF('bui').unblock()"/>-->
+                    <!--<p:commandButton value="#{msg.get('btn.name.cancel')}"-->
+                                     <!--process="@this"-->
+                                     <!--update=":examinationForm"-->
+                                     <!--styleClass="medium" style="#{msg.get('btn.size')}"-->
+                                     <!--icon="ui-icon-cancel"-->
+                                     <!--oncomplete="PF('confirmDlg').hide()"/>-->
+                <!--</div>-->
+            <!--</p:confirmDialog>-->
+        <!--</p:panel>-->
+
+        <ui:include src="../site/dialog/confirmDlg.xhtml">
+            <ui:param name="id" value="confirmDeleteDialog"/>
+            <ui:param name="name" value="confirmDeleteDlg"/>
+            <ui:param name="message" value="Do you really want to Delete this?"/>
+            <ui:param name="formId" value="frmConfirmDeleteClass"/>
+            <ui:param name="controller" value="#{examinationBean}"/>
+            <ui:param name="action" value="onClickDelete"/>
+            <ui:param name="update" value=":examinationForm:examTable"/>
+        </ui:include>
 
     </h:body>
 </f:view>
