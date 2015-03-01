@@ -37,7 +37,7 @@ public class ClassTutorialBean extends Bean {
 
     @PostConstruct
     private void init(){
-        subjectModelSelected = new SubjectModel();
+//        subjectModelSelected = new SubjectModel();
         classDetailList = new ArrayList<ClassEntity>();
         onload();
     }
