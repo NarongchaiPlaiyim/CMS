@@ -40,9 +40,7 @@ public class ClassTutorialService extends Service {
         if(null == entity){
             throw new Exception("entity can't be null!");
         }
-
         SubjectModel subjectModel = subjectDAO.findByID(entity.getSubjectModel().getId());
-
         entity.setSubjectModel(subjectModel);
         entity.setActive(1);
         classDao.persist(entity);

@@ -35,8 +35,10 @@
                                              var="subjectModel"
                                              value="#{classTutorialBean.subjectModelList}"
                                              selectionMode="single"
+                                             selection="#{classTutorialBean.subjectModelSelected}"
                                              rowKey="#{subjectModel.id}"
                                              rowIndexVar="rowIndex">
+                                    <p:ajax event="rowSelect" listener="#{classTutorialBean.selectData}" update=":classTutorialForm:tutorialTable"/>
                                     <p:column headerText="No" style="min-width: 20px; width: 20px; max-width: 20px;" styleClass="center">
                                         <h:outputText value="#{rowIndex+1}"/>
                                     </p:column>
@@ -98,10 +100,11 @@
                                               <h:outputText value="#{classModel.weekNo}"  />
                                     </p:column>
                                     <p:column headerText="" style="min-width: 150px; width: 150px; max-width: 150px;" styleClass="center">
+
                                         <p:commandButton value="#{msg.get('btn.name.delete')}"
-                                                         action="#{classTutorialBean.onDeleteNewTutorial}"
-                                                         update="@form, :classTruorialDialogForm"
+                                                         update=":classTutorialForm"
                                                          styleClass="medium" style="#{msg.get('btn.size')}"
+                                                         onclick="PF('confirmDeleteClassDlg').show()"
                                                          icon="ui-icon-plusthick">
                                             <f:setPropertyActionListener value="#{classModel}" target="#{classTutorialBean.classSelected}"/>
                                                 </p:commandButton>
@@ -144,6 +147,16 @@
                 <ui:include src="../site/dialog/studentDialog.xhtml"/>
             </p:dialog>
         </p:panel>
+
+        <ui:include src="../site/dialog/confirmDlg.xhtml">
+            <ui:param name="id" value="confirmDeleteClassDialog"/>
+            <ui:param name="name" value="confirmDeleteClassDlg"/>
+            <ui:param name="message" value="Do you really want to Delete this?"/>
+            <ui:param name="formId" value="frmConfirmDeleteClass"/>
+            <ui:param name="controller" value="#{classTutorialBean}"/>
+            <ui:param name="action" value="onDeleteNewTutorial"/>
+            <ui:param name="update" value=":classTutorialForm:tutorialTable"/>
+        </ui:include>
 
     </h:body>
 </f:view>
