@@ -30,6 +30,7 @@ public class ClassTutorialBean extends Bean {
     private int currentSubjectId;
 
 
+
     @PostConstruct
     private void init(){
         classDetailList = new ArrayList<ClassEntity>();
@@ -57,9 +58,9 @@ public class ClassTutorialBean extends Bean {
 
     }
 
-    public void goToChat(){
+    public void goToChat(int classId){
         HttpSession session = FacesUtil.getSession(true);
-        session.setAttribute("asd", "");
+        session.setAttribute("chatClassId", classId);
         FacesUtil.redirect("/site/chat.xhtml");
     }
 

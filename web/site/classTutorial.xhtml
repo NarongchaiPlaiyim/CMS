@@ -100,7 +100,7 @@
                         </p:column>
                         <p:column headerText="" style="min-width: 15px; width: 15px; max-width: 15px; text-align: center" styleClass="center">
                             <p:commandButton value="classBoard"
-                                             action="#{classTutorialBean.goToChat}"
+                                             action="#{classTutorialBean.goToChat(classModel.id)}"
                                              update=""
                                              styleClass="medium" style="#{msg.get('btn.size')}"
                                              icon="ui-icon-plusthick"/>
