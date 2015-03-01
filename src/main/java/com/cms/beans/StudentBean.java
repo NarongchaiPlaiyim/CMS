@@ -23,7 +23,6 @@ public class StudentBean extends Bean {
     @ManagedProperty("#{studentService}") private StudentService studentService;
     private List<SubjectModel> subjectModelList;
     private SubjectModel subjectModelSelected;
-    private final List<String> SEMESTER = Utils.getSemester();
     private final List<String> ACADEMICYEAR = Utils.getAcademicYear();
 
     private final List<String> SEMESTER = Utils.getSemester();
