@@ -32,10 +32,10 @@ public class UploadService extends Service {
     private AssignmentDAO assignmentDAO;
 
     public void processUpload(FileUploadModel model , UploadedFile file,FileType fileType,int idType) throws Exception{
-        log.debug("processUpload!");
+        log.debug("processUpload()");
         String generateFileName = generateFileName(file.getFileName(),fileType);
         log.debug("generateFilename : {}",generateFileName);
-        upLoadFile(file,generateFileName,fileType);
+        upLoadFile(file,generateFileName);
 
         switch (fileType){
             case FILE_CLASS : model.setClassModel(classDAO.findByID(idType));   break;
@@ -47,7 +47,15 @@ public class UploadService extends Service {
         fileUploadDAO.persist(model);
     }
 
-    private void upLoadFile(UploadedFile file ,String fileName,FileType fileType) throws Exception {
+    public void processDownLoad()throws Exception{
+        log.debug("processDownLoad()");
+    }
+
+    public void processDelete()throws Exception{
+        log.debug("processDelete()");
+    }
+
+    private void upLoadFile(UploadedFile file ,String fileName) throws Exception {
 
         if(null == file){
             throw new Exception("file is null!");
