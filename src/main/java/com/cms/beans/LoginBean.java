@@ -56,6 +56,8 @@ public class LoginBean extends Bean{
     private List<UserModel> teacherList;
     private UserModel userModel;
     private UserModel userModelSelected;
+
+
     @PostConstruct
     private void init(){
 //        if(!Utils.isNull(SecurityContextHolder.getContext().getAuthentication())){

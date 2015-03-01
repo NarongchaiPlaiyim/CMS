@@ -5,7 +5,7 @@
         xmlns:h="http://java.sun.com/jsf/html"
         xmlns:p="http://primefaces.org/ui">
     <h:form>
-        <p:slideMenu style="max-width: 160px; min-width: 160px">
+        <p:slideMenu style="max-width: 160px; min-width: 160px" rendered="#{loginBean.teacherFlag}">
             <p:menuitem value="#{msg.get('menu.subject.title')}" icon="ui-icon-disk" outcome="#{msg.get('menu.subject.url')}"/>
             <p:separator/>
             <p:menuitem value="#{msg.get('menu.class.tutorial.title')}" icon="ui-icon-disk" outcome="#{msg.get('menu.class.tutorial.url')}"/>
@@ -13,6 +13,10 @@
             <p:menuitem value="#{msg.get('menu.assignment.title')}" icon="ui-icon-disk" outcome="#{msg.get('menu.assignment.url')}"/>
             <p:separator/>
             <p:menuitem value="#{msg.get('menu.examination.title')}" icon="ui-icon-disk" outcome="#{msg.get('menu.examination.url')}"/>
+        </p:slideMenu>
+
+        <p:slideMenu style="max-width: 160px; min-width: 160px" rendered="#{loginBean.studentFlag}">
+
         </p:slideMenu>
 
         <p:commandButton id="btnLogout"

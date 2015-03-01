@@ -7,6 +7,7 @@ import com.cms.service.SubjectService;
 import com.cms.service.security.UserDetail;
 import com.cms.utils.AttributeName;
 import com.cms.utils.FacesUtil;
+import com.cms.utils.MessageDialog;
 import com.cms.utils.Utils;
 import lombok.Getter;
 import lombok.Setter;
@@ -45,10 +46,10 @@ public class SubjectBean extends Bean {
         subjectModelSelected = new SubjectModel();
         HttpSession httpSession = FacesUtil.getSession(true);
         userDetail = (UserDetail) httpSession.getAttribute(AttributeName.USER_DETAIL.getName());
-        onload();
+        onLoad();
     }
 
-    private void onload(){
+    private void onLoad(){
         subjectModelList = subjectService.getSubject(userDetail.getId());
         HttpSession session = FacesUtil.getSession(true);
         session.setAttribute("subjectModelList", subjectModelList);
@@ -60,14 +61,14 @@ public class SubjectBean extends Bean {
 
     public void onClickDelete(){
         subjectService.remove(subjectId);
-        onload();
+        onLoad();
     }
 
     public void onSubmit(){
         log.debug("subjectModelSelected : [{}]", subjectModelSelected.toString());
         subjectService.save(subjectModelSelected, userDetail.getId());
         showDialogSaved();
-        onload();
+        onLoad();
     }
 
     public void studentInSubject(){
