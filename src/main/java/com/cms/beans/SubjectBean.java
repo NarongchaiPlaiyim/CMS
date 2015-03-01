@@ -59,7 +59,6 @@ public class SubjectBean extends Bean {
     public void onClickDelete(){
         subjectService.remove(subjectId);
         onload();
-        showDialog("Remove", "Sucess", "msgBoxSystemMessageDlg");
     }
 
     public void onSubmit(){
