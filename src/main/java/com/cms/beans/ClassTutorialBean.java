@@ -37,7 +37,6 @@ public class ClassTutorialBean extends Bean {
 
     @PostConstruct
     private void init(){
-//        subjectModelSelected = new SubjectModel();
         classDetailList = new ArrayList<ClassEntity>();
         onload();
     }
@@ -47,6 +46,22 @@ public class ClassTutorialBean extends Bean {
 
         subjectModelList = (List<SubjectModel>) session.getAttribute("subjectModelList");
     }
+
+    public void selectData(SelectEvent event){
+        System.out.println(";llll   "+subjectModelSelected.toString());
+        log.debug("selectData() : {}",subjectModelSelected.toString());
+
+        try {
+            currentSubjectId = subjectModelSelected.getId();
+            classDetailList = findClassBySubjectId(subjectModelSelected.getId());
+            System.out.println(classDetailList.size());
+        }catch (Exception e){
+            e.printStackTrace();
+            log.error(e.getMessage());
+        }
+
+    }
+
 
     public void onClickAdd(){
         log.debug("onClickAdd()");
@@ -78,23 +93,6 @@ public class ClassTutorialBean extends Bean {
             e.printStackTrace();
             log.error(e.getMessage());
         }
-    }
-
-
-
-    public void selectData(SelectEvent event){
-        System.out.println(";llll   "+subjectModelSelected.toString());
-        log.debug("selectData() : {}",subjectModelSelected.toString());
-
-        try {
-            currentSubjectId = subjectModelSelected.getId();
-            classDetailList = findClassBySubjectId(subjectModelSelected.getId());
-            System.out.println(classDetailList.size());
-        }catch (Exception e){
-            e.printStackTrace();
-            log.error(e.getMessage());
-        }
-
     }
 
     private List<ClassEntity> findClassBySubjectId(int id) throws Exception{
