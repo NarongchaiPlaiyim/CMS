@@ -51,8 +51,9 @@
                                     <p:column headerText="Description" style="min-width: 300px; width: 300px; max-width: 300px;" styleClass="center">
                                         <h:outputText value="#{subjectModel.description}" style="word-wrap:break-word;"/>
                                     </p:column>
-                                    <p:column headerText="No. of student" style="min-width: 100px; width: 100px; max-width: 100px; text-align: center" styleClass="center">
-                                        <p:commandButton value="View" process="@this"
+                                    <p:column style="min-width: 15px; width: 15px; max-width: 15px; text-align: center" styleClass="center">
+                                        <p:commandButton process="@this"
+                                                         icon="ui-icon-search"
                                                          update=":studentDlgForm"
                                                          oncomplete="PF('studentDlg').show()"
                                                          action="#{subjectBean.studentInSubject}">
@@ -127,7 +128,7 @@
                                      update="classTutorialForm"
                                      icon="ui-icon-check"
                                      styleClass="medium" style="#{msg.get('btn.size')}"
-                                     oncomplete="PF('msgBoxSystemMessageDlg').hide()"/>
+                                     oncomplete="PF('msgBoxSystemMessageDlg').hide(); PF('classTutorialDlg').hide()"/>
                 </div>
             </p:confirmDialog>
         </p:panel>

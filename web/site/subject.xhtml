@@ -61,15 +61,14 @@
                                     <p:column headerText="Description" style="min-width: 300px; width: 300px; max-width: 300px;" styleClass="center">
                                         <h:outputText value="#{subjectModel.description}" style="word-wrap:break-word;"/>
                                     </p:column>
-                                    <p:column headerText="No. of student" style="min-width: 100px; width: 100px; max-width: 100px; text-align: center" styleClass="center">
-                                        <p:commandButton value="View" process="@this"
+                                    <p:column headerText="" style="min-width: 30px; width: 30px; max-width: 30px; text-align: center" styleClass="center">
+                                        <p:commandButton process="@this"
+                                                         icon="ui-icon-search"
                                                          update=":studentDlgForm"
                                                          oncomplete="PF('studentDlg').show()"
                                                          action="#{subjectBean.studentInSubject}">
                                             <f:setPropertyActionListener value="#{subjectModel.id}" target="#{subjectBean.subjectId}"/>
                                         </p:commandButton>
-                                    </p:column>
-                                    <p:column headerText="" style="min-width: 15px; width: 15px; max-width: 15px; text-align: center" styleClass="center">
                                         <p:commandButton icon="ui-icon-trash"
                                                          process="@this"
                                                          update=":confirmDeleteDialog"

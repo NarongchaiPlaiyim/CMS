@@ -72,8 +72,6 @@ public class ClassTutorialBean extends Bean {
             classTutorialService.save(classSelected);
             classDetailList = findClassBySubjectId(currentSubjectId);
             showDialogSaved();
-
-
         }catch (Exception e){
             e.printStackTrace();
             log.error(e.getMessage());
