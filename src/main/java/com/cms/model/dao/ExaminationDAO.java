@@ -11,6 +11,7 @@ import java.util.List;
 @Repository
 public class ExaminationDAO extends GenericDAO<ExaminationModel, Integer>{
     public List<ExaminationModel> findBySubject(SubjectModel model) throws Exception {
-        return Utils.safetyList(getCriteria().add(Restrictions.eq("subjectModel", model)).add(Restrictions.eq("active", 1)).list());
+        return Utils.safetyList(getCriteria().add(Restrictions.eq("subjectModel", model))
+                .add(Restrictions.eq("active", 1)).list());
     }
 }

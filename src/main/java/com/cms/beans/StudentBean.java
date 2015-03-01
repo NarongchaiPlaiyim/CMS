@@ -1,5 +1,6 @@
 package com.cms.beans;
 
+import com.cms.model.db.EnrollModel;
 import com.cms.model.db.SubjectModel;
 import com.cms.service.StudentService;
 import com.cms.utils.FacesUtil;
@@ -23,9 +24,13 @@ public class StudentBean extends Bean {
     private List<SubjectModel> subjectModelList;
     private SubjectModel subjectModelSelected;
 
+    private List<EnrollModel> enrollModelList;
+    private EnrollModel enrollModel;
+
     @PostConstruct
     private void init(){
         subjectModelSelected = new SubjectModel();
+        enrollModel = new EnrollModel();
         onLoad();
     }
 
@@ -34,7 +39,6 @@ public class StudentBean extends Bean {
     }
 
     public void onClickTable(){
-//        flagBtnAdd = false;
-//        examinationModelList = examinationService.getList(subjectModelSelected);
+        enrollModelList = studentService.getList(subjectModelSelected);
     }
 }
