@@ -20,7 +20,7 @@ public class RegisterSubjectBean extends Bean{
     @ManagedProperty("#{registerSubjectService}") private RegisterSubjectService registerSubjectService;
     private List<SubjectModel> subjectModelList;
 
-    private int subjectId;
+    private SubjectModel subjectId;
 
     @PostConstruct
     public void onCreation(){
@@ -33,8 +33,14 @@ public class RegisterSubjectBean extends Bean{
         subjectInTeacher();
     }
 
-
     private void subjectInTeacher(){
+        //TeacherId
         subjectModelList =  registerSubjectService.findByTeacherId(4);
+    }
+
+    public void onRegister(){
+        //StudentId
+        registerSubjectService.register(subjectId, 8);
+        showDialogSaved();
     }
 }

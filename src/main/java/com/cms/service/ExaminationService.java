@@ -21,7 +21,7 @@ public class ExaminationService extends Service {
     public List<ExaminationModel> getList(SubjectModel model){
         List<ExaminationModel> examinationModelList = Utils.getEmptyList();
         try {
-            examinationModelList = examinationDAO.findBySubject(model);
+            examinationModelList = examinationDAO.findBySubject(model.getId());
         } catch (Exception e) {
             log.debug("Exception error load : ", e);
         }
