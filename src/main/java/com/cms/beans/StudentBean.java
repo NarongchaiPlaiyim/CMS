@@ -26,6 +26,11 @@ public class StudentBean extends Bean {
     private final List<String> SEMESTER = Utils.getSemester();
     private final List<String> ACADEMICYEAR = Utils.getAcademicYear();
 
+    private final List<String> SEMESTER = Utils.getSemester();
+    private final List<String> YEAR = Utils.getAcademicYear();
+    private String semesterSelected;
+    private String yearSelected;
+
     private List<EnrollModel> enrollModelList;
     private EnrollModel enrollModel;
 
@@ -45,6 +50,11 @@ public class StudentBean extends Bean {
 
     public void onClickTable(){
         enrollModelList = studentService.getList(subjectModelSelected);
-        log.debug("-------- : {}", enrollModelList.size());
+    }
+
+    public void onClickSearch(){
+        System.out.println("onClickSearch");
+        enrollModelList = studentService.getList(subjectModelSelected, semesterSelected, yearSelected);
+        System.out.println(enrollModelList.size());
     }
 }

@@ -51,8 +51,9 @@
                                     <p:column headerText="Description" style="min-width: 300px; width: 300px; max-width: 300px;" styleClass="center">
                                         <h:outputText value="#{subject.description}" style="word-wrap:break-word;"/>
                                     </p:column>
-                                    <p:column headerText="No. of student" style="min-width: 100px; width: 100px; max-width: 100px; text-align: center" styleClass="center">
-                                        <p:commandButton value="View" process="@this"
+                                    <p:column style="min-width: 15px; width: 15px; max-width: 15px; text-align: center" styleClass="center">
+                                        <p:commandButton process="@this"
+                                                         icon="ui-icon-search"
                                                          update=":studentDlgForm"
                                                          oncomplete="PF('studentDlg').show()"
                                                          action="#{subjectBean.studentInSubject}">
@@ -107,18 +108,14 @@
                                     <p:column headerText="Semester" style="min-width: 150px; width: 150px; max-width: 150px;" styleClass="center">
                                         <h:outputText value="#{assignment.semester}" style="word-wrap:break-word;"/>
                                     </p:column>
-                                    <p:column headerText="View" style="min-width: 150px; width: 150px; max-width: 150px; text-align: center" styleClass="center">
+                                    <p:column headerText="" style="min-width: 40px; width: 40px; max-width: 40px; text-align: center" styleClass="center">
                                         <p:commandButton id="btnAdd"
-                                                         value="#{msg.get('btn.name.add')}"
                                                          oncomplete="PF('studentAssignmetDlg').show()"
                                                          action="#{assignmentBean.loadStudentAssignment()}"
                                                          update=":assignmentTeacherDialogForm"
-                                                         styleClass="medium" style="#{msg.get('btn.size')}"
                                                          icon="ui-icon-plusthick">
                                             <f:setPropertyActionListener value="#{assignment.id}" target="#{assignmentBean.assignmentId}"/>
                                         </p:commandButton>
-                                    </p:column>
-                                    <p:column headerText="" style="min-width: 15px; width: 15px; max-width: 15px; text-align: center" styleClass="center">
                                         <p:commandButton icon="ui-icon-trash"
                                                          process="@this"
                                                          update=":confirmDeleteDialog"

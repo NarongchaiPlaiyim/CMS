@@ -53,8 +53,9 @@
                                     <p:column headerText="Description" style="min-width: 300px; width: 300px; max-width: 300px;" styleClass="center">
                                         <h:outputText value="#{subjectModel.description}" style="word-wrap:break-word;"/>
                                     </p:column>
-                                    <p:column headerText="No. of student" style="min-width: 80px; width: 80px; max-width: 80px; text-align: center" styleClass="center">
-                                        <p:commandButton value="View" process="@this"
+                                    <p:column style="min-width: 15px; width: 15px; max-width: 15px; text-align: center" styleClass="center">
+                                        <p:commandButton rocess="@this"
+                                                         icon="ui-icon-search"
                                                          update=":studentDlgForm"
                                                          oncomplete="PF('studentDlg').show()"
                                                          action="#{subjectBean.studentInSubject}">
@@ -79,60 +80,44 @@
                         </div>
                     </p:panel>
 
-                    <table border="0" class="content_table_form">
-                        <tr >
-                            <td style="min-width: 150px; width: 150px; max-width: 150px;" class="left" />
-                            <td style="min-width: 150px; width: 150px; max-width: 150px;" class="left" />
-                            <td style="min-width: 150px; width: 150px; max-width: 150px;" class="left" />
-                            <td style="min-width: 150px; width: 150px; max-width: 150px;" class="left" />
-                            <td style="min-width: 150px; width: 150px; max-width: 150px;" class="left" />
-                        </tr>
-                        <tr>
-                            <td colspan="4">
-                                <p:dataTable id="examTable"
-                                             rows="7" paginator="true"
-                                             var="examinationModel"
-                                             value="#{examinationBean.examinationModelList}"
-                                             rowKey="#{subjectModel.id}"
-                                             rowIndexVar="rowIndex">
-                                    <p:column headerText="No" style="min-width: 20px; width: 20px; max-width: 20px;" styleClass="center">
-                                        <h:outputText value="#{rowIndex+1}"/>
-                                    </p:column>
-                                    <p:column headerText="Exam No." style="min-width: 150px; width: 150px; max-width: 150px;" styleClass="center">
-                                        <h:outputText value="#{examinationModel.examNo}" style="word-wrap:break-word;"/>
-                                    </p:column>
-                                    <p:column headerText="Exam Content" style="min-width: 150px; width: 150px; max-width: 150px;" styleClass="center">
-                                        <h:outputText value="#{examinationModel.examContent}" style="word-wrap:break-word;"/>
-                                    </p:column>
-                                    <p:column headerText="Type" style="min-width: 150px; width: 150px; max-width: 150px;" styleClass="center">
-                                        <h:outputText value="#{examinationModel.examType}" style="word-wrap:break-word;"/>
-                                    </p:column>
-                                    <p:column headerText="Score" style="min-width: 150px; width: 150px; max-width: 150px;" styleClass="center">
-                                        <h:outputText value="#{examinationModel.score}" style="word-wrap:break-word;"/>
-                                    </p:column>
-                                    <p:column headerText="Add Score" style="min-width: 100px; width: 100px; max-width: 100px; text-align: center" styleClass="center">
-                                        <p:commandButton icon="ui-icon-trash"
-                                                         title="View"
-                                                         value="#{msg.get('btn.name.view')}"
-                                                         update=":examinationDialogForm2"
-                                                         action="#{examinationBean.getStudentExam()}"
-                                                         oncomplete="PF('examinationDlg2').show()">
-                                            <f:setPropertyActionListener value="#{examinationModel.id}" target="#{examinationBean.examId}"/>
-                                        </p:commandButton>
-                                    </p:column>
-                                    <p:column headerText="" style="min-width: 15px; width: 15px; max-width: 15px; text-align: center" styleClass="center">
-                                        <p:commandButton icon="ui-icon-trash"
-                                                         process="@this"
-                                                         update=":confirmDeleteDialog"
-                                                         oncomplete="PF('confirmDeleteDlg').show()"
-                                                         title="Remove">
-                                            <f:setPropertyActionListener value="#{examinationModel.id}" target="#{examinationBean.examId}"/>
-                                        </p:commandButton>
-                                    </p:column>
-                                </p:dataTable>
-                            </td>
-                        </tr>
-                    </table>
+                    <p:dataTable id="examTable"
+                                 rows="7" paginator="true"
+                                 var="examinationModel"
+                                 value="#{examinationBean.examinationModelList}"
+                                 rowKey="#{subjectModel.id}"
+                                 rowIndexVar="rowIndex">
+                        <p:column headerText="No" style="min-width: 20px; width: 20px; max-width: 20px;" styleClass="center">
+                            <h:outputText value="#{rowIndex+1}"/>
+                        </p:column>
+                        <p:column headerText="Exam No." style="min-width: 150px; width: 150px; max-width: 150px;" styleClass="center">
+                            <h:outputText value="#{examinationModel.examNo}" style="word-wrap:break-word;"/>
+                        </p:column>
+                        <p:column headerText="Exam Content" style="min-width: 150px; width: 150px; max-width: 150px;" styleClass="center">
+                            <h:outputText value="#{examinationModel.examContent}" style="word-wrap:break-word;"/>
+                        </p:column>
+                        <p:column headerText="Type" style="min-width: 150px; width: 150px; max-width: 150px;" styleClass="center">
+                            <h:outputText value="#{examinationModel.examType}" style="word-wrap:break-word;"/>
+                        </p:column>
+                        <p:column headerText="Score" style="min-width: 150px; width: 150px; max-width: 150px;" styleClass="center">
+                            <h:outputText value="#{examinationModel.score}" style="word-wrap:break-word;"/>
+                        </p:column>
+                        <p:column style="min-width: 40px; width: 40px; max-width: 40px; text-align: center" styleClass="center">
+                            <p:commandButton icon="ui-icon-plusthick"
+                                             title="View"
+                                             update=":examinationDialogForm2"
+                                             action="#{examinationBean.getStudentExam()}"
+                                             oncomplete="PF('examinationDlg2').show()">
+                                <f:setPropertyActionListener value="#{examinationModel.id}" target="#{examinationBean.examId}"/>
+                            </p:commandButton>
+                            <p:commandButton icon="ui-icon-trash"
+                                             process="@this"
+                                             update=":confirmDeleteDialog"
+                                             oncomplete="PF('confirmDeleteDlg').show()"
+                                             title="Remove">
+                                <f:setPropertyActionListener value="#{examinationModel.id}" target="#{examinationBean.examId}"/>
+                            </p:commandButton>
+                        </p:column>
+                    </p:dataTable>
                 </h:form>
             </p:layoutUnit>
         </p:layout>
