@@ -1,6 +1,7 @@
 package com.cms.model.dao;
 
 import com.cms.model.db.EnrollModel;
+import com.cms.model.db.SubjectModel;
 import com.cms.utils.Utils;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
@@ -22,5 +23,10 @@ public class EnrollDAO extends GenericDAO<EnrollModel, Integer> {
         }
 
         return enrollModelList;
+    }
+
+    public List<EnrollModel> findBySubject(SubjectModel model) throws Exception {
+        return Utils.safetyList(getCriteria().add(Restrictions.eq("subjectModel", model))
+                .add(Restrictions.eq("active", 1)).list());
     }
 }

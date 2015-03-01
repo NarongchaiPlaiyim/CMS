@@ -83,14 +83,14 @@
     <p:dialog id="teacherRegisterDialog" widgetVar="teacherRegisterDlg" header="Teacher Register"
               onShow="hideWindowsScrollBar()" onHide="showWindowsScrollBar()" resizable="false"
               closable="false"
-              modal="true" width="300" height="230">
+              modal="true" width="350">
         <ui:include src="site/dialog/teacherRegisterDialog.xhtml"/>
     </p:dialog>
 
     <p:dialog id="studentRegisterDialog" widgetVar="studentRegisterDlg" header="Student Register"
               onShow="hideWindowsScrollBar()" onHide="showWindowsScrollBar()" resizable="false"
               closable="false"
-              modal="true" width="300" height="230">
+              modal="true" width="350">
         <ui:include src="site/dialog/studenRegisterDialog.xhtml"/>
     </p:dialog>
 
@@ -106,7 +106,7 @@
                                  update=":frmLogin"
                                  icon="ui-icon-check"
                                  styleClass="medium" style="#{msg.get('btn.size')}"
-                                 oncomplete="PF('msgBoxSystemMessageDlg').hide()"/>
+                                 oncomplete="PF('msgBoxSystemMessageDlg').hide(); PF('teacherRegisterDlg').hide(); PF('studentRegisterDlg').hide()"/>
             </div>
         </p:confirmDialog>
     </p:panel>
