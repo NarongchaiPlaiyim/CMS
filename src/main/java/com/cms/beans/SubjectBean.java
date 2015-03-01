@@ -41,7 +41,7 @@ public class SubjectBean extends Bean {
         subjectModelSelected = new SubjectModel();
         HttpSession httpSession = FacesUtil.getSession(true);
         userDetail = (UserDetail) httpSession.getAttribute(AttributeName.USER_DETAIL.getName());
-        onload();
+        onLoad();
     }
 
     private void onLoad(){
