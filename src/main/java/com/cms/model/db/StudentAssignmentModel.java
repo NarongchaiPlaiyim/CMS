@@ -27,7 +27,7 @@ public class StudentAssignmentModel {
     @JoinColumn(name="assignment_id")
     private AssignmentModel assignmentModel;
 
-    @Column(name="submit_status")
+    @Column(name="submit_status", nullable=false, columnDefinition="int default 0")
     private boolean submitStatus;
 
     @Column(name="score")

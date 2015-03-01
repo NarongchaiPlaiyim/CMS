@@ -38,4 +38,18 @@ public class EnrollDAO extends GenericDAO<EnrollModel, Integer> {
                 .add(Restrictions.eq("subjectModel.year", year))
                 .list());
     }
+
+    public EnrollModel findByStudentIdAndSubjectId(int subjectId, int studentId){
+        EnrollModel enrollModel = null;
+        try {
+            Criteria criteria = getCriteria();
+            criteria.add(Restrictions.eq("subjectModel.id", subjectId));
+            criteria.add(Restrictions.eq("userModel.id", studentId));
+            enrollModel = (EnrollModel) criteria.uniqueResult();
+        } catch (Exception e) {
+            log.debug("Exception error findByStudentIdAndSubjectId");
+        }
+
+        return enrollModel;
+    }
 }
