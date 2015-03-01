@@ -66,14 +66,9 @@ public class AssignmentBean extends Bean{
         assignmentModels = assignmentService.getAssignment(subjectModelSelected.getId());
     }
 
-    public void preDelete(){
-        showDialog(MessageDialog.WARNING.getMessageHeader(), "Are you want to delete?", "confirmDlg");
-    }
-
     public void onClickDelete(){
         assignmentService.remove(assignmentId);
         getAssignmentBySubject();
-        showDialog("Remove", "Sucess", "msgBoxSystemMessageDlg");
     }
 
     public void loadStudentAssignment(){

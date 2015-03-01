@@ -27,7 +27,7 @@ public class AssignmentService extends Service{
     public void save(AssignmentModel model, int subjectId){
         try {
             SubjectModel subjectModel = subjectDAO.findByID(subjectId);
-//            model.setSubjectModel(subjectModel);
+            model.setSubjectModel(subjectModel);
             assignmentDAO.persist(model);
         } catch (Exception e) {
             log.debug("Exception error save : ", e);

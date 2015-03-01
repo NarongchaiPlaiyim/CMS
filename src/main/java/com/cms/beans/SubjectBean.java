@@ -52,14 +52,9 @@ public class SubjectBean extends Bean {
         subjectModelSelected = new SubjectModel();
     }
 
-    public void preDelete(){
-        showDialog(MessageDialog.WARNING.getMessageHeader(), "Are you want to delete?", "confirmDlg");
-    }
-
     public void onClickDelete(){
         subjectService.remove(subjectId);
         onload();
-        showDialog("Remove", "Sucess", "msgBoxSystemMessageDlg");
     }
 
     public void onSubmit(){

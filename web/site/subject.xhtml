@@ -73,8 +73,8 @@
                                         <p:commandButton icon="ui-icon-trash"
                                                          value="Delete"
                                                          process="@this"
-                                                         action="#{subjectBean.preDelete()}"
-                                                         update=":confirmPanel"
+                                                         update=":confirmDeleteDialog"
+                                                         oncomplete="PF('confirmDeleteDlg').show()"
                                                          title="Delete">
                                             <f:setPropertyActionListener value="#{subjectModel.id}" target="#{subjectBean.subjectId}"/>
                                         </p:commandButton>
@@ -117,26 +117,36 @@
             </p:confirmDialog>
         </p:panel>
 
-        <p:panel id="confirmPanel" style="border: 0">
-            <p:confirmDialog id="confirmDialog" widgetVar="confirmDlg" width="#{msg.get('dialog.message.size')}"
-                             closable="false"
-                             header="#{subjectBean.messageHeader}" message="#{subjectBean.message}" >
-                <div style="text-align: right">
-                    <p:commandButton value="#{msg.get('btn.name.ok')}" action="#{subjectBean.onClickDelete()}"
-                                     process="@this" update=":msgBoxSystemMessagePanel"
-                                     styleClass="medium" style="#{msg.get('btn.size')}"
-                                     icon="ui-icon-check"
-                                     onstart="PF('bui').block()"
-                                     oncomplete="PF('confirmDlg').hide(); PF('bui').unblock()"/>
-                    <p:commandButton value="#{msg.get('btn.name.cancel')}"
-                                     process="@this"
-                                     update=":subjectForm"
-                                     styleClass="medium" style="#{msg.get('btn.size')}"
-                                     icon="ui-icon-cancel"
-                                     oncomplete="PF('confirmDlg').hide()"/>
-                </div>
-            </p:confirmDialog>
-        </p:panel>
+        <!--<p:panel id="confirmPanel" style="border: 0">-->
+            <!--<p:confirmDialog id="confirmDialog" widgetVar="confirmDlg" width="#{msg.get('dialog.message.size')}"-->
+                             <!--closable="false"-->
+                             <!--header="#{subjectBean.messageHeader}" message="#{subjectBean.message}" >-->
+                <!--<div style="text-align: right">-->
+                    <!--<p:commandButton value="#{msg.get('btn.name.ok')}" action="#{subjectBean.onClickDelete()}"-->
+                                     <!--process="@this" update=":confirmDeleteDialog"-->
+                                     <!--styleClass="medium" style="#{msg.get('btn.size')}"-->
+                                     <!--icon="ui-icon-check"-->
+                                     <!--onstart="PF('bui').block()"-->
+                                     <!--oncomplete="PF('confirmDlg').hide(); PF('bui').unblock()"/>-->
+                    <!--<p:commandButton value="#{msg.get('btn.name.cancel')}"-->
+                                     <!--process="@this"-->
+                                     <!--update=":subjectForm"-->
+                                     <!--styleClass="medium" style="#{msg.get('btn.size')}"-->
+                                     <!--icon="ui-icon-cancel"-->
+                                     <!--oncomplete="PF('confirmDlg').hide()"/>-->
+                <!--</div>-->
+            <!--</p:confirmDialog>-->
+        <!--</p:panel>-->
+
+        <ui:include src="../site/dialog/confirmDlg.xhtml">
+            <ui:param name="id" value="confirmDeleteDialog"/>
+            <ui:param name="name" value="confirmDeleteDlg"/>
+            <ui:param name="message" value="Do you really want to Delete this?"/>
+            <ui:param name="formId" value="frmConfirmDeleteClass"/>
+            <ui:param name="controller" value="#{subjectBean}"/>
+            <ui:param name="action" value="onClickDelete"/>
+            <ui:param name="update" value=":subjectForm:subjectTable"/>
+        </ui:include>
 
     </h:body>
 </f:view>

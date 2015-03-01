@@ -81,7 +81,6 @@ public class ExaminationBean extends Bean {
     public void onClickDelete(){
         examinationService.remove(examId);
         onClickTable();
-        showDialog("Remove", "Sucess", "msgBoxSystemMessageDlg");
     }
 
     public void onEditScore(){
