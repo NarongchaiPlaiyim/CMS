@@ -37,7 +37,15 @@ public class ExaminationBean extends Bean {
     private int examId;
 
     private boolean flagBtnAdd = true;
+
     @PostConstruct
+    public void onCreation(){
+        log.debug("onCreation().");
+        if(preLoad() && isAuthorizeTeacher()){
+            init();
+        }
+    }
+
     private void init(){
         examinationModel = new ExaminationModel();
         subjectModelSelected = new SubjectModel();

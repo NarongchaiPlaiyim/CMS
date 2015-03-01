@@ -36,6 +36,13 @@ public class StudentBean extends Bean {
     private String term;
 
     @PostConstruct
+    public void onCreation(){
+        log.debug("onCreation().");
+        if(preLoad() && isAuthorizeTeacher()){
+            init();
+        }
+    }
+
     private void init(){
         subjectModelSelected = new SubjectModel();
         enrollModel = new EnrollModel();

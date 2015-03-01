@@ -14,8 +14,14 @@
         <from-view-id>/login.xhtml</from-view-id>
         <navigation-case>
             <from-action>#{loginBean.login}</from-action>
-            <from-outcome>PASS</from-outcome>
-            <to-view-id>/site/main.xhtml</to-view-id>
+            <from-outcome>TEACHER</from-outcome>
+            <to-view-id>/site/subject.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-action>#{loginBean.login}</from-action>
+            <from-outcome>STUDENT</from-outcome>
+            <to-view-id>/site/registerSubject.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
     </navigation-rule>

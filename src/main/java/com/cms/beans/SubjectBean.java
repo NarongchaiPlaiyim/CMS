@@ -36,6 +36,13 @@ public class SubjectBean extends Bean {
     private List<EnrollModel> enrollModelList;
 
     @PostConstruct
+    public void onCreation(){
+        log.debug("onCreation().");
+        if(preLoad() && isAuthorizeTeacher()){
+            init();
+        }
+    }
+
     private void init(){
         subjectModelList = new ArrayList<SubjectModel>();
         subjectModelSelected = new SubjectModel();

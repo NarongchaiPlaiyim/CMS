@@ -60,22 +60,15 @@ public class LoginBean extends Bean{
 
     @PostConstruct
     private void init(){
-//        if(!Utils.isNull(SecurityContextHolder.getContext().getAuthentication())){
-//            userDetail = (UserDetail) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//            map = (Map<String, String>) FacesUtil.getSession(false).getAttribute(AttributeName.AUTHORIZE.getName());
-//        } else {
-//            log.debug("[NEW] CODE MAP");
-//            map = new HashMap<String, String>();
-//        }
         initTeacher();
         typeRadio = TEACHER;
+        userModelSelected = new UserModel();
     }
 
     private void initTeacher(){
         teacherFlag = true;
         studentFlag = false;
         onClickRegister();
-        initTeacherList();
     }
 
     private void initStudent(){
@@ -162,12 +155,16 @@ public class LoginBean extends Bean{
                     httpSession.setAttribute(AttributeName.USER_DETAIL.getName(), getUserDetail());
 //                httpSession.setAttribute(AttributeName.AUTHORIZE.getName(), loginService.getAuthorize());
                     log.debug("-- userDetail[{}]", userDetail.toString());
-                    return "PASS";
+                    teacherFlag = true;
+                    studentFlag = false;
+                    System.out.println(teacherFlag+" : "+studentFlag);
+                    return "TEACHER";
                 }
             }
             showDialog(MessageDialog.WARNING.getMessageHeader(), "Invalid username or password.");
             return "loggedOut";
         } else {
+
             if(!Utils.isZero(getUserName().length()) && !Utils.isZero(getPassword().length())) {
                 if(loginService.isUserExist(getUserName(), getPassword(), Type.STUDENT)){
                     try {
@@ -196,7 +193,10 @@ public class LoginBean extends Bean{
                     httpSession.setAttribute(AttributeName.USER_DETAIL.getName(), getUserDetail());
 //                httpSession.setAttribute(AttributeName.AUTHORIZE.getName(), loginService.getAuthorize());
                     log.debug("-- userDetail[{}]", userDetail.toString());
-                    return "PASS";
+                    teacherFlag = false;
+                    studentFlag = true;
+                    System.out.println(teacherFlag+" : "+studentFlag);
+                    return "STUDENT";
                 }
             }
             showDialog(MessageDialog.WARNING.getMessageHeader(), "Invalid username or password.");
@@ -217,16 +217,6 @@ public class LoginBean extends Bean{
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
         SecurityContextHolder.clearContext();
         return "loggedOut";
-    }
-
-    public void test(){
-        System.out.println("test");
-//        barcodePrintingService.insert();
-//        try {
-////            loginService.getStaffModel()
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-//        }
     }
 
 }

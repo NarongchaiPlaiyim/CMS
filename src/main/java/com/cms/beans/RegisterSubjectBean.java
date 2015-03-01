@@ -23,6 +23,12 @@ public class RegisterSubjectBean extends Bean{
     private int subjectId;
 
     @PostConstruct
+    public void onCreation(){
+        log.debug("onCreation().");
+        if(preLoad() && isAuthorizeStudent()){
+            init();
+        }
+    }
     private void init(){
         subjectInTeacher();
     }

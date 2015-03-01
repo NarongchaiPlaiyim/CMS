@@ -38,6 +38,13 @@ public class AssignmentBean extends Bean{
     private int assignmentId;
 
     @PostConstruct
+    public void onCreation(){
+        log.debug("onCreation().");
+        if(preLoad() && isAuthorizeTeacher()){
+            init();
+        }
+    }
+
     private void init(){
         subjectModelSelected = new SubjectModel();
         onload();

@@ -33,8 +33,14 @@ public class ChatBean extends Bean {
     private UploadedFile uploadedFile;
     private int thisClassId;
 
-
     @PostConstruct
+    public void onCreation(){
+        log.debug("onCreation().");
+        if(preLoad() && isAuthorizeTeacher()){
+            init();
+        }
+    }
+
     private void init(){
         onload();
     }

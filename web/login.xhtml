@@ -37,11 +37,11 @@
                     <h:outputLabel id="teacherIdLabel" for="teacherId" value="Teacher ID"
                                    rendered="#{loginBean.studentFlag}"/>
 
-                    <p:selectOneMenu id="teacherId" value="#{loginBean.userModelSelected}" rendered="#{loginBean.studentFlag}">
+                    <p:selectOneMenu id="teacherId" value="#{loginBean.teacherId}" rendered="#{loginBean.studentFlag}">
                         <f:selectItem itemLabel="- Please Select -" itemValue=""/>
                         <f:selectItems value="#{loginBean.teacherList}"
                                        var="c"
-                                       itemLabel="#{c.personId}" itemValue="#{c.id}" />
+                                       itemLabel="#{c.personId}" itemValue="#{c.personId}" />
                     </p:selectOneMenu>
 
                     <p:commandButton id="loginBtn" value="#{msg.get('btn.name.login')}"
