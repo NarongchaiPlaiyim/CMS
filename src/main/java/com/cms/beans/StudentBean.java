@@ -4,6 +4,7 @@ import com.cms.model.db.EnrollModel;
 import com.cms.model.db.SubjectModel;
 import com.cms.service.StudentService;
 import com.cms.utils.FacesUtil;
+import com.cms.utils.Utils;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -22,9 +23,14 @@ public class StudentBean extends Bean {
     @ManagedProperty("#{studentService}") private StudentService studentService;
     private List<SubjectModel> subjectModelList;
     private SubjectModel subjectModelSelected;
+    private final List<String> SEMESTER = Utils.getSemester();
+    private final List<String> ACADEMICYEAR = Utils.getAcademicYear();
 
     private List<EnrollModel> enrollModelList;
     private EnrollModel enrollModel;
+
+    private String year;
+    private String term;
 
     @PostConstruct
     private void init(){
