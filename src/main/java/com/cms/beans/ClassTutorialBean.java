@@ -33,7 +33,6 @@ public class ClassTutorialBean extends Bean {
     private ClassEntity classSelected;
     private SubjectModel subjectModelSelected;
     private int currentSubjectId;
-    private UploadedFile uploadedFile;
 
 
     @PostConstruct
@@ -60,12 +59,7 @@ public class ClassTutorialBean extends Bean {
     public void onSaveNewTutorial(){
         log.debug("onSaveNewTutorial : [{}]", classSelected.toString());
         try {
-
-
-            classTutorialService.uploadFile(uploadedFile, getUser());
-
             classTutorialService.save(classSelected);
-
             classDetailList = findClassBySubjectId(currentSubjectId);
 
 
