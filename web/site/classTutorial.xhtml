@@ -98,6 +98,11 @@
                             <h:outputText value="#{classModel.weekNo}"  />
                         </p:column>
                         <p:column headerText="" style="min-width: 15px; width: 15px; max-width: 15px; text-align: center" styleClass="center">
+                            <p:commandButton value="classBoard"
+                                             action="#{classTutorialBean.goToChat}"
+                                             update=""
+                                             styleClass="medium" style="#{msg.get('btn.size')}"
+                                             icon="ui-icon-plusthick"/>
                             <p:commandButton update=":classTutorialForm"
                                              onclick="PF('confirmDeleteClassDlg').show()"
                                              icon="ui-icon-trash">

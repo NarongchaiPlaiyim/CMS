@@ -57,6 +57,11 @@ public class ClassTutorialBean extends Bean {
 
     }
 
+    public void goToChat(){
+        HttpSession session = FacesUtil.getSession(true);
+        session.setAttribute("asd", "");
+        FacesUtil.redirect("/site/chat.xhtml");
+    }
 
     public void onClickAdd(){
         log.debug("onClickAdd()");
