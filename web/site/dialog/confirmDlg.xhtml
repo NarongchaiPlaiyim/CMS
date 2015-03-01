@@ -7,20 +7,20 @@
                      showEffect="fade" hideEffect="fade" width="380" height="30"
                      severity="alert" widgetVar="#{name}">
         <h:form id="#{formId}" style="width: 100%">
-            <div class="onRight" >
+            <div style="text-align: center">
                 <p:commandButton value="OK"
                                  id="cnfBtn"
-                                 style="width: 100px;margin-left: 40%"
+                                 style="width: 100px;"
                                  action="#{controller[action]}"
                                  update="#{update}"
                                  oncomplete="PF('#{name}').hide();"/>
                 <p:commandButton value="Cancel" onclick="PF('#{name}').hide();"
                                  style="width: 100px"/>
             </div>
-            <p:blockUI block="#{formId}" trigger="cnfBtn"  >
-                LOADING<br />
-                <p:graphicImage value="/resources/img/ajaxloadingbar.gif"/>
-            </p:blockUI>
+            <!--<p:blockUI block="#{formId}" trigger="cnfBtn"  >-->
+                <!--LOADING<br />-->
+                <!--<p:graphicImage value="/resources/img/ajaxloadingbar.gif"/>-->
+            <!--</p:blockUI>-->
         </h:form>
     </p:confirmDialog>
 
