@@ -35,6 +35,7 @@
                                              var="subjectModel"
                                              value="#{classTutorialBean.subjectModelList}"
                                              selectionMode="single"
+                                             selection="#{classTutorialBean.subjectModelSelected}"
                                              rowKey="#{subjectModel.id}"
                                              rowIndexVar="rowIndex">
                                     <p:ajax event="rowSelect" listener="#{classTutorialBean.selectData}" update=":classTutorialForm:tutorialTable"/>
@@ -101,7 +102,7 @@
                                     <p:column headerText="" style="min-width: 150px; width: 150px; max-width: 150px;" styleClass="center">
 
                                         <p:commandButton value="#{msg.get('btn.name.delete')}"
-                                                         update=":confirmDeleteClassDlg"
+                                                         update=":classTutorialForm"
                                                          styleClass="medium" style="#{msg.get('btn.size')}"
                                                          onclick="PF('confirmDeleteClassDlg').show()"
                                                          icon="ui-icon-plusthick">
@@ -154,7 +155,7 @@
             <ui:param name="formId" value="frmConfirmDeleteClass"/>
             <ui:param name="controller" value="#{classTutorialBean}"/>
             <ui:param name="action" value="onDeleteNewTutorial"/>
-            <ui:param name="update" value=":classTruorialDialogForm"/>
+            <ui:param name="update" value=":classTutorialForm:tutorialTable"/>
         </ui:include>
 
     </h:body>
