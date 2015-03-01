@@ -99,6 +99,11 @@
                             <h:outputText value="#{classModel.weekNo}"  />
                         </p:column>
                         <p:column headerText="" style="min-width: 15px; width: 15px; max-width: 15px; text-align: center" styleClass="center">
+                            <p:commandButton value="classBoard"
+                                             action="#{classTutorialBean.goToChat(classModel.id)}"
+                                             update=""
+                                             styleClass="medium" style="#{msg.get('btn.size')}"
+                                             icon="ui-icon-plusthick"/>
                             <p:commandButton update=":classTutorialForm"
                                              onclick="PF('confirmDeleteClassDlg').show()"
                                              icon="ui-icon-trash">
@@ -136,7 +141,7 @@
         <p:panel id="studentPanel" styleClass="panel">
             <p:dialog id="studentDialog" widgetVar="studentDlg" header="View Student In Subject"
                       onShow="hideWindowsScrollBar()" onHide="showWindowsScrollBar()" resizable="false"
-                      modal="true" width="380">
+                      modal="true" width="780">
                 <ui:include src="../site/dialog/studentDialog.xhtml"/>
             </p:dialog>
         </p:panel>

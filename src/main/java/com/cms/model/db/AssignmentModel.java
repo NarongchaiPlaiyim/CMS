@@ -18,9 +18,6 @@ public class AssignmentModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name="assignment_id")
-    private String assignmentId;
-
     @Column(name="assignment_no")
     private String assignmentNo;
 
@@ -45,7 +42,6 @@ public class AssignmentModel {
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
                 .append("id", id)
-                .append("assignmentId", assignmentId)
                 .append("assignmentNo", assignmentNo)
                 .append("year", year)
                 .append("semester", semester)

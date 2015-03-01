@@ -18,8 +18,11 @@ public class FileUploadModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name="topic")
-    private String topic;
+    @Column(name="filename")
+    private String fileName;
+
+    @Column(name="description")
+    private String description;
 
     @Column(name="location")
     private String location;
@@ -44,7 +47,8 @@ public class FileUploadModel {
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
                 .append("id", id)
-                .append("topic", topic)
+                .append("filename", fileName)
+                .append("description", description)
                 .append("location", location)
                 .append("subjectModel", subjectModel)
                 .append("classModel", classModel)
