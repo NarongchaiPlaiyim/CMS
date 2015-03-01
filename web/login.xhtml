@@ -44,18 +44,6 @@
                                        itemLabel="#{c.personId}" itemValue="#{c.id}" />
 
                     </p:selectOneMenu>
-                    <!--<p:selectOneMenu id="warehouseMenu" value="#{palletManagement.warehouseMode.id}"-->
-                                     <!--style="#{msg.get('fix.size.200')} margin-top: 4px">-->
-
-                        <!--<f:selectItems value="#{palletManagement.warehouseModelList}"-->
-                                       <!--var="wareItem"-->
-                                       <!--itemLabel="#{wareItem.warehouseCode}"-->
-                                       <!--itemValue="#{wareItem.id}"/>-->
-                        <!--<p:ajax listener="#{palletManagement.onFind}"-->
-                                <!--update=":palletForm:palletManagementTable,-->
-                                                    <!--:palletForm:findKey,-->
-                                                    <!--:palletForm:locationMenu"/>-->
-                    <!--</p:selectOneMenu>-->
 
                     <p:commandButton id="loginBtn" value="#{msg.get('btn.name.login')}"
 
@@ -83,14 +71,14 @@
     <p:dialog id="teacherRegisterDialog" widgetVar="teacherRegisterDlg" header="Teacher Register"
               onShow="hideWindowsScrollBar()" onHide="showWindowsScrollBar()" resizable="false"
               closable="false"
-              modal="true" width="300" height="230">
+              modal="true" width="350" height="330">
         <ui:include src="site/dialog/teacherRegisterDialog.xhtml"/>
     </p:dialog>
 
     <p:dialog id="studentRegisterDialog" widgetVar="studentRegisterDlg" header="Student Register"
               onShow="hideWindowsScrollBar()" onHide="showWindowsScrollBar()" resizable="false"
               closable="false"
-              modal="true" width="300" height="230">
+              modal="true" width="350" height="330">
         <ui:include src="site/dialog/studenRegisterDialog.xhtml"/>
     </p:dialog>
 
