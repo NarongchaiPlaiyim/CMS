@@ -77,8 +77,8 @@
                                 <h:outputLabel value="Academic Year"/>
                             </td>
                             <td colspan="2">
-                                <p:selectOneMenu value="#{subjectBean.subjectModelSelected.semester}">
-                                    <f:selectItems value="#{subjectBean.SEMESTER}" />
+                                <p:selectOneMenu value="#{studentBean.yearSelected}">
+                                    <f:selectItems value="#{studentBean.YEAR}" />
                                 </p:selectOneMenu>
                             </td>
                         </tr>
@@ -88,19 +88,17 @@
                                 <h:outputLabel value="Semester"/>
                             </td>
                             <td >
-                                <p:selectOneMenu value="#{subjectBean.subjectModelSelected.semester}">
-                                    <f:selectItems value="#{subjectBean.SEMESTER}" />
+                                <p:selectOneMenu value="#{studentBean.semesterSelected}">
+                                    <f:selectItems value="#{studentBean.SEMESTER}" />
                                 </p:selectOneMenu>
                             </td>
                             <td >
                                 <div style="text-align: center;">
-                                    <p:commandButton value="#{msg.get('btn.name.search')}"
-                                                     update=":msgBoxSystemMessagePanel"
+                                    <p:commandButton value="#{msg.get('btn.name.submit')}"
+                                                     update=":studentForm:studentTable2"
                                                      styleClass="medium" style="#{msg.get('btn.size')}"
-                                                     icon="ui-icon-check"
                                                      process="@form"
-                                                     oncomplete="PF('examinationDlg').hide()"
-                                                     action="#{subjectBean.onSubmit()}"/>
+                                                     action="#{studentBean.onClickSearch}"/>
                                 </div>
 
                             </td>

@@ -4,6 +4,7 @@ import com.cms.model.db.EnrollModel;
 import com.cms.model.db.SubjectModel;
 import com.cms.service.StudentService;
 import com.cms.utils.FacesUtil;
+import com.cms.utils.Utils;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -23,6 +24,11 @@ public class StudentBean extends Bean {
     private List<SubjectModel> subjectModelList;
     private SubjectModel subjectModelSelected;
 
+    private final List<String> SEMESTER = Utils.getSemester();
+    private final List<String> YEAR = Utils.getAcademicYear();
+    private String semesterSelected;
+    private String yearSelected;
+
     private List<EnrollModel> enrollModelList;
     private EnrollModel enrollModel;
 
@@ -39,6 +45,11 @@ public class StudentBean extends Bean {
 
     public void onClickTable(){
         enrollModelList = studentService.getList(subjectModelSelected);
-        log.debug("-------- : {}", enrollModelList.size());
+    }
+
+    public void onClickSearch(){
+        System.out.println("onClickSearch");
+        enrollModelList = studentService.getList(subjectModelSelected, semesterSelected, yearSelected);
+        System.out.println(enrollModelList.size());
     }
 }
