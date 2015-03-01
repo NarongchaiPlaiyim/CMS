@@ -6,19 +6,14 @@ import com.cms.service.ClassTutorialService;
 import com.cms.utils.FacesUtil;
 import lombok.Getter;
 import lombok.Setter;
-import org.apache.commons.io.FilenameUtils;
 import org.primefaces.event.SelectEvent;
-import org.primefaces.model.UploadedFile;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.servlet.http.HttpSession;
-import java.io.FileNotFoundException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Getter
@@ -76,6 +71,7 @@ public class ClassTutorialBean extends Bean {
         try {
             classTutorialService.save(classSelected);
             classDetailList = findClassBySubjectId(currentSubjectId);
+            showDialogSaved();
 
 
         }catch (Exception e){
