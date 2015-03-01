@@ -4,6 +4,7 @@ import com.cms.model.db.EnrollModel;
 import com.cms.model.db.SubjectModel;
 import com.cms.service.SubjectService;
 import com.cms.service.security.UserDetail;
+import com.cms.utils.AttributeName;
 import com.cms.utils.FacesUtil;
 import com.cms.utils.Utils;
 import lombok.Getter;
@@ -37,7 +38,8 @@ public class SubjectBean extends Bean {
     private void init(){
         subjectModelList = new ArrayList<SubjectModel>();
         subjectModelSelected = new SubjectModel();
-        userDetail = getUser();
+        HttpSession httpSession = FacesUtil.getSession(true);
+        userDetail = (UserDetail) httpSession.getAttribute(AttributeName.USER_DETAIL.getName());
         onload();
     }
 
@@ -68,8 +70,6 @@ public class SubjectBean extends Bean {
     }
 
     public void onEditSubject(){
-        log.debug("---------- {}", subjectId);
         subjectModelSelected = subjectService.edit(subjectId);
-        log.debug("++++++++++++ {}", subjectModelSelected.toString());
     }
 }
