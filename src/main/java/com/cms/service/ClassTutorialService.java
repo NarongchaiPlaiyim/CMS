@@ -40,18 +40,11 @@ public class ClassTutorialService extends Service {
         classDao.persist(entity);
     }
 
-    public void deleteClassById(int id)throws Exception{
-        log.debug(" ClassTutorialService deleteClassById() id : {}",id);
-        ClassEntity entity  = classDao.findByID(id);
+    public void deleteClassById(int id)throws Exception {
+        log.debug(" ClassTutorialService deleteClassById() id : {}", id);
+        ClassEntity entity = classDao.findByID(id);
         entity.setActive(0);
         classDao.update(entity);
-    }
-
-    public void uploadFile(UploadedFile uploadedFile , UserDetail user) throws Exception{
-        log.debug("uploadFile()");
-        if(null != uploadedFile) {
-            upLoadFile(uploadedFile, user);
-        }
     }
 
 }
