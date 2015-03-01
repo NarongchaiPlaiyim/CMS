@@ -25,6 +25,15 @@
                         <p:column headerText="Student Name" style="min-width: 150px; width: 150px; max-width: 150px;" styleClass="center">
                             <h:outputText value="#{student.userModel.name}" style="word-wrap:break-word;"/>
                         </p:column>
+                        <p:column headerText="Department" style="min-width: 150px; width: 150px; max-width: 150px;" styleClass="center">
+                            <h:outputText value="#{student.userModel.department}" style="word-wrap:break-word;"/>
+                        </p:column>
+                        <p:column headerText="Year" style="min-width: 50px; width: 50px; max-width: 50px;" styleClass="center">
+                            <h:outputText value="#{student.subjectModel.year}" style="word-wrap:break-word;"/>
+                        </p:column>
+                        <p:column headerText="Semester" style="min-width: 80px; width: 80px; max-width: 80px;" styleClass="center">
+                            <h:outputText value="#{student.subjectModel.semester}" style="word-wrap:break-word;"/>
+                        </p:column>
                     </p:dataTable>
                 </td>
             </tr>

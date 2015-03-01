@@ -5,7 +5,6 @@ import com.cms.model.db.SubjectModel;
 import com.cms.service.SubjectService;
 import com.cms.service.security.UserDetail;
 import com.cms.utils.FacesUtil;
-import com.cms.utils.MessageDialog;
 import com.cms.utils.Utils;
 import lombok.Getter;
 import lombok.Setter;
@@ -66,5 +65,11 @@ public class SubjectBean extends Bean {
 
     public void studentInSubject(){
         enrollModelList = subjectService.getStudent(subjectId);
+    }
+
+    public void onEditSubject(){
+        log.debug("---------- {}", subjectId);
+        subjectModelSelected = subjectService.edit(subjectId);
+        log.debug("++++++++++++ {}", subjectModelSelected.toString());
     }
 }
