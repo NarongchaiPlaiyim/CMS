@@ -53,8 +53,9 @@
                                     <p:column headerText="Description" style="min-width: 300px; width: 300px; max-width: 300px;" styleClass="center">
                                         <h:outputText value="#{subjectModel.description}" style="word-wrap:break-word;"/>
                                     </p:column>
-                                    <p:column headerText="No. of student" style="min-width: 100px; width: 100px; max-width: 100px; text-align: center" styleClass="center">
-                                        <p:commandButton value="View" process="@this"
+                                    <p:column style="min-width: 15px; width: 15px; max-width: 15px; text-align: center" styleClass="center">
+                                        <p:commandButton process="@this"
+                                                         icon="ui-icon-search"
                                                          update=":studentDlgForm"
                                                          oncomplete="PF('studentDlg').show()"
                                                          action="#{subjectBean.studentInSubject}">
@@ -77,8 +78,8 @@
                                 <h:outputLabel value="Academic Year"/>
                             </td>
                             <td colspan="2">
-                                <p:selectOneMenu value="#{studentBean.yearSelected}">
-                                    <f:selectItems value="#{studentBean.YEAR}" />
+                                <p:selectOneMenu value="#{subjectBean.subjectModelSelected.semester}">
+                                    <f:selectItems value="#{subjectBean.SEMESTER}" />
                                 </p:selectOneMenu>
                             </td>
                         </tr>
@@ -88,17 +89,19 @@
                                 <h:outputLabel value="Semester"/>
                             </td>
                             <td >
-                                <p:selectOneMenu value="#{studentBean.semesterSelected}">
-                                    <f:selectItems value="#{studentBean.SEMESTER}" />
+                                <p:selectOneMenu value="#{subjectBean.subjectModelSelected.semester}">
+                                    <f:selectItems value="#{subjectBean.SEMESTER}" />
                                 </p:selectOneMenu>
                             </td>
                             <td >
                                 <div style="text-align: center;">
-                                    <p:commandButton value="#{msg.get('btn.name.submit')}"
-                                                     update=":studentForm:studentTable2"
+                                    <p:commandButton value="#{msg.get('btn.name.search')}"
+                                                     update=":msgBoxSystemMessagePanel"
                                                      styleClass="medium" style="#{msg.get('btn.size')}"
+                                                     icon="ui-icon-check"
                                                      process="@form"
-                                                     action="#{studentBean.onClickSearch}"/>
+                                                     oncomplete="PF('examinationDlg').hide()"
+                                                     action="#{subjectBean.onSubmit()}"/>
                                 </div>
 
                             </td>

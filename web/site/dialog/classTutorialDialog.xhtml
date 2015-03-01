@@ -14,26 +14,26 @@
             </tr>
             <tr>
                 <td>
-                    <h:outputLabel value="Class"/>
+                    <p:outputLabel value="Class"/>
                 </td>
                 <td>
-                    <h:inputText value="#{classTutorialBean.classSelected.classCode}" />
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <h:outputLabel value="Topic"/>
-                </td>
-                <td>
-                    <h:inputText value="#{classTutorialBean.classSelected.className}" />
+                    <p:inputText value="#{classTutorialBean.classSelected.classCode}" required="#{not empty param[addClass.clientId]}"/>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <h:outputLabel value="Description"/>
+                    <p:outputLabel value="Topic"/>
                 </td>
                 <td>
-                    <h:inputText value="#{classTutorialBean.classSelected.description}" />
+                    <p:inputText value="#{classTutorialBean.classSelected.className}" required="#{not empty param[addClass.clientId]}"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p:outputLabel value="Description"/>
+                </td>
+                <td>
+                    <p:inputTextarea value="#{classTutorialBean.classSelected.description}" />
                 </td>
             </tr>
             <tr>
@@ -41,26 +41,28 @@
                     <h:outputLabel value="Week"/>
                 </td>
                 <td>
-                    <h:inputText value="#{classTutorialBean.classSelected.weekNo}" />
+                    <p:inputText value="#{classTutorialBean.classSelected.weekNo}"  onkeydown="return onKeyDownNumber(event);"
+                                 onkeypress="return onKeyPressNumber(event);"/>
                 </td>
             </tr>
             <tr>
                 <td colspan="2">
-                    <div style="text-align: center;"></div>
-                    <p:commandButton value="#{msg.get('btn.name.submit')}"
-                                     id="btnSaveHeader"
-                                     update=":msgBoxSystemMessagePanel , :classTutorialForm:tutorialTable"
-                                     styleClass="medium" style="#{msg.get('btn.size')}"
-                                     icon="ui-icon-check"
-                                     process="@form"
-                                     oncomplete="PF('classTutorialDlg').hide()"
-                                     action="#{classTutorialBean.onSaveNewTutorial()}"/>
-                    <p:commandButton value="#{msg.get('btn.name.cancel')}"
-                                     id="btnCancel"
-                                     icon="ui-icon-cancel"
-                                     styleClass="medium" style="#{msg.get('btn.size')}"
-                                     process="@form"
-                                     oncomplete="PF('classTutorialDlg').hide()"/>
+                    <div style="text-align: center;">
+                        <p:commandButton value="#{msg.get('btn.name.submit')}"
+                                         id="btnSaveHeader"
+                                         update=":msgBoxSystemMessagePanel , :classTutorialForm:tutorialTable, :classTruorialDialogForm"
+                                         styleClass="medium" style="#{msg.get('btn.size')}"
+                                         icon="ui-icon-check"
+                                         binding="#{addClass}"
+                                         process="@form"
+                                         action="#{classTutorialBean.onSaveNewTutorial()}"/>
+                        <p:commandButton value="#{msg.get('btn.name.cancel')}"
+                                         id="btnCancel"
+                                         icon="ui-icon-cancel"
+                                         styleClass="medium" style="#{msg.get('btn.size')}"
+                                         process="@form"
+                                         oncomplete="PF('classTutorialDlg').hide()"/>
+                    </div>
                 </td>
             </tr>
         </table>

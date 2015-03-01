@@ -6,17 +6,11 @@ import com.cms.model.db.ClassEntity;
 import com.cms.model.db.SubjectModel;
 import com.cms.service.security.UserDetail;
 import com.cms.utils.Utils;
-import org.apache.commons.io.FilenameUtils;
 import org.primefaces.model.UploadedFile;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.*;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 @Component
@@ -50,7 +44,7 @@ public class ClassTutorialService extends Service {
         log.debug(" ClassTutorialService deleteClassById() id : {}",id);
         ClassEntity entity  = classDao.findByID(id);
         entity.setActive(0);
-        classDao.persist(entity);
+        classDao.update(entity);
     }
 
     public void uploadFile(UploadedFile uploadedFile , UserDetail user) throws Exception{
