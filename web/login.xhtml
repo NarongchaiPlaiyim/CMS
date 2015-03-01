@@ -42,7 +42,6 @@
                         <f:selectItems value="#{loginBean.teacherList}"
                                        var="c"
                                        itemLabel="#{c.personId}" itemValue="#{c.id}" />
-
                     </p:selectOneMenu>
                     <!--<p:selectOneMenu id="warehouseMenu" value="#{palletManagement.warehouseMode.id}"-->
                                      <!--style="#{msg.get('fix.size.200')} margin-top: 4px">-->
@@ -58,7 +57,6 @@
                     <!--</p:selectOneMenu>-->
 
                     <p:commandButton id="loginBtn" value="#{msg.get('btn.name.login')}"
-
                                      update=":msgBoxSystemMessagePanel"
                                      onstart="PF('bui').block()"
                                      action="#{loginBean.login}"

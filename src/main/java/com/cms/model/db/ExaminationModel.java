@@ -19,9 +19,6 @@ public class ExaminationModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name="Exam_id")
-    private String examId;
-
     @Column(name="exam_type")
     private String examType;
 
@@ -55,7 +52,6 @@ public class ExaminationModel {
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
                 .append("id", id)
-                .append("examId", examId)
                 .append("description", description)
                 .append("score", score)
                 .append("subjectModel", subjectModel)

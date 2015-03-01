@@ -6,6 +6,7 @@ import com.cms.model.dao.UserDAO;
 import com.cms.model.db.EnrollModel;
 import com.cms.model.db.SubjectModel;
 import com.cms.model.db.UserModel;
+import com.cms.utils.Utils;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,10 +27,13 @@ public class SubjectService extends Service {
 
     public void save(SubjectModel subject, int user){
         try {
-            UserModel model = userDAO.findByID(user);
-            subject.setUserModel(model);
-            log.debug("save subject : [{}]", subject.toString());
-            subjectDAO.persist(subject);
+            if (Utils.isZero(subject.getId())){
+                UserModel model = userDAO.findByID(user);
+                subject.setUserModel(model);
+                subjectDAO.persist(subject);
+            } else {
+                subjectDAO.update(subject);
+            }
         } catch (Exception e) {
             log.debug("Exception error save : ", e);
         }
@@ -47,5 +51,14 @@ public class SubjectService extends Service {
 
     public List<EnrollModel> getStudent(int subjectId){
         return enrollDAO.findBySubjectId(subjectId);
+    }
+
+    public SubjectModel edit(int subjectId){
+        try {
+            return subjectDAO.findByID(subjectId);
+        } catch (Exception e) {
+            log.debug("Exception error edit : ", e);
+            return new SubjectModel();
+        }
     }
 }
