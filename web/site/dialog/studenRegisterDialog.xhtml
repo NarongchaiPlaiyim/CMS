@@ -18,7 +18,7 @@
                 </td>
                 <td>
                     <p:inputText style="min-width: 150px; width: 150px; max-width: 150px;"
-                                 value="#{loginBean.userModel.personId}" />
+                                 value="#{loginBean.userModel.personId}" required="#{not empty param[addStudent.clientId]}"/>
                 </td>
             </tr>
             <tr>
@@ -36,7 +36,7 @@
                 </td>
                 <td>
                     <p:inputText style="min-width: 150px; width: 150px; max-width: 150px;"
-                                 value="#{loginBean.userModel.userName}" />
+                                 value="#{loginBean.userModel.userName}" required="#{not empty param[addStudent.clientId]}"/>
                 </td>
             </tr>
             <tr>
@@ -45,7 +45,7 @@
                 </td>
                 <td>
                     <p:password style="min-width: 150px; width: 150px; max-width: 150px;"
-                                 value="#{loginBean.userModel.password}" />
+                                 value="#{loginBean.userModel.password}" required="#{not empty param[addStudent.clientId]}"/>
                 </td>
             </tr>
             <tr>
@@ -81,10 +81,10 @@
                     <div style="text-align: center;">
                         <p:commandButton value="#{msg.get('btn.name.submit')}"
                                          id="btnSaveHeader"
-                                         update=":msgBoxSystemMessagePanel"
+                                         update=":msgBoxSystemMessagePanel, :studenRegisterForm"
                                          styleClass="medium" style="#{msg.get('btn.size')}"
                                          icon="ui-icon-check"
-                                         oncomplete="PF('studentRegisterDlg').hide()"
+                                         binding="#{addStudent}"
                                          action="#{loginBean.onClickRegStudentSubmit}"/>
                         <p:commandButton value="#{msg.get('btn.name.cancel')}"
                                          id="btnCancel"
