@@ -26,4 +26,12 @@ public class FileUploadDAO extends GenericDAO<FileUploadModel, Integer>{
         criteria.addOrder(Order.asc("id"));
         return criteria.list();
     }
+
+    public List<FileUploadModel> findByAssginmentId(int id)throws Exception{
+        Criteria criteria = getCriteria();
+        criteria.add(Restrictions.eq("assignmentModel.id", id));
+        criteria.add(Restrictions.eq("active",1));
+        criteria.addOrder(Order.asc("id"));
+        return criteria.list();
+    }
 }

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<f:view xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:p="http://primefaces.org/ui">
+    <h:head>
+    </h:head>
+    <h:form id="addFileDialogForm" enctype="multipart/form-data">
+        <table border="0" class="content_table_form">
+            <tr >
+                <td style="min-width: 100px; width: 100px; max-width: 100px;" class="left" />
+                <td style="min-width: 150px; width: 150px; max-width: 150px;" class="left" />
+            </tr>
+            <tr>
+                <td>
+                    <p:outputLabel value="FileName"/>
+                </td>
+                <td>
+                    <p:inputText value="#{assignmentBean.fileUploadSelected.fileName}"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p:outputLabel value="Description"/>
+                </td>
+                <td>
+                    <p:inputTextarea value="#{assignmentBean.fileUploadSelected.description}" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <h:outputLabel value="File"/>
+                </td>
+                <td>
+                    <p:fileUpload id="file" value="#{assignmentBean.uploadedFile}"
+                                  required="false"
+                                  mode="simple"
+                                  fileLimit="1">
+                    </p:fileUpload>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div style="text-align: center;">
+                        <p:commandButton value="#{msg.get('btn.name.submit')}"
+                                         id="btnSaveHeader"
+                                         update=":assginmentAddPanel"
+                                         styleClass="medium" style="#{msg.get('btn.size')}"
+                                         icon="ui-icon-check"
+                                         ajax="false"
+                                         process="@form"
+                                         oncomplete="PF('AssignmentUploadDlg').hide()"
+                                         action="#{assignmentBean.onUploadFile()}"/>
+                        <p:commandButton value="#{msg.get('btn.name.cancel')}"
+                                         id="btnCancel"
+                                         icon="ui-icon-cancel"
+                                         styleClass="medium" style="#{msg.get('btn.size')}"
+                                         process="@form"
+                                         oncomplete="PF('AssignmentUploadDlg').hide()"/>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </h:form>
+
+</f:view>
+</html>
