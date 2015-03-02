@@ -85,6 +85,9 @@ public class AssignmentBean extends Bean{
     }
 
     public void onAddScore(){
+        for (StudentAssignmentModel model : studentAssignmentModelList){
+            log.debug("---------- {}", model.getScore());
+        }
         assignmentService.saveScore(studentAssignmentModelList);
         showDialogSaved();
     }
@@ -113,6 +116,17 @@ public class AssignmentBean extends Bean{
             assignmentService.uploadFile(fileUploadSelected, uploadedFile, assignmentId);
             onSelectFileUploadByAssignmentId();
 //            showDialogSaved();
+        }catch (Exception e){
+            e.printStackTrace();
+            log.error(e.getMessage());
+        }
+    }
+
+    public void onDeleteFile(){
+        log.debug("onDeleteFile : [{}]", fileUploadSelected.toString());
+        try {
+            assignmentService.deleteFileById(fileUploadSelected.getId());
+            onSelectFileUploadByAssignmentId();
         }catch (Exception e){
             e.printStackTrace();
             log.error(e.getMessage());

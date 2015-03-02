@@ -46,7 +46,7 @@ public class StudentAssignmentBean extends Bean{
 
     @PostConstruct
     private void init(){
-        httpSession = FacesUtil.getSession(false);
+        httpSession = FacesUtil.getSession(true);
         subjectOnload();
     }
 
@@ -73,6 +73,7 @@ public class StudentAssignmentBean extends Bean{
         log.debug("onUploadFile : [{}]", fileName);
         try {
             studentAssignmentService.uploadFile(fileName, uploadedFile, studentAssignmentId);
+            studentAssignmentModelList = studentAssignmentService.getStudentAssignment(subjectModel.getId(), studentId.getId());
 //            onSelectFileUploadBySubjectId();
 //            showDialogSaved();
         }catch (Exception e){
@@ -82,7 +83,7 @@ public class StudentAssignmentBean extends Bean{
     }
 
     public void onSelectFile(){
-        if (Utils.isNull(studentAssignmentService.getById(studentAssignmentId).getFilename()) || "".equals(studentAssignmentService.getById(studentAssignmentId).getFilename())){
+        if (Utils.isNull(studentAssignmentService.getById(studentAssignmentId).getLocation()) || "".equals(studentAssignmentService.getById(studentAssignmentId).getLocation())){
             fileName = "";
             flagUpload = false;
         } else {

@@ -46,14 +46,14 @@ public class RegisterSubjectBean extends Bean{
     }
 
     private void getAttribute(){
-        httpSession = FacesUtil.getSession(false);
-        teacher = (String) httpSession.getAttribute(AttributeName.TEACHER_ID.getName());
+        httpSession = FacesUtil.getSession(true);
+        teacher = (String) httpSession.getAttribute(AttributeName.TEACHER.getName());
         studentId = (UserDetail) httpSession.getAttribute(AttributeName.USER_DETAIL.getName());
     }
 
     private void getTeacherId(){
         teacherId = registerSubjectService.getByTeacherName(teacher);
-        httpSession.setAttribute("teacherId", teacherId);
+//        httpSession.setAttribute("teacherId", teacherId);
     }
 
     private void subjectInTeacher(){

@@ -181,7 +181,7 @@ public class LoginBean extends Bean{
                     compositeSessionAuthenticationStrategy.onAuthentication(request, httpServletRequest, httpServletResponse);
                     HttpSession httpSession = FacesUtil.getSession(false);
                     httpSession.setAttribute(AttributeName.USER_DETAIL.getName(), getUserDetail());
-                    httpSession.setAttribute(AttributeName.TEACHER_ID.getName(), getTeacherId());
+                    httpSession.setAttribute(AttributeName.TEACHER.getName(), getTeacherId());
                     log.debug("-- userDetail[{}]", userDetail.toString());
                     teacherFlag = false;
                     studentFlag = true;

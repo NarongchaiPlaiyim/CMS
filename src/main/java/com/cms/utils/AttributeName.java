@@ -5,7 +5,7 @@ import lombok.Getter;
 @Getter
 public enum AttributeName {
     USER_DETAIL("userDetail"),
-    TEACHER_ID("teacherId"),
+    TEACHER("teacher"),
     STUDENT_SUBJECT("studentSubject"),
     AUTHORIZE("authorize");
     private String name;

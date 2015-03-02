@@ -78,4 +78,10 @@ public class SubjectService extends Service {
         log.debug("findListFileByClassId() id : {}",id);
         return fileUploadDAO.findBySubjectId(id);
     }
+
+    public void deleteFileById(int id)throws Exception{
+        log.debug(" ClassTutorialService deleteFileById() id : {}",id);
+        uploadService.processDelete(id);
+
+    }
 }

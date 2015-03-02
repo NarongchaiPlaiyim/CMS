@@ -74,4 +74,10 @@ public class AssignmentService extends Service{
         log.debug("findListFileByClassId() id : {}",id);
         return fileUploadDAO.findByAssginmentId(id);
     }
+
+    public void deleteFileById(int id)throws Exception{
+        log.debug(" ClassTutorialService deleteFileById() id : {}",id);
+        uploadService.processDelete(id);
+
+    }
 }

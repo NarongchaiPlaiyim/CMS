@@ -157,6 +157,16 @@
             <ui:param name="update" value=":subjectForm:subjectTable"/>
         </ui:include>
 
+        <ui:include src="../site/dialog/confirmDlg.xhtml">
+            <ui:param name="id" value="confirmDeleteFileDialog"/>
+            <ui:param name="name" value="confirmDeleteFileDlg"/>
+            <ui:param name="message" value="Do you really want to Delete this?"/>
+            <ui:param name="formId" value="frmConfirmDeleteFile"/>
+            <ui:param name="controller" value="#{subjectBean}"/>
+            <ui:param name="action" value="onDeleteFile"/>
+            <ui:param name="update" value=":fileDlgForm"/>
+        </ui:include>
+
     </h:body>
 </f:view>
 </html>

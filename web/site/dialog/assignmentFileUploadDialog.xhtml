@@ -40,6 +40,13 @@
                         <p:column headerText="description" style="min-width: 150px; width: 150px; max-width: 150px;" styleClass="center">
                             <h:outputText value="#{fileBean.description}"/>
                         </p:column>
+                        <p:column style="min-width: 20px; width: 20px; max-width: 20px; text-align: center">
+                            <p:commandButton update=":assignmentFileDlgForm"
+                                             onclick="PF('confirmDeleteFileDlg').show()"
+                                             icon="ui-icon-trash">
+                                <f:setPropertyActionListener value="#{fileBean}" target="#{assignmentBean.fileUploadSelected}"/>
+                            </p:commandButton>
+                        </p:column>
                     </p:dataTable>
                 </td>
             </tr>

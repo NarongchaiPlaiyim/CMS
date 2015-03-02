@@ -207,6 +207,16 @@
             <ui:param name="update" value=":assignmentForm:assignmentTable"/>
         </ui:include>
 
+        <ui:include src="../site/dialog/confirmDlg.xhtml">
+            <ui:param name="id" value="confirmDeleteFileDialog"/>
+            <ui:param name="name" value="confirmDeleteFileDlg"/>
+            <ui:param name="message" value="Do you really want to Delete this?"/>
+            <ui:param name="formId" value="frmConfirmDeleteFile"/>
+            <ui:param name="controller" value="#{assignmentBean}"/>
+            <ui:param name="action" value="onDeleteFile"/>
+            <ui:param name="update" value=":assignmentFileDlgForm"/>
+        </ui:include>
+
     </h:body>
 </f:view>
 </html>

@@ -7,7 +7,6 @@ import com.cms.service.SubjectService;
 import com.cms.service.security.UserDetail;
 import com.cms.utils.AttributeName;
 import com.cms.utils.FacesUtil;
-import com.cms.utils.MessageDialog;
 import com.cms.utils.Utils;
 import lombok.Getter;
 import lombok.Setter;
@@ -110,6 +109,17 @@ public class SubjectBean extends Bean {
             subjectService.uploadFile(fileUploadSelected, uploadedFile, subjectId);
             onSelectFileUploadBySubjectId();
 //            showDialogSaved();
+        }catch (Exception e){
+            e.printStackTrace();
+            log.error(e.getMessage());
+        }
+    }
+
+    public void onDeleteFile(){
+        log.debug("onDeleteFile : [{}]", fileUploadSelected.toString());
+        try {
+            subjectService.deleteFileById(fileUploadSelected.getId());
+            onSelectFileUploadBySubjectId();
         }catch (Exception e){
             e.printStackTrace();
             log.error(e.getMessage());
