@@ -51,7 +51,7 @@ public class StudentAssignmentBean extends Bean{
     }
 
     private void subjectOnload(){
-        subjectModelList = (List<SubjectModel>) httpSession.getAttribute("studentSubject");
+        subjectModelList = (List<SubjectModel>) httpSession.getAttribute(AttributeName.STUDENT_SUBJECT.getName());
     }
 
     public void onClickTable(){
