@@ -1,5 +1,6 @@
 package com.cms.beans;
 
+import com.cms.model.db.BoardModel;
 import com.cms.model.db.ClassEntity;
 import com.cms.model.db.FileUploadModel;
 import com.cms.model.db.SubjectModel;
@@ -32,7 +33,9 @@ public class ChatBean extends Bean {
 
     private ClassEntity classSelected;
     private List<FileUploadModel> fileUploadList;
+    private List<BoardModel> boardModelList;
     private FileUploadModel fileUploadSelected;
+    private BoardModel chatMessage;
     private UploadedFile uploadedFile;
     private int thisClassId;
 
@@ -46,6 +49,7 @@ public class ChatBean extends Bean {
     }
 
     private void init(){
+        chatMessage = new BoardModel();
         onload();
     }
 
@@ -55,6 +59,7 @@ public class ChatBean extends Bean {
         try {
             classSelected = chatService.findClassById(thisClassId);
             onSelectFileUploadByClassId(thisClassId);
+            onSelectChatMessageByClassId(thisClassId);
         }catch (Exception e){
             e.printStackTrace();
             log.error(e.getMessage());
@@ -67,13 +72,36 @@ public class ChatBean extends Bean {
 
         try {
             fileUploadList =  chatService.findListFileByClassId(id);
-
-            System.out.println("cccccccccccccc : "+fileUploadList.size()+" id : "+id);
         }catch (Exception e){
             e.printStackTrace();
             log.error(e.getMessage());
         }
 
+    }
+
+    public void onSelectChatMessageByClassId(int id){
+        log.debug("onSelectChatMessageByClassId()");
+
+        try {
+            boardModelList =  chatService.findListChatMessageByClassId(id);
+        }catch (Exception e){
+            e.printStackTrace();
+            log.error(e.getMessage());
+        }
+
+    }
+
+    public void onAddChatMessage(){
+        log.debug("onAddChatMessage()");
+        try {
+            chatService.addChatMessage(chatMessage, getUser().getId(), thisClassId);
+            onSelectChatMessageByClassId(thisClassId);
+            chatMessage = new BoardModel();
+//            chatMessage.setDetail("");
+        }catch (Exception e){
+            e.printStackTrace();
+            log.error(e.getMessage());
+        }
     }
 
 

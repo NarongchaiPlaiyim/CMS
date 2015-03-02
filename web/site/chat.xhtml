@@ -17,6 +17,14 @@
                 PF('bui').hide();
             }
         </script>
+        <style>
+            .informationBox .ui-panelgrid tr,
+            .ui-panelgrid td {
+                width: 100% !important;
+                font-size: 12px;
+                border: none !important;
+            }
+        </style>
     </h:head>
     <h:body>
         <p:layout fullPage="true" id="layoutPanel">
@@ -29,7 +37,7 @@
                 <ui:include src="#{msg.get('include.menu')}"/>
             </p:layoutUnit>
 
-            <p:layoutUnit id="layoutCenter" position="center" header="#{msg.get('menu.class.tutorial.title')}" >
+            <p:layoutUnit id="layoutCenter" position="center" header="#{msg.get('menu.class.tutorial.title')} >> Class Board" >
                 <h:form id="chatForm">
                     <p:panel style="border: 0">
 
@@ -117,23 +125,19 @@
                     <table border="0" style="width: 90%">
                         <tr>
                             <td>
-                                <p:dataScroller value="#{welcome.informationViewList}" mode="inline" var="data"
-                                                chunkSize="5" scrollHeight="200" style="border: none">
+                                <p:dataScroller value="#{chatBean.boardModelList}" mode="inline" var="data" id="chatBox"
+                                                chunkSize="10" scrollHeight="200" style="border: none" widgetVar="chatBox">
 
                                     <h:panelGrid columns="1" cellpadding="5" styleClass="informationBox">
-                                        <p:panelGrid columns="1" cellpadding="5">
-                                            <p:panelGrid columns="2">
-                                                <h:outputText value="#{data.subject}"
-                                                              style="float: left;font-weight: 800;"/>
-                                                <h:outputText value="#{data.createDate}"
+                                        <p:panelGrid columns="1" cellpadding="2">
+                                                <h:outputText value="#{data.actionDate}"
                                                               style="float: right;color: #ff3574;">
-                                                    <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                                    <f:convertDateTime pattern="dd/MM/yyyy HH:mm"/>
                                                 </h:outputText>
-                                            </p:panelGrid>
-                                            <h:outputText value="#{data.information}" escape="false"/>
-                                            <h:outputText value="created by &lt;u&gt;#{data.createBy}&lt;/u &gt;"
-                                                          escape="false"
-                                                          style="float: right"/>
+                                                <h:outputText value="#{data.detail}" escape="false"/>
+                                                <h:outputText value="created by &lt;u&gt;#{data.userModel.userName}&lt;/u &gt;"
+                                                              escape="false"
+                                                              style="float: right"/>
 
                                         </p:panelGrid>
 
@@ -144,10 +148,16 @@
                         </tr>
                         <tr>
                             <td>
-                                <p:inputTextarea style="width: 100%"/>
+                                <p:inputTextarea style="width: 100%" value="#{chatBean.chatMessage.detail}" id="chatInput">
+                                    <p:ajax event="keyup" update="messageBtn" />
+                                        </p:inputTextarea>
                             </td>
                             <td>
-                                <p:commandButton value="send"/>
+                                <p:commandButton id="messageBtn"
+                                                 value="send"
+                                                 actionListener="#{chatBean.onAddChatMessage}"
+                                                 disabled="#{empty chatBean.chatMessage.detail}"
+                                                 update=":chatForm:chatBox , :chatForm:messageBtn , :chatForm:chatInput"/>
                             </td>
                         </tr>
                     </table>
