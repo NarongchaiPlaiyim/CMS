@@ -37,7 +37,7 @@
                 <ui:include src="#{msg.get('include.menu')}"/>
             </p:layoutUnit>
 
-            <p:layoutUnit id="layoutCenter" position="center" header="#{msg.get('menu.class.tutorial.title')}" >
+            <p:layoutUnit id="layoutCenter" position="center" header="#{msg.get('menu.class.tutorial.title')} >> Class Board" >
                 <h:form id="chatForm">
                     <p:panel style="border: 0">
 
@@ -148,10 +148,16 @@
                         </tr>
                         <tr>
                             <td>
-                                <p:inputTextarea style="width: 100%" value="#{chatBean.chatMessage.detail}"/>
+                                <p:inputTextarea style="width: 100%" value="#{chatBean.chatMessage.detail}" id="chatInput">
+                                    <p:ajax event="keyup" update="messageBtn" />
+                                        </p:inputTextarea>
                             </td>
                             <td>
-                                <p:commandButton value="send" actionListener="#{chatBean.onAddChatMessage}" update=":chatForm:chatBox"/>
+                                <p:commandButton id="messageBtn"
+                                                 value="send"
+                                                 actionListener="#{chatBean.onAddChatMessage}"
+                                                 disabled="#{empty chatBean.chatMessage.detail}"
+                                                 update=":chatForm:chatBox , :chatForm:messageBtn , :chatForm:chatInput"/>
                             </td>
                         </tr>
                     </table>

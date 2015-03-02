@@ -72,8 +72,6 @@ public class ChatBean extends Bean {
 
         try {
             fileUploadList =  chatService.findListFileByClassId(id);
-
-            System.out.println("cccccccccccccc : "+fileUploadList.size()+" id : "+id);
         }catch (Exception e){
             e.printStackTrace();
             log.error(e.getMessage());
@@ -99,6 +97,7 @@ public class ChatBean extends Bean {
             chatService.addChatMessage(chatMessage, getUser().getId(), thisClassId);
             onSelectChatMessageByClassId(thisClassId);
             chatMessage = new BoardModel();
+//            chatMessage.setDetail("");
         }catch (Exception e){
             e.printStackTrace();
             log.error(e.getMessage());
