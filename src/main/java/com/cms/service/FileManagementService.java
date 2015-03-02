@@ -17,6 +17,9 @@ import javax.annotation.Resource;
 import javax.faces.context.FacesContext;
 import javax.servlet.ServletContext;
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 @Component
 @Transactional
@@ -55,10 +58,15 @@ public class FileManagementService extends Service {
     public StreamedContent processDownLoad(int id)throws Exception{
         log.debug("processDownLoad()");
         FileUploadModel fileUploadModel = fileUploadDAO.findByID(id);
+        System.out.println("path : "+PATH_FILE+fileUploadModel.getLocation());
 
         InputStream stream = ((ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext()).getResourceAsStream(PATH_FILE+fileUploadModel.getLocation());
-        file = new DefaultStreamedContent(stream);
-        return file;
+        System.out.println("steam1 "+stream);
+        InputStream stream2 = new FileInputStream(new File(PATH_FILE+fileUploadModel.getLocation()));
+        System.out.println("steam2 "+stream2);
+
+        String fileName = fileUploadModel.getFileName()+"."+FilenameUtils.getExtension(fileUploadModel.getLocation());
+        return new DefaultStreamedContent(stream2,getMimeType(fileUploadModel.getLocation()),fileName);
 
     }
 
@@ -103,5 +111,8 @@ public class FileManagementService extends Service {
         return String.format("%s_%s.%s", Utils.getDocumentNo(),fileType.toString(), FilenameUtils.getExtension(oldFileName));
     }
 
-
+    public String getMimeType(String paths)throws IOException {
+        Path path = Paths.get(paths);
+        return Files.probeContentType(path);
+    }
 }

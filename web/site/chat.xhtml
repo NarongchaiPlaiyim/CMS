@@ -89,8 +89,8 @@
                                             <h:outputText value="#{fileBean.description}"/>
                                         </p:column>
                                         <p:column headerText="" style="min-width: 150px; width: 150px; max-width: 150px;" styleClass="center">
-                                            <p:commandButton value="Download" ajax="false" action="#{chatBean.onDownloadFile}" icon="ui-icon-arrowthick-1-s" onclick="PrimeFaces.monitorDownload(start, stop);">
-                                                <p:fileDownload value="#{chatBean.fileDownload}"/>
+                                            <p:commandButton value="Download" ajax="false" icon="ui-icon-arrowthick-1-s" onclick="PrimeFaces.monitorDownload(start, stop);">
+                                                <p:fileDownload value="#{chatBean.onDownloadFile(fileBean.id)}"/>
                                             </p:commandButton>
                                             <p:commandButton update=""
                                                              onclick="PF('confirmDeleteFileDlg').show()"

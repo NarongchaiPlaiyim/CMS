@@ -123,18 +123,18 @@ public class ChatBean extends Bean {
         }
     }
 
-    public void onDownloadFile(){
+    public StreamedContent onDownloadFile(int fileId){
         log.debug("onUploadFile ");
         try {
 
-           fileDownload =  chatService.downloadFileById(2);
-
+            fileDownload =  chatService.downloadFileById(fileId);
+            System.out.println("**************  "+fileDownload.getName() +"  "+fileDownload.getContentType());
         }catch (Exception e){
             e.printStackTrace();
             System.out.println(e.getMessage());
             log.error(e.getMessage());
         }
-
+                         return fileDownload;
     }
 
     public void onDeleteFile(){
