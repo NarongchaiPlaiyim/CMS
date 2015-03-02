@@ -3,6 +3,7 @@ package com.cms.beans;
 import com.cms.model.db.UserModel;
 import com.cms.service.StudentService;
 import com.cms.service.security.UserDetail;
+import com.cms.utils.AttributeName;
 import com.cms.utils.FacesUtil;
 import lombok.Getter;
 import lombok.Setter;
@@ -38,7 +39,7 @@ public class StudentBean extends Bean {
     }
 
     private void onLoad(){
-        studentId = (UserDetail) httpSession.getAttribute("studentSubject");
+        studentId = (UserDetail) httpSession.getAttribute(AttributeName.USER_DETAIL.getName());
         userModel = studentService.getStudent(studentId.getId());
     }
 }
