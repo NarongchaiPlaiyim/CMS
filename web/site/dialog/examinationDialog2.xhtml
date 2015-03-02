@@ -75,7 +75,9 @@
             <p:column headerText="Score" styleClass="center" style="min-width: 30px; width: 30px; max-width: 30px;">
                 <p:cellEditor>
                     <f:facet name="output"><h:outputText value="#{studentExaminationModel.score}" style="word-wrap:break-word;"/></f:facet>
-                    <f:facet name="input"><p:inputText id="modelInput" value="#{studentExaminationModel.score}" style="min-width: 50px; width: 50px; max-width: 50px;" /></f:facet>
+                    <f:facet name="input"><p:inputText id="modelInput" value="#{studentExaminationModel.score}" style="min-width: 50px; width: 50px; max-width: 50px;"
+                                                       onkeydown="return onKeyDownNumber(event);"
+                                                       onkeypress="return onKeyPressNumber(event);"/></f:facet>
                 </p:cellEditor>
             </p:column>
         </p:dataTable>

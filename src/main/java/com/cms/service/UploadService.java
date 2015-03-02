@@ -4,7 +4,6 @@ import com.cms.model.dao.AssignmentDAO;
 import com.cms.model.dao.ClassDAO;
 import com.cms.model.dao.FileUploadDAO;
 import com.cms.model.dao.SubjectDAO;
-import com.cms.model.db.ClassEntity;
 import com.cms.model.db.FileUploadModel;
 import com.cms.utils.Utils;
 import org.apache.commons.io.FilenameUtils;
@@ -14,7 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.io.*;
-import java.util.List;
 
 @Component
 @Transactional
@@ -55,7 +53,7 @@ public class UploadService extends Service {
         log.debug("processDelete()");
     }
 
-    private void upLoadFile(UploadedFile file ,String fileName) throws Exception {
+    public void upLoadFile(UploadedFile file ,String fileName) throws Exception {
 
         if(null == file){
             throw new Exception("file is null!");

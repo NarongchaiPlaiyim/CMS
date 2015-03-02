@@ -24,7 +24,7 @@ public class StudentAssignmentDAO extends GenericDAO<StudentAssignmentModel, Int
         return assignmentModelList;
     }
 
-    public StudentAssignmentModel findByAssignmentIdAndSubjectId(int assignmentId, int studentId){
+    public StudentAssignmentModel findByAssignmentIdAndStudent(int assignmentId, int studentId){
         StudentAssignmentModel studentAssignmentModel = null;
         try {
             Criteria criteria = getCriteria();
