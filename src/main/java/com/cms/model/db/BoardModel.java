@@ -8,6 +8,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import org.hibernate.annotations.Proxy;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Getter
 @Setter
@@ -19,16 +20,20 @@ public class BoardModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name="detail")
+    @Column(name="detail",columnDefinition="TEXT")
     private String detail;
 
     @OneToOne
-    @JoinColumn(name="subject_id")
-    private SubjectModel subjectModel;
+    @JoinColumn(name="class_id")
+    private ClassEntity classModel;
 
     @OneToOne
     @JoinColumn(name="user_id")
     private UserModel userModel;
+
+    @Version
+    @JoinColumn(name = "actionDate")
+    private Date actionDate;
 
     @Column(name="active", nullable=false, columnDefinition="int default 1")
     private int active = 1;
@@ -39,8 +44,9 @@ public class BoardModel {
         return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
                 .append("id", id)
                 .append("detail", detail)
-                .append("subjectModel", subjectModel)
+                .append("classModel", classModel)
                 .append("userModel", userModel)
+                .append("actionDate", actionDate)
                 .append("active", active)
                 .toString();
     }
