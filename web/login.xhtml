@@ -40,7 +40,7 @@
                     <h:outputLabel id="teacherIdLabel" for="teacherId" value="Teacher ID"
                                    rendered="#{loginBean.studentFlag}"/>
 
-                    <p:selectOneMenu id="teacherId" value="#{loginBean.teacherId}" rendered="#{loginBean.studentFlag}">
+                    <p:selectOneMenu id="teacherId" value="#{loginBean.teacherId}" rendered="#{loginBean.studentFlag}" required="#{not empty param[signon.clientId]}">
                         <f:selectItem itemLabel="- Please Select -" itemValue=""/>
                         <f:selectItems value="#{loginBean.teacherList}"
                                        var="c"
@@ -48,8 +48,9 @@
                     </p:selectOneMenu>
 
                     <p:commandButton id="loginBtn" value="#{msg.get('btn.name.login')}"
-                                     update=":msgBoxSystemMessagePanel"
+                                     update=":msgBoxSystemMessagePanel, :frmLogin:teacherId"
                                      onstart="PF('bui').block()"
+                                     binding="#{signon}"
                                      action="#{loginBean.login}"
                                      oncomplete="PF('bui').unblock()" />
 

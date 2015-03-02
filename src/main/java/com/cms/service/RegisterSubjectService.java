@@ -87,4 +87,13 @@ public class RegisterSubjectService extends Service{
             log.debug("Exception error examinationSubject : ", e);
         }
     }
+
+    public int getByTeacherName(String teacher){
+        try {
+            return userDAO.findByPersonId(teacher).getId();
+        } catch (Exception e) {
+            log.debug("Exception error getByTeacherName : ", e);
+            return 0;
+        }
+    }
 }
