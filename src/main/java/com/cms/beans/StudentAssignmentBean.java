@@ -6,6 +6,9 @@ import com.cms.model.db.StudentAssignmentModel;
 import com.cms.model.db.SubjectModel;
 import com.cms.service.StudentAssignmentService;
 import com.cms.service.UploadService;
+import com.cms.service.security.UserDetail;
+import com.cms.utils.AttributeName;
+import com.cms.utils.FacesUtil;
 import com.cms.utils.Utils;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,6 +19,7 @@ import javax.annotation.Resource;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Getter
@@ -37,18 +41,22 @@ public class StudentAssignmentBean extends Bean{
     private int studentAssignmentId;
     private String fileName;
     private boolean flagUpload;
+    HttpSession httpSession;
+    private UserDetail studentId;
 
     @PostConstruct
     private void init(){
+        httpSession = FacesUtil.getSession(false);
         subjectOnload();
     }
 
     private void subjectOnload(){
-        subjectModelList =  studentAssignmentService.findByTeacherId(4);
+        subjectModelList = (List<SubjectModel>) httpSession.getAttribute("studentSubject");
     }
 
     public void onClickTable(){
-        studentAssignmentModelList = studentAssignmentService.getStudentAssignment(subjectModel.getId(), 8);
+        studentId = (UserDetail) httpSession.getAttribute(AttributeName.USER_DETAIL.getName());
+        studentAssignmentModelList = studentAssignmentService.getStudentAssignment(subjectModel.getId(), studentId.getId());
     }
 
     public void onSave(){

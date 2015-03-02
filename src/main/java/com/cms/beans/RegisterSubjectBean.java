@@ -59,7 +59,6 @@ public class RegisterSubjectBean extends Bean{
     private void subjectInTeacher(){
         subjectModelList =  registerSubjectService.findByTeacherId(teacherId);
         httpSession.setAttribute("studentSubject", subjectModelList);
-        log.debug("--------- {}", subjectModelList.size());
     }
 
     public void onRegister(){

@@ -1,37 +1,23 @@
 package com.cms.service;
 
-import com.cms.model.dao.EnrollDAO;
-import com.cms.model.db.EnrollModel;
-import com.cms.model.db.SubjectModel;
-import com.cms.utils.Utils;
+import com.cms.model.dao.UserDAO;
+import com.cms.model.db.UserModel;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
-import java.util.List;
 
 @Component
 @Transactional
 public class StudentService extends Service {
-    @Resource private EnrollDAO enrollDAO;
+    @Resource private UserDAO userDAO;
 
-    public List<EnrollModel> getList(SubjectModel model){
-        List<EnrollModel> examinationModelList = Utils.getEmptyList();
+    public UserModel getStudent(int studentId){
         try {
-            examinationModelList = enrollDAO.findBySubject(model);
+            return userDAO.findByID(studentId);
         } catch (Exception e) {
-            log.debug("Exception error load : ", e);
+            log.debug("Exception error getStudent : ", e);
+            return null;
         }
-        return examinationModelList;
-    }
-
-    public List<EnrollModel> getList(SubjectModel model, String semester, String year){
-        List<EnrollModel> examinationModelList = Utils.getEmptyList();
-        try {
-            examinationModelList = enrollDAO.findBySubject(model, semester, year);
-        } catch (Exception e) {
-            log.debug("Exception error load : ", e);
-        }
-        return examinationModelList;
     }
 }
