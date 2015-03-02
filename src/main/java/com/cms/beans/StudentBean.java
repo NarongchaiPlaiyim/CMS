@@ -25,7 +25,7 @@ public class StudentBean extends Bean {
     @PostConstruct
     public void onCreation(){
         log.debug("onCreation().");
-        if(preLoad() && isAuthorizeTeacher()){
+        if(preLoad() && isAuthorizeStudent()){
             init();
         }
     }
