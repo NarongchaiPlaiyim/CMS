@@ -11,6 +11,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
+import javax.servlet.http.HttpSession;
 
 @Getter
 @Setter
@@ -21,11 +22,13 @@ public class StudentBean extends Bean {
     @ManagedProperty("#{studentService}") private StudentService studentService;
     private UserDetail studentId;
     private UserModel userModel;
+    private HttpSession httpSession;
 
     @PostConstruct
     public void onCreation(){
         log.debug("onCreation().");
         if(preLoad() && isAuthorizeStudent()){
+            httpSession = FacesUtil.getSession(false);
             init();
         }
     }
@@ -35,7 +38,7 @@ public class StudentBean extends Bean {
     }
 
     private void onLoad(){
-        studentId = (UserDetail) FacesUtil.getSession(true).getAttribute("studentSubject");
+        studentId = (UserDetail) httpSession.getAttribute("studentSubject");
         userModel = studentService.getStudent(studentId.getId());
     }
 }

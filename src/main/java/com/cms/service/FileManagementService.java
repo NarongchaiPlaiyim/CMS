@@ -69,7 +69,7 @@ public class FileManagementService extends Service {
 
     }
 
-    private void upLoadFile(UploadedFile file ,String fileName) throws Exception {
+    public void upLoadFile(UploadedFile file ,String fileName) throws Exception {
         log.debug("upLoadFile()");
    
 

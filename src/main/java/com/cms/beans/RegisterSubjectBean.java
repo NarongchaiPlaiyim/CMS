@@ -29,7 +29,7 @@ public class RegisterSubjectBean extends Bean{
     private UserDetail studentId;
 
     private int teacherId;
-    HttpSession httpSession;
+    private HttpSession httpSession;
 
     @PostConstruct
     public void onCreation(){

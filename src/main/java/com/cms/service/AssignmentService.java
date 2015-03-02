@@ -23,7 +23,7 @@ public class AssignmentService extends Service{
     @Resource private SubjectDAO subjectDAO;
     @Resource private StudentAssignmentDAO studentAssignmentDAO;
     @Resource private FileUploadDAO fileUploadDAO;
-    @Resource private UploadService uploadService;
+    @Resource private FileManagementService uploadService;
 
     public List<AssignmentModel> getAssignment(int subjectId){
         return assignmentDAO.findBySubjectId(subjectId);
@@ -66,7 +66,7 @@ public class AssignmentService extends Service{
     public void uploadFile(FileUploadModel model , UploadedFile file,int classId)throws Exception{
         log.debug(" ClassTutorialService uploadFile() classId : {}",classId);
 
-        uploadService.processUpload(model, file, UploadService.FileType.FILE_ASSIGNMENT,classId);
+        uploadService.processUpload(model, file, FileManagementService.FileType.FILE_ASSIGNMENT,classId);
 
     }
 

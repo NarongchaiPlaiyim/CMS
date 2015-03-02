@@ -5,7 +5,7 @@ import com.cms.model.db.FileUploadModel;
 import com.cms.model.db.StudentAssignmentModel;
 import com.cms.model.db.SubjectModel;
 import com.cms.service.StudentAssignmentService;
-import com.cms.service.UploadService;
+import com.cms.service.FileManagementService;
 import com.cms.service.security.UserDetail;
 import com.cms.utils.AttributeName;
 import com.cms.utils.FacesUtil;
@@ -36,12 +36,12 @@ public class StudentAssignmentBean extends Bean{
     private UploadedFile uploadedFile;
     @Resource
     private FileUploadDAO fileUploadDAO;
-    @Resource private UploadService uploadService;
+    @Resource private FileManagementService uploadService;
     private List<StudentAssignmentModel> studentAssignmentModelList;
     private int studentAssignmentId;
     private String fileName;
     private boolean flagUpload;
-    HttpSession httpSession;
+    private HttpSession httpSession;
     private UserDetail studentId;
 
     @PostConstruct

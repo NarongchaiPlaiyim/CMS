@@ -18,7 +18,7 @@ public class StudentAssignmentService extends Service{
     @Resource private AssignmentDAO assignmentDAO;
     @Resource private StudentAssignmentDAO studentAssignmentDAO;
     @Resource private UserDAO userDAO;
-    @Resource private UploadService uploadService;
+    @Resource private FileManagementService uploadService;
 
     public List<SubjectModel> findByTeacherId(int teacherId){
         return subjectDAO.findByUserId(teacherId);

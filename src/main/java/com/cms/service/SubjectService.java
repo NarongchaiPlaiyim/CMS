@@ -24,7 +24,7 @@ public class SubjectService extends Service {
     @Resource private UserDAO userDAO;
     @Resource private EnrollDAO enrollDAO;
     @Resource private FileUploadDAO fileUploadDAO;
-    @Resource private UploadService uploadService;
+    @Resource private FileManagementService uploadService;
 
     public List<SubjectModel> getSubject(int userId){
         return subjectDAO.findByUserId(userId);
@@ -70,7 +70,7 @@ public class SubjectService extends Service {
     public void uploadFile(FileUploadModel model , UploadedFile file,int classId)throws Exception{
         log.debug(" ClassTutorialService uploadFile() classId : {}",classId);
 
-        uploadService.processUpload(model, file, UploadService.FileType.FILE_SUBJECT,classId);
+        uploadService.processUpload(model, file, FileManagementService.FileType.FILE_SUBJECT,classId);
 
     }
 
