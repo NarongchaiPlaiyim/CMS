@@ -25,7 +25,10 @@
                                       value="#{loginBean.typeRadio}">
                         <f:selectItem itemLabel="Teacher" itemValue="#{loginBean.TEACHER}"/>
                         <f:selectItem itemLabel="Student" itemValue="#{loginBean.STUDENT}"/>
-                        <p:ajax listener="#{loginBean.onClickRadio}" event="change" update="@form, :frmLogin:teacherId"/>
+                        <p:ajax listener="#{loginBean.onClickRadio}" event="change"
+                                update="@form,
+                                        :frmLogin:teacherId
+                                        "/>
                     </p:selectOneRadio>
 
 

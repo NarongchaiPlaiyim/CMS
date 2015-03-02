@@ -63,6 +63,7 @@ public class LoginBean extends Bean{
         initTeacher();
         typeRadio = TEACHER;
         userModelSelected = new UserModel();
+        map = new HashMap<String, String>();
     }
 
     private void initTeacher(){
@@ -153,28 +154,17 @@ public class LoginBean extends Bean{
                     compositeSessionAuthenticationStrategy.onAuthentication(request, httpServletRequest, httpServletResponse);
                     HttpSession httpSession = FacesUtil.getSession(false);
                     httpSession.setAttribute(AttributeName.USER_DETAIL.getName(), getUserDetail());
-//                httpSession.setAttribute(AttributeName.AUTHORIZE.getName(), loginService.getAuthorize());
                     log.debug("-- userDetail[{}]", userDetail.toString());
                     teacherFlag = true;
                     studentFlag = false;
-                    System.out.println(teacherFlag+" : "+studentFlag);
                     return "TEACHER";
                 }
             }
             showDialog(MessageDialog.WARNING.getMessageHeader(), "Invalid username or password.");
             return "loggedOut";
         } else {
-
             if(!Utils.isZero(getUserName().length()) && !Utils.isZero(getPassword().length())) {
                 if(loginService.isUserExist(getUserName(), getPassword(), Type.STUDENT)){
-                    try {
-                        if(!registerService.isRecordExist(getTeacherId())){
-                            showDialog(MessageDialog.WARNING.getMessageHeader(), "Invalid teacher id.");
-                            return "loggedOut";
-                        }
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
                     UserModel userModel = loginService.getUserModel();
                     userDetail = new UserDetail(userModel.getId(),
                             userModel.getUserName(),
@@ -191,11 +181,10 @@ public class LoginBean extends Bean{
                     compositeSessionAuthenticationStrategy.onAuthentication(request, httpServletRequest, httpServletResponse);
                     HttpSession httpSession = FacesUtil.getSession(false);
                     httpSession.setAttribute(AttributeName.USER_DETAIL.getName(), getUserDetail());
-//                httpSession.setAttribute(AttributeName.AUTHORIZE.getName(), loginService.getAuthorize());
+                    httpSession.setAttribute(AttributeName.TEACHER_ID.getName(), getTeacherId());
                     log.debug("-- userDetail[{}]", userDetail.toString());
                     teacherFlag = false;
                     studentFlag = true;
-                    System.out.println(teacherFlag+" : "+studentFlag);
                     return "STUDENT";
                 }
             }
@@ -206,7 +195,7 @@ public class LoginBean extends Bean{
 
     public boolean isRendered(String key){
         try {
-            return map.containsKey(key);
+            return String.valueOf(getUser().getRole().getValue()).equals(key);
         } catch (Exception e) {
             log.error("Exception : {}", e);
             return false;

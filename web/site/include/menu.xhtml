@@ -6,29 +6,41 @@
         xmlns:p="http://primefaces.org/ui">
     <h:form id="menuForm">
         <p:slideMenu id="menu" style="max-width: 160px; min-width: 160px">
-            <p:menuitem value="#{msg.get('menu.subject.title')}" icon="ui-icon-disk" outcome="#{msg.get('menu.subject.url')}"
-                        rendered="#{loginBean.teacherFlag}"/>
-            <p:separator rendered="#{loginBean.teacherFlag}"/>
 
-            <p:menuitem value="#{msg.get('menu.class.tutorial.title')}" icon="ui-icon-disk" outcome="#{msg.get('menu.class.tutorial.url')}"
-                        rendered="#{loginBean.teacherFlag}"/>
-            <p:separator rendered="#{loginBean.teacherFlag}"/>
+            <p:menuitem value="#{msg.get('menu.subject.title')}"
+                        icon="ui-icon-disk"
+                        outcome="#{msg.get('menu.subject.url')}"
+                        rendered="#{loginBean.isRendered('0')}"
+                    />
+            <p:separator rendered="#{loginBean.isRendered('0')}"/>
 
-            <p:menuitem value="#{msg.get('menu.assignment.title')}" icon="ui-icon-disk" outcome="#{msg.get('menu.assignment.url')}"
-                        rendered="#{loginBean.teacherFlag}"/>
-            <p:separator rendered="#{loginBean.teacherFlag}"/>
+            <p:menuitem value="#{msg.get('menu.class.tutorial.title')}"
+                        icon="ui-icon-disk"
+                        outcome="#{msg.get('menu.class.tutorial.url')}"
+                        rendered="#{loginBean.isRendered('0')}"
+                    />
+            <p:separator rendered="#{loginBean.isRendered('0')}"/>
 
-            <p:menuitem value="#{msg.get('menu.examination.title')}" icon="ui-icon-disk" outcome="#{msg.get('menu.examination.url')}"
-                        rendered="#{loginBean.teacherFlag}"/>
+            <p:menuitem value="#{msg.get('menu.assignment.title')}"
+                        icon="ui-icon-disk"
+                        outcome="#{msg.get('menu.assignment.url')}"
+                        rendered="#{loginBean.isRendered('0')}"
+                    />
+            <p:separator rendered="#{loginBean.isRendered('0')}" />
 
+            <p:menuitem value="#{msg.get('menu.examination.title')}"
+                        icon="ui-icon-disk"
+                        outcome="#{msg.get('menu.examination.url')}"
+                        rendered="#{loginBean.isRendered('0')}"
+                    />
 
-            <p:separator rendered="#{loginBean.teacherFlag}"/>
-            <p:separator rendered="#{loginBean.teacherFlag}"/>
-            <p:separator rendered="#{loginBean.teacherFlag}"/>
-            <p:separator rendered="#{loginBean.teacherFlag}"/>
-            <p:menuitem value="#{msg.get('menu.register.title')}" icon="ui-icon-disk" outcome="#{msg.get('menu.register.url')}"
-                        rendered="#{loginBean.teacherFlag}"/>
-            <p:separator rendered="#{loginBean.teacherFlag}"/>
+            <p:menuitem value="#{msg.get('menu.register.title')}"
+                        icon="ui-icon-disk"
+                        outcome="#{msg.get('menu.register.url')}"
+                        rendered="#{loginBean.isRendered('1')}"
+                    />
+
+            <p:separator rendered="#{loginBean.isRendered('1')}"/>
 
         </p:slideMenu>
 
