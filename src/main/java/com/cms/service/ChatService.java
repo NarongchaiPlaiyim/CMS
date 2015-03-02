@@ -2,12 +2,9 @@ package com.cms.service;
 
 import com.cms.model.dao.ClassDAO;
 import com.cms.model.dao.FileUploadDAO;
-import com.cms.model.dao.SubjectDAO;
 import com.cms.model.db.ClassEntity;
 import com.cms.model.db.FileUploadModel;
-import com.cms.model.db.SubjectModel;
-import com.cms.service.security.UserDetail;
-import com.cms.utils.Utils;
+import org.primefaces.model.StreamedContent;
 import org.primefaces.model.UploadedFile;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,7 +19,7 @@ public class ChatService extends Service {
     @Resource
     private ClassDAO classDao;
     @Resource
-    private UploadService uploadService;
+    private FileManagementService fileManagementService;
     @Resource
     private FileUploadDAO fileUploadDAO;
 
@@ -39,18 +36,22 @@ public class ChatService extends Service {
 
     public void uploadFile(FileUploadModel model , UploadedFile file,int classId)throws Exception{
         log.debug(" ClassTutorialService uploadFile() classId : {}",classId);
+        fileManagementService.processUpload(model, file, FileManagementService.FileType.FILE_CLASS,classId);
+    }
 
-        uploadService.processUpload(model, file, UploadService.FileType.FILE_CLASS,classId);
+    public StreamedContent downloadFileById(int id)throws Exception{
+        log.debug(" ClassTutorialService downloadFileById() id : {}",id);
+        return fileManagementService.processDownLoad(id);
+    }
+
+    public void deleteFileById(int id)throws Exception{
+        log.debug(" ClassTutorialService deleteFileById() id : {}",id);
+        fileManagementService.processDelete(id);
 
     }
 
 
-    public void deleteClassById(int id)throws Exception{
-        log.debug(" ClassTutorialService deleteClassById() id : {}",id);
-        ClassEntity entity  = classDao.findByID(id);
-        entity.setActive(0);
-        classDao.update(entity);
-    }
+
 
 
 }
