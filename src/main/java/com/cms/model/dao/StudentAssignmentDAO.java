@@ -23,4 +23,18 @@ public class StudentAssignmentDAO extends GenericDAO<StudentAssignmentModel, Int
 
         return assignmentModelList;
     }
+
+    public StudentAssignmentModel findByAssignmentIdAndStudent(int assignmentId, int studentId){
+        StudentAssignmentModel studentAssignmentModel = null;
+        try {
+            Criteria criteria = getCriteria();
+            criteria.add(Restrictions.eq("assignmentModel.id", assignmentId));
+            criteria.add(Restrictions.eq("userModel.id", studentId));
+            studentAssignmentModel = (StudentAssignmentModel) criteria.uniqueResult();
+        } catch (Exception e) {
+            log.debug("Exception error findByStudentIdAndSubjectId : ", e);
+        }
+
+        return studentAssignmentModel;
+    }
 }

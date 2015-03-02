@@ -1,14 +1,12 @@
 package com.cms.beans;
 
-import com.cms.model.db.AssignmentModel;
-import com.cms.model.db.StudentAssignmentModel;
-import com.cms.model.db.SubjectModel;
+import com.cms.model.db.*;
 import com.cms.service.AssignmentService;
 import com.cms.utils.FacesUtil;
-import com.cms.utils.MessageDialog;
 import com.cms.utils.Utils;
 import lombok.Getter;
 import lombok.Setter;
+import org.primefaces.model.UploadedFile;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
@@ -31,6 +29,10 @@ public class AssignmentBean extends Bean{
     private final List<String> SEMESTER = Utils.getSemester();
     private final List<String> Year = Utils.getAcademicYear();
     private List<StudentAssignmentModel> studentAssignmentModelList;
+    private List<EnrollModel> enrollModelList;
+    private FileUploadModel fileUploadSelected;
+    private List<FileUploadModel> fileUploadList;
+    private UploadedFile uploadedFile;
 
     private String selectSemester;
     private String selectYear;
@@ -38,6 +40,13 @@ public class AssignmentBean extends Bean{
     private int assignmentId;
 
     @PostConstruct
+    public void onCreation(){
+        log.debug("onCreation().");
+        if(preLoad() && isAuthorizeTeacher()){
+            init();
+        }
+    }
+
     private void init(){
         subjectModelSelected = new SubjectModel();
         onload();
@@ -78,5 +87,35 @@ public class AssignmentBean extends Bean{
     public void onAddScore(){
         assignmentService.saveScore(studentAssignmentModelList);
         showDialogSaved();
+    }
+
+    public void onUpload(){
+        log.debug("onClickAdd()");
+        fileUploadSelected = new FileUploadModel();
+    }
+
+    public void onSelectFileUploadByAssignmentId(){
+        log.debug("onSelectFileUploadByClassId()");
+
+        try {
+            fileUploadList =  assignmentService.findListFileByClassId(assignmentId);
+            log.debug("fileUploadList : {}", fileUploadList.size());
+        }catch (Exception e){
+            e.printStackTrace();
+            log.error(e.getMessage());
+        }
+
+    }
+
+    public void onUploadFile(){
+        log.debug("onUploadFile : [{}]", fileUploadSelected.toString());
+        try {
+            assignmentService.uploadFile(fileUploadSelected, uploadedFile, assignmentId);
+            onSelectFileUploadByAssignmentId();
+//            showDialogSaved();
+        }catch (Exception e){
+            e.printStackTrace();
+            log.error(e.getMessage());
+        }
     }
 }

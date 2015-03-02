@@ -81,6 +81,39 @@ public abstract class Bean implements Serializable {
         }
     }
 
+
+    protected boolean isAuthorizeTeacher(){
+        boolean result = true;
+        try{
+            UserDetail userDetail = (UserDetail) FacesUtil.getSession(false).getAttribute(AttributeName.USER_DETAIL.getName());
+            if(Type.TEACHER != userDetail.getRole()){
+                FacesUtil.redirect(NamesUtil.LOGIN_PAGE.getName());
+                result = false;
+            }
+            setUserDetail(userDetail);
+            return result;
+        } catch (Exception e) {
+            FacesUtil.redirect(NamesUtil.LOGIN_PAGE.getName());
+            return false;
+        }
+    }
+
+    protected boolean isAuthorizeStudent(){
+        boolean result = true;
+        try{
+            UserDetail userDetail = (UserDetail) FacesUtil.getSession(false).getAttribute(AttributeName.USER_DETAIL.getName());
+            if(Type.STUDENT != userDetail.getRole()){
+                FacesUtil.redirect(NamesUtil.LOGIN_PAGE.getName());
+                result = false;
+            }
+            setUserDetail(userDetail);
+            return result;
+        } catch (Exception e) {
+            FacesUtil.redirect(NamesUtil.LOGIN_PAGE.getName());
+            return false;
+        }
+    }
+
     protected boolean isAuthorize(String key){
         boolean result = true;
         try {

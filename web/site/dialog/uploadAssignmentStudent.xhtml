@@ -6,7 +6,7 @@
         xmlns:p="http://primefaces.org/ui">
     <h:head>
     </h:head>
-    <h:form id="addFileClassDialogForm" enctype="multipart/form-data">
+    <h:form id="addFileDialogForm" enctype="multipart/form-data">
         <table border="0" class="content_table_form">
             <tr >
                 <td style="min-width: 100px; width: 100px; max-width: 100px;" class="left" />
@@ -17,15 +17,7 @@
                     <p:outputLabel value="FileName"/>
                 </td>
                 <td>
-                    <p:inputText value="#{chatBean.fileUploadSelected.fileName}"/>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <p:outputLabel value="Description"/>
-                </td>
-                <td>
-                    <p:inputTextarea value="#{chatBean.fileUploadSelected.description}" />
+                    <p:inputText value="#{studentAssginmentBane.fileName}"/>
                 </td>
             </tr>
             <tr>
@@ -33,11 +25,10 @@
                     <h:outputLabel value="File"/>
                 </td>
                 <td>
-                    <p:fileUpload id="file" value="#{chatBean.uploadedFile}"
+                    <p:fileUpload id="file" value="#{studentAssginmentBane.uploadedFile}"
                                   required="false"
                                   mode="simple"
                                   fileLimit="1">
-                        <!--<f:validator validatorId="FileUploadValidator" />-->
                     </p:fileUpload>
                 </td>
             </tr>
@@ -46,19 +37,19 @@
                     <div style="text-align: center;">
                         <p:commandButton value="#{msg.get('btn.name.submit')}"
                                          id="btnSaveHeader"
-                                         update=":msgBoxSystemMessagePanel ,:chatForm"
+                                         update=":fileDlgForm"
                                          styleClass="medium" style="#{msg.get('btn.size')}"
                                          icon="ui-icon-check"
-                                         binding="#{addClass}"
                                          ajax="false"
                                          process="@form"
-                                         action="#{chatBean.onUploadFile()}"/>
+                                         oncomplete="PF('uploadDlg').hide()"
+                                         action="#{studentAssginmentBane.onUploadFile()}"/>
                         <p:commandButton value="#{msg.get('btn.name.cancel')}"
                                          id="btnCancel"
                                          icon="ui-icon-cancel"
                                          styleClass="medium" style="#{msg.get('btn.size')}"
                                          process="@form"
-                                         oncomplete="PF('fileClassDlg').hide()"/>
+                                         oncomplete="PF('uploadDlg').hide()"/>
                     </div>
                 </td>
             </tr>

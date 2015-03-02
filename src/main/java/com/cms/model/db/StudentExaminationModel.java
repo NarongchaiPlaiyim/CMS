@@ -7,6 +7,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.hibernate.annotations.Proxy;
 import javax.persistence.*;
+import java.math.BigDecimal;
 
 @Getter
 @Setter
@@ -27,7 +28,7 @@ public class StudentExaminationModel {
     private ExaminationModel examinationModel;
 
     @Column(name="score")
-    private double score;
+    private BigDecimal score;
 
     @Override
     public String toString() {

@@ -6,7 +6,7 @@
         xmlns:ui="http://java.sun.com/jsf/facelets"
         xmlns:p="http://primefaces.org/ui">
     <h:head>
-        <title>#{msg.get('menu.class.tutorial.title')}</title>
+        <title>#{msg.get('menu.register.title')}</title>
     </h:head>
     <h:body>
         <p:layout fullPage="true" id="layoutPanel">
@@ -19,7 +19,7 @@
                 <ui:include src="#{msg.get('include.menu')}"/>
             </p:layoutUnit>
 
-            <p:layoutUnit id="layoutCenter" position="center" header="#{msg.get('menu.class.tutorial.title')}" >
+            <p:layoutUnit id="layoutCenter" position="center" header="#{msg.get('menu.register.title')}" >
                 <h:form id="registerSubjectForm">
                     <p:dataTable id="registerSubjectTable"
                                  rows="7" paginator="true"
@@ -37,15 +37,31 @@
                             <h:outputText value="#{subject.subjectName}"  />
                         </p:column>
                         <p:column headerText="Register" style="min-width: 15px; width: 15px; max-width: 15px; text-align: center" styleClass="center">
-                            <p:commandButton update=":registerSubjectForm"
+                            <p:commandButton update=":registerSubjectForm, :msgBoxSystemMessagePanel"
+                                             action="#{registerSubjectBean.onRegister()}"
                                              icon="ui-icon-plusthick">
-                                <f:setPropertyActionListener value="#{subject.id}" target="#{registerSubjectBean.subjectId}"/>
+                                <f:setPropertyActionListener value="#{subject}" target="#{registerSubjectBean.subjectId}"/>
                             </p:commandButton>
                         </p:column>
                     </p:dataTable>
                 </h:form>
             </p:layoutUnit>
         </p:layout>
+
+        <p:panel id="msgBoxSystemMessagePanel" style="border: 0">
+            <p:confirmDialog id="msgBoxSystemMessageDialog" widgetVar="msgBoxSystemMessageDlg" width="#{msg.get('dialog.message.size')}" closable="false"
+                             header="#{registerSubjectBean.messageHeader}" message="#{registerSubjectBean.message}" >
+                <div style="text-align: right">
+                    <p:commandButton value="#{msg.get('btn.name.ok')}"
+                                     process="@this"
+                                     update="registerSubjectForm"
+                                     icon="ui-icon-check"
+                                     styleClass="medium" style="#{msg.get('btn.size')}"
+                                     oncomplete="PF('msgBoxSystemMessageDlg').hide();"/>
+                </div>
+            </p:confirmDialog>
+        </p:panel>
+
     </h:body>
 </f:view>
 </html>

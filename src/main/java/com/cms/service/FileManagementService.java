@@ -4,7 +4,6 @@ import com.cms.model.dao.AssignmentDAO;
 import com.cms.model.dao.ClassDAO;
 import com.cms.model.dao.FileUploadDAO;
 import com.cms.model.dao.SubjectDAO;
-import com.cms.model.db.ClassEntity;
 import com.cms.model.db.FileUploadModel;
 import com.cms.utils.Utils;
 import org.apache.commons.io.FilenameUtils;
@@ -18,7 +17,6 @@ import javax.annotation.Resource;
 import javax.faces.context.FacesContext;
 import javax.servlet.ServletContext;
 import java.io.*;
-import java.util.List;
 
 @Component
 @Transactional
@@ -73,6 +71,8 @@ public class FileManagementService extends Service {
 
     private void upLoadFile(UploadedFile file ,String fileName) throws Exception {
         log.debug("upLoadFile()");
+   
+
         if(null == file){
             throw new Exception("file is null!");
         }
@@ -102,8 +102,6 @@ public class FileManagementService extends Service {
     private String generateFileName(String oldFileName,FileType fileType){
         return String.format("%s_%s.%s", Utils.getDocumentNo(),fileType.toString(), FilenameUtils.getExtension(oldFileName));
     }
-
-
 
 
 }

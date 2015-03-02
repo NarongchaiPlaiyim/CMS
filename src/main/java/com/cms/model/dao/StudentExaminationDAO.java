@@ -48,4 +48,18 @@ public class StudentExaminationDAO extends GenericDAO<StudentExaminationModel, I
         }
         return studentExaminationModelList;
     }
+
+    public StudentExaminationModel findByExamIdAndStudentId(int examId, int studentId){
+        StudentExaminationModel studentExaminationModel = null;
+        try {
+            Criteria criteria = getCriteria();
+            criteria.add(Restrictions.eq("examinationModel.id", examId));
+            criteria.add(Restrictions.eq("userModel.id", studentId));
+            studentExaminationModel = (StudentExaminationModel) criteria.uniqueResult();
+        } catch (Exception e) {
+            log.debug("Exception error findByExamIdAndStudentId : ", e);
+        }
+
+        return studentExaminationModel;
+    }
 }

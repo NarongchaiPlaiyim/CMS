@@ -58,27 +58,4 @@ public class LoginService extends Service{
         }
         return result;
     }
-
-//
-//    public Map<String, String> getAuthorize(){
-//        List<String> stringList;
-//        Map<String, String> map = new HashMap();
-//        try {
-//            stringList = menuObjectDAO.findByStaffId(staffModel.getId());
-//            for (String s : stringList) map.put(s, s);
-//        } catch (Exception e) {
-//            System.err.println(e);
-//            log.error("Exception while calling getAuthorize()", e);
-//        }
-//        return map;
-//    }
-//
-//    public List<MenuObjectModel> getAllMenuObject(){
-//        try {
-//            return menuObjectDAO.findAllOrderByCode();
-//        } catch (Exception e) {
-//            System.err.println(e);
-//            return Collections.EMPTY_LIST;
-//        }
-//    }
 }

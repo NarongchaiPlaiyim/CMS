@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<f:view xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:p="http://primefaces.org/ui">
+    <h:head>
+    </h:head>
+    <h:form id="fileAssignmentDlgForm">
+        <table border="0">
+            <tr>
+                <td style="width: 110px; max-width: 110px; min-width: 110px"/>
+                <td style="width: 150px; max-width: 150px; min-width: 150px"/>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <p:outputLabel value="File"/>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <p:commandButton value="#{msg.get('btn.name.add')}"
+                                     action="#{studentAssginmentBane.onUpload}"
+                                     oncomplete="PF('uploadDlg').show()"
+                                     disabled="#{studentAssginmentBane.flagUpload}"
+                                     update=":addFileDialogForm"
+                                     styleClass="medium" style="#{msg.get('btn.size')}"
+                                     icon="ui-icon-plusthick"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p:outputLabel value="File Name"/>
+                </td>
+                <td>
+                    <p:inputText disabled="true" value="#{studentAssginmentBane.fileName}" style="width: 80px; max-width: 80px; min-width: 80px"/>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align: center">
+                    <p:commandButton value="Close"
+                                     oncomplete="PF('addfileDlg').hide()"
+                                     styleClass="medium" style="#{msg.get('btn.size')}"/>
+                </td>
+            </tr>
+        </table>
+    </h:form>
+</f:view>
+</html>

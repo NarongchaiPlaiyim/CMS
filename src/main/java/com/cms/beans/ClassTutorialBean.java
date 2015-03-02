@@ -32,6 +32,13 @@ public class ClassTutorialBean extends Bean {
 
 
     @PostConstruct
+    public void onCreation(){
+        log.debug("onCreation().");
+        if(preLoad() && isAuthorizeTeacher()){
+            init();
+        }
+    }
+
     private void init(){
         classDetailList = new ArrayList<ClassEntity>();
         onload();

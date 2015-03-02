@@ -23,7 +23,6 @@ public class StudentBean extends Bean {
     @ManagedProperty("#{studentService}") private StudentService studentService;
     private List<SubjectModel> subjectModelList;
     private SubjectModel subjectModelSelected;
-    private final List<String> SEMESTER = Utils.getSemester();
     private final List<String> ACADEMICYEAR = Utils.getAcademicYear();
     private final List<String> YEAR = Utils.getAcademicYear();
 
@@ -37,6 +36,13 @@ public class StudentBean extends Bean {
     private String term;
 
     @PostConstruct
+    public void onCreation(){
+        log.debug("onCreation().");
+        if(preLoad() && isAuthorizeTeacher()){
+            init();
+        }
+    }
+
     private void init(){
         subjectModelSelected = new SubjectModel();
         enrollModel = new EnrollModel();

@@ -26,8 +26,8 @@ import java.util.List;
 @Setter
 @ViewScoped
 @ManagedBean(name = "chatBean")
-public class ChatBean extends Bean implements Serializable {
-//    private static final long serialVersionUID = 4112585632998374840L;
+public class ChatBean extends Bean {
+    private static final long serialVersionUID = 4112585632998374840L;
     @ManagedProperty("#{chatService}") private ChatService chatService;
 
     private ClassEntity classSelected;
@@ -38,6 +38,13 @@ public class ChatBean extends Bean implements Serializable {
 
     private StreamedContent fileDownload;
     @PostConstruct
+    public void onCreation(){
+        log.debug("onCreation().");
+        if(preLoad() && isAuthorizeTeacher()){
+            init();
+        }
+    }
+
     private void init(){
         onload();
     }

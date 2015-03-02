@@ -56,24 +56,20 @@ public class LoginBean extends Bean{
     private List<UserModel> teacherList;
     private UserModel userModel;
     private UserModel userModelSelected;
+
+
     @PostConstruct
     private void init(){
-//        if(!Utils.isNull(SecurityContextHolder.getContext().getAuthentication())){
-//            userDetail = (UserDetail) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//            map = (Map<String, String>) FacesUtil.getSession(false).getAttribute(AttributeName.AUTHORIZE.getName());
-//        } else {
-//            log.debug("[NEW] CODE MAP");
-//            map = new HashMap<String, String>();
-//        }
         initTeacher();
         typeRadio = TEACHER;
+        userModelSelected = new UserModel();
+        map = new HashMap<String, String>();
     }
 
     private void initTeacher(){
         teacherFlag = true;
         studentFlag = false;
         onClickRegister();
-        initTeacherList();
     }
 
     private void initStudent(){
@@ -158,9 +154,10 @@ public class LoginBean extends Bean{
                     compositeSessionAuthenticationStrategy.onAuthentication(request, httpServletRequest, httpServletResponse);
                     HttpSession httpSession = FacesUtil.getSession(false);
                     httpSession.setAttribute(AttributeName.USER_DETAIL.getName(), getUserDetail());
-//                httpSession.setAttribute(AttributeName.AUTHORIZE.getName(), loginService.getAuthorize());
                     log.debug("-- userDetail[{}]", userDetail.toString());
-                    return "PASS";
+                    teacherFlag = true;
+                    studentFlag = false;
+                    return "TEACHER";
                 }
             }
             showDialog(MessageDialog.WARNING.getMessageHeader(), "Invalid username or password.");
@@ -168,14 +165,6 @@ public class LoginBean extends Bean{
         } else {
             if(!Utils.isZero(getUserName().length()) && !Utils.isZero(getPassword().length())) {
                 if(loginService.isUserExist(getUserName(), getPassword(), Type.STUDENT)){
-                    try {
-                        if(!registerService.isRecordExist(getTeacherId())){
-                            showDialog(MessageDialog.WARNING.getMessageHeader(), "Invalid teacher id.");
-                            return "loggedOut";
-                        }
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
                     UserModel userModel = loginService.getUserModel();
                     userDetail = new UserDetail(userModel.getId(),
                             userModel.getUserName(),
@@ -192,9 +181,11 @@ public class LoginBean extends Bean{
                     compositeSessionAuthenticationStrategy.onAuthentication(request, httpServletRequest, httpServletResponse);
                     HttpSession httpSession = FacesUtil.getSession(false);
                     httpSession.setAttribute(AttributeName.USER_DETAIL.getName(), getUserDetail());
-//                httpSession.setAttribute(AttributeName.AUTHORIZE.getName(), loginService.getAuthorize());
+                    httpSession.setAttribute(AttributeName.TEACHER_ID.getName(), getTeacherId());
                     log.debug("-- userDetail[{}]", userDetail.toString());
-                    return "PASS";
+                    teacherFlag = false;
+                    studentFlag = true;
+                    return "STUDENT";
                 }
             }
             showDialog(MessageDialog.WARNING.getMessageHeader(), "Invalid username or password.");
@@ -204,7 +195,7 @@ public class LoginBean extends Bean{
 
     public boolean isRendered(String key){
         try {
-            return map.containsKey(key);
+            return String.valueOf(getUser().getRole().getValue()).equals(key);
         } catch (Exception e) {
             log.error("Exception : {}", e);
             return false;
@@ -215,16 +206,6 @@ public class LoginBean extends Bean{
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
         SecurityContextHolder.clearContext();
         return "loggedOut";
-    }
-
-    public void test(){
-        System.out.println("test");
-//        barcodePrintingService.insert();
-//        try {
-////            loginService.getStaffModel()
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-//        }
     }
 
 }

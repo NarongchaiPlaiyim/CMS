@@ -25,7 +25,10 @@
                                       value="#{loginBean.typeRadio}">
                         <f:selectItem itemLabel="Teacher" itemValue="#{loginBean.TEACHER}"/>
                         <f:selectItem itemLabel="Student" itemValue="#{loginBean.STUDENT}"/>
-                        <p:ajax listener="#{loginBean.onClickRadio}" event="change" update="@form, :frmLogin:teacherId"/>
+                        <p:ajax listener="#{loginBean.onClickRadio}" event="change"
+                                update="@form,
+                                        :frmLogin:teacherId
+                                        "/>
                     </p:selectOneRadio>
 
 
@@ -37,28 +40,17 @@
                     <h:outputLabel id="teacherIdLabel" for="teacherId" value="Teacher ID"
                                    rendered="#{loginBean.studentFlag}"/>
 
-                    <p:selectOneMenu id="teacherId" value="#{loginBean.userModelSelected}" rendered="#{loginBean.studentFlag}">
+                    <p:selectOneMenu id="teacherId" value="#{loginBean.teacherId}" rendered="#{loginBean.studentFlag}" required="#{not empty param[signon.clientId]}">
                         <f:selectItem itemLabel="- Please Select -" itemValue=""/>
                         <f:selectItems value="#{loginBean.teacherList}"
                                        var="c"
-                                       itemLabel="#{c.personId}" itemValue="#{c.id}" />
+                                       itemLabel="#{c.personId}" itemValue="#{c.personId}" />
                     </p:selectOneMenu>
-                    <!--<p:selectOneMenu id="warehouseMenu" value="#{palletManagement.warehouseMode.id}"-->
-                                     <!--style="#{msg.get('fix.size.200')} margin-top: 4px">-->
-
-                        <!--<f:selectItems value="#{palletManagement.warehouseModelList}"-->
-                                       <!--var="wareItem"-->
-                                       <!--itemLabel="#{wareItem.warehouseCode}"-->
-                                       <!--itemValue="#{wareItem.id}"/>-->
-                        <!--<p:ajax listener="#{palletManagement.onFind}"-->
-                                <!--update=":palletForm:palletManagementTable,-->
-                                                    <!--:palletForm:findKey,-->
-                                                    <!--:palletForm:locationMenu"/>-->
-                    <!--</p:selectOneMenu>-->
 
                     <p:commandButton id="loginBtn" value="#{msg.get('btn.name.login')}"
-                                     update=":msgBoxSystemMessagePanel"
+                                     update=":msgBoxSystemMessagePanel, :frmLogin:teacherId"
                                      onstart="PF('bui').block()"
+                                     binding="#{signon}"
                                      action="#{loginBean.login}"
                                      oncomplete="PF('bui').unblock()" />
 

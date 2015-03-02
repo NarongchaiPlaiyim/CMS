@@ -4,6 +4,7 @@ import com.cms.model.db.UserModel;
 import com.cms.service.security.encryption.EncryptionService;
 import com.cms.utils.Type;
 import com.cms.utils.Utils;
+import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
@@ -30,4 +31,9 @@ public class UserDAO extends GenericDAO<UserModel, Integer>{
         return Utils.safetyList(getCriteria().add(Restrictions.eq("role", Type.TEACHER)).list());
     }
 
+    public UserModel findByPersonId(String personId) throws Exception {
+        Criteria criteria = getCriteria();
+        criteria.add(Restrictions.eq("personId", personId));
+        return (UserModel) criteria.uniqueResult();
+    }
 }
