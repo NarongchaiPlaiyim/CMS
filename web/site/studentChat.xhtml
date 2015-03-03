@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+<f:view xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:pe="http://primefaces.org/ui/extensions"
+        xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <title>#{msg.get('menu.class.tutorial.title')}</title>
+    <script type="text/javascript">
+        function start() {
+            PF('bui').show();
+        }
+
+        function stop() {
+            PF('bui').hide();
+        }
+    </script>
+    <style>
+        .informationBox .ui-panelgrid tr,
+        .ui-panelgrid td {
+            width: 100% !important;
+            font-size: 12px;
+            border: none !important;
+        }
+    </style>
+</h:head>
+<h:body>
+    <p:layout fullPage="true" id="layoutPanel">
+        <p:layoutUnit id="layoutTop" position="north" size="180" header="#{msg.get('header.north')}" collapsible="true" style="border: 0">
+            <ui:insert name="header">
+                <ui:include src="#{msg.get('include.header')}"/>
+            </ui:insert>
+        </p:layoutUnit>
+        <p:layoutUnit id="layoutLeft" position="west" size="#{msg.get('layoutLeft.size')}" header="#{msg.get('header.west')}" collapsible="true" style="border: 0">
+            <ui:include src="#{msg.get('include.menu')}"/>
+        </p:layoutUnit>
+
+        <p:layoutUnit id="layoutCenter" position="center" header="#{msg.get('menu.class.tutorial.title')} >> Class Board" >
+            <h:form id="chatForm">
+                <p:panel style="border: 0">
+
+                    <table border="0" class="content_table_form">
+                        <tr >
+                            <td style="min-width: 100px; width: 100px; max-width: 100px;" class="left" />
+                            <td style="min-width: 500px; width: 500px; max-width: 500px;" class="left" />
+                        </tr>
+                        <tr>
+                            <td>
+                                <h:outputLabel value="Class"/>
+                            </td>
+                            <td>
+                                <p:inputText style="min-width: 150px; width: 150px; max-width: 150px;"
+                                             readonly="#{true}" value="#{studentChatBean.classSelected.classCode}"/>
+                            </td>
+                            <td>
+                                <h:outputLabel value="File"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h:outputLabel value="Topic"/>
+                            </td>
+                            <td>
+                                <p:inputText style="min-width: 150px; width: 150px; max-width: 150px;"
+                                             readonly="#{true}" value="#{studentChatBean.classSelected.className   }"/>
+                            </td>
+                            <td rowspan="3">
+                                <p:commandButton value="#{msg.get('btn.name.add')}"
+                                                 action="#{studentChatBean.onClickAdd}"
+                                                 oncomplete="PF('fileClassDlg').show()"
+                                                 update=":addFileClassDialogForm"
+                                                 styleClass="medium" style="#{msg.get('btn.size')}"
+                                                 icon="ui-icon-plusthick"/>
+                                <p:dataTable id="fileTable"
+                                             rows="7" paginator="true"
+                                             var="fileBean"
+                                             value="#{studentChatBean.fileUploadList}"
+                                             rowKey="#{fileBean.id}"
+                                             rowIndexVar="rowIndex">
+                                    <p:column headerText="No" style="min-width: 5px; width: 5px; max-width: 5px; text-align: center" styleClass="center">
+                                        <h:outputText value="#{rowIndex+1}"/>
+                                    </p:column>
+                                    <p:column headerText="File Name" style="min-width: 150px; width: 50px; max-width: 150px;" styleClass="center">
+                                        <h:outputText value="#{fileBean.fileName}"/>
+                                    </p:column>
+                                    <p:column headerText="description" style="min-width: 250px; width: 250px; max-width: 250px;" styleClass="center">
+                                        <h:outputText value="#{fileBean.description}"/>
+                                    </p:column>
+                                    <p:column headerText="" style="min-width: 100px; width: 100px; max-width: 100px; text-align: center" styleClass="center">
+                                        <p:commandButton ajax="false" icon="ui-icon-arrowthick-1-s" onclick="PrimeFaces.monitorDownload(start, stop);">
+                                            <p:fileDownload value="#{studentChatBean.onDownloadFile(fileBean.id)}"/>
+                                        </p:commandButton>
+                                        <p:commandButton update=""
+                                                         onclick="PF('confirmDeleteFileDlg').show()"
+                                                         icon="ui-icon-trash">
+                                            <f:setPropertyActionListener value="#{fileBean}" target="#{studentChatBean.fileUploadSelected}"/>
+                                        </p:commandButton>
+                                    </p:column>
+                                </p:dataTable>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h:outputLabel value="Descript"/>
+                            </td>
+                            <td>
+                                <p:inputTextarea style="min-width: 150px; width: 150px; max-width: 150px;"
+                                                 readonly="#{true}" value="#{studentChatBean.classSelected.description}" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h:outputLabel value="Week"/>
+                            </td>
+                            <td>
+                                <p:inputText style="min-width: 150px; width: 150px; max-width: 150px;"
+                                             readonly="#{true}" value="#{studentChatBean.classSelected.weekNo}"/>
+                            </td>
+                        </tr>
+                    </table>
+                </p:panel>
+
+                <table border="0" style="width: 90%">
+                    <tr>
+                        <td>
+                            <p:dataScroller value="#{studentChatBean.boardModelList}" mode="inline" var="data" id="chatBox"
+                                            chunkSize="10" scrollHeight="200" style="border: none" widgetVar="chatBox">
+
+                                <h:panelGrid columns="1" cellpadding="5" styleClass="informationBox">
+                                    <p:panelGrid columns="1" cellpadding="2">
+                                        <h:outputText value="#{data.actionDate}"
+                                                      style="float: right;color: #ff3574;">
+                                            <f:convertDateTime pattern="dd/MM/yyyy HH:mm"/>
+                                        </h:outputText>
+                                        <h:outputText value="#{data.detail}" escape="false"/>
+                                        <h:outputText value="created by &lt;u&gt;#{data.userModel.userName}&lt;/u &gt;"
+                                                      escape="false"
+                                                      style="float: right"/>
+
+                                    </p:panelGrid>
+
+                                </h:panelGrid>
+                                <p:separator/>
+                            </p:dataScroller>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:inputTextarea style="width: 100%" value="#{studentChatBean.chatMessage.detail}" id="chatInput">
+                                <p:ajax event="keyup" update="messageBtn" />
+                            </p:inputTextarea>
+                        </td>
+                        <td>
+                            <p:commandButton id="messageBtn"
+                                             value="send"
+                                             actionListener="#{studentChatBean.onAddChatMessage}"
+                                             disabled="#{empty studentChatBean.chatMessage.detail}"
+                                             update=":chatForm:chatBox , :chatForm:messageBtn , :chatForm:chatInput"/>
+                        </td>
+                    </tr>
+                </table>
+
+            </h:form>
+        </p:layoutUnit>
+    </p:layout>
+
+    <p:panel id="msgBoxSystemMessagePanel" style="border: 0">
+        <p:confirmDialog id="msgBoxSystemMessageDialog" widgetVar="msgBoxSystemMessageDlg" width="#{msg.get('dialog.message.size')}" closable="false"
+                         header="#{classTutorialBean.messageHeader}" message="#{classTutorialBean.message}" >
+            <div style="text-align: right">
+                <p:commandButton value="#{msg.get('btn.name.ok')}"
+                                 process="@this"
+                                 update="chatForm"
+                                 icon="ui-icon-check"
+                                 styleClass="medium" style="#{msg.get('btn.size')}"
+                                 oncomplete="PF('msgBoxSystemMessageDlg').hide(); PF('classTutorialDlg').hide()"/>
+            </div>
+        </p:confirmDialog>
+    </p:panel>
+
+
+    <p:panel id="addFileClassPanel" styleClass="panel">
+        <p:dialog id="addFileClassDialog" widgetVar="fileClassDlg" header="Add File"
+                  closable="false"
+                  onShow="hideWindowsScrollBar()" onHide="showWindowsScrollBar()" resizable="false"
+                  modal="true" width="600" height="300">
+            <ui:include src="../site/dialog/addFileClassDialog.xhtml"/>
+        </p:dialog>
+    </p:panel>
+
+    <ui:include src="../site/dialog/confirmDlg.xhtml">
+        <ui:param name="id" value="confirmDeleteFileDialog"/>
+        <ui:param name="name" value="confirmDeleteFileDlg"/>
+        <ui:param name="message" value="Do you really want to Delete this?"/>
+        <ui:param name="formId" value="frmConfirmDeleteFile"/>
+        <ui:param name="controller" value="#{studentChatBean}"/>
+        <ui:param name="action" value="onDeleteFile"/>
+        <ui:param name="update" value=":chatForm"/>
+    </ui:include>
+
+    <pe:blockUI widgetVar="bui" centerX="true" centerY="true">
+        <p:panel style="border: 0">
+            <div style="text-align: center;">
+                <h:outputText value="Please wait..." />
+            </div>
+            <div style="text-align: right;">
+                <p:graphicImage value="/resources/images/shared/292.GIF"/>
+            </div>
+        </p:panel>
+    </pe:blockUI>
+</h:body>
+</f:view>
+</html>
