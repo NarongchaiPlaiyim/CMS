@@ -21,98 +21,69 @@
 
             <p:layoutUnit id="layoutCenter" position="center" header="#{msg.get('menu.class.tutorial.title')}" >
                 <h:form id="classTutorialForm">
-                    <table border="0" class="content_table_form">
-                        <tr >
-                            <td style="min-width: 150px; width: 150px; max-width: 150px;" class="left" />
-                            <td style="min-width: 150px; width: 150px; max-width: 150px;" class="left" />
-                            <td style="min-width: 150px; width: 150px; max-width: 150px;" class="left" />
-                            <td style="min-width: 150px; width: 150px; max-width: 150px;" class="left" />
-                        </tr>
-                        <tr>
-                            <td colspan="4">
-                                <p:dataTable id="subjectTable"
-                                             rows="7" paginator="true" var="subject"
-                                             selection="#{studentClassBean.subjectModelSelected}"
-                                             selectionMode="single"
-                                             value="#{studentClassBean.subjectModelList}"
-                                             rowKey="#{subject.id}"
-                                             rowIndexVar="rowIndex">
-                                    <p:ajax event="rowSelect" listener="#{studentClassBean.selectData}" update=":classTutorialForm"/>
-                                    <p:column headerText="No" style="min-width: 5px; width: 5px; max-width: 5px; text-align: center" styleClass="center">
-                                        <h:outputText value="#{rowIndex+1}"  />
-                                    </p:column>
-                                    <p:column headerText="Subject ID" style="min-width: 80px; width: 80px; max-width: 80px;" styleClass="center">
-                                        <h:outputText value="#{subject.subjectCode}"  />
-                                    </p:column>
-                                    <p:column headerText="Subject Name" style="min-width: 80px; width: 80px; max-width: 80px;" styleClass="center">
-                                        <h:outputText value="#{subject.subjectName}"  />
-                                    </p:column>
-                                    <p:column headerText="Description" style="min-width: 300px; width: 300px; max-width: 300px;" styleClass="center">
-                                        <h:outputText value="#{subject.description}"  />
-                                    </p:column>
-                                </p:dataTable>
-                            </td>
-                        </tr>
-                    </table>
+                    <p:panel style="border: 0">
+                        <p:dataTable id="subjectTable"
+                                     rows="7" paginator="true" var="subject"
+                                     selection="#{studentClassBean.subjectModelSelected}"
+                                     selectionMode="single"
+                                     value="#{studentClassBean.subjectModelList}"
+                                     rowKey="#{subject.id}"
+                                     rowIndexVar="rowIndex">
+                            <p:ajax event="rowSelect" listener="#{studentClassBean.selectData}" update=":classTutorialForm"/>
+                            <p:column headerText="No" style="min-width: 5px; width: 5px; max-width: 5px; text-align: center" styleClass="center">
+                                <h:outputText value="#{rowIndex+1}"  />
+                            </p:column>
+                            <p:column headerText="Subject ID" style="min-width: 80px; width: 80px; max-width: 80px;" styleClass="center">
+                                <h:outputText value="#{subject.subjectCode}"  />
+                            </p:column>
+                            <p:column headerText="Subject Name" style="min-width: 80px; width: 80px; max-width: 80px;" styleClass="center">
+                                <h:outputText value="#{subject.subjectName}"  />
+                            </p:column>
+                            <p:column headerText="Description" style="min-width: 300px; width: 300px; max-width: 300px;" styleClass="center">
+                                <h:outputText value="#{subject.description}"  />
+                            </p:column>
+                        </p:dataTable>
+                    </p:panel>
 
-                    <!--<p:panel style="border: 0">-->
-                        <!--<div style="text-align: left;">-->
-                            <!--<p:commandButton value="#{msg.get('btn.name.add')}"-->
-                                             <!--action="#{studentClassBean.onClickAdd}"-->
-                                             <!--oncomplete="PF('classTutorialDlg').show()"-->
-                                             <!--update="@form, :classTruorialDialogForm"-->
-                                             <!--styleClass="medium" style="#{msg.get('btn.size')}"-->
-                                             <!--disabled="#{null == studentClassBean.subjectModelSelected}"-->
-                                             <!--icon="ui-icon-plusthick"/>-->
-                        <!--</div>-->
-                    <!--</p:panel>-->
-
-                    <p:dataTable id="tutorialTable"
-                                 rows="7" paginator="true"
-                                 var="classModel"
-                                 value="#{studentClassBean.classDetailList}"
-                                 rowKey="#{classModel.id}"
-                                 rowIndexVar="rowIndex">
-                        <p:column headerText="No" style="min-width: 20px; width: 20px; max-width: 20px;" styleClass="center">
-                            <h:outputText value="#{rowIndex+1}"  />
-                        </p:column>
-                        <p:column headerText="Tutorial Code" style="min-width: 80px; width: 80px; max-width: 80px;" styleClass="center">
-                            <h:outputText value="#{classModel.classCode}"  />
-                        </p:column>
-                        <p:column headerText="Tutorial Name" style="min-width: 80px; width: 80px; max-width: 80px;" styleClass="center">
-                            <h:outputText value="#{classModel.className}"  />
-                        </p:column>
-                        <p:column headerText="Description" style="min-width: 200px; width: 200px; max-width: 200px;" styleClass="center">
-                            <h:outputText value="#{classModel.description}"  />
-                        </p:column>
-                        <p:column headerText="Week" style="min-width: 50px; width: 50px; max-width: 50px;" styleClass="center">
-                            <h:outputText value="#{classModel.weekNo}"  />
-                        </p:column>
-                        <p:column headerText="" style="min-width: 80px; width: 80px; max-width: 80px; text-align: center" styleClass="center">
-                            <p:commandButton value="classBoard"
-                                             action="#{studentClassBean.goToChat(classModel.id)}"
-                                             update=""
-                                             styleClass="medium" style="#{msg.get('btn.size150')}"
-                                             icon="ui-icon-plusthick"/>
-                            <p:commandButton update=":classTutorialForm"
-                                             onclick="PF('confirmDeleteClassDlg').show()"
-                                             icon="ui-icon-trash">
-                                <f:setPropertyActionListener value="#{classModel}" target="#{studentClassBean.classSelected}"/>
-                            </p:commandButton>
-                        </p:column>
-                    </p:dataTable>
+                    <p:panel style="border: 0">
+                        <p:dataTable id="tutorialTable"
+                                     rows="7" paginator="true"
+                                     var="classModel"
+                                     value="#{studentClassBean.classDetailList}"
+                                     rowKey="#{classModel.id}"
+                                     rowIndexVar="rowIndex">
+                            <p:column headerText="No" style="min-width: 20px; width: 20px; max-width: 20px;" styleClass="center">
+                                <h:outputText value="#{rowIndex+1}"  />
+                            </p:column>
+                            <p:column headerText="Tutorial Code" style="min-width: 80px; width: 80px; max-width: 80px;" styleClass="center">
+                                <h:outputText value="#{classModel.classCode}"  />
+                            </p:column>
+                            <p:column headerText="Tutorial Name" style="min-width: 80px; width: 80px; max-width: 80px;" styleClass="center">
+                                <h:outputText value="#{classModel.className}"  />
+                            </p:column>
+                            <p:column headerText="Description" style="min-width: 200px; width: 200px; max-width: 200px;" styleClass="center">
+                                <h:outputText value="#{classModel.description}"  />
+                            </p:column>
+                            <p:column headerText="Week" style="min-width: 50px; width: 50px; max-width: 50px;" styleClass="center">
+                                <h:outputText value="#{classModel.weekNo}"  />
+                            </p:column>
+                            <p:column headerText="" style="min-width: 80px; width: 80px; max-width: 80px; text-align: center" styleClass="center">
+                                <p:commandButton value="classBoard"
+                                                 action="#{studentClassBean.goToChat(classModel.id)}"
+                                                 update=""
+                                                 styleClass="medium" style="#{msg.get('btn.size150')}"
+                                                 icon="ui-icon-plusthick"/>
+                                <p:commandButton update=":classTutorialForm"
+                                                 onclick="PF('confirmDeleteClassDlg').show()"
+                                                 icon="ui-icon-trash">
+                                    <f:setPropertyActionListener value="#{classModel}" target="#{studentClassBean.classSelected}"/>
+                                </p:commandButton>
+                            </p:column>
+                        </p:dataTable>
+                    </p:panel>
                 </h:form>
             </p:layoutUnit>
         </p:layout>
-
-        <p:panel id="classTutorialPanel" styleClass="panel">
-            <p:dialog id="classTutorialDialog" widgetVar="classTutorialDlg" header="Add Class Tutorial"
-                      closable="false"
-                      onShow="hideWindowsScrollBar()" onHide="showWindowsScrollBar()" resizable="false"
-                      modal="true" width="5d00" height="230">
-                <ui:include src="../site/dialog/classTutorialDialog.xhtml"/>
-            </p:dialog>
-        </p:panel>
 
         <p:panel id="msgBoxSystemMessagePanel" style="border: 0">
             <p:confirmDialog id="msgBoxSystemMessageDialog" widgetVar="msgBoxSystemMessageDlg" width="#{msg.get('dialog.message.size')}" closable="false"
@@ -126,14 +97,6 @@
                                      oncomplete="PF('msgBoxSystemMessageDlg').hide(); PF('classTutorialDlg').hide()"/>
                 </div>
             </p:confirmDialog>
-        </p:panel>
-
-        <p:panel id="studentPanel" styleClass="panel">
-            <p:dialog id="studentDialog" widgetVar="studentDlg" header="View Student In Subject"
-                      onShow="hideWindowsScrollBar()" onHide="showWindowsScrollBar()" resizable="false"
-                      modal="true" width="780">
-                <ui:include src="../site/dialog/studentDialog.xhtml"/>
-            </p:dialog>
         </p:panel>
 
         <ui:include src="../site/dialog/confirmDlg.xhtml">

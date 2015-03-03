@@ -37,7 +37,7 @@ public class ChatBean extends Bean {
     @PostConstruct
     public void onCreation(){
         log.debug("onCreation().");
-        if(preLoad() && isAuthorizeStudent()){
+        if(preLoad() && isAuthorizeTeacher()){
             init();
         }
     }

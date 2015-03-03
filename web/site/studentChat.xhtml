@@ -67,12 +67,6 @@
                                              readonly="#{true}" value="#{studentChatBean.classSelected.className   }"/>
                             </td>
                             <td rowspan="3">
-                                <!--<p:commandButton value="#{msg.get('btn.name.add')}"-->
-                                                 <!--action="#{studentChatBean.onClickAdd}"-->
-                                                 <!--oncomplete="PF('fileClassDlg').show()"-->
-                                                 <!--update=":addFileClassDialogForm"-->
-                                                 <!--styleClass="medium" style="#{msg.get('btn.size')}"-->
-                                                 <!--icon="ui-icon-plusthick"/>-->
                                 <p:dataTable id="fileTable"
                                              rows="7" paginator="true"
                                              var="fileBean"
@@ -92,11 +86,6 @@
                                         <p:commandButton ajax="false" icon="ui-icon-arrowthick-1-s" onclick="PrimeFaces.monitorDownload(start, stop);">
                                             <p:fileDownload value="#{studentChatBean.onDownloadFile(fileBean.id)}"/>
                                         </p:commandButton>
-                                        <!--<p:commandButton update=""-->
-                                                         <!--onclick="PF('confirmDeleteFileDlg').show()"-->
-                                                         <!--icon="ui-icon-trash">-->
-                                            <!--<f:setPropertyActionListener value="#{fileBean}" target="#{studentChatBean.fileUploadSelected}"/>-->
-                                        <!--</p:commandButton>-->
                                     </p:column>
                                 </p:dataTable>
                             </td>
@@ -168,7 +157,7 @@
 
     <p:panel id="msgBoxSystemMessagePanel" style="border: 0">
         <p:confirmDialog id="msgBoxSystemMessageDialog" widgetVar="msgBoxSystemMessageDlg" width="#{msg.get('dialog.message.size')}" closable="false"
-                         header="#{classTutorialBean.messageHeader}" message="#{classTutorialBean.message}" >
+                         header="#{studentChatBean.messageHeader}" message="#{studentChatBean.message}" >
             <div style="text-align: right">
                 <p:commandButton value="#{msg.get('btn.name.ok')}"
                                  process="@this"
@@ -179,26 +168,6 @@
             </div>
         </p:confirmDialog>
     </p:panel>
-
-
-    <p:panel id="addFileClassPanel" styleClass="panel">
-        <p:dialog id="addFileClassDialog" widgetVar="fileClassDlg" header="Add File"
-                  closable="false"
-                  onShow="hideWindowsScrollBar()" onHide="showWindowsScrollBar()" resizable="false"
-                  modal="true" width="600" height="300">
-            <ui:include src="../site/dialog/addFileClassDialog.xhtml"/>
-        </p:dialog>
-    </p:panel>
-
-    <ui:include src="../site/dialog/confirmDlg.xhtml">
-        <ui:param name="id" value="confirmDeleteFileDialog"/>
-        <ui:param name="name" value="confirmDeleteFileDlg"/>
-        <ui:param name="message" value="Do you really want to Delete this?"/>
-        <ui:param name="formId" value="frmConfirmDeleteFile"/>
-        <ui:param name="controller" value="#{studentChatBean}"/>
-        <ui:param name="action" value="onDeleteFile"/>
-        <ui:param name="update" value=":chatForm"/>
-    </ui:include>
 
     <pe:blockUI widgetVar="bui" centerX="true" centerY="true">
         <p:panel style="border: 0">
