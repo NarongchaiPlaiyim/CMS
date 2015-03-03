@@ -8,6 +8,7 @@ import com.cms.model.db.AssignmentModel;
 import com.cms.model.db.FileUploadModel;
 import com.cms.model.db.StudentAssignmentModel;
 import com.cms.model.db.SubjectModel;
+import org.primefaces.model.StreamedContent;
 import org.primefaces.model.UploadedFile;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -79,5 +80,10 @@ public class AssignmentService extends Service{
         log.debug(" ClassTutorialService deleteFileById() id : {}",id);
         uploadService.processDelete(id);
 
+    }
+
+    public StreamedContent downloadFileById(int id)throws Exception{
+        log.debug(" ClassTutorialService downloadFileById() id : {}",id);
+        return uploadService.processDownLoad(id, 1);
     }
 }

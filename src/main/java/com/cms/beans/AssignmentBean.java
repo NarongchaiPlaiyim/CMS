@@ -6,6 +6,7 @@ import com.cms.utils.FacesUtil;
 import com.cms.utils.Utils;
 import lombok.Getter;
 import lombok.Setter;
+import org.primefaces.model.StreamedContent;
 import org.primefaces.model.UploadedFile;
 
 import javax.annotation.PostConstruct;
@@ -38,6 +39,7 @@ public class AssignmentBean extends Bean{
     private String selectYear;
     private boolean flagAdd;
     private int assignmentId;
+    private StreamedContent fileDownload;
 
     @PostConstruct
     public void onCreation(){
@@ -131,5 +133,19 @@ public class AssignmentBean extends Bean{
             e.printStackTrace();
             log.error(e.getMessage());
         }
+    }
+
+    public StreamedContent onDownloadFile(int fileId){
+        log.debug("onUploadFile ");
+        try {
+
+            fileDownload =  assignmentService.downloadFileById(fileId);
+            System.out.println("**************  "+fileDownload.getName() +"  "+fileDownload.getContentType());
+        }catch (Exception e){
+            e.printStackTrace();
+            System.out.println(e.getMessage());
+            log.error(e.getMessage());
+        }
+        return fileDownload;
     }
 }

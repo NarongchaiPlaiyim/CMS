@@ -7,7 +7,6 @@ import com.cms.model.dao.UserDAO;
 import com.cms.model.db.BoardModel;
 import com.cms.model.db.ClassEntity;
 import com.cms.model.db.FileUploadModel;
-import com.cms.model.db.UserModel;
 import org.primefaces.model.StreamedContent;
 import org.primefaces.model.UploadedFile;
 import org.springframework.stereotype.Component;
@@ -62,7 +61,7 @@ public class ChatService extends Service {
 
     public StreamedContent downloadFileById(int id)throws Exception{
         log.debug(" ClassTutorialService downloadFileById() id : {}",id);
-        return fileManagementService.processDownLoad(id);
+        return fileManagementService.processDownLoad(id, 0);
     }
 
     public void deleteFileById(int id)throws Exception{

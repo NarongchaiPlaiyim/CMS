@@ -3,13 +3,10 @@ package com.cms.beans;
 import com.cms.model.db.BoardModel;
 import com.cms.model.db.ClassEntity;
 import com.cms.model.db.FileUploadModel;
-import com.cms.model.db.SubjectModel;
 import com.cms.service.ChatService;
-import com.cms.service.ClassTutorialService;
 import com.cms.utils.FacesUtil;
 import lombok.Getter;
 import lombok.Setter;
-import org.primefaces.event.SelectEvent;
 import org.primefaces.model.StreamedContent;
 import org.primefaces.model.UploadedFile;
 
@@ -18,9 +15,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.servlet.http.HttpSession;
-import java.io.FileNotFoundException;
-import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -134,7 +128,7 @@ public class ChatBean extends Bean {
             System.out.println(e.getMessage());
             log.error(e.getMessage());
         }
-                         return fileDownload;
+        return fileDownload;
     }
 
     public void onDeleteFile(){

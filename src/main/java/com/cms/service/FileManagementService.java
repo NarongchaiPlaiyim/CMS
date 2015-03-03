@@ -1,10 +1,8 @@
 package com.cms.service;
 
-import com.cms.model.dao.AssignmentDAO;
-import com.cms.model.dao.ClassDAO;
-import com.cms.model.dao.FileUploadDAO;
-import com.cms.model.dao.SubjectDAO;
+import com.cms.model.dao.*;
 import com.cms.model.db.FileUploadModel;
+import com.cms.model.db.StudentAssignmentModel;
 import com.cms.utils.Utils;
 import org.apache.commons.io.FilenameUtils;
 import org.primefaces.model.DefaultStreamedContent;
@@ -14,8 +12,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
-import javax.faces.context.FacesContext;
-import javax.servlet.ServletContext;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -35,6 +31,7 @@ public class FileManagementService extends Service {
     private SubjectDAO subjectDAO;
     @Resource
     private AssignmentDAO assignmentDAO;
+    @Resource private StudentAssignmentDAO studentAssignmentDAO;
 
     private static final String PATH_FILE = "C:\\tmp\\";
 
@@ -55,18 +52,28 @@ public class FileManagementService extends Service {
     }
     private StreamedContent file;
 
-    public StreamedContent processDownLoad(int id)throws Exception{
+    public StreamedContent processDownLoad(int id, int role)throws Exception{
         log.debug("processDownLoad()");
-        FileUploadModel fileUploadModel = fileUploadDAO.findByID(id);
-        System.out.println("path : "+PATH_FILE+fileUploadModel.getLocation());
 
-        InputStream stream = ((ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext()).getResourceAsStream(PATH_FILE+fileUploadModel.getLocation());
-        System.out.println("steam1 "+stream);
-        InputStream stream2 = new FileInputStream(new File(PATH_FILE+fileUploadModel.getLocation()));
-        System.out.println("steam2 "+stream2);
+       if(Utils.isZero(role)){
+           FileUploadModel fileUploadModel = fileUploadDAO.findByID(id);
+           String fileName = fileUploadModel.getFileName()+"."+FilenameUtils.getExtension(fileUploadModel.getLocation());
+           InputStream stream2 = new FileInputStream(new File(PATH_FILE+fileUploadModel.getLocation()));
+           return new DefaultStreamedContent(stream2,getMimeType(fileUploadModel.getLocation()),fileName);
 
-        String fileName = fileUploadModel.getFileName()+"."+FilenameUtils.getExtension(fileUploadModel.getLocation());
-        return new DefaultStreamedContent(stream2,getMimeType(fileUploadModel.getLocation()),fileName);
+       } else {
+           StudentAssignmentModel studentAssignmentModel = studentAssignmentDAO.findByID(id);
+           String fileName = studentAssignmentModel.getFilename()+"."+FilenameUtils.getExtension(studentAssignmentModel.getLocation());
+           InputStream stream2 = new FileInputStream(new File(PATH_FILE+studentAssignmentModel.getLocation()));
+           return new DefaultStreamedContent(stream2,getMimeType(studentAssignmentModel.getLocation()),fileName);
+       }
+
+//        System.out.println("path : "+PATH_FILE+fileUploadModel.getLocation());
+
+//        InputStream stream = ((ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext()).getResourceAsStream(PATH_FILE+fileUploadModel.getLocation());
+//        System.out.println("steam1 "+stream);
+//        System.out.println("steam2 "+stream2);
+
 
     }
 
