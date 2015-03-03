@@ -12,6 +12,7 @@ import com.cms.utils.FacesUtil;
 import com.cms.utils.Utils;
 import lombok.Getter;
 import lombok.Setter;
+import org.primefaces.model.StreamedContent;
 import org.primefaces.model.UploadedFile;
 
 import javax.annotation.PostConstruct;
@@ -43,6 +44,7 @@ public class StudentAssignmentBean extends Bean{
     private boolean flagUpload;
     private HttpSession httpSession;
     private UserDetail studentId;
+    private StreamedContent fileDownload;
 
     @PostConstruct
     private void init(){
@@ -90,5 +92,30 @@ public class StudentAssignmentBean extends Bean{
             flagUpload = true;
             fileName = studentAssignmentService.getById(studentAssignmentId).getFilename();
         }
+    }
+
+    public void onSelectFileUploadByAssignmentId(){
+        log.debug("onSelectFileUploadByClassId()");
+
+        try {
+            fileUploadList =  studentAssignmentService.findListFileByClassId(studentAssignmentId);
+            log.debug("fileUploadList : {}", fileUploadList.size());
+        }catch (Exception e){
+            e.printStackTrace();
+            log.error(e.getMessage());
+        }
+    }
+
+    public StreamedContent onDownloadFile(int fileId){
+        log.debug("onUploadFile ");
+        try {
+
+            fileDownload =  studentAssignmentService.downloadFileById(fileId);
+        }catch (Exception e){
+            e.printStackTrace();
+            System.out.println(e.getMessage());
+            log.error(e.getMessage());
+        }
+        return fileDownload;
     }
 }

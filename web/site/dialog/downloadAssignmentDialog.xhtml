@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<f:view xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:p="http://primefaces.org/ui">
+    <h:head>
+    </h:head>
+    <h:form id="fileDlgForm">
+        <table>
+            <tr>
+                <td style="width: 300px; max-width: 300px; min-width: 300px">
+                    <p:outputLabel value="File"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p:dataTable id="fileTable"
+                                 rows="7" paginator="true"
+                                 var="fileBean"
+                                 value="#{studentAssginmentBane.fileUploadList}"
+                                 rowKey="#{fileBean.id}"
+                                 rowIndexVar="rowIndex">
+                        <p:column headerText="No" style="min-width: 5px; width: 5px; max-width: 5px; text-align: center" styleClass="center">
+                            <h:outputText value="#{rowIndex+1}"  style="word-wrap:break-word;"/>
+                        </p:column>
+                        <p:column headerText="File Name" style="min-width: 150px; width: 100px; max-width: 100px;" styleClass="center">
+                            <h:outputText value="#{fileBean.fileName}"  style="word-wrap:break-word;"/>
+                        </p:column>
+                        <p:column headerText="description" style="min-width: 150px; width: 150px; max-width: 150px;" styleClass="center">
+                            <h:outputText value="#{fileBean.description}"  style="word-wrap:break-word;"/>
+                        </p:column>
+                        <p:column style="min-width: 20px; width: 20px; max-width: 20px; text-align: center">
+                            <p:commandButton ajax="false" icon="ui-icon-arrowthick-1-s" onclick="PrimeFaces.monitorDownload(start, stop);">
+                                <p:fileDownload value="#{studentAssginmentBane.onDownloadFile(fileBean.id)}"/>
+                            </p:commandButton>
+                        </p:column>
+                    </p:dataTable>
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 300px; max-width: 300px; min-width: 300px; text-align: center">
+                    <p:commandButton value="Close"
+                                     oncomplete="PF('addDlg').hide()"
+                                     styleClass="medium" style="#{msg.get('btn.size')}"/>
+                </td>
+            </tr>
+        </table>
+    </h:form>
+</f:view>
+</html>

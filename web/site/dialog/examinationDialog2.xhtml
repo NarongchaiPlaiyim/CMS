@@ -66,13 +66,13 @@
             <p:column headerText="Department" styleClass="center" style="min-width: 80px; width: 80px; max-width: 80px;">
                 <h:outputText value="#{studentExaminationModel.userModel.department}"  style="word-wrap:break-word;"/>
             </p:column>
-            <p:column headerText="Year" styleClass="center" style="min-width: 50px; width: 50px; max-width: 50px;">
+            <p:column headerText="Year" styleClass="center" style="min-width: 50px; width: 50px; max-width: 50px; text-align: center">
                 <h:outputText value="#{studentExaminationModel.examinationModel.subjectModel.year}"  style="word-wrap:break-word;"/>
             </p:column>
-            <p:column headerText="Semester" styleClass="center" style="min-width: 50px; width: 50px; max-width: 50px;">
+            <p:column headerText="Semester" styleClass="center" style="min-width: 50px; width: 50px; max-width: 50px; text-align: center">
                 <h:outputText value="#{studentExaminationModel.examinationModel.subjectModel.semester}"  style="word-wrap:break-word;"/>
             </p:column>
-            <p:column headerText="Score" styleClass="center" style="min-width: 30px; width: 30px; max-width: 30px;">
+            <p:column headerText="Score" styleClass="center" style="min-width: 30px; width: 30px; max-width: 30px; text-align: center">
                 <p:cellEditor>
                     <f:facet name="output"><h:outputText value="#{studentExaminationModel.score}" style="word-wrap:break-word;"/></f:facet>
                     <f:facet name="input"><p:inputText id="modelInput" value="#{studentExaminationModel.score}" style="min-width: 50px; width: 50px; max-width: 50px;"

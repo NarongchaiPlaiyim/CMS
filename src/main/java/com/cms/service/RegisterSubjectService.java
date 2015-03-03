@@ -3,6 +3,7 @@ package com.cms.service;
 import com.cms.model.dao.*;
 import com.cms.model.db.*;
 import com.cms.utils.Utils;
+import org.primefaces.model.StreamedContent;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,6 +21,8 @@ public class RegisterSubjectService extends Service{
     @Resource private StudentAssignmentDAO studentAssignmentDAO;
     @Resource private ExaminationDAO examinationDAO;
     @Resource private StudentExaminationDAO studentExaminationDAO;
+    @Resource private FileUploadDAO fileUploadDAO;
+    @Resource private FileManagementService uploadService;
 
     public List<SubjectModel> findByTeacherId(int teacherId){
         return subjectDAO.findByUserId(teacherId);
@@ -95,5 +98,15 @@ public class RegisterSubjectService extends Service{
             log.debug("Exception error getByTeacherName : ", e);
             return 0;
         }
+    }
+
+    public List<FileUploadModel> findListFileByClassId(int id) throws Exception{
+        log.debug("findListFileByClassId() id : {}",id);
+        return fileUploadDAO.findBySubjectId(id);
+    }
+
+    public StreamedContent downloadFileById(int id)throws Exception{
+        log.debug(" ClassTutorialService downloadFileById() id : {}",id);
+        return uploadService.processDownLoad(id, 0);
     }
 }

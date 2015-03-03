@@ -40,10 +40,17 @@
                            <p:column headerText="Description" style="min-width: 300px; width: 300px; max-width: 300px;" styleClass="center">
                                <h:outputText value="#{subject.description}"   style="word-wrap:break-word;"/>
                            </p:column>
-                           <p:column headerText="Register" style="min-width: 15px; width: 15px; max-width: 15px; text-align: center" styleClass="center">
+                           <p:column headerText="Register" style="min-width: 30px; width: 30px; max-width: 30px; text-align: center" styleClass="center">
                                <p:commandButton update=":registerSubjectForm, :msgBoxSystemMessagePanel"
                                                 action="#{registerSubjectBean.onRegister()}"
                                                 icon="ui-icon-plusthick">
+                                   <f:setPropertyActionListener value="#{subject}" target="#{registerSubjectBean.subjectId}"/>
+                               </p:commandButton>
+                               <p:commandButton process="@this"
+                                                icon="ui-icon-arrowthick-1-s"
+                                                update=":fileDlgForm"
+                                                oncomplete="PF('addDlg').show()"
+                                                action="#{registerSubjectBean.onSelectFileUploadBySubjectId()}">
                                    <f:setPropertyActionListener value="#{subject}" target="#{registerSubjectBean.subjectId}"/>
                                </p:commandButton>
                            </p:column>
@@ -65,6 +72,15 @@
                                      oncomplete="PF('msgBoxSystemMessageDlg').hide();"/>
                 </div>
             </p:confirmDialog>
+        </p:panel>
+
+        <p:panel id="addPanel" styleClass="panel">
+            <p:dialog id="addDialog" widgetVar="addDlg" header="Add File"
+                      closable="false"
+                      onShow="hideWindowsScrollBar()" onHide="showWindowsScrollBar()" resizable="false"
+                      modal="true" width="600" height="300">
+                <ui:include src="../site/dialog/downloadSubjectDialog.xhtml"/>
+            </p:dialog>
         </p:panel>
 
     </h:body>

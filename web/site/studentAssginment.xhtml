@@ -65,12 +65,19 @@
                            <p:column headerText="Score" style="min-width: 50px; width: 50px; max-width: 50px; text-align: center" styleClass="right">
                                <h:outputText value="#{assginment.score}" style="word-wrap:break-word;" />
                            </p:column>
-                           <p:column headerText="Upload" style="min-width: 5px; width: 5px; max-width: 5px; text-align: center" styleClass="center">
+                           <p:column headerText="Upload" style="min-width: 30px; width: 30px; max-width: 30px; text-align: center" styleClass="center">
                                <p:commandButton process="@this"
                                                 icon="ui-icon-circle-arrow-n"
                                                 update=":fileAssignmentDlgForm"
                                                 oncomplete="PF('addfileDlg').show()"
                                                 action="#{studentAssginmentBane.onSelectFile()}">
+                                   <f:setPropertyActionListener value="#{assginment.id}" target="#{studentAssginmentBane.studentAssignmentId}"/>
+                               </p:commandButton>
+                               <p:commandButton process="@this"
+                                                icon="ui-icon-arrowthick-1-s"
+                                                update=":fileDlgForm"
+                                                oncomplete="PF('addDlg').show()"
+                                                action="#{studentAssginmentBane.onSelectFileUploadByAssignmentId()}">
                                    <f:setPropertyActionListener value="#{assginment.id}" target="#{studentAssginmentBane.studentAssignmentId}"/>
                                </p:commandButton>
                            </p:column>
@@ -118,6 +125,15 @@
                       onShow="hideWindowsScrollBar()" onHide="showWindowsScrollBar()" resizable="false"
                       modal="true" width="600">
                 <ui:include src="../site/dialog/uploadAssignmentStudent.xhtml"/>
+            </p:dialog>
+        </p:panel>
+
+        <p:panel id="addPanel" styleClass="panel">
+            <p:dialog id="addDialog" widgetVar="addDlg" header="Add File"
+                      closable="false"
+                      onShow="hideWindowsScrollBar()" onHide="showWindowsScrollBar()" resizable="false"
+                      modal="true" width="600" height="300">
+                <ui:include src="../site/dialog/downloadAssignmentDialog.xhtml"/>
             </p:dialog>
         </p:panel>
 

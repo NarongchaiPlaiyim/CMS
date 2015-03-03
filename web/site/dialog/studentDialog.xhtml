@@ -16,7 +16,7 @@
                                  value="#{subjectBean.enrollModelList}"
                                  rowKey="#{student.id}"
                                  rowIndexVar="rowIndex">
-                        <p:column headerText="No" style="min-width: 5px; width: 5px; max-width: 5px; text-align: center" styleClass="center">
+                        <p:column headerText="No" style="min-width: 15px; width: 15px; max-width: 15px; text-align: center" styleClass="center">
                             <h:outputText value="#{rowIndex+1}"/>
                         </p:column>
                         <p:column headerText="Student Id" style="min-width: 100px; width: 100px; max-width: 100px;" styleClass="center">
@@ -28,10 +28,10 @@
                         <p:column headerText="Department" style="min-width: 150px; width: 150px; max-width: 150px;" styleClass="center">
                             <h:outputText value="#{student.userModel.department}" style="word-wrap:break-word;"/>
                         </p:column>
-                        <p:column headerText="Year" style="min-width: 50px; width: 50px; max-width: 50px;" styleClass="center">
+                        <p:column headerText="Year" style="min-width: 50px; width: 50px; max-width: 50px; text-align: center" styleClass="center">
                             <h:outputText value="#{student.subjectModel.year}" style="word-wrap:break-word;"/>
                         </p:column>
-                        <p:column headerText="Semester" style="min-width: 80px; width: 80px; max-width: 80px;" styleClass="center">
+                        <p:column headerText="Semester" style="min-width: 80px; width: 80px; max-width: 80px; text-align: center" styleClass="center">
                             <h:outputText value="#{student.subjectModel.semester}" style="word-wrap:break-word;"/>
                         </p:column>
                     </p:dataTable>
