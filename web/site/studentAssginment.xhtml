@@ -31,16 +31,16 @@
                                     rowIndexVar="rowIndex">
                            <p:ajax event="rowSelect" update=":studentAssginmentBaneForm:studentAssginmentBaneTable" listener="#{studentAssginmentBane.onClickTable}"/>
                            <p:column headerText="No" style="min-width: 5px; width: 5px; max-width: 5px; text-align: center" styleClass="center">
-                               <h:outputText value="#{rowIndex+1}"  />
+                               <h:outputText value="#{rowIndex+1}"   style="word-wrap:break-word;"/>
                            </p:column>
                            <p:column headerText="Subject ID" style="min-width: 80px; width: 80px; max-width: 80px;" styleClass="center">
-                               <h:outputText value="#{subject.subjectCode}"  />
+                               <h:outputText value="#{subject.subjectCode}"   style="word-wrap:break-word;"/>
                            </p:column>
                            <p:column headerText="Subject Name" style="min-width: 80px; width: 80px; max-width: 80px;" styleClass="center">
-                               <h:outputText value="#{subject.subjectName}"  />
+                               <h:outputText value="#{subject.subjectName}"   style="word-wrap:break-word;"/>
                            </p:column>
                            <p:column headerText="Description" style="min-width: 300px; width: 300px; max-width: 300px;" styleClass="center">
-                               <h:outputText value="#{subject.description}"  />
+                               <h:outputText value="#{subject.description}"   style="word-wrap:break-word;"/>
                            </p:column>
                        </p:dataTable>
                    </p:panel>

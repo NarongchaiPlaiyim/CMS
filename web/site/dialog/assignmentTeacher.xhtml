@@ -32,8 +32,8 @@
                      rowKey="#{studentAssignment.id}"
                      rowIndexVar="rowIndex">
             <p:ajax event="rowSelect" update=":assignmentTeacherDialogForm:studentAssignmentTable" />
-            <p:column headerText="No" style="min-width: 20px; width: 20px; max-width: 20px;" styleClass="center">
-                <h:outputText value="#{rowIndex+1}"/>
+            <p:column headerText="No" style="min-width: 5px; width: 5px; max-width: 5px; text-align: center" styleClass="center">
+                <h:outputText value="#{rowIndex+1}"  style="word-wrap:break-word;"/>
             </p:column>
             <p:column headerText="Student Id" style="min-width: 100px; width: 100px; max-width: 80px;" styleClass="center">
                 <h:outputText value="#{studentAssignment.userModel.personId}" style="word-wrap:break-word;"/>

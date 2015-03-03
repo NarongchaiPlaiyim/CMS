@@ -31,8 +31,8 @@
                                      rowKey="#{subjectModel.id}"
                                      rowIndexVar="rowIndex">
                             <p:ajax event="rowSelect" listener="#{classTutorialBean.selectData}" update=":classTutorialForm"/>
-                            <p:column headerText="No" style="min-width: 20px; width: 20px; max-width: 20px;" styleClass="center">
-                                <h:outputText value="#{rowIndex+1}"/>
+                            <p:column headerText="No" style="min-width: 5px; width: 5px; max-width: 5px; text-align: center" styleClass="center">
+                                <h:outputText value="#{rowIndex+1}"  style="word-wrap:break-word;"/>
                             </p:column>
                             <p:column headerText="Subject Id" style="min-width: 80px; width: 80px; max-width: 80px;" styleClass="center">
                                 <h:outputText value="#{subjectModel.subjectCode}" style="word-wrap:break-word;"/>
@@ -74,7 +74,7 @@
                                      value="#{classTutorialBean.classDetailList}"
                                      rowKey="#{classModel.id}"
                                      rowIndexVar="rowIndex">
-                            <p:column headerText="No" style="min-width: 20px; width: 20px; max-width: 20px;" styleClass="center">
+                            <p:column headerText="No" style="min-width: 5px; width: 5px; max-width: 5px; text-align: center" styleClass="center">
                                 <h:outputText value="#{rowIndex+1}"  />
                             </p:column>
                             <p:column headerText="Tutorial Code" style="min-width: 80px; width: 80px; max-width: 80px;" styleClass="center">
@@ -83,10 +83,10 @@
                             <p:column headerText="Tutorial Name" style="min-width: 80px; width: 80px; max-width: 80px;" styleClass="center">
                                 <h:outputText value="#{classModel.className}"  />
                             </p:column>
-                            <p:column headerText="Description" style="min-width: 200px; width: 200px; max-width: 200px;" styleClass="center">
+                            <p:column headerText="Description" style="min-width: 250px; width: 250px; max-width: 250px;" styleClass="center">
                                 <h:outputText value="#{classModel.description}"  />
                             </p:column>
-                            <p:column headerText="Week" style="min-width: 50px; width: 50px; max-width: 50px;" styleClass="center">
+                            <p:column headerText="Week" style="min-width: 30px; width: 30px; max-width: 30px; text-align: center" styleClass="center">
                                 <h:outputText value="#{classModel.weekNo}"  />
                             </p:column>
                             <p:column headerText="" style="min-width: 80px; width: 80px; max-width: 80px; text-align: center" styleClass="center">
@@ -95,7 +95,7 @@
                                                  update=""
                                                  styleClass="medium" style="#{msg.get('btn.size150')}"
                                                  icon="ui-icon-plusthick"/>
-                                <p:commandButton update=":classTutorialForm"
+                                <p:commandButton update=":classTutorialForm:tutorialTable"
                                                  onclick="PF('confirmDeleteClassDlg').show()"
                                                  icon="ui-icon-trash">
                                     <f:setPropertyActionListener value="#{classModel}" target="#{classTutorialBean.classSelected}"/>
@@ -111,7 +111,7 @@
             <p:dialog id="classTutorialDialog" widgetVar="classTutorialDlg" header="Add Class Tutorial"
                       closable="false"
                       onShow="hideWindowsScrollBar()" onHide="showWindowsScrollBar()" resizable="false"
-                      modal="true" width="5d00" height="230">
+                      modal="true" width="5d00">
                 <ui:include src="../site/dialog/classTutorialDialog.xhtml"/>
             </p:dialog>
         </p:panel>

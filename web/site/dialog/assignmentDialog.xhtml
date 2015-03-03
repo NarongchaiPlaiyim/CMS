@@ -17,7 +17,7 @@
                     <h:outputLabel value="Topic"/>
                 </td>
                 <td>
-                    <p:inputText value="#{assignmentBean.assignmentModel.assignmentNo}" required="#{not empty param[addAssignment.clientId]}"/>
+                    <p:inputText value="#{assignmentBean.assignmentModel.assignmentNo}"  style="word-wrap:break-word;" required="#{not empty param[addAssignment.clientId]}"/>
                 </td>
             </tr>
             <tr>
@@ -25,7 +25,7 @@
                     <h:outputLabel value="Description"/>
                 </td>
                 <td>
-                    <p:inputTextarea value="#{assignmentBean.assignmentModel.description}" required="#{not empty param[addAssignment.clientId]}"/>
+                    <p:inputTextarea value="#{assignmentBean.assignmentModel.description}"  style="word-wrap:break-word;" required="#{not empty param[addAssignment.clientId]}"/>
                 </td>
             </tr>
             <tr>
