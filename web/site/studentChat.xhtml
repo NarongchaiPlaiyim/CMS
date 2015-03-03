@@ -67,12 +67,12 @@
                                              readonly="#{true}" value="#{studentChatBean.classSelected.className   }"/>
                             </td>
                             <td rowspan="3">
-                                <p:commandButton value="#{msg.get('btn.name.add')}"
-                                                 action="#{studentChatBean.onClickAdd}"
-                                                 oncomplete="PF('fileClassDlg').show()"
-                                                 update=":addFileClassDialogForm"
-                                                 styleClass="medium" style="#{msg.get('btn.size')}"
-                                                 icon="ui-icon-plusthick"/>
+                                <!--<p:commandButton value="#{msg.get('btn.name.add')}"-->
+                                                 <!--action="#{studentChatBean.onClickAdd}"-->
+                                                 <!--oncomplete="PF('fileClassDlg').show()"-->
+                                                 <!--update=":addFileClassDialogForm"-->
+                                                 <!--styleClass="medium" style="#{msg.get('btn.size')}"-->
+                                                 <!--icon="ui-icon-plusthick"/>-->
                                 <p:dataTable id="fileTable"
                                              rows="7" paginator="true"
                                              var="fileBean"
@@ -92,11 +92,11 @@
                                         <p:commandButton ajax="false" icon="ui-icon-arrowthick-1-s" onclick="PrimeFaces.monitorDownload(start, stop);">
                                             <p:fileDownload value="#{studentChatBean.onDownloadFile(fileBean.id)}"/>
                                         </p:commandButton>
-                                        <p:commandButton update=""
-                                                         onclick="PF('confirmDeleteFileDlg').show()"
-                                                         icon="ui-icon-trash">
-                                            <f:setPropertyActionListener value="#{fileBean}" target="#{studentChatBean.fileUploadSelected}"/>
-                                        </p:commandButton>
+                                        <!--<p:commandButton update=""-->
+                                                         <!--onclick="PF('confirmDeleteFileDlg').show()"-->
+                                                         <!--icon="ui-icon-trash">-->
+                                            <!--<f:setPropertyActionListener value="#{fileBean}" target="#{studentChatBean.fileUploadSelected}"/>-->
+                                        <!--</p:commandButton>-->
                                     </p:column>
                                 </p:dataTable>
                             </td>

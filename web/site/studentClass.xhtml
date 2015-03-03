@@ -55,17 +55,17 @@
                         </tr>
                     </table>
 
-                    <p:panel style="border: 0">
-                        <div style="text-align: left;">
-                            <p:commandButton value="#{msg.get('btn.name.add')}"
-                                             action="#{studentClassBean.onClickAdd}"
-                                             oncomplete="PF('classTutorialDlg').show()"
-                                             update="@form, :classTruorialDialogForm"
-                                             styleClass="medium" style="#{msg.get('btn.size')}"
-                                             disabled="#{null == studentClassBean.subjectModelSelected}"
-                                             icon="ui-icon-plusthick"/>
-                        </div>
-                    </p:panel>
+                    <!--<p:panel style="border: 0">-->
+                        <!--<div style="text-align: left;">-->
+                            <!--<p:commandButton value="#{msg.get('btn.name.add')}"-->
+                                             <!--action="#{studentClassBean.onClickAdd}"-->
+                                             <!--oncomplete="PF('classTutorialDlg').show()"-->
+                                             <!--update="@form, :classTruorialDialogForm"-->
+                                             <!--styleClass="medium" style="#{msg.get('btn.size')}"-->
+                                             <!--disabled="#{null == studentClassBean.subjectModelSelected}"-->
+                                             <!--icon="ui-icon-plusthick"/>-->
+                        <!--</div>-->
+                    <!--</p:panel>-->
 
                     <p:dataTable id="tutorialTable"
                                  rows="7" paginator="true"
