@@ -21,50 +21,39 @@
 
             <p:layoutUnit id="layoutCenter" position="center" header="#{msg.get('menu.assignment.title')}" >
                 <h:form id="assignmentForm">
-                    <table border="0" class="content_table_form">
-                        <tr >
-                            <td style="min-width: 150px; width: 150px; max-width: 150px;" class="left" />
-                            <td style="min-width: 150px; width: 150px; max-width: 150px;" class="left" />
-                            <td style="min-width: 150px; width: 150px; max-width: 150px;" class="left" />
-                            <td style="min-width: 150px; width: 150px; max-width: 150px;" class="left" />
-                        </tr>
-                        <tr>
-                            <td colspan="4">
-                                <p:dataTable id="subjectTable"
-                                             var="subject"
-                                             rows="7" paginator="true"
-                                             value="#{assignmentBean.subjectModelList}"
-                                             selection="#{assignmentBean.subjectModelSelected}"
-                                             selectionMode="single"
-                                             rowKey="#{subject.id}"
-                                             rowIndexVar="rowIndex">
-                                    <p:ajax event="rowSelect" update=":assignmentForm:assignmentTable, :assignmentForm:btnAdd" listener="#{assignmentBean.getAssignmentBySubject()}"/>
-                                    <p:column headerText="No" style="min-width: 20px; width: 20px; max-width: 20px;" styleClass="center">
-                                        <h:outputText value="#{rowIndex+1}"/>
-                                    </p:column>
-                                    <p:column headerText="Subject Id" style="min-width: 80px; width: 80px; max-width: 80px;" styleClass="center">
-                                        <h:outputText value="#{subject.subjectCode}" style="word-wrap:break-word;"/>
-                                    </p:column>
-                                    <p:column headerText="Subject Name" style="min-width: 150px; width: 150px; max-width: 150px;" styleClass="center">
-                                        <h:outputText value="#{subject.subjectName}" style="word-wrap:break-word;"/>
-                                    </p:column>
-                                    <p:column headerText="Description" style="min-width: 300px; width: 300px; max-width: 300px;" styleClass="center">
-                                        <h:outputText value="#{subject.description}" style="word-wrap:break-word;"/>
-                                    </p:column>
-                                    <p:column style="min-width: 15px; width: 15px; max-width: 15px; text-align: center" styleClass="center">
-                                        <p:commandButton process="@this"
-                                                         icon="ui-icon-search"
-                                                         update=":studentDlgForm"
-                                                         oncomplete="PF('studentDlg').show()"
-                                                         action="#{subjectBean.studentInSubject}">
-                                            <f:setPropertyActionListener value="#{subject.id}" target="#{subjectBean.subjectId}"/>
-                                        </p:commandButton>
-                                    </p:column>
-                                </p:dataTable>
-                            </td>
-                        </tr>
-                    </table>
-
+                    <p:panel style="border: 0">
+                        <p:dataTable id="subjectTable"
+                                     var="subject"
+                                     rows="7" paginator="true"
+                                     value="#{assignmentBean.subjectModelList}"
+                                     selection="#{assignmentBean.subjectModelSelected}"
+                                     selectionMode="single"
+                                     rowKey="#{subject.id}"
+                                     rowIndexVar="rowIndex">
+                            <p:ajax event="rowSelect" update=":assignmentForm:assignmentTable, :assignmentForm:btnAdd" listener="#{assignmentBean.getAssignmentBySubject()}"/>
+                            <p:column headerText="No" style="min-width: 20px; width: 20px; max-width: 20px;" styleClass="center">
+                                <h:outputText value="#{rowIndex+1}"/>
+                            </p:column>
+                            <p:column headerText="Subject Id" style="min-width: 80px; width: 80px; max-width: 80px;" styleClass="center">
+                                <h:outputText value="#{subject.subjectCode}" style="word-wrap:break-word;"/>
+                            </p:column>
+                            <p:column headerText="Subject Name" style="min-width: 150px; width: 150px; max-width: 150px;" styleClass="center">
+                                <h:outputText value="#{subject.subjectName}" style="word-wrap:break-word;"/>
+                            </p:column>
+                            <p:column headerText="Description" style="min-width: 300px; width: 300px; max-width: 300px;" styleClass="center">
+                                <h:outputText value="#{subject.description}" style="word-wrap:break-word;"/>
+                            </p:column>
+                            <p:column style="min-width: 15px; width: 15px; max-width: 15px; text-align: center" styleClass="center">
+                                <p:commandButton process="@this"
+                                                 icon="ui-icon-search"
+                                                 update=":studentDlgForm"
+                                                 oncomplete="PF('studentDlg').show()"
+                                                 action="#{subjectBean.studentInSubject}">
+                                    <f:setPropertyActionListener value="#{subject.id}" target="#{subjectBean.subjectId}"/>
+                                </p:commandButton>
+                            </p:column>
+                        </p:dataTable>
+                    </p:panel>
                     <p:panel style="border: 0">
                         <div style="text-align: left;">
                             <p:commandButton id="btnAdd"
@@ -78,63 +67,65 @@
                         </div>
                     </p:panel>
 
-                    <table border="0" class="content_table_form">
-                        <tr >
-                            <td style="min-width: 150px; width: 150px; max-width: 150px;" class="left" />
-                            <td style="min-width: 150px; width: 150px; max-width: 150px;" class="left" />
-                            <td style="min-width: 150px; width: 150px; max-width: 150px;" class="left" />
-                            <td style="min-width: 150px; width: 150px; max-width: 150px;" class="left" />
-                        </tr>
-                        <tr>
-                            <td colspan="4">
-                                <p:dataTable id="assignmentTable"
-                                             var="assignment"
-                                             rows="7" paginator="true"
-                                             value="#{assignmentBean.assignmentModels}"
-                                             rowKey="#{assignment.id}"
-                                             rowIndexVar="rowIndex">
-                                    <p:column headerText="No" style="min-width: 20px; width: 20px; max-width: 20px;" styleClass="center">
-                                        <h:outputText value="#{rowIndex+1}" style="word-wrap:break-word;"/>
-                                    </p:column>
-                                    <p:column headerText="Assignment Id" style="min-width: 150px; width: 150px; max-width: 150px;" styleClass="center">
-                                        <h:outputText value="#{assignment.assignmentNo}" style="word-wrap:break-word;"/>
-                                    </p:column>
-                                    <p:column headerText="Description" style="min-width: 150px; width: 150px; max-width: 150px;" styleClass="center">
-                                        <h:outputText value="#{assignment.description}" style="word-wrap:break-word;"/>
-                                    </p:column>
-                                    <p:column headerText="Year apply" style="min-width: 150px; width: 150px; max-width: 150px;" styleClass="center">
-                                        <h:outputText value="#{assignment.year}" style="word-wrap:break-word;"/>
-                                    </p:column>
-                                    <p:column headerText="Semester" style="min-width: 150px; width: 150px; max-width: 150px;" styleClass="center">
-                                        <h:outputText value="#{assignment.semester}" style="word-wrap:break-word;"/>
-                                    </p:column>
-                                    <p:column headerText="" style="min-width: 60px; width: 60px; max-width: 60px; text-align: center" styleClass="center">
-                                        <p:commandButton id="btnAdd"
-                                                         oncomplete="PF('studentAssignmetDlg').show()"
-                                                         action="#{assignmentBean.loadStudentAssignment()}"
-                                                         update=":assignmentTeacherDialogForm"
-                                                         icon="ui-icon-plusthick">
-                                            <f:setPropertyActionListener value="#{assignment.id}" target="#{assignmentBean.assignmentId}"/>
-                                        </p:commandButton>
-                                        <p:commandButton icon="ui-icon-trash"
-                                                         process="@this"
-                                                         update=":confirmDeleteDialog"
-                                                         oncomplete="PF('confirmDeleteDlg').show()"
-                                                         title="Remove">
-                                            <f:setPropertyActionListener value="#{assignment.id}" target="#{assignmentBean.assignmentId}"/>
-                                        </p:commandButton>
-                                        <p:commandButton process="@this"
-                                                         icon="ui-icon-circle-arrow-n"
-                                                         update=":assignmentFileDlgForm"
-                                                         oncomplete="PF('addDlg').show()"
-                                                         action="#{assignmentBean.onSelectFileUploadByAssignmentId()}">
-                                            <f:setPropertyActionListener value="#{assignment.id}" target="#{assignmentBean.assignmentId}"/>
-                                        </p:commandButton>
-                                    </p:column>
-                                </p:dataTable>
-                            </td>
-                        </tr>
-                    </table>
+                    <p:panel style="border: 0">
+                        <table border="0" class="content_table_form">
+                            <tr >
+                                <td style="min-width: 150px; width: 150px; max-width: 150px;" class="left" />
+                                <td style="min-width: 150px; width: 150px; max-width: 150px;" class="left" />
+                                <td style="min-width: 150px; width: 150px; max-width: 150px;" class="left" />
+                                <td style="min-width: 150px; width: 150px; max-width: 150px;" class="left" />
+                            </tr>
+                            <tr>
+                                <td colspan="4">
+                                    <p:dataTable id="assignmentTable"
+                                                 var="assignment"
+                                                 rows="7" paginator="true"
+                                                 value="#{assignmentBean.assignmentModels}"
+                                                 rowKey="#{assignment.id}"
+                                                 rowIndexVar="rowIndex">
+                                        <p:column headerText="No" style="min-width: 20px; width: 20px; max-width: 20px;" styleClass="center">
+                                            <h:outputText value="#{rowIndex+1}" style="word-wrap:break-word;"/>
+                                        </p:column>
+                                        <p:column headerText="Assignment Id" style="min-width: 150px; width: 150px; max-width: 150px;" styleClass="center">
+                                            <h:outputText value="#{assignment.assignmentNo}" style="word-wrap:break-word;"/>
+                                        </p:column>
+                                        <p:column headerText="Description" style="min-width: 150px; width: 150px; max-width: 150px;" styleClass="center">
+                                            <h:outputText value="#{assignment.description}" style="word-wrap:break-word;"/>
+                                        </p:column>
+                                        <p:column headerText="Year apply" style="min-width: 150px; width: 150px; max-width: 150px;" styleClass="center">
+                                            <h:outputText value="#{assignment.year}" style="word-wrap:break-word;"/>
+                                        </p:column>
+                                        <p:column headerText="Semester" style="min-width: 150px; width: 150px; max-width: 150px;" styleClass="center">
+                                            <h:outputText value="#{assignment.semester}" style="word-wrap:break-word;"/>
+                                        </p:column>
+                                        <p:column headerText="" style="min-width: 60px; width: 60px; max-width: 60px; text-align: center" styleClass="center">
+                                            <p:commandButton id="btnAdd"
+                                                             oncomplete="PF('studentAssignmetDlg').show()"
+                                                             action="#{assignmentBean.loadStudentAssignment()}"
+                                                             update=":assignmentTeacherDialogForm"
+                                                             icon="ui-icon-plusthick">
+                                                <f:setPropertyActionListener value="#{assignment.id}" target="#{assignmentBean.assignmentId}"/>
+                                            </p:commandButton>
+                                            <p:commandButton icon="ui-icon-trash"
+                                                             process="@this"
+                                                             update=":confirmDeleteDialog"
+                                                             oncomplete="PF('confirmDeleteDlg').show()"
+                                                             title="Remove">
+                                                <f:setPropertyActionListener value="#{assignment.id}" target="#{assignmentBean.assignmentId}"/>
+                                            </p:commandButton>
+                                            <p:commandButton process="@this"
+                                                             icon="ui-icon-circle-arrow-n"
+                                                             update=":assignmentFileDlgForm"
+                                                             oncomplete="PF('addDlg').show()"
+                                                             action="#{assignmentBean.onSelectFileUploadByAssignmentId()}">
+                                                <f:setPropertyActionListener value="#{assignment.id}" target="#{assignmentBean.assignmentId}"/>
+                                            </p:commandButton>
+                                        </p:column>
+                                    </p:dataTable>
+                                </td>
+                            </tr>
+                        </table>
+                    </p:panel>
 
                 </h:form>
             </p:layoutUnit>

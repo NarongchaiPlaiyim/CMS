@@ -33,68 +33,57 @@
                         </div>
                     </p:panel>
 
-
-                    <table border="0" class="content_table_form">
-                        <tr >
-                            <td style="min-width: 150px; width: 150px; max-width: 150px;" class="left" />
-                            <td style="min-width: 150px; width: 150px; max-width: 150px;" class="left" />
-                            <td style="min-width: 150px; width: 150px; max-width: 150px;" class="left" />
-                            <td style="min-width: 150px; width: 150px; max-width: 150px;" class="left" />
-                        </tr>
-                        <tr>
-                            <td colspan="4">
-                                <p:dataTable id="subjectTable"
-                                             var="subjectModel"
-                                             rows="7" paginator="true"
-                                             value="#{subjectBean.subjectModelList}"
-                                             rowKey="#{subjectModel.id}"
-                                             rowIndexVar="rowIndex">
-                                    <p:column headerText="No" style="min-width: 20px; width: 20px; max-width: 20px;" styleClass="center">
-                                        <h:outputText value="#{rowIndex+1}"/>
-                                    </p:column>
-                                    <p:column headerText="Subject Id" style="min-width: 80px; width: 80px; max-width: 80px;" styleClass="center">
-                                        <h:outputText value="#{subjectModel.subjectCode}" style="word-wrap:break-word;"/>
-                                    </p:column>
-                                    <p:column headerText="Subject Name" style="min-width: 150px; width: 150px; max-width: 150px;" styleClass="center">
-                                        <h:outputText value="#{subjectModel.subjectName}" style="word-wrap:break-word;"/>
-                                    </p:column>
-                                    <p:column headerText="Description" style="min-width: 300px; width: 300px; max-width: 300px;" styleClass="center">
-                                        <h:outputText value="#{subjectModel.description}" style="word-wrap:break-word;"/>
-                                    </p:column>
-                                    <p:column headerText="" style="min-width: 80px; width: 80px; max-width: 80px; text-align: center" styleClass="center">
-                                        <p:commandButton process="@this"
-                                                         icon="ui-icon-pencil"
-                                                         update=":subjectDlgForm"
-                                                         oncomplete="PF('subjectDlg').show()"
-                                                         action="#{subjectBean.onEditSubject()}">
-                                            <f:setPropertyActionListener value="#{subjectModel.id}" target="#{subjectBean.subjectId}"/>
-                                        </p:commandButton>
-                                        <p:commandButton icon="ui-icon-trash"
-                                                         process="@this"
-                                                         update=":confirmDeleteDialog"
-                                                         oncomplete="PF('confirmDeleteDlg').show()"
-                                                         title="Delete">
-                                            <f:setPropertyActionListener value="#{subjectModel.id}" target="#{subjectBean.subjectId}"/>
-                                        </p:commandButton>
-                                        <p:commandButton process="@this"
-                                                         icon="ui-icon-circle-arrow-n"
-                                                         update=":fileDlgForm"
-                                                         oncomplete="PF('addDlg').show()"
-                                                         action="#{subjectBean.onSelectFileUploadBySubjectId()}">
-                                            <f:setPropertyActionListener value="#{subjectModel.id}" target="#{subjectBean.subjectId}"/>
-                                        </p:commandButton>
-                                        <p:commandButton process="@this"
-                                                         icon="ui-icon-search"
-                                                         update=":studentDlgForm"
-                                                         oncomplete="PF('studentDlg').show()"
-                                                         action="#{subjectBean.studentInSubject()}">
-                                            <f:setPropertyActionListener value="#{subjectModel.id}" target="#{subjectBean.subjectId}"/>
-                                        </p:commandButton>
-                                    </p:column>
-                                </p:dataTable>
-                            </td>
-                        </tr>
-                    </table>
+                    <p:panel style="border: 0">
+                        <p:dataTable id="subjectTable"
+                                     var="subjectModel"
+                                     rows="7" paginator="true"
+                                     value="#{subjectBean.subjectModelList}"
+                                     rowKey="#{subjectModel.id}"
+                                     rowIndexVar="rowIndex">
+                            <p:column headerText="No" style="min-width: 20px; width: 20px; max-width: 20px;" styleClass="center">
+                                <h:outputText value="#{rowIndex+1}"/>
+                            </p:column>
+                            <p:column headerText="Subject Id" style="min-width: 80px; width: 80px; max-width: 80px;" styleClass="center">
+                                <h:outputText value="#{subjectModel.subjectCode}" style="word-wrap:break-word;"/>
+                            </p:column>
+                            <p:column headerText="Subject Name" style="min-width: 150px; width: 150px; max-width: 150px;" styleClass="center">
+                                <h:outputText value="#{subjectModel.subjectName}" style="word-wrap:break-word;"/>
+                            </p:column>
+                            <p:column headerText="Description" style="min-width: 300px; width: 300px; max-width: 300px;" styleClass="center">
+                                <h:outputText value="#{subjectModel.description}" style="word-wrap:break-word;"/>
+                            </p:column>
+                            <p:column headerText="" style="min-width: 80px; width: 80px; max-width: 80px; text-align: center" styleClass="center">
+                                <p:commandButton process="@this"
+                                                 icon="ui-icon-pencil"
+                                                 update=":subjectDlgForm"
+                                                 oncomplete="PF('subjectDlg').show()"
+                                                 action="#{subjectBean.onEditSubject()}">
+                                    <f:setPropertyActionListener value="#{subjectModel.id}" target="#{subjectBean.subjectId}"/>
+                                </p:commandButton>
+                                <p:commandButton icon="ui-icon-trash"
+                                                 process="@this"
+                                                 update=":confirmDeleteDialog"
+                                                 oncomplete="PF('confirmDeleteDlg').show()"
+                                                 title="Delete">
+                                    <f:setPropertyActionListener value="#{subjectModel.id}" target="#{subjectBean.subjectId}"/>
+                                </p:commandButton>
+                                <p:commandButton process="@this"
+                                                 icon="ui-icon-circle-arrow-n"
+                                                 update=":fileDlgForm"
+                                                 oncomplete="PF('addDlg').show()"
+                                                 action="#{subjectBean.onSelectFileUploadBySubjectId()}">
+                                    <f:setPropertyActionListener value="#{subjectModel.id}" target="#{subjectBean.subjectId}"/>
+                                </p:commandButton>
+                                <p:commandButton process="@this"
+                                                 icon="ui-icon-search"
+                                                 update=":studentDlgForm"
+                                                 oncomplete="PF('studentDlg').show()"
+                                                 action="#{subjectBean.studentInSubject()}">
+                                    <f:setPropertyActionListener value="#{subjectModel.id}" target="#{subjectBean.subjectId}"/>
+                                </p:commandButton>
+                            </p:column>
+                        </p:dataTable>
+                    </p:panel>
                 </h:form>
             </p:layoutUnit>
         </p:layout>

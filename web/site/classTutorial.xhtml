@@ -21,49 +21,39 @@
 
             <p:layoutUnit id="layoutCenter" position="center" header="#{msg.get('menu.class.tutorial.title')}" >
                 <h:form id="classTutorialForm">
-                    <table border="0" class="content_table_form">
-                        <tr >
-                            <td style="min-width: 150px; width: 150px; max-width: 150px;" class="left" />
-                            <td style="min-width: 150px; width: 150px; max-width: 150px;" class="left" />
-                            <td style="min-width: 150px; width: 150px; max-width: 150px;" class="left" />
-                            <td style="min-width: 150px; width: 150px; max-width: 150px;" class="left" />
-                        </tr>
-                        <tr>
-                            <td colspan="4">
-                                <p:dataTable id="subjectTable"
-                                             rows="7" paginator="true"
-                                             var="subjectModel"
-                                             value="#{classTutorialBean.subjectModelList}"
-                                             selectionMode="single"
-                                             selection="#{classTutorialBean.subjectModelSelected}"
-                                             rowKey="#{subjectModel.id}"
-                                             rowIndexVar="rowIndex">
-                                    <p:ajax event="rowSelect" listener="#{classTutorialBean.selectData}" update=":classTutorialForm"/>
-                                    <p:column headerText="No" style="min-width: 20px; width: 20px; max-width: 20px;" styleClass="center">
-                                        <h:outputText value="#{rowIndex+1}"/>
-                                    </p:column>
-                                    <p:column headerText="Subject Id" style="min-width: 80px; width: 80px; max-width: 80px;" styleClass="center">
-                                        <h:outputText value="#{subjectModel.subjectCode}" style="word-wrap:break-word;"/>
-                                    </p:column>
-                                    <p:column headerText="Subject Name" style="min-width: 150px; width: 150px; max-width: 150px;" styleClass="center">
-                                        <h:outputText value="#{subjectModel.subjectName}" style="word-wrap:break-word;"/>
-                                    </p:column>
-                                    <p:column headerText="Description" style="min-width: 300px; width: 300px; max-width: 300px;" styleClass="center">
-                                        <h:outputText value="#{subjectModel.description}" style="word-wrap:break-word;"/>
-                                    </p:column>
-                                    <p:column style="min-width: 15px; width: 15px; max-width: 15px; text-align: center" styleClass="center">
-                                        <p:commandButton process="@this"
-                                                         icon="ui-icon-search"
-                                                         update=":studentDlgForm"
-                                                         oncomplete="PF('studentDlg').show()"
-                                                         action="#{subjectBean.studentInSubject}">
-                                            <f:setPropertyActionListener value="#{subjectModel.id}" target="#{subjectBean.subjectId}"/>
-                                        </p:commandButton>
-                                    </p:column>
-                                </p:dataTable>
-                            </td>
-                        </tr>
-                    </table>
+                    <p:panel style="border: 0">
+                        <p:dataTable id="subjectTable"
+                                     rows="7" paginator="true"
+                                     var="subjectModel"
+                                     value="#{classTutorialBean.subjectModelList}"
+                                     selectionMode="single"
+                                     selection="#{classTutorialBean.subjectModelSelected}"
+                                     rowKey="#{subjectModel.id}"
+                                     rowIndexVar="rowIndex">
+                            <p:ajax event="rowSelect" listener="#{classTutorialBean.selectData}" update=":classTutorialForm"/>
+                            <p:column headerText="No" style="min-width: 20px; width: 20px; max-width: 20px;" styleClass="center">
+                                <h:outputText value="#{rowIndex+1}"/>
+                            </p:column>
+                            <p:column headerText="Subject Id" style="min-width: 80px; width: 80px; max-width: 80px;" styleClass="center">
+                                <h:outputText value="#{subjectModel.subjectCode}" style="word-wrap:break-word;"/>
+                            </p:column>
+                            <p:column headerText="Subject Name" style="min-width: 150px; width: 150px; max-width: 150px;" styleClass="center">
+                                <h:outputText value="#{subjectModel.subjectName}" style="word-wrap:break-word;"/>
+                            </p:column>
+                            <p:column headerText="Description" style="min-width: 300px; width: 300px; max-width: 300px;" styleClass="center">
+                                <h:outputText value="#{subjectModel.description}" style="word-wrap:break-word;"/>
+                            </p:column>
+                            <p:column style="min-width: 15px; width: 15px; max-width: 15px; text-align: center" styleClass="center">
+                                <p:commandButton process="@this"
+                                                 icon="ui-icon-search"
+                                                 update=":studentDlgForm"
+                                                 oncomplete="PF('studentDlg').show()"
+                                                 action="#{subjectBean.studentInSubject}">
+                                    <f:setPropertyActionListener value="#{subjectModel.id}" target="#{subjectBean.subjectId}"/>
+                                </p:commandButton>
+                            </p:column>
+                        </p:dataTable>
+                    </p:panel>
 
                     <p:panel style="border: 0">
                         <div style="text-align: left;">
@@ -77,40 +67,42 @@
                         </div>
                     </p:panel>
 
-                    <p:dataTable id="tutorialTable"
-                                 rows="7" paginator="true"
-                                 var="classModel"
-                                 value="#{classTutorialBean.classDetailList}"
-                                 rowKey="#{classModel.id}"
-                                 rowIndexVar="rowIndex">
-                        <p:column headerText="No" style="min-width: 20px; width: 20px; max-width: 20px;" styleClass="center">
-                            <h:outputText value="#{rowIndex+1}"  />
-                        </p:column>
-                        <p:column headerText="Tutorial Code" style="min-width: 80px; width: 80px; max-width: 80px;" styleClass="center">
-                            <h:outputText value="#{classModel.classCode}"  />
-                        </p:column>
-                        <p:column headerText="Tutorial Name" style="min-width: 80px; width: 80px; max-width: 80px;" styleClass="center">
-                            <h:outputText value="#{classModel.className}"  />
-                        </p:column>
-                        <p:column headerText="Description" style="min-width: 200px; width: 200px; max-width: 200px;" styleClass="center">
-                            <h:outputText value="#{classModel.description}"  />
-                        </p:column>
-                        <p:column headerText="Week" style="min-width: 50px; width: 50px; max-width: 50px;" styleClass="center">
-                            <h:outputText value="#{classModel.weekNo}"  />
-                        </p:column>
-                        <p:column headerText="" style="min-width: 80px; width: 80px; max-width: 80px; text-align: center" styleClass="center">
-                            <p:commandButton value="classBoard"
-                                             action="#{classTutorialBean.goToChat(classModel.id)}"
-                                             update=""
-                                             styleClass="medium" style="#{msg.get('btn.size150')}"
-                                             icon="ui-icon-plusthick"/>
-                            <p:commandButton update=":classTutorialForm"
-                                             onclick="PF('confirmDeleteClassDlg').show()"
-                                             icon="ui-icon-trash">
-                                <f:setPropertyActionListener value="#{classModel}" target="#{classTutorialBean.classSelected}"/>
-                            </p:commandButton>
-                        </p:column>
-                    </p:dataTable>
+                    <p:panel style="border: 0">
+                        <p:dataTable id="tutorialTable"
+                                     rows="7" paginator="true"
+                                     var="classModel"
+                                     value="#{classTutorialBean.classDetailList}"
+                                     rowKey="#{classModel.id}"
+                                     rowIndexVar="rowIndex">
+                            <p:column headerText="No" style="min-width: 20px; width: 20px; max-width: 20px;" styleClass="center">
+                                <h:outputText value="#{rowIndex+1}"  />
+                            </p:column>
+                            <p:column headerText="Tutorial Code" style="min-width: 80px; width: 80px; max-width: 80px;" styleClass="center">
+                                <h:outputText value="#{classModel.classCode}"  />
+                            </p:column>
+                            <p:column headerText="Tutorial Name" style="min-width: 80px; width: 80px; max-width: 80px;" styleClass="center">
+                                <h:outputText value="#{classModel.className}"  />
+                            </p:column>
+                            <p:column headerText="Description" style="min-width: 200px; width: 200px; max-width: 200px;" styleClass="center">
+                                <h:outputText value="#{classModel.description}"  />
+                            </p:column>
+                            <p:column headerText="Week" style="min-width: 50px; width: 50px; max-width: 50px;" styleClass="center">
+                                <h:outputText value="#{classModel.weekNo}"  />
+                            </p:column>
+                            <p:column headerText="" style="min-width: 80px; width: 80px; max-width: 80px; text-align: center" styleClass="center">
+                                <p:commandButton value="classBoard"
+                                                 action="#{classTutorialBean.goToChat(classModel.id)}"
+                                                 update=""
+                                                 styleClass="medium" style="#{msg.get('btn.size150')}"
+                                                 icon="ui-icon-plusthick"/>
+                                <p:commandButton update=":classTutorialForm"
+                                                 onclick="PF('confirmDeleteClassDlg').show()"
+                                                 icon="ui-icon-trash">
+                                    <f:setPropertyActionListener value="#{classModel}" target="#{classTutorialBean.classSelected}"/>
+                                </p:commandButton>
+                            </p:column>
+                        </p:dataTable>
+                    </p:panel>
                 </h:form>
             </p:layoutUnit>
         </p:layout>
