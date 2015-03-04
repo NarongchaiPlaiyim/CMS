@@ -91,6 +91,9 @@ public class SubjectService extends Service {
     public void deleteFileById(int id)throws Exception{
         log.debug(" ClassTutorialService deleteFileById() id : {}",id);
         uploadService.processDelete(id);
+    }
 
+    public List<EnrollModel> search(int key, String text, int subjectId){
+        return enrollDAO.findBySearch(key, text, subjectId);
     }
 }

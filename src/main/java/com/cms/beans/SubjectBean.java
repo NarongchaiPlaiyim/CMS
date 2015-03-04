@@ -40,6 +40,11 @@ public class SubjectBean extends Bean {
     private List<FileUploadModel> fileUploadList;
     private UploadedFile uploadedFile;
 
+    private int search;
+    private int ID = 1;
+    private int NAME = 2;
+    private String inputSearch;
+
     @PostConstruct
     public void onCreation(){
         log.debug("onCreation().");
@@ -129,6 +134,16 @@ public class SubjectBean extends Bean {
         }catch (Exception e){
             e.printStackTrace();
             log.error(e.getMessage());
+        }
+    }
+
+    public void onSearch(){
+        if (search == 1){
+            enrollModelList = subjectService.search(ID, inputSearch, subjectId);
+        }
+
+        if (search == 2){
+            enrollModelList = subjectService.search(NAME, inputSearch, subjectId);
         }
     }
 }

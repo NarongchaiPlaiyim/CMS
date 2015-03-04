@@ -52,4 +52,27 @@ public class EnrollDAO extends GenericDAO<EnrollModel, Integer> {
 
         return enrollModel;
     }
+
+    public List<EnrollModel> findBySearch(int key, String text, int subjectId){
+        List<EnrollModel> enrollModelList = Utils.getEmptyList();
+        try {
+            Criteria criteria = getSession().createCriteria(EnrollModel.class, "enroll");
+            criteria.createAlias("enroll.userModel", "student");
+
+            if (key == 1){
+                criteria.add(Restrictions.like("student.personId", "%" + text + "%"));
+            }
+
+            if (key == 2){
+                criteria.add(Restrictions.like("student.name", "%" + text + "%"));
+            }
+
+            criteria.add(Restrictions.eq("subjectModel.id", subjectId));
+            enrollModelList = criteria.list();
+        } catch (Exception e) {
+            log.debug("Exception error findByStudentIdAndSubjectId");
+        }
+
+        return enrollModelList;
+    }
 }
