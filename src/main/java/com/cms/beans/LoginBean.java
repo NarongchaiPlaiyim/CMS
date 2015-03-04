@@ -50,7 +50,7 @@ public class LoginBean extends Bean{
     private boolean teacherFlag;
     private boolean studentFlag;
 
-    private final String TEACHER = "0";
+    private final String TEACHER = "0";   //////////
     private final String STUDENT = "1";
 
     private List<UserModel> teacherList;
