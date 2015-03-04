@@ -7,6 +7,7 @@ import com.cms.service.SubjectService;
 import com.cms.service.security.UserDetail;
 import com.cms.utils.AttributeName;
 import com.cms.utils.FacesUtil;
+import com.cms.utils.MessageDialog;
 import com.cms.utils.Utils;
 import lombok.Getter;
 import lombok.Setter;
@@ -72,9 +73,14 @@ public class SubjectBean extends Bean {
 
     public void onSubmit(){
         log.debug("subjectModelSelected : [{}]", subjectModelSelected.toString());
-        subjectService.save(subjectModelSelected, userDetail.getId());
-        showDialogSaved();
-        onLoad();
+        boolean flagDup = subjectService.save(subjectModelSelected, userDetail.getId());
+
+        if (flagDup){
+            showDialogSaved();
+            onLoad();
+        } else {
+            showDialog(MessageDialog.WARNING.getMessageHeader(), "Subject Duplicate", "msgBoxSystemMessageDlg2");
+        }
     }
 
     public void studentInSubject(){

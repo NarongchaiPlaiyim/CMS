@@ -62,7 +62,8 @@
                            <p:column headerText="Submit" style="min-width: 30px; width: 30px; max-width: 30px; text-align: center" styleClass="center">
                                <p:selectBooleanCheckbox value="#{assginment.submitStatus}" style="word-wrap:break-word;"/>
                            </p:column>
-                           <p:column headerText="Score" style="min-width: 50px; width: 50px; max-width: 50px; text-align: center" styleClass="right">
+                           <p:column headerText="Score" style="min-width: 50px; width: 50px; max-width: 50px; text-align: center;
+                                     background-color: #{assginment.score > 0 ? 'green' : ''};" styleClass="right">
                                <h:outputText value="#{assginment.score}" style="word-wrap:break-word;" />
                            </p:column>
                            <p:column headerText="Upload" style="min-width: 30px; width: 30px; max-width: 30px; text-align: center" styleClass="center">

@@ -62,7 +62,8 @@
                             <p:column headerText="Type" style="min-width: 30px; width: 30px; max-width: 30px; text-align: center" styleClass="center">
                                 <h:outputText value="#{exam.examinationModel.examType}" style="word-wrap:break-word;" />
                             </p:column>
-                            <p:column headerText="Score" style="min-width: 50px; width: 50px; max-width: 50px; text-align: center" styleClass="right">
+                            <p:column headerText="Score" style="min-width: 50px; width: 50px; max-width: 50px; text-align: center;
+                                      background-color: #{exam.score > 0 ? 'green' : ''};" styleClass="right">
                                 <h:outputText value="#{exam.score}" style="word-wrap:break-word;" />
                             </p:column>
                         </p:dataTable>
