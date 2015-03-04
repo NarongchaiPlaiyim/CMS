@@ -10,14 +10,15 @@
         <table border="0" class="content_table_form">
             <tr >
                 <td style="min-width: 150px; width: 150px; max-width: 150px;" class="left" />
-                <td style="min-width: 150px; width: 150px; max-width: 150px;" class="left" />
+                <td style="min-width: 450px; width: 450px; max-width: 450px;" class="left" />
             </tr>
             <tr>
                 <td>
                     <h:outputLabel value="Topic"/>
                 </td>
                 <td>
-                    <p:inputText value="#{assignmentBean.assignmentModel.assignmentNo}"  style="word-wrap:break-word;" required="#{not empty param[addAssignment.clientId]}"/>
+                    <p:inputText value="#{assignmentBean.assignmentModel.assignmentNo}"  style="min-width: 350px; width: 350px; max-width: 350px;"
+                                 required="#{not empty param[addAssignment.clientId]}"/>
                 </td>
             </tr>
             <tr>
@@ -25,7 +26,9 @@
                     <h:outputLabel value="Description"/>
                 </td>
                 <td>
-                    <p:inputTextarea value="#{assignmentBean.assignmentModel.description}"  style="word-wrap:break-word;" required="#{not empty param[addAssignment.clientId]}"/>
+                    <p:inputTextarea value="#{assignmentBean.assignmentModel.description}"
+                                     style="min-width: 350px; width: 350px; max-width: 350px; min-height: 400px; height: 400px; max-height: 400px"
+                                     required="#{not empty param[addAssignment.clientId]}"/>
                 </td>
             </tr>
             <tr>
