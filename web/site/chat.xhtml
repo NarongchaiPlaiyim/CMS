@@ -66,7 +66,7 @@
                 <ui:include src="#{msg.get('include.menu')}"/>
             </p:layoutUnit>
 
-            <p:layoutUnit id="layoutCenter" position="center" header="#{msg.get('menu.class.tutorial.title')} >> Class Board" >
+            <p:layoutUnit id="layoutCenter" position="center" header="#{msg.get('menu.class.tutorial.title')} >> Class Board" style="border: none" >
                 <div class="maincontentinner">
                 <h:form id="chatForm">
                     <div class="row-fluid">
@@ -162,7 +162,11 @@
                         </div>
                     </div>
                       <p:separator/>
-                    <p:fieldset legend=" Chat Room. " styleClass="myFieldStyle" >
+                    <div class="row-fluid">
+                    <div class="span12">
+                    <div class="widget">
+                    <h4 class="widgettitle">Chat Room.</h4>
+                    <div class="widgetcontent">
                     <table border="0" style="width: 90%">
                         <tr>
                             <td>
@@ -204,7 +208,10 @@
                             </td>
                         </tr>
                     </table>
-                          </p:fieldset>
+                       </div>
+                    </div>
+                    </div>
+                    </div>
                 </h:form>
                 </div>
             </p:layoutUnit>
