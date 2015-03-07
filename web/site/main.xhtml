@@ -10,13 +10,13 @@
 </h:head>
 <h:body>
 <p:layout fullPage="true" id="layoutPanel">
-<p:layoutUnit id="layoutTop" position="north" size="180" header="#{msg.get('header.north')}" collapsible="true" style="border: 0">
     <ui:insert name="header">
-        <ui:include src="#{msg.get('include.header')}"/>
+        <!--<ui:include src="#{msg.get('include.header')}"/>-->
     </ui:insert>
-</p:layoutUnit>
 <p:layoutUnit id="layoutLeft" position="west" size="#{msg.get('layoutLeft.size')}" header="#{msg.get('header.west')}" collapsible="true" style="border: 0">
-    <ui:include src="#{msg.get('include.menu')}"/>
+    <div class="leftpanel">
+    <!--<ui:include src="#{msg.get('include.menu')}"/>-->
+    </div>
 </p:layoutUnit>
 
 <p:layoutUnit id="layoutCenter" position="center" header="MAIN_PAGE" >

@@ -5,43 +5,104 @@
         xmlns:p="http://primefaces.org/ui"
         xmlns:pe="http://primefaces.org/ui/extensions"
         xmlns:ui="http://java.sun.com/jsf/facelets">
-    <h:head>
-        <h:outputScript library="js" name="custom.js" />
-    </h:head>
-    <div class="ui-grid ui-grid-responsive">
-        <div class="ui-grid-row">
-            <div class="ui-grid-col-2" />
-            <div class="ui-grid-col-2" >
-                <!--<h:graphicImage library="images" name="/shared/DN2.png" />-->
-            </div>
-            <div class="ui-grid-col-2" />
-
-            <div class="ui-grid-col-3" />
-            <!--<div class="ui-grid-col-3">-->
-                <!--Name : #{headerBean.fullName}<br/><br/>-->
-                <!--Role : <br/><br/>-->
-
-                    <!--<p:commandButton id="btnEditProfile"-->
-                                     <!--action="#{headerBean.onClickEdit()}"-->
-                                     <!--styleClass="medium"-->
-                                     <!--value="Change Password"/>-->
-                    <!--<p:commandButton id="btnLogout"-->
-                                     <!--action="#{headerBean.logout}"-->
-                                     <!--styleClass="medium" style="#{msg.get('fix.size.150')}"-->
-                                     <!--value="#{msg.get('btn.name.logout')}"/>-->
-
-            <!--</div>-->
+    <div class="header">
+        <div class="logo">
+            <h:graphicImage library="images" name="logo1.png" />
         </div>
+        <!--<div class="headerinner">-->
+            <!--<ul class="headmenu">-->
+                <!--<li class="odd">-->
+                    <!--<a class="dropdown-toggle" data-toggle="dropdown" href="#">-->
+                        <!--<span class="count">4</span>-->
+                        <!--<span class="head-icon head-message"></span>-->
+                        <!--<span class="headmenu-label">Messages</span>-->
+                    <!--</a>-->
+                    <!--<ul class="dropdown-menu">-->
+                        <!--<li class="nav-header">Messages</li>-->
+                        <!--<li><a href=""><span class="icon-envelope"></span> New message from <strong>Jack</strong> <small class="muted"> - 19 hours ago</small></a></li>-->
+                        <!--<li><a href=""><span class="icon-envelope"></span> New message from <strong>Daniel</strong> <small class="muted"> - 2 days ago</small></a></li>-->
+                        <!--<li><a href=""><span class="icon-envelope"></span> New message from <strong>Jane</strong> <small class="muted"> - 3 days ago</small></a></li>-->
+                        <!--<li><a href=""><span class="icon-envelope"></span> New message from <strong>Tanya</strong> <small class="muted"> - 1 week ago</small></a></li>-->
+                        <!--<li><a href=""><span class="icon-envelope"></span> New message from <strong>Lee</strong> <small class="muted"> - 1 week ago</small></a></li>-->
+                        <!--<li class="viewmore"><a href="messages.html">View More Messages</a></li>-->
+                    <!--</ul>-->
+                <!--</li>-->
+                <!--<li>-->
+                    <!--<a class="dropdown-toggle" data-toggle="dropdown" data-target="#">-->
+                        <!--<span class="count">10</span>-->
+                        <!--<span class="head-icon head-users"></span>-->
+                        <!--<span class="headmenu-label">New Users</span>-->
+                    <!--</a>-->
+                    <!--<ul class="dropdown-menu newusers">-->
+                        <!--<li class="nav-header">New Users</li>-->
+                        <!--<li>-->
+                            <!--<a href="">-->
+                                <!--<img src="images/photos/thumb1.png" alt="" class="userthumb" />-->
+                                <!--<strong>Draniem Daamul</strong>-->
+                                <!--<small>April 20, 2013</small>-->
+                            <!--</a>-->
+                        <!--</li>-->
+                        <!--<li>-->
+                            <!--<a href="">-->
+                                <!--<img src="images/photos/thumb2.png" alt="" class="userthumb" />-->
+                                <!--<strong>Shamcey Sindilmaca</strong>-->
+                                <!--<small>April 19, 2013</small>-->
+                            <!--</a>-->
+                        <!--</li>-->
+                        <!--<li>-->
+                            <!--<a href="">-->
+                                <!--<img src="images/photos/thumb3.png" alt="" class="userthumb" />-->
+                                <!--<strong>Nusja Paul Nawancali</strong>-->
+                                <!--<small>April 19, 2013</small>-->
+                            <!--</a>-->
+                        <!--</li>-->
+                        <!--<li>-->
+                            <!--<a href="">-->
+                                <!--<img src="images/photos/thumb4.png" alt="" class="userthumb" />-->
+                                <!--<strong>Rose Cerona</strong>-->
+                                <!--<small>April 18, 2013</small>-->
+                            <!--</a>-->
+                        <!--</li>-->
+                        <!--<li>-->
+                            <!--<a href="">-->
+                                <!--<img src="images/photos/thumb5.png" alt="" class="userthumb" />-->
+                                <!--<strong>John Doe</strong>-->
+                                <!--<small>April 16, 2013</small>-->
+                            <!--</a>-->
+                        <!--</li>-->
+                    <!--</ul>-->
+                <!--</li>-->
+                <!--<li class="odd">-->
+                    <!--<a class="dropdown-toggle" data-toggle="dropdown" data-target="#">-->
+                        <!--<span class="count">1</span>-->
+                        <!--<span class="head-icon head-bar"></span>-->
+                        <!--<span class="headmenu-label">Statistics</span>-->
+                    <!--</a>-->
+                    <!--<ul class="dropdown-menu">-->
+                        <!--<li class="nav-header">Statistics</li>-->
+                        <!--<li><a href=""><span class="icon-align-left"></span> New Reports from <strong>Products</strong> <small class="muted"> - 19 hours ago</small></a></li>-->
+                        <!--<li><a href=""><span class="icon-align-left"></span> New Statistics from <strong>Users</strong> <small class="muted"> - 2 days ago</small></a></li>-->
+                        <!--<li><a href=""><span class="icon-align-left"></span> New Statistics from <strong>Comments</strong> <small class="muted"> - 3 days ago</small></a></li>-->
+                        <!--<li><a href=""><span class="icon-align-left"></span> Most Popular in <strong>Products</strong> <small class="muted"> - 1 week ago</small></a></li>-->
+                        <!--<li><a href=""><span class="icon-align-left"></span> Most Viewed in <strong>Blog</strong> <small class="muted"> - 1 week ago</small></a></li>-->
+                        <!--<li class="viewmore"><a href="charts.html">View More Statistics</a></li>-->
+                    <!--</ul>-->
+                <!--</li>-->
+                <!--&lt;!&ndash;<li class="right">&ndash;&gt;-->
+                    <!--&lt;!&ndash;<div class="userloggedinfo">&ndash;&gt;-->
+                        <!--&lt;!&ndash;<img src="images/photos/thumb1.png" alt="" />&ndash;&gt;-->
+                        <!--&lt;!&ndash;<div class="userinfo">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<h5>Juan Dela Cruz <small>- juan@themepixels.com</small></h5>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<ul>&ndash;&gt;-->
+                                <!--&lt;!&ndash;<li><a href="editprofile.html">Edit Profile</a></li>&ndash;&gt;-->
+                                <!--&lt;!&ndash;<li><a href="">Account Settings</a></li>&ndash;&gt;-->
+                                <!--&lt;!&ndash;<li><a href="index.html">Sign Out</a></li>&ndash;&gt;-->
+                            <!--&lt;!&ndash;</ul>&ndash;&gt;-->
+                        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                <!--&lt;!&ndash;</li>&ndash;&gt;-->
+            <!--</ul>&lt;!&ndash;headmenu&ndash;&gt;-->
+        <!--</div>-->
     </div>
 
-    <pe:blockUI widgetVar="bui" centerX="true" centerY="true">
-        <p:panel style="border: 0">
-            <div style="text-align: center;">
-                <h:outputText value="Please wait..." />
-            </div>
-            <div style="text-align: right;">
-                <p:graphicImage value="/resources/images/shared/292.GIF"/>
-            </div>
-        </p:panel>
-    </pe:blockUI>
 </ui:composition>
