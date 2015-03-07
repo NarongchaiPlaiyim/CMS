@@ -41,6 +41,7 @@
             </p:layoutUnit>
 
             <p:layoutUnit id="layoutCenter" position="center" header="#{msg.get('menu.assignment.title')}" >
+                <div class="maincontentinner">
                 <h:form id="assignmentForm">
                     <p:panel style="border: 0">
                         <p:dataTable id="subjectTable"
@@ -75,6 +76,7 @@
                             </p:column>
                         </p:dataTable>
                     </p:panel>
+                    <p:separator/>
                     <p:panel style="border: 0">
                         <div style="text-align: left;">
                             <p:commandButton id="btnAdd"
@@ -87,7 +89,6 @@
                                              icon="ui-icon-plusthick"/>
                         </div>
                     </p:panel>
-
                     <p:panel style="border: 0">
                         <table border="0" class="content_table_form">
                             <tr >
@@ -149,6 +150,7 @@
                     </p:panel>
 
                 </h:form>
+                </div>
             </p:layoutUnit>
         </p:layout>
 

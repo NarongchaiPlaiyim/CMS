@@ -5,7 +5,7 @@
         xmlns:h="http://java.sun.com/jsf/html"
         xmlns:p="http://primefaces.org/ui">
     <h:form id="menuForm">
-        <p:slideMenu id="menu">
+        <p:slideMenu id="menu" style="max-width: 160px; min-width: 160px;border: none;">
 
             <!--Teacher-->
             <p:menuitem value="#{msg.get('menu.subject.title')}"
@@ -72,11 +72,10 @@
 
         </p:slideMenu>
 
-        <p:separator rendered="#{loginBean.isRendered('1')}"/>
 
         <p:commandButton id="btnLogout"
                          action="#{loginBean.logout}"
-                         styleClass="medium" style="width: 100%; text-align: center"
+                         styleClass="medium" style="width: 170px; text-align: center"
                          value="#{msg.get('btn.name.logout')}"/>
     </h:form>
 </f:view>

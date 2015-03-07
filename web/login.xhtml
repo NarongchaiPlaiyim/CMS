@@ -66,7 +66,7 @@
         <div class="loginpanel">
         <div class="loginpanelinner" style="text-align: center">
         <h:form id="frmLogin">
-            <div class="logo bounceIn"> <p:graphicImage library="images" name="logo1.png"/></div>
+            <div class="logo bounceIn"> <p:graphicImage library="images" name="cmslogo1.png"/></div>
             <p:separator />
                 <p:panelGrid styleClass="loginPanelGrid" columns="2" style="font-size: 10px">
                     <h:outputLabel for="typeRadio" value=""/>
@@ -88,12 +88,13 @@
                     <h:outputLabel id="teacherIdLabel" for="teacherId" value="Teacher ID :"
                                    rendered="#{loginBean.studentFlag}"/>
 
-                    <p:selectOneMenu id="teacherId" value="#{loginBean.teacherId}" rendered="#{loginBean.studentFlag}" required="#{not empty param[signon.clientId]}">
+                    <h:selectOneMenu id="teacherId" value="#{loginBean.teacherId}" style="width: 95%"
+                                     rendered="#{loginBean.studentFlag}" required="#{not empty param[signon.clientId]}">
                         <f:selectItem itemLabel="- Please Select -" itemValue=""/>
                         <f:selectItems value="#{loginBean.teacherList}"
                                        var="c"
                                        itemLabel="#{c.personId}" itemValue="#{c.personId}" />
-                    </p:selectOneMenu>
+                    </h:selectOneMenu>
 
                     <p:commandButton id="loginBtn" value="#{msg.get('btn.name.login')}"
                                      update=":msgBoxSystemMessagePanel, :frmLogin:teacherId"
