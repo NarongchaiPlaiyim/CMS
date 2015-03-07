@@ -30,9 +30,16 @@ public class SubjectService extends Service {
         return subjectDAO.findByUserId(userId);
     }
 
-    public void save(SubjectModel subject, int user){
+    public boolean save(SubjectModel subject, int user){
         try {
             if (Utils.isZero(subject.getId())){
+
+                SubjectModel duplicate = subjectDAO.findByDup(subject);
+
+                if (!Utils.isNull(duplicate)){
+                    return false;
+                }
+
                 UserModel model = userDAO.findByID(user);
                 subject.setUserModel(model);
                 subjectDAO.persist(subject);
@@ -42,6 +49,8 @@ public class SubjectService extends Service {
         } catch (Exception e) {
             log.debug("Exception error save : ", e);
         }
+
+        return true;
     }
 
     public void remove(int subjectId){
@@ -82,6 +91,9 @@ public class SubjectService extends Service {
     public void deleteFileById(int id)throws Exception{
         log.debug(" ClassTutorialService deleteFileById() id : {}",id);
         uploadService.processDelete(id);
+    }
 
+    public List<EnrollModel> search(int key, String text, int subjectId){
+        return enrollDAO.findBySearch(key, text, subjectId);
     }
 }

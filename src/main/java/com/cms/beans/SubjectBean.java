@@ -7,6 +7,7 @@ import com.cms.service.SubjectService;
 import com.cms.service.security.UserDetail;
 import com.cms.utils.AttributeName;
 import com.cms.utils.FacesUtil;
+import com.cms.utils.MessageDialog;
 import com.cms.utils.Utils;
 import lombok.Getter;
 import lombok.Setter;
@@ -38,6 +39,11 @@ public class SubjectBean extends Bean {
     private FileUploadModel fileUploadSelected;
     private List<FileUploadModel> fileUploadList;
     private UploadedFile uploadedFile;
+
+    private int search;
+    private int ID = 1;
+    private int NAME = 2;
+    private String inputSearch;
 
     @PostConstruct
     public void onCreation(){
@@ -72,9 +78,14 @@ public class SubjectBean extends Bean {
 
     public void onSubmit(){
         log.debug("subjectModelSelected : [{}]", subjectModelSelected.toString());
-        subjectService.save(subjectModelSelected, userDetail.getId());
-        showDialogSaved();
-        onLoad();
+        boolean flagDup = subjectService.save(subjectModelSelected, userDetail.getId());
+
+        if (flagDup){
+            showDialogSaved();
+            onLoad();
+        } else {
+            showDialog(MessageDialog.WARNING.getMessageHeader(), "Subject Duplicate", "msgBoxSystemMessageDlg2");
+        }
     }
 
     public void studentInSubject(){
@@ -123,6 +134,16 @@ public class SubjectBean extends Bean {
         }catch (Exception e){
             e.printStackTrace();
             log.error(e.getMessage());
+        }
+    }
+
+    public void onSearch(){
+        if (search == 1){
+            enrollModelList = subjectService.search(ID, inputSearch, subjectId);
+        }
+
+        if (search == 2){
+            enrollModelList = subjectService.search(NAME, inputSearch, subjectId);
         }
     }
 }
