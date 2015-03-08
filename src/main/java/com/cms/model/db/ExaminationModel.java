@@ -25,11 +25,8 @@ public class ExaminationModel {
     @Column(name="exam_no")
     private String examNo;
 
-    @Column(name="exam_content")
+    @Column(name="exam_content", length = 2500)
     private String examContent;
-
-    @Column(name="description")
-    private String description;
 
     @Column(name="score")
     private double score;
@@ -52,7 +49,6 @@ public class ExaminationModel {
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
                 .append("id", id)
-                .append("description", description)
                 .append("score", score)
                 .append("subjectModel", subjectModel)
                 .append("active", active)

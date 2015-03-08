@@ -22,8 +22,6 @@
                 <td>
                     <p:commandButton value="Search" process="@form"
                                      action="#{subjectBean.onSearch}"
-                                     onstart="PF('bui').block()"
-                                     oncomplete="PF('bui').unblock()"
                                      update=":studentDlgForm:studentTable"/>
                 </td>
             </tr>

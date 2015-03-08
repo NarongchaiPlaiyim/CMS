@@ -27,7 +27,7 @@ public class ClassEntity {
     @Column(name="week_no")
     private int weekNo;
 
-    @Column(name="description")
+    @Column(name="description", length = 2500)
     private String description;
 
     @OneToOne

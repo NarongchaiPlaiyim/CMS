@@ -24,7 +24,7 @@ public class SubjectModel {
     @Column(name="subject_name")
     private String subjectName;
 
-    @Column(name="description")
+    @Column(name="description", length = 2500)
     private String description;
 
     @Column(name="semester")

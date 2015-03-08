@@ -81,7 +81,7 @@
                                 <p:commandButton process="@this"
                                                  icon="ui-icon-pencil"
                                                  update=":subjectDlgForm"
-                                                 oncomplete="PF('subjectDlg').show()"
+                                                 oncomplete="PF('studentDlgForm').show()"
                                                  action="#{subjectBean.onEditSubject()}">
                                     <f:setPropertyActionListener value="#{subjectModel.id}" target="#{subjectBean.subjectId}"/>
                                 </p:commandButton>

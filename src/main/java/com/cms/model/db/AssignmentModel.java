@@ -27,7 +27,7 @@ public class AssignmentModel {
     @Column(name="semester")
     private String semester;
 
-    @Column(name="description")
+    @Column(name="description", length = 2500)
     private String description;
 
     @OneToOne
