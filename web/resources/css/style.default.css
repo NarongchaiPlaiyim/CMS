@@ -101,10 +101,10 @@ h1,h2,h3,h4,h5 { font-weight: normal; line-height: normal; }
 
 .header { background: #0a6bce; clear: both; height: 110px; }
 .headerinner { margin-left: 260px; }
-.header .logo { width: 260px; text-align: center; padding-top: 40px; float: left; }
+.header .logo { width: 300px; text-align: center; padding-top: 40px;margin-left: 10px; float: left; }
 
 .headmenu { list-style: none; }
-.headmenu .dropdown-menu { border: 2px solid #0866c6; border-top: 0; margin: 0; }
+.headmenu .dropdown-menu { border: 2px solid #0866c6;  margin: 0; }
 .headmenu .nav-header { text-shadow: none; font-weight: normal; }
 .headmenu .dropdown-menu::after {
     position: absolute; top: -6px; left: 45px; display: inline-block; border-right: 6px solid transparent;
@@ -1721,7 +1721,7 @@ table td.center, table th.center { text-align: center; }
     .leftmenu .nav-tabs.nav-stacked .dropdown ul li a { font-size: 12px; }
     .userloggedinfo img { width: 60px; }
     .userloggedinfo .userinfo { top: 90px; }
-    .header .logo { padding-top: 30px; }
+    .header .logo { padding-top: 0px; }
     .headmenu .dropdown-menu:after { left: 25px; }
     .userloggedinfo .userinfo:after { right: 35px; }
     .searchbar input { background-position: 285px 10px; }
@@ -1788,7 +1788,7 @@ table td.center, table th.center { text-align: center; }
     body { font-size: 11px; line-height: 18px; }
 
     .leftpanel { width: 240px; }
-    .header .logo { width: 240px; }
+    .header .logo { width: 300px; }
     .headmenu > li > a { padding: 25px 0 9px; }
     .searchbar input { background-position: 245px 10px; }
     .pagetitle h1 { font-size: 24px; }
