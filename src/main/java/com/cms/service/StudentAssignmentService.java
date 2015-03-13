@@ -27,6 +27,7 @@ public class StudentAssignmentService extends Service{
     }
 
     public List<StudentAssignmentModel> getStudentAssignment(int subjectId, int studentId){
+        log.debug("------ {} --------- {}", subjectId, studentId);
         List<StudentAssignmentModel> studentAssignmentModelList = new ArrayList<StudentAssignmentModel>();
 
         try {

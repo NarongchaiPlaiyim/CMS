@@ -59,6 +59,7 @@ public class StudentAssignmentBean extends Bean{
     public void onClickTable(){
         studentId = (UserDetail) httpSession.getAttribute(AttributeName.USER_DETAIL.getName());
         studentAssignmentModelList = studentAssignmentService.getStudentAssignment(subjectModel.getId(), studentId.getId());
+        log.debug("--------- {}", studentAssignmentModelList.toString());
     }
 
     public void onSave(){

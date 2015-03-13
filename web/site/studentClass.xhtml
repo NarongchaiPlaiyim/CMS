@@ -94,11 +94,6 @@
                                                  update=""
                                                  styleClass="medium" style="#{msg.get('btn.size150')}"
                                                  icon="ui-icon-plusthick"/>
-                                <p:commandButton update=":classTutorialForm"
-                                                 onclick="PF('confirmDeleteClassDlg').show()"
-                                                 icon="ui-icon-trash">
-                                    <f:setPropertyActionListener value="#{classModel}" target="#{studentClassBean.classSelected}"/>
-                                </p:commandButton>
                             </p:column>
                         </p:dataTable>
                     </p:panel>
