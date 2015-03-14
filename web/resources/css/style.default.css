@@ -131,7 +131,7 @@ h1,h2,h3,h4,h5 { font-weight: normal; line-height: normal; }
 .head-bar { background-image: url(../images/icons/bar.png); }
 .head-archive { background-image: url(../images/icons/icon-archive.png); }
 .head-event { background-image: url(../images/icons/icon-event.png); }
-.head-clvWeb { background-image: url(../images/icons/clv-web.png); }
+/*.head-clvWeb { background-image: url(../images/icons/clv-web.png); }*/
 .head-help {background-image: url(../images/icons/icon-help.png);}
 
 .viewmore a { font-size: 11px; text-transform: uppercase; font-size: 11px !important; }
