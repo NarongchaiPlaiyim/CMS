@@ -8,6 +8,7 @@ import com.cms.service.security.UserDetail;
 import com.cms.utils.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.primefaces.model.StreamedContent;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -56,6 +57,7 @@ public class LoginBean extends Bean{
     private List<UserModel> teacherList;
     private UserModel userModel;
     private UserModel userModelSelected;
+    private StreamedContent fileDownload;
 
 
     @PostConstruct
@@ -206,6 +208,26 @@ public class LoginBean extends Bean{
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
         SecurityContextHolder.clearContext();
         return "loggedOut";
+    }
+
+    public StreamedContent onDownloadFile(){
+        HttpSession httpSession = FacesUtil.getSession(false);
+        log.debug("onUploadFile {}", httpSession.getAttribute(AttributeName.USER_DETAIL.getName()));
+
+        UserDetail detail = (UserDetail) httpSession.getAttribute(AttributeName.USER_DETAIL.getName());
+
+        try {
+            if (Type.TEACHER.equals(detail.getRole())){
+                fileDownload =  loginService.downloadFileById(1);
+            } else {
+                fileDownload =  loginService.downloadFileById(2);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            System.out.println(e.getMessage());
+            log.error(e.getMessage());
+        }
+        return fileDownload;
     }
 
 }

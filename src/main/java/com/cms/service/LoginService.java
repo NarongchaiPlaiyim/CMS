@@ -5,6 +5,7 @@ import com.cms.model.db.UserModel;
 import com.cms.utils.Type;
 import com.cms.utils.Utils;
 import lombok.Getter;
+import org.primefaces.model.StreamedContent;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,6 +21,7 @@ public class LoginService extends Service{
     private static final long serialVersionUID = 4112578634088874840L;
     @Resource private UserDAO userDAO;
     @Getter private UserModel userModel;
+    @Resource private FileManagementService uploadService;
 
     public List<UserModel> getTeacherList(){
         List<UserModel> userModelList = Utils.getEmptyList();
@@ -57,5 +59,10 @@ public class LoginService extends Service{
             log.error("Exception while calling isUserExist()", e);
         }
         return result;
+    }
+
+    public StreamedContent downloadFileById(int id)throws Exception{
+        log.debug(" ClassTutorialService downloadFileById() id : {}",id);
+        return uploadService.processDownLoad(id, 0);
     }
 }

@@ -31,6 +31,15 @@
         <h:outputStylesheet library="css" name="font-awesome.min.css"/>
         <h:outputScript library="js" name="custom.js"/>
     </h:head>
+    <script type="text/javascript">
+        function start() {
+            PF('bui').show();
+        }
+
+        function stop() {
+            PF('bui').hide();
+        }
+    </script>
     <style>
 
         .loginPanelGrid ,.loginPanelGrid tr, .loginPanelGrid td {
@@ -63,67 +72,88 @@
 
     <h:body class="loginpage">
         <div class="loginpanel">
-        <div class="loginpanelinner" style="text-align: center">
-        <h:form id="frmLogin">
-            <div class="logo bounceIn"> <p:graphicImage library="images" name="cmslogo2.png"/></div>
-            <p:separator style="margin-top: 0px"/>
-                <p:panelGrid styleClass="loginPanelGrid" columns="2" style="font-size: 10px">
-                    <h:outputLabel for="typeRadio" value=""/>
-                    <p:selectOneRadio id="typeRadio"
-                                      styleClass="radio"
-                                      value="#{loginBean.typeRadio}">
-                        <f:selectItem itemLabel="Teacher" itemValue="#{loginBean.TEACHER}"/>
-                        <f:selectItem itemLabel="Student" itemValue="#{loginBean.STUDENT}"/>
-                        <p:ajax listener="#{loginBean.onClickRadio}" event="change"
-                                update="@form,
-                                        :frmLogin:teacherId
-                                        "/>
-                    </p:selectOneRadio>
-                    <h:outputLabel for="username" value="Username :"/>
-                    <p:inputText id="username" value="#{loginBean.userName}" placeholder="Enter your username." />
-                    <h:outputLabel for="password" value="Password :"/>
-                    <p:password id="password" value="#{loginBean.password}" placeholder="Enter your password." />
+            <div class="loginpanelinner" style="text-align: center">
+                <h:form id="frmLogin">
+                    <div class="logo bounceIn"> <p:graphicImage library="images" name="cmslogo2.png"/></div>
+                    <p:separator style="margin-top: 0px"/>
+                        <p:panelGrid styleClass="loginPanelGrid" columns="2" style="font-size: 10px">
+                            <h:outputLabel for="typeRadio" value=""/>
+                            <p:selectOneRadio id="typeRadio"
+                                              styleClass="radio"
+                                              value="#{loginBean.typeRadio}">
+                                <f:selectItem itemLabel="Teacher" itemValue="#{loginBean.TEACHER}"/>
+                                <f:selectItem itemLabel="Student" itemValue="#{loginBean.STUDENT}"/>
+                                <p:ajax listener="#{loginBean.onClickRadio}" event="change"
+                                        update="@form,
+                                                :frmLogin:teacherId
+                                                "/>
+                            </p:selectOneRadio>
+                            <h:outputLabel for="username" value="Username :"/>
+                            <p:inputText id="username" value="#{loginBean.userName}" placeholder="Enter your username." />
+                            <h:outputLabel for="password" value="Password :"/>
+                            <p:password id="password" value="#{loginBean.password}" placeholder="Enter your password." />
 
-                    <h:outputLabel id="teacherIdLabel" for="teacherId" value="Teacher ID :"
-                                   rendered="#{loginBean.studentFlag}"/>
+                            <h:outputLabel id="teacherIdLabel" for="teacherId" value="Teacher ID :"
+                                           rendered="#{loginBean.studentFlag}"/>
 
-                    <h:selectOneMenu id="teacherId" value="#{loginBean.teacherId}" style="width: 95%"
-                                     rendered="#{loginBean.studentFlag}" required="#{not empty param[signon.clientId]}">
-                        <f:selectItem itemLabel="- Please Select -" itemValue=""/>
-                        <f:selectItems value="#{loginBean.teacherList}"
-                                       var="c"
-                                       itemLabel="#{c.personId}" itemValue="#{c.personId}" />
-                    </h:selectOneMenu>
+                            <h:selectOneMenu id="teacherId" value="#{loginBean.teacherId}" style="width: 95%"
+                                             rendered="#{loginBean.studentFlag}" required="#{not empty param[signon.clientId]}">
+                                <f:selectItem itemLabel="- Please Select -" itemValue=""/>
+                                <f:selectItems value="#{loginBean.teacherList}"
+                                               var="c"
+                                               itemLabel="#{c.personId}" itemValue="#{c.personId}" />
+                            </h:selectOneMenu>
 
-                    <p:commandButton id="loginBtn" value="#{msg.get('btn.name.login')}"
-                                     update=":msgBoxSystemMessagePanel, :frmLogin:teacherId"
-                                     onstart="PF('bui').block()"
-                                     binding="#{signon}"
-                                     styleClass="buttonlogin"
-                                     action="#{loginBean.login}"
-                                     oncomplete="PF('bui').unblock()" />
+                            <p:commandButton id="loginBtn" value="#{msg.get('btn.name.login')}"
+                                             update=":msgBoxSystemMessagePanel, :frmLogin:teacherId"
+                                             onstart="PF('bui').block()"
+                                             binding="#{signon}"
+                                             styleClass="buttonlogin"
+                                             action="#{loginBean.login}"
+                                             oncomplete="PF('bui').unblock()" />
 
-                    <p:commandButton id="registerTeacherBtn" value="#{msg.get('btn.name.register')}"
-                                     rendered="#{loginBean.teacherFlag}"
-                                     update=":teacherRegisterForm"
-                                     action="#{loginBean.onClickRegister}"
-                                     styleClass="buttonlogin"
-                                     oncomplete="PF('teacherRegisterDlg').show()"/>
+                            <p:commandButton id="registerTeacherBtn" value="#{msg.get('btn.name.register')}"
+                                             rendered="#{loginBean.teacherFlag}"
+                                             update=":teacherRegisterForm"
+                                             action="#{loginBean.onClickRegister}"
+                                             styleClass="buttonlogin"
+                                             oncomplete="PF('teacherRegisterDlg').show()"/>
 
 
-                    <p:commandButton id="registerStudentBtn" value="#{msg.get('btn.name.register')}"
-                                     rendered="#{loginBean.studentFlag}"
-                                     update=":studenRegisterForm"
-                                     action="#{loginBean.onClickRegister}"
-                                     styleClass="buttonlogin"
-                                     oncomplete="PF('studentRegisterDlg').show()"/>
-            </p:panelGrid>
+                            <p:commandButton id="registerStudentBtn" value="#{msg.get('btn.name.register')}"
+                                             rendered="#{loginBean.studentFlag}"
+                                             update=":studenRegisterForm"
+                                             action="#{loginBean.onClickRegister}"
+                                             styleClass="buttonlogin"
+                                             oncomplete="PF('studentRegisterDlg').show()"/>
+                    </p:panelGrid>
+                    <!--<div style="text-align: right; width: 100%; margin-top: 30px">-->
+                        <!--<p:commandButton ajax="false"  value="คู่มือการใช้งาน" onclick="PrimeFaces.monitorDownload(start, stop);">-->
+                            <!--<p:fileDownload value="#{loginBean.onDownloadFile()}"/>-->
+                        <!--</p:commandButton>-->
+                    <!--</div>-->
+                    <!--<div class="footer" style="text-align: right">-->
+                        <!--<p:commandButton ajax="false" value="คู่มือการใช้งาน" onclick="PrimeFaces.monitorDownload(start, stop);">-->
+                            <!--<p:fileDownload value="#{loginBean.onDownloadFile()}"/>-->
+                        <!--</p:commandButton>-->
+                    <!--</div>-->
+                </h:form>
+                <div class="loginfooter">
+                    <p>© 2015. Class Management Application by Ekarin Sangthammarat All Rights Reserved.</p>
+                    <!--<table style="text-align: right; width: 100%">-->
+                        <!--<tr>-->
+                            <!--<td>-->
+                                <!--<p:commandButton value="คู่มือการใช้งาน">-->
 
-        </h:form>
-        <div class="loginfooter">
-            <p>© 2015. Class Management Application by Ekarin Sangthammarat All Rights Reserved.</p>
-        </div>
-        </div>
+                                <!--</p:commandButton>-->
+                                <!--&lt;!&ndash;<p:commandButton ajax="false" value="คู่มือการใช้งาน" onclick="PrimeFaces.monitorDownload(start, stop);">&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<p:fileDownload value="#{loginBean.onDownloadFile()}"/>&ndash;&gt;-->
+                                <!--&lt;!&ndash;</p:commandButton>&ndash;&gt;-->
+                            <!--</td>-->
+                        <!--</tr>-->
+                    <!--</table>-->
+                </div>
+            </div>
         </div>
     </h:body>
 

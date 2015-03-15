@@ -73,10 +73,13 @@
         </p:slideMenu>
 
 
-        <p:commandButton id="btnLogout"
-                         action="#{loginBean.logout}"
-                         styleClass="medium" style="width: 170px; text-align: center"
-                         value="#{msg.get('btn.name.logout')}"/>
+        <p:commandButton ajax="false"  value="คู่มือการใช้งาน" onclick="PrimeFaces.monitorDownload(start, stop);">
+            <p:fileDownload value="#{loginBean.onDownloadFile()}"/>
+        </p:commandButton>
+        <!--<p:commandButton id="btnLogout"-->
+                         <!--action="#{loginBean.logout}"-->
+                         <!--styleClass="medium" style="width: 170px; text-align: center"-->
+                         <!--value="#{msg.get('btn.name.logout')}"/>-->
     </h:form>
 </f:view>
 </html>
